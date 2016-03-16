@@ -37,15 +37,15 @@ body :-ms-input-placeholder {
   font-weight: 300;
 }
 .wrapper {
-  background: #50a3a2;
-  background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
-  background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
-  position: absolute;
-  top: 50%;
+  background: #3c8dbc;
+  background: -webkit-linear-gradient(top left, #3c8dbc 0%, #367FA9 100%);
+  background: linear-gradient(to bottom right, #3c8dbc 0%, #367FA9 100%);
+  position: fixed;
+  top: 0%;
   left: 0;
   width: 100%;
-  height: 400px;
-  margin-top: -200px;
+  height: 100%;
+  margin-top: initial;
   overflow: hidden;
 }
 .wrapper.form-success .container h1 {
@@ -55,7 +55,7 @@ body :-ms-input-placeholder {
 .container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 15% 0;
   height: 400px;
   text-align: center;
 }
@@ -97,7 +97,7 @@ form input:hover {
 form input:focus {
   background-color: white;
   width: 300px;
-  color: #53e3a6;
+  color: #367FA9;
 }
 form button {
   -webkit-appearance: none;
@@ -107,7 +107,7 @@ form button {
   background-color: white;
   border: 0;
   padding: 10px 15px;
-  color: #53e3a6;
+  color: #367FA9;
   border-radius: 3px;
   width: 250px;
   cursor: pointer;
@@ -146,7 +146,7 @@ form button:hover {
   left: 20%;
   width: 80px;
   height: 80px;
-  -webkit-animation-delay: 2s;
+  -webkit-animation-delay: 1s;
           animation-delay: 2s;
   -webkit-animation-duration: 17s;
           animation-duration: 17s;

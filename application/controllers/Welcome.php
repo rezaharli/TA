@@ -20,6 +20,12 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome');
+		if($this->session->userdata('is_logged_in')) 
+			$this->load->view('home');
+		else 
+			$this->load->view('login');
 	}
 }
+ 
+/* End of file welcome.php */
+/* Location: ./application/controllers/welcome.php */
