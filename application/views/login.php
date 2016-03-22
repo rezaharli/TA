@@ -10,17 +10,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</head>
 
   	<body>
-  	<?php echo "lala ".$this->session->userdata('username'); ?> <br />
-	<?php echo "lblb ".$this->session->userdata('is_logged_in'); ?> <br />
 	    <div class="wrapper">
 			<div class="container">
-				<h1>Welcome</h1>
-				
+				<h1>Selamat Datang</h1>
 				<form id="login" class="form" >
 					<input type="text" placeholder="Username" name="username">
 					<input type="password" placeholder="Password" name="password">
 					<button type="submit" id="login-button">Login</button>
 				</form>
+				<p style="display: none;" class="error">Login gagal. Mohon masukkan username atau password yang benar.</p>
 			</div>
 			
 			<ul class="bg-bubbles">
@@ -37,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</ul>
 		</div>
 	    
-	    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	    <script src='<?php echo base_url(); ?>assets/jquery/2.1.3/jquery.min.js'></script>
 		<script>
 		// Variable to hold request
 		var request;
@@ -47,9 +45,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			event.preventDefault();
 
 		    // Abort any pending request
-		    if (request) {
-		        request.abort();
-		    }
+		    // if (request) {
+		    //     request.abort();
+		    // }
 		    // setup some local variables
 		    var $form = $(this);
 
@@ -59,23 +57,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		    // Serialize the data in the form
 		    var serializedData = $form.serialize();
 
-		    // Let's disable the inputs for the duration of the Ajax request.
-		    // Note: we disable elements AFTER the form data has been serialized.
-		    // Disabled form elements will not be serialized.
-		    $inputs.prop("disabled", true);
-
 		    // Fire off the request to /form.php
 		    request = $.ajax({
-		        url: "login",
+		        url: "<?php echo base_url(); ?>user/login",
 		        type: "post",
 		        data: serializedData
 		    });
 
 		    // Callback handler that will be called on success
 		    request.done(function (response){
-		    	if(response == "null"){
-		    		alert(response);
-		    	} else {
+		    	if(response == true){
+		    		$('.error').css('display', 'none');
 					$('form').fadeOut(500);
 					$('.bg-bubbles').delay(1500).fadeOut(1500);
 					$('.wrapper').addClass('form-success');
@@ -84,6 +76,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					window.setTimeout(function(){
 						window.location="<?php echo base_url(); ?>";
 					}, 3000);
+		    	} else {
+		    		$('.error').css('display', 'block'); // show error msg
 		    	}
 		    });
 		});
