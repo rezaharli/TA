@@ -1,5 +1,7 @@
-<?php 
-$user = $this->session->userdata('logged_in_user');
-
-echo $user['username']; ?> <br />
-<a href="user/logout">logout</a>
+<!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+      <pre>
+        <?php var_dump($this->session->userdata()); ?>
+        </pre>
+      </div>
+      <!-- /.content-wrapper -->
