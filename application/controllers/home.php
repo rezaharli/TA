@@ -7,7 +7,7 @@ class Home extends Private_Controller {
 	}
 	
 	function index() {
-		$this->load_page('page/home');
+		$this->load_page('page/private/home');
 	}
 
 }
