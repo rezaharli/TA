@@ -51,9 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		    // setup some local variables
 		    var $form = $(this);
 
-		    // Let's select and cache all the fields
-		    var $inputs = $form.find("input");
-
 		    // Serialize the data in the form
 		    var serializedData = $form.serialize();
 

@@ -20,7 +20,7 @@ class Guest extends Public_Controller {
 	    
     	$this->load->model($user->role.'_model', 'roled_user_model');
     	$roled_user = $this->roled_user_model->get_by(array('id_user' => $user->id));
-    	
+
         if($user) {
 	       	$this->session->set_userdata('logged_in_user', array(
 	       		'user_data'			=> $user,

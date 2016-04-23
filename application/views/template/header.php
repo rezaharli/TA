@@ -82,14 +82,27 @@
                   <li class="user-header">
                     <img src="<?php echo base_url() ?>assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
-                      <?php echo $this->session->userdata('logged_in_user')['user_data']->nama ?> - Web Developer
-                      <small>Member since Nov. 2012</small>
+                      <?php echo $this->session->userdata('logged_in_user')['user_data']->nama ?>
+                      <small>
+                      <?php 
+                      $jenis_user = $this->session->userdata('logged_in_user')['roled_user_data']->jenis;
+                      if ($jenis_user == 'kaur') { 
+                        echo 'Kepala Urusan Kemahasiswaan';
+                      } elseif ($jenis_user == 'staff_kemahasiswaan') {
+                        echo 'Staff Kemahasiswaan';
+                      } elseif ($jenis_user == 'staff_admin') {
+                        echo 'Staff Admin';
+                      } else {
+                        echo 'Mahasiswa';
+                      } ?>
+                      </small>
+                      <small><?php echo $this->session->userdata('logged_in_user')['user_data']->email ?></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="<?php echo base_url() ?>user/show_profile" class="btn btn-default btn-flat">Profile</a>
+                      <a href="<?php echo base_url() ?>user/edit" class="btn btn-default btn-flat">Edit Profile</a>
                     </div>
                     <div class="pull-right">
                       <a href="<?php echo base_url() ?>user/logout" class="btn btn-default btn-flat">Logout</a>
