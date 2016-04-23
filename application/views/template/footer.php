@@ -16,6 +16,8 @@
     </script>
     <!-- notifikasi -->
     <script src="<?php echo base_url() ?>assets/js/notifikasi.js"></script>
+    <!-- cek username -->
+    <script src="<?php echo base_url() ?>assets/js/cek_username.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="<?php echo base_url() ?>assets/adminlte/bootstrap/js/bootstrap.min.js"></script>
     <!-- Morris.js charts -->

@@ -36,9 +36,6 @@ class Private_Controller extends MY_Controller {
         }
     }
 
-    public function asdf(){
-    }
-
     public function load_page($page = ''){
         $this->load->view('template/header');
         $this->load->view('template/sidebar');
