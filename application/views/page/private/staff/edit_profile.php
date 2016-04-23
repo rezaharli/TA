@@ -60,17 +60,17 @@
             </div><!-- /.box-footer -->
           </form>
           
-          <form role="form">
+          <form role="form" autocomplete="off" method="post" action="<?php echo base_url() ?>user/do_password_edit" id="form-password">
             <div class="box-footer">
-              <div class="form-group">
+              <div id="form-group-password" class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" id="input-password" name="password">
               </div>
-              <div class="form-group">
+              <div id="form-group-password-confirm" class="form-group">
                 <label>Confirm Password</label>
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" id="input-password-confirm">
               </div>
-              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+              <button type="submit" id="button-password-submit" class="btn btn-primary btn-block" disabled>Submit & Logout</button>
             </div><!-- /.box-footer -->
           </form>
         </div><!-- /.box -->
@@ -123,5 +123,6 @@
     </div>
   </section>
 </div>
+
 <!-- cek username -->
 <script src="<?php echo base_url() ?>assets/js/cek_username.js"></script>

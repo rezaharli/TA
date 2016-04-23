@@ -17,6 +17,12 @@ class User extends Private_Controller {
 		}
 	}
 
+    function do_password_edit(){
+    	$password = $this->input->post('password');
+    	$this->user_model->update($this->session->userdata('logged_in_user')['user_data']->id, array('password' => sha1($password)));
+    	$this->logout();
+    }
+
     function do_username_edit(){
     	$username = $this->input->post('username');
     	$this->user_model->update($this->session->userdata('logged_in_user')['user_data']->id, array('username' => $username));
