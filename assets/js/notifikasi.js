@@ -7,7 +7,7 @@ $(document).ready(function(){
 
 function cek(){
     $.ajax({
-        url: "notifikasi/hitung",
+        url: window.location.origin + "/hmmmm/notifikasi/hitung",
         cache: false,
         success: function(msg){
             $("#jumlah-notifikasi").html(msg);
@@ -18,7 +18,7 @@ function cek(){
 
 function tampilkan(){
     $.ajax({
-        url: "notifikasi/get",
+        url: window.location.origin + "/hmmmm/notifikasi/get",
         cache: false,
         success: function(msg){
             // $("#loading").hide();
