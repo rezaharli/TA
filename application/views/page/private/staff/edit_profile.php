@@ -126,3 +126,5 @@
 
 <!-- cek username -->
 <script src="<?php echo base_url() ?>assets/js/cek_username.js"></script>
+<!-- cek password -->
+<script src="<?php echo base_url() ?>assets/js/cek_password.js"></script>
