@@ -3,7 +3,7 @@
   <section class="content-header">
     <h1>
       Edit Profile
-      <small><?php echo $this->session->userdata('logged_in_user')['user_data']->nama ?></small>
+      <small><?php echo $user_data->nama ?></small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -47,7 +47,7 @@
                 <label>Username</label>
                 <div>
                   <div class="col-md-7">
-                    <input type="text" class="form-control" id="input-username" name="username" value="<?php echo $this->session->userdata('logged_in_user')['user_data']->username ?>">
+                    <input type="text" class="form-control" id="input-username" name="username" value="<?php echo $user_data->username ?>">
                   </div>
                   <div class="col-md-5">
                     <h5 id="status-username" class="text-center"></h5>
@@ -89,23 +89,23 @@
             <div class="box-body">
               <div class="form-group">
                 <label>NIP</label>
-                <input type="text" class="form-control" value="<?php echo $this->session->userdata('logged_in_user')['roled_user_data']->nip ?>" disabled>
+                <input type="text" class="form-control" value="<?php echo $roled_user_data->nip ?>" disabled>
               </div>
               <div class="form-group">
                 <label>Nama</label>
-                <input type="text" class="form-control" value="<?php echo $this->session->userdata('logged_in_user')['user_data']->nama ?>" placeholder="Nama">
+                <input type="text" class="form-control" value="<?php echo $user_data->nama ?>" placeholder="Nama">
               </div>
               <div class="form-group">
                 <label>E-mail</label>
-                <input type="email" class="form-control" value="<?php echo $this->session->userdata('logged_in_user')['user_data']->email ?>" placeholder="E-mail">
+                <input type="email" class="form-control" value="<?php echo $user_data->email ?>" placeholder="E-mail">
               </div>
               <div class="form-group">
                 <label>Alamat</label>
-                <textarea class="form-control" rows="3" placeholder="Alamat"></textarea>
+                <textarea class="form-control" rows="3" placeholder="Alamat"><?php echo $user_data->alamat ?></textarea>
               </div>
               <div class="form-group">
                 <label>No. Telepon</label>
-                <input type="text" class="form-control" value="<?php echo $this->session->userdata('logged_in_user')['user_data']->telp ?>" placeholder="No. Telepon">
+                <input type="text" class="form-control" value="<?php echo $user_data->telp ?>" placeholder="No. Telepon">
               </div>
             </div><!-- /.box-body -->
 
