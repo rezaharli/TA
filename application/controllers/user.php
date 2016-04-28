@@ -31,13 +31,18 @@ class User extends Private_Controller {
     }
 
     function edit(){
-        $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-        $view_data['user_data'] = $user;
-    	if ($user->role == 'staff') {
-    		$this->load_page('page/private/staff/edit_profile');
-    	} else if ($user->role == 'mahasiswa') {
-    		
-    	}
+        $user_data = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
+
+        $this->load->model($user_data->role.'_model', 'roled_user_model');
+        $roled_user_data = $this->roled_user_model->get_by(array('id_user' => $user_data->id));
+
+        $data['nama']       = $user_data->nama;
+        $data['username']   = $user_data->username;
+        $data['alamat']     = $user_data->alamat;
+        $data['telp']       = $user_data->telp;
+
+        $data['nip'] = $roled_user_data->nip;
+    	$this->load_page('page/private/'.$user_data->role.'/edit_profile', $data);
     }
 
 	function logout(){
