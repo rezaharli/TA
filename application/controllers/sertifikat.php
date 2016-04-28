@@ -6,7 +6,7 @@ class Sertifikat extends Private_Controller {
 		parent::__construct();
 	}
 
-    function upload (){
+    function index (){
         $this->load->model('user_model');
         $user_data = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
         $this->load_page('page/private/'.$user_data->role.'/upload_sertifikat', null);

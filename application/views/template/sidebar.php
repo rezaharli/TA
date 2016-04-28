@@ -20,7 +20,7 @@
         </li>
 
         <?php if($role == 'mahasiswa') { ?>
-           <li><a href="<?php echo base_url('sertifikat/upload') ?>"><i class="fa fa-files-o"></i> <span>Upload Sertifikat</span></a></li>
+           <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-files-o"></i> <span>Sertifikat</span></a></li>
            <li><a href="<?php echo base_url('laporan') ?>"><i class="fa fa-map-o"></i> <span>Lihat Laporan</span></a></li>
         <?php } ?>
 
