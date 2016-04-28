@@ -56,6 +56,8 @@ class User extends Private_Controller {
     	$this->load_page('');
     }
 
+    
+
 }
 
 /* End of file user.php */
