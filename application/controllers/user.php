@@ -9,7 +9,8 @@ class User extends Private_Controller {
 
 	function do_username_check(){
 		$username = $this->input->post('username');
-		if($username == $this->session->userdata('logged_in_user')['user_data']->username){ //jika username sama seperti sebelumnya
+        $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
+		if($username == $user->username){ //jika username sama seperti sebelumnya (tidak berubah)
 			echo '3';
 		} else {
 			$user = $this->user_model->get_by(array('username' => $username));
@@ -19,26 +20,33 @@ class User extends Private_Controller {
 
     function do_password_edit(){
     	$password = $this->input->post('password');
-    	$this->user_model->update($this->session->userdata('logged_in_user')['user_data']->id, array('password' => sha1($password)));
+    	$this->user_model->update($this->session->userdata('id'), array('password' => sha1($password)));
     	$this->logout();
     }
 
     function do_username_edit(){
     	$username = $this->input->post('username');
-    	$this->user_model->update($this->session->userdata('logged_in_user')['user_data']->id, array('username' => $username));
+    	$this->user_model->update($this->session->userdata('id'), array('username' => $username));
     	$this->logout();
     }
 
     function edit(){
-    	if ($this->session->userdata('logged_in_user')['user_data']->role == 'staff') {
-    		$this->load_page('page/private/staff/edit_profile');
-    	} else if ($this->session->userdata('logged_in_user')['user_data']->role == 'mahasiswa') {
-    		
-    	}
+        $user_data = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
+
+        $this->load->model($user_data->role.'_model', 'roled_user_model');
+        $roled_user_data = $this->roled_user_model->get_by(array('id_user' => $user_data->id));
+
+        $data['nama']       = $user_data->nama;
+        $data['username']   = $user_data->username;
+        $data['alamat']     = $user_data->alamat;
+        $data['telp']       = $user_data->telp;
+
+        $data['nip'] = $roled_user_data->nip;
+    	$this->load_page('page/private/'.$user_data->role.'/edit_profile', $data);
     }
 
 	function logout(){
-	    if($this->session->userdata('logged_in_user')) {
+	    if($this->session->userdata('id')) {
         	$this->session->sess_destroy();
 	    }
 	    redirect('');
