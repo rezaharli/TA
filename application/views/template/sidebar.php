@@ -20,7 +20,6 @@
         </li>
 
         <?php if($role == 'mahasiswa') { ?>
-           <li><a href="<?php echo base_url('proposal/pengajuan') ?>"><i class="fa fa-edit"></i> <span>Pengajuan Proposal</span></a></li>
            <li><a href="<?php echo base_url('sertifikat/upload') ?>"><i class="fa fa-files-o"></i> <span>Upload Sertifikat</span></a></li>
            <li><a href="<?php echo base_url('laporan') ?>"><i class="fa fa-map-o"></i> <span>Lihat Laporan</span></a></li>
         <?php } ?>
