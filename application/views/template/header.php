@@ -69,17 +69,17 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="<?php echo base_url() ?>assets/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs"><?php echo $user_data->username ?></span>
+                  <span class="hidden-xs"><?php echo $username ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="<?php echo base_url() ?>assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
-                      <?php echo $user_data->nama ?>
+                      <?php echo $nama ?>
                       <small>
                       <?php 
-                      $jenis_user = $roled_user_data->jenis;
+                      $jenis_user = $jenis;
                       if ($jenis_user == 'kaur') { 
                         echo 'Kepala Urusan Kemahasiswaan';
                       } elseif ($jenis_user == 'staff_kemahasiswaan') {
@@ -90,7 +90,7 @@
                         echo 'Mahasiswa';
                       } ?>
                       </small>
-                      <small><?php echo $user_data->email ?></small>
+                      <small><?php echo $email ?></small>
                     </p>
                   </li>
                   <!-- Menu Footer-->
