@@ -1,22 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css" media="screen" title="no title" charset="utf-8">
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<script type="text/javascript">
-jQuery(document).ready(function($) {
-    $(".switch").bootstrapSwitch();
-    $('.switch').on('switchChange.bootstrapSwitch', function(event, state) {
-        if (state) {
-            // request access to google API
-            window.location.replace("<?php echo site_url(); ?>himpunan/get_google_auth");
-        }else{
-            // revoke access from google API
-            window.location.replace("<?php echo site_url(); ?>himpunan/revoke_google_access");
-        }
-    });
-});
-</script>
+
 <div class="content-wrapper">
     <div class="row">
         <div class="col-md-12">
