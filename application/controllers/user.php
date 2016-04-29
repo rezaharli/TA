@@ -50,6 +50,17 @@ class User extends Private_Controller {
     	$this->load_page('page/private/'.$user_data->role.'/edit_profile', $data);
     }
 
+    function do_edit(){
+        $nama = $this->input->post('nama');
+        $email = $this->input->post('email');
+        $alamat = $this->input->post('alamat');
+        $telp = $this->input->post('telp');
+
+        $this->user_model->update($this->session->userdata('id'), array('nama' => $nama, 'email' => $email, 'alamat' => $alamat, 'telp' => $telp ));
+
+        redirect('user/edit');
+    }
+
 	function logout(){
 	    if($this->session->userdata('id')) {
         	$this->session->sess_destroy();
