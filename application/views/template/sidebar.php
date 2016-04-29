@@ -5,6 +5,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li><a href="<?php echo base_url() ?>"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-calendar"></i> <span>Event</span>
@@ -17,6 +18,12 @@
             <?php } ?>
           </ul>
         </li>
+
+        <?php if($role == 'mahasiswa') { ?>
+           <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-files-o"></i> <span>Sertifikat</span></a></li>
+           <li><a href="<?php echo base_url('laporan') ?>"><i class="fa fa-map-o"></i> <span>Lihat Laporan</span></a></li>
+        <?php } ?>
+
         <?php if ($jenis == 'kaur' || $jenis == 'himpunan') { ?>
           <li class="header">Menu Khusus</li>
           <?php if ($jenis == 'kaur') { ?>
