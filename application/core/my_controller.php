@@ -46,6 +46,7 @@ class Private_Controller extends MY_Controller {
         $header_data['email']       = $user_data->email;
         $header_data['jenis']       = $roled_user_data->jenis;
 
+        $sidebar_data['role']   = $user_data->role;
         $sidebar_data['jenis']  = $roled_user_data->jenis;
 
         $this->load->view('template/header', $header_data);

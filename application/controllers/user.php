@@ -40,7 +40,12 @@ class User extends Private_Controller {
         $data['username']   = $user_data->username;
         $data['alamat']     = $user_data->alamat;
         $data['telp']       = $user_data->telp;
-        $data['nip'] = $roled_user_data->nip;
+
+        if ($user_data->role == 'staff'){
+            $data['nip'] = $roled_user_data->nip;    
+        } elseif ($user_data->role == 'mahasiswa') {
+            $data['nim'] = $roled_user_data->nim;  
+        }
 
     	$this->load_page('page/private/'.$user_data->role.'/edit_profile', $data);
     }
@@ -66,6 +71,8 @@ class User extends Private_Controller {
     function show_profile($username){
     	$this->load_page('');
     }
+
+    
 
 }
 
