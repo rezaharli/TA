@@ -10,28 +10,31 @@ class Himpunan extends Private_Controller {
 	}
 
 	function index(){
-		$this->load->model('user_model');
-		// load model
-		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $this->session->userdata['logged_in_user']['roled_user_data']->nim));
-		// var_dump($himpunan);
-		// die();
-		$user = $this->session->userdata('logged_in_user');
-		$this->view_data['title'] = $himpunan->nama;
-		$this->view_data['himpunan'] = $himpunan;
-		$this->view_data['user'] = $this->user_model->get_by(array('id' => $this->session->userdata['logged_in_user']['user_data']->id));
-		$this->load_page('page/private/himpunan/edit_himpunan');
+		// get id user
+		$this->load->model('user_model');	
+		$user_data = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
+
+        $this->load->model($user_data->role.'_model', 'roled_user_model');
+        $roled_user_data = $this->roled_user_model->get_by(array('id_user' => $user_data->id));
+		
+		// get nim
+		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $roled_user_data->nim));
+
+		$view_data['title'] 		= $himpunan->nama;
+		$view_data['himpunan'] 	= $himpunan;
+		$view_data['user'] 		= $user_data;
+		$this->load_page('page/private/himpunan/edit_himpunan', $view_data);
 	}
-
-
-	function getIdMahasiswa(){
-		$this->load->model('mahasiswa_model');
-		$mahasiswa = $this->mahasiswa_model->get_by(array('id_user' => $this->session->userdata['logged_in_user']['user_data']->id));
-		return $mahasiswa->nim;
-	}
-
 
 	function do_update(){
-		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $this->getIdMahasiswa()));
+		$this->load->model('user_model');	
+		$user_data = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
+
+        $this->load->model($user_data->role.'_model', 'roled_user_model');
+        $roled_user_data = $this->roled_user_model->get_by(array('id_user' => $user_data->id));
+		
+		// load model
+		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $roled_user_data->nim));
 
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$post = $this->input->post();
