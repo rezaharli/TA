@@ -40,9 +40,20 @@ class User extends Private_Controller {
         $data['username']   = $user_data->username;
         $data['alamat']     = $user_data->alamat;
         $data['telp']       = $user_data->telp;
-
         $data['nip'] = $roled_user_data->nip;
+
     	$this->load_page('page/private/'.$user_data->role.'/edit_profile', $data);
+    }
+
+    function do_edit(){
+        $nama = $this->input->post('nama');
+        $email = $this->input->post('email');
+        $alamat = $this->input->post('alamat');
+        $telp = $this->input->post('telp');
+
+        $this->user_model->update($this->session->userdata('id'), array('nama' => $nama, 'email' => $email, 'alamat' => $alamat, 'telp' => $telp ));
+
+        redirect('user/edit');
     }
 
 	function logout(){

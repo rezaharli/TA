@@ -85,7 +85,7 @@
             <h3 class="box-title">Data diri</h3>
           </div><!-- /.box-header -->
           <!-- form start -->
-          <form role="form">
+          <form role="form" method="post" action="<?php echo base_url() ?>user/do_edit">
             <div class="box-body">
               <div class="form-group">
                 <label>NIP</label>
@@ -93,19 +93,19 @@
               </div>
               <div class="form-group">
                 <label>Nama</label>
-                <input type="text" class="form-control" value="<?php echo $nama ?>" placeholder="Nama">
+                <input type="text" class="form-control" value="<?php echo $nama ?>" placeholder="Nama" name="nama">
               </div>
               <div class="form-group">
                 <label>E-mail</label>
-                <input type="email" class="form-control" value="<?php echo $email ?>" placeholder="E-mail">
+                <input type="email" class="form-control" value="<?php echo $email ?>" placeholder="E-mail" name="email">
               </div>
               <div class="form-group">
                 <label>Alamat</label>
-                <textarea class="form-control" rows="3" placeholder="Alamat"><?php echo $alamat ?></textarea>
+                <textarea class="form-control" rows="3" placeholder="Alamat" name="alamat"><?php echo $alamat ?></textarea>
               </div>
               <div class="form-group">
                 <label>No. Telepon</label>
-                <input type="text" class="form-control" value="<?php echo $telp ?>" placeholder="No. Telepon">
+                <input type="text" class="form-control" value="<?php echo $telp ?>" placeholder="No. Telepon" name="telp">
               </div>
             </div><!-- /.box-body -->
 
