@@ -17,7 +17,7 @@
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url() ?>staff/do_add">
+            <form role="form" method="post" action="<?php echo base_url() ?>staff/do_add" autocomplete="off">
             
             <div class="col-md-6">
                 <!-- general form elements -->
@@ -73,9 +73,16 @@
                                 <option value="staff_kemahasiswaan">Staff Kemahasiswaan</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input type="text" class="form-control" id="input-username" name="username" placeholder="Username">
+                        <div id="form-group-username" class="form-group">
+                          <label>Username</label>
+                          <div>
+                            <div class="col-md-7">
+                              <input type="text" class="form-control" id="input-username" name="username">
+                            </div>
+                            <div class="col-md-5">
+                              <h5 id="status-username" class="text-center"></h5>
+                            </div>
+                          </div>
                         </div>
                     </div><!-- /.box-body -->
 

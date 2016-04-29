@@ -43,7 +43,7 @@ class Staff extends Private_Controller {
         $telp = $this->input->post('telp');
         $role = $this->input->post('role');
 
-        $this->user_model->insert(array('username' => $username, 'password' => $username, 'nama' => $nama, 'email' => $email, 'alamat' => $alamat, 'telp' => $telp, 'role' => $role), FALSE);
+        $this->user_model->insert(array('username' => $username, 'password' => sha1($username), 'nama' => $nama, 'email' => $email, 'alamat' => $alamat, 'telp' => $telp, 'role' => $role), FALSE);
 
         $this->staff_model->insert(array('nip' => $nip, 'id_user' => $this->db->insert_id(), 'jenis' => $jenisstaff), FALSE);
 
