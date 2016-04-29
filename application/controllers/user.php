@@ -10,7 +10,9 @@ class User extends Private_Controller {
 	function do_username_check(){
 		$username = $this->input->post('username');
         $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-		if($username == $user->username){ //jika username sama seperti sebelumnya (tidak berubah)
+        $this->load->helper('url'); // load the helper first
+
+		if($username == $user->username && $this->uri->segment(3) == 'user' && $this->uri->segment(4) == 'edit'){ //jika username sama seperti sebelumnya (tidak berubah)
 			echo '3';
 		} else {
 			$user = $this->user_model->get_by(array('username' => $username));
@@ -48,6 +50,17 @@ class User extends Private_Controller {
         }
 
     	$this->load_page('page/private/'.$user_data->role.'/edit_profile', $data);
+    }
+
+    function do_edit(){
+        $nama = $this->input->post('nama');
+        $email = $this->input->post('email');
+        $alamat = $this->input->post('alamat');
+        $telp = $this->input->post('telp');
+
+        $this->user_model->update($this->session->userdata('id'), array('nama' => $nama, 'email' => $email, 'alamat' => $alamat, 'telp' => $telp ));
+
+        redirect('user/edit');
     }
 
 	function logout(){
