@@ -27,17 +27,26 @@ class Staff extends Private_Controller {
     }
 
 	function add(){
-		$staffs = $this->load->model('staff_model');
-        $data['staffs'] = $staffs;
-		$this->load_page('page/private/staff/add_new_staff', '');
+		$this->load_page('page/private/staff/add_new_staff', null);
 	}
 
 	function do_add(){
 		$this->load->model('staff_model');
-		$nip = $this->input->post('nama');
+
+		$jenisstaff = $this->input->post('jenisstaff');
+		$nip = $this->input->post('nip');
+
+		$username = $this->input->post('username');
 		$nama = $this->input->post('nama');
 		$email = $this->input->post('email');
         $alamat = $this->input->post('alamat');
         $telp = $this->input->post('telp');
+        $role = $this->input->post('role');
+
+        $this->user_model->insert(array('username' => $username, 'password' => $username, 'nama' => $nama, 'email' => $email, 'alamat' => $alamat, 'telp' => $telp, 'role' => $role), FALSE);
+
+        $this->staff_model->insert(array('nip' => $nip, 'id_user' => $this->db->insert_id(), 'jenis' => $jenisstaff), FALSE);
+
+ 		
 	}
 }

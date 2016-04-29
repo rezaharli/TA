@@ -10,7 +10,9 @@ class User extends Private_Controller {
 	function do_username_check(){
 		$username = $this->input->post('username');
         $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-		if($username == $user->username){ //jika username sama seperti sebelumnya (tidak berubah)
+        $this->load->helper('url'); // load the helper first
+
+		if($username == $user->username && $this->uri->segment(3) == 'user' && $this->uri->segment(4) == 'edit'){ //jika username sama seperti sebelumnya (tidak berubah)
 			echo '3';
 		} else {
 			$user = $this->user_model->get_by(array('username' => $username));

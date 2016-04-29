@@ -17,39 +17,8 @@
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form">
-            <div class="col-md-6">
-                <!-- general form elements -->
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Data Akun</h3>
-                    </div><!-- /.box-header -->
-                    
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label>Jenis Staff</label>
-                            <select class="form-control select2" style="width: 100%;">
-                                <option selected="selected">--Jenis Staff--</option>
-                                <option>Kaur</option>
-                                <option>Admin</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input type="text" class="form-control" placeholder="Username" name="username">
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control" placeholder="Password" name="password">
-                        </div>
-                        <div class="form-group">
-                            <label>Konfirmasi Password</label>
-                            <input type="password" class="form-control" placeholder="Konfirmasi Password" name="confirmpassword">
-                        </div>
-                    </div><!-- /.box-body -->
-                </div>
-            </div>
-
+            <form role="form" method="post" action="<?php echo base_url() ?>staff/do_add">
+            
             <div class="col-md-6">
                 <!-- general form elements -->
                 <div class="box box-primary">
@@ -78,13 +47,44 @@
                             <label>Telp</label>
                             <input type="text" class="form-control" placeholder="Telp" name="telp">
                         </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" placeholder="Telp" name="role" value="staff">
+                        </div>
+                    </div><!-- /.box-body -->
+
+                    
+                </div><!-- /.box -->
+            </div>
+
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Data Akun</h3>
+                    </div><!-- /.box-header -->
+                    
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Jenis Staff</label>
+                            <select class="form-control select2" style="width: 100%;" name="jenisstaff">
+                                <option selected="selected" disabled="">--Jenis Staff--</option>
+                                <option value="kaur">Kaur</option>
+                                <option value="staff_admin">Staff Admin</option>
+                                <option value="staff_kemahasiswaan">Staff Kemahasiswaan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control" id="input-username" name="username" placeholder="Username">
+                        </div>
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
-                </div><!-- /.box -->
+                </div>
             </div>
+
             </form>
         </div>
     </section>
@@ -92,5 +92,3 @@
 
 <!-- cek username -->
 <script src="<?php echo base_url() ?>assets/js/cek_username.js"></script>
-<!-- cek password -->
-<script src="<?php echo base_url() ?>assets/js/cek_password.js"></script>
