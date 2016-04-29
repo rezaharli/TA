@@ -1,11 +1,16 @@
 $("#input-username").on('focus change keyup', function(event){
-     var serializedData = $("#form-username").serialize();
+     var value = $("#input-username").val();
 
+     var str = window.location.href;
+     var status = "/" + str.split(window.location.origin + "/hmmmm/").pop();
 // Fire off the request to /form.php
+     
+     var url = window.location.origin + "/hmmmm/user/do_username_check" + status;
+
      request = $.ajax({
-          url: window.location.origin + "/hmmmm/user/do_username_check",
+          url: url,
           type: "post",
-          data: serializedData
+          data: 'username='+value
      });
 
      if($("#input-username").val() != ""){
