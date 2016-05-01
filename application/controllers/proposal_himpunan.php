@@ -15,7 +15,7 @@ class Proposal_himpunan extends Private_Controller{
     }
 
     function index(){
-        $data['user'] = $this->user_model->get_by(array('id' => $this->session->userdata('logged_in_user')['user_data']->id));
+        $data['user'] = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
         $this->load_page('page/private/himpunan/upload_prop_himpunan', $data);
     }
 

@@ -10,9 +10,10 @@ class User extends Private_Controller {
 	function do_username_check(){
 		$username = $this->input->post('username');
         $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-        $this->load->helper('url'); // load the helper first
 
-		if($username == $user->username && $this->uri->segment(3) == 'user' && $this->uri->segment(4) == 'edit'){ //jika username sama seperti sebelumnya (tidak berubah)
+        //jika username sama seperti sebelumnya (tidak berubah)
+        //hanya untuk edit profil user
+		if($username == $user->username && $this->uri->segment(3) == 'user' && $this->uri->segment(4) == 'edit'){ 
 			echo '3';
 		} else {
 			$user = $this->user_model->get_by(array('username' => $username));
@@ -32,35 +33,32 @@ class User extends Private_Controller {
     	$this->logout();
     }
 
-    function edit(){
-        $user_data = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-
-        $this->load->model($user_data->role.'_model', 'roled_user_model');
-        $roled_user_data = $this->roled_user_model->get_by(array('id_user' => $user_data->id));
-
-        $data['nama']       = $user_data->nama;
-        $data['username']   = $user_data->username;
-        $data['alamat']     = $user_data->alamat;
-        $data['telp']       = $user_data->telp;
-
-        if ($user_data->role == 'staff'){
-            $data['nip'] = $roled_user_data->nip;    
-        } elseif ($user_data->role == 'mahasiswa') {
-            $data['nim'] = $roled_user_data->nim;  
-        }
-
-    	$this->load_page('page/private/'.$user_data->role.'/edit_profile', $data);
-    }
-
-    function do_edit(){
-        $nama = $this->input->post('nama');
+    function do_datadiri_edit(){
         $email = $this->input->post('email');
         $alamat = $this->input->post('alamat');
         $telp = $this->input->post('telp');
 
-        $this->user_model->update($this->session->userdata('id'), array('nama' => $nama, 'email' => $email, 'alamat' => $alamat, 'telp' => $telp ));
+        $this->user_model->update($this->session->userdata('id'), array('email' => $email, 'alamat' => $alamat, 'telp' => $telp ));
 
         redirect('user/edit');
+    }
+
+    function edit(){
+        $user = $this->get_user_dan_role();
+
+        $data['role']       = $user->role;
+        $data['nama']       = $user->nama;
+        $data['username']   = $user->username;
+        $data['alamat']     = $user->alamat;
+        $data['telp']       = $user->telp;
+
+        if ($user->role == 'staff'){
+            $data['nip'] = $user->roled_data->nip;    
+        } elseif ($user->role == 'mahasiswa') {
+            $data['nim'] = $user->roled_data->nim;  
+        }
+
+    	$this->load_page('page/private/edit_profile', $data);
     }
 
 	function logout(){
@@ -79,4 +77,3 @@ class User extends Private_Controller {
 }
 
 /* End of file user.php */
-/* Location: ./application/controllers/user.php */
