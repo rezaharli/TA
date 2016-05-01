@@ -20,8 +20,18 @@
         </li>
 
         <?php if($role == 'mahasiswa') { ?>
-           <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-files-o"></i> <span>Beasiswa</span></a></li>
-           <li><a href="<?php echo base_url('laporan') ?>"><i class="fa fa-map-o"></i> <span>Lihat Laporan</span></a></li>
+          <li>
+            <a href="<?php echo base_url('sertifikat') ?>">
+              <i class="fa fa-files-o"></i> 
+                <span>Beasiswa</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?php echo base_url('laporan') ?>">
+              <i class="fa fa-map-o"></i> 
+                <span>Lihat Laporan</span>
+            </a>
+          </li>
         <?php } ?>
 
         <?php if ($jenis == 'kaur' || $jenis == 'himpunan') { ?>
