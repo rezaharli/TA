@@ -64,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <?php
-if($this->session->flashdata('status')){
+if($this->session->flashdata('status') !== null){
     echo '<script type="text/javascript">';
     if ($this->session->flashdata('status')) {
         echo 'alert("Update data berhasil")';

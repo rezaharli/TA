@@ -34,20 +34,26 @@ class Private_Controller extends MY_Controller {
         }
     }
 
-    public function load_page($page = '', $content_data){
+    public function get_user_dan_role(){
         $this->load->model('user_model');
-        $user_data = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
+        $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
        
-        $this->load->model($user_data->role.'_model', 'roled_user_model');
-        $roled_user_data = $this->roled_user_model->get_by(array('id_user' => $user_data->id));
+        $this->load->model($user->role.'_model', 'roled_user_model');
+        $user->roled_data = $this->roled_user_model->get_by(array('id_user' => $user->id));
 
-        $header_data['username']    = $user_data->username;
-        $header_data['nama']        = $user_data->nama;
-        $header_data['email']       = $user_data->email;
-        $header_data['jenis']       = $roled_user_data->jenis;
+        return $user;
+    }
 
-        $sidebar_data['role']   = $user_data->role;
-        $sidebar_data['jenis']  = $roled_user_data->jenis;
+    public function load_page($page = '', $content_data){
+        $user = $this->get_user_dan_role();
+
+        $header_data['username']    = $user->username;
+        $header_data['nama']        = $user->nama;
+        $header_data['email']       = $user->email;
+        $header_data['jenis']       = $user->roled_data->jenis;
+
+        $sidebar_data['role']   = $user->role;
+        $sidebar_data['jenis']  = $user->roled_data->jenis;
 
         $this->load->view('template/header', $header_data);
         $this->load->view('template/sidebar', $sidebar_data);
