@@ -44,7 +44,7 @@ class Private_Controller extends MY_Controller {
         return $user;
     }
 
-    public function load_page($page = '', $content_data){
+    public function load_page($page = '', $content_data = null){
         $user = $this->get_user_dan_role();
 
         $header_data['username']    = $user->username;

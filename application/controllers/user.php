@@ -77,3 +77,4 @@ class User extends Private_Controller {
 }
 
 /* End of file user.php */
+/* Location: ./application/controllers/user.php */
