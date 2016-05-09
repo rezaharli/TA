@@ -20,10 +20,7 @@
 	    	</div><!-- /.col -->
 	  	</div><!-- /.row -->
 	</section><!-- /.content -->
-
-	<pre>
-	  	<?php var_dump($this->session->userdata()); ?>
-	</pre>
+	
 </div>
 <!-- /.content-wrapper -->
 

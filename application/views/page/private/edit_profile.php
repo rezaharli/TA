@@ -21,16 +21,22 @@
         <!-- Profile Image -->
         <div class="box box-primary">
           <div class="box-body box-profile">
-            <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url() ?>assets/adminlte/dist/img/user4-128x128.jpg" alt="User profile picture">
+            <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url() ?>assets/img/foto-profil/<?php echo $foto_profil ?>" alt="User profile picture">
           </div>
-
-          <form role="form">
+          <?php if (null !== $this->session->flashdata('error')) { ?>
+            <div class="box-footer">
+              <div class="form-group">
+                <?php echo $this->session->flashdata('error'); ?> 
+              </div>
+            </div><!-- /.box-body -->
+          <?php } ?>
+          <form role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url() ?>user/do_foto_profil_edit">
             <div class="box-footer">
               <div class="form-group col-md-8">
-                <input type="file" id="exampleInputFile" style="margin-top: 7px">
+                <input type="file" name="foto-profil" id="exampleInputFile" style="margin-top: 7px">
               </div>
               <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary">Ganti Foto</button>
               </div>
             </div><!-- /.box-body -->
           </form>

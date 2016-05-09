@@ -7,6 +7,34 @@ class User extends Private_Controller {
 	    $this->load->model('user_model');
 	}
 
+    function do_foto_profil_edit(){
+        $id = $this->session->userdata('id');
+        $input_file_name = 'foto-profil';
+
+        $tmp        = explode(".", $_FILES[$input_file_name]['name']);
+        $ext        = end($tmp);
+        $filename   = $this->session->userdata('id').'_'.sha1($_FILES[$input_file_name]['name']).'.'.$ext;
+
+        $config['upload_path']      = './assets/img/foto-profil/';
+        $config['allowed_types']    = 'gif|jpg|png';
+        $config['file_name']        = $filename;
+
+        $this->load->library('upload', $config);
+        
+        if ( ! $this->upload->do_upload($input_file_name)) {
+            $this->session->set_flashdata('error', $this->upload->display_errors());
+        } else {
+            $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
+            $file = "./assets/img/foto-profil/".$user->foto_profil;
+            if(is_file($file)){
+                if(unlink($file)){
+                    $this->user_model->update($this->session->userdata('id'), array('foto_profil' => $this->upload->data()['file_name']));
+                }
+            }
+        }
+        redirect('user/edit');
+    }
+
 	function do_username_check(){
 		$username = $this->input->post('username');
         $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));

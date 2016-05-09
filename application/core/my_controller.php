@@ -50,6 +50,7 @@ class Private_Controller extends MY_Controller {
         $header_data['username']    = $user->username;
         $header_data['nama']        = $user->nama;
         $header_data['email']       = $user->email;
+        $header_data['foto_profil'] = $user->foto_profil;
         $header_data['jenis']       = $user->roled_data->jenis;
 
         $sidebar_data['role']   = $user->role;
