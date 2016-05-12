@@ -12,16 +12,22 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Ajukan event</a></li>
-            <?php if ($jenis == 'kaur' || $jenis == 'staff_kemahasiswaan') { ?>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Daftar pengajuan event</a></li>
+
+            <?php if($role == 'mahasiswa' || $jenis == 'staff_admin') { ?>
+              <li><a href="#"><i class="fa fa-circle-o"></i>Ajukan event</a></li>
             <?php } ?>
+            
+            <?php if ($jenis == 'kaur' || $jenis == 'staff_kemahasiswaan') { ?>
+              <li><a href="#"><i class="fa fa-circle-o"></i>Daftar pengajuan event</a></li>
+              <li><a href="#"><i class="fa fa-circle-o"></i>Tambah Event</a></li>
+            <?php } ?>
+          
           </ul>
         </li>
 
         <?php if($role == 'mahasiswa') { ?>
-           <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-files-o"></i> <span>Beasiswa</span></a></li>
-           <li><a href="<?php echo base_url('laporan') ?>"><i class="fa fa-map-o"></i> <span>Lihat Laporan</span></a></li>
+          <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-files-o"></i> <span>Beasiswa</span></a></li>
+          <li><a href="<?php echo base_url('laporan') ?>"><i class="fa fa-map-o"></i> <span>Lihat Laporan</span></a></li>
         <?php } ?>
 
         <?php if ($jenis == 'kaur' || $jenis == 'himpunan') { ?>

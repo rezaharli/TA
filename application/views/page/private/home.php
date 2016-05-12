@@ -39,7 +39,7 @@
 				right: 'prev,next'
 			},
 			height: 'auto',
-			editable: true,
+			editable: false,
 			eventLimit: 2, // allow "more" link when too many events
 			events: '<?php echo base_url('home/calendar'); ?>'
 		});
