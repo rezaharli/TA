@@ -262,7 +262,7 @@
                   <div class="form-group">
                     <label for="inputExperience" class="col-sm-2 control-label">Alamat</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" rows="3" placeholder="Alamat" name="alamat"><?php echo $alamat ?></textarea>
+                      <textarea class="form-control" rows="3" placeholder="Alamat" name="alamat" style="resize: none;"><?php echo $alamat ?></textarea>
                     </div>
                   </div>
                   <div class="form-group">
