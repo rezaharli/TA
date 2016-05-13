@@ -33,12 +33,12 @@ class Google_calendar {
  		 	array_push($calendar_datas, $this->event_to_array($event));
 
 	    }
-	    echo json_encode($calendar_datas);
+	    return $calendar_datas;
 	}
 
 	function get_by_id($event_id){
 		$event = $this->cal->events->get(self::CALENDAR_ID, $event_id);
-		json_encode($this->event_to_array($event));
+		return $this->event_to_array($event);
 	}
 
 	private function event_to_array($event){
@@ -62,10 +62,11 @@ class Google_calendar {
 
 
  		 	return array(
- 		 		'id'		=> $event->id,
- 		 		'title'		=> $event->summary,
- 		 		'start'		=> $eventdate->format("Y").'-'.$eventdate->format("m").'-'.$eventdate->format("j"),
- 		 		'url'		=> base_url('event/detail/'.$event->id)
+ 		 		'id'			=> $event->id,
+ 		 		'title'			=> $event->summary,
+ 		 		'start'			=> $eventdate->format("Y").'-'.$eventdate->format("m").'-'.$eventdate->format("j"),
+ 		 		'google_url'	=> $event->htmlLink,
+ 		 		'url'			=> base_url('event/detail/'.$event->id)
  		 		);
 	}
 
