@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hmmmm</title>
+    <title><?php echo APP_NAME ?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -40,7 +40,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>K</b>MH</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>AdminLTE</b></span>
+          <span class="logo-lg"><b><?php echo APP_NAME ?></b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -68,23 +68,22 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="<?php echo base_url() ?>assets/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                  <img src="<?php echo base_url() ?>assets/img/foto-profil/<?php echo $foto_profil ?>" class="user-image" alt="User Image">
                   <span class="hidden-xs"><?php echo $username ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="<?php echo base_url() ?>assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="<?php echo base_url() ?>assets/img/foto-profil/<?php echo $foto_profil ?>" class="img-circle" alt="User Image">
                     <p>
                       <?php echo $nama ?>
                       <small>
                       <?php 
-                      $jenis_user = $jenis;
-                      if ($jenis_user == 'kaur') { 
+                      if ($jenis == 'kaur') { 
                         echo 'Kepala Urusan Kemahasiswaan';
-                      } elseif ($jenis_user == 'staff_kemahasiswaan') {
+                      } elseif ($jenis == 'staff_kemahasiswaan') {
                         echo 'Staff Kemahasiswaan';
-                      } elseif ($jenis_user == 'staff_admin') {
+                      } elseif ($jenis == 'staff_admin') {
                         echo 'Staff Admin';
                       } else {
                         echo 'Mahasiswa';
@@ -96,7 +95,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="<?php echo base_url() ?>user/edit" class="btn btn-default btn-flat">Edit Profile</a>
+                      <a href="<?php echo base_url() ?>user/<?php echo $username ?>" class="btn btn-default btn-flat">Profil</a>
                     </div>
                     <div class="pull-right">
                       <a href="<?php echo base_url() ?>user/logout" class="btn btn-default btn-flat">Logout</a>
