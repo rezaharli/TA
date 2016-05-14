@@ -4,8 +4,54 @@ class User extends Private_Controller {
 	
 	function __construct() {
 		parent::__construct();
-	    $this->load->model('user_model');
+
+        $this->load->model('user_model');
 	}
+
+    public function _remap($method, $params = array()) {
+        if (method_exists(__CLASS__, $method)) {
+            $this->$method($params);
+        } else {
+            $this->index();
+        }
+    }
+
+    function index() {
+        $username = $this->uri->segment(2);
+
+        if($username){
+            $user = $this->user_model->get_by(array('username' => $username));
+
+            if ($user) {
+                $model = $user->role.'_model';
+                $this->load->model($model);
+                $user->roled_data = $this->$model->get_by(array('id_user' => $user->id));
+
+                $data['id_user']        = $user->id;
+                $data['role']           = $user->role;
+                $data['nama']           = $user->nama;
+                $data['username']       = $user->username;
+                $data['alamat']         = $user->alamat;
+                $data['email']          = $user->email;
+                $data['telp']           = $user->telp;
+                $data['foto_profil']    = ($user->foto_profil) ? $user->foto_profil : 'default.png' ;
+                $data['jenis']          = $user->roled_data->jenis;
+
+                if ($user->role == 'staff'){
+                    $data['nip'] = $user->roled_data->nip;    
+                } elseif ($user->role == 'mahasiswa') {
+                    $data['nim'] = $user->roled_data->nim;  
+                }
+
+                $this->load_page('page/private/profil.php', $data);
+            } else {
+                $this->load_page('errors/404.php');
+            }
+        } else {
+            $user = $this->get_user_dan_role_by_id();
+            redirect('user/'.$user->username);
+        }
+    }
 
     function do_foto_profil_edit(){
         $id = $this->session->userdata('id');
@@ -32,7 +78,7 @@ class User extends Private_Controller {
                 }
             }
         }
-        redirect('user/edit');
+        redirect('user');
     }
 
 	function do_username_check(){
@@ -68,25 +114,7 @@ class User extends Private_Controller {
 
         $this->user_model->update($this->session->userdata('id'), array('email' => $email, 'alamat' => $alamat, 'telp' => $telp ));
 
-        redirect('user/edit');
-    }
-
-    function edit(){
-        $user = $this->get_user_dan_role();
-
-        $data['role']       = $user->role;
-        $data['nama']       = $user->nama;
-        $data['username']   = $user->username;
-        $data['alamat']     = $user->alamat;
-        $data['telp']       = $user->telp;
-
-        if ($user->role == 'staff'){
-            $data['nip'] = $user->roled_data->nip;    
-        } elseif ($user->role == 'mahasiswa') {
-            $data['nim'] = $user->roled_data->nim;  
-        }
-
-    	$this->load_page('page/private/edit_profile', $data);
+        redirect('user');
     }
 
 	function logout(){
@@ -99,8 +127,6 @@ class User extends Private_Controller {
     function show_profile($username){
     	$this->load_page('');
     }
-
-    
 
 }
 

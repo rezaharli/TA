@@ -5,11 +5,46 @@
 <!--Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
+	<section class="content-header">
+	    <h1>
+	      	Event
+	    </h1>
+	    <ol class="breadcrumb">
+	      	<li><a href="#">Event</a></li>
+	      	<li class="active"><?php echo $title ?></li>
+	    </ol>
+	</section>
+
 	<section class="content">
 	  	<div class="row">
-	    	<div class="col-md-8">
-            
-	    	</div>
+	    	<div class="col-xs-8">
+	    		<div class="box box-solid">
+	              	<div class="box-header with-border">
+                  		<h3 class="box-title">Detail Event</h3>
+                	</div>
+                	<div class="box-body">
+		              	<div class="table-responsive">
+			                <table class="table">
+			                  	<tr>
+				                    <th style="width:20%">Title:</th>
+				                    <td><?php echo $title ?></td>
+			                  	</tr>
+			                  	<tr>
+				                    <th>Start:</th>
+				                    <td><?php echo $start ?></td>
+			                  	</tr>
+			                </table>
+		             	</div>
+		              	<div class="row no-print">
+							<div class="col-xs-12">
+								<a href="<?php echo $google_url ?>" target="_blank" class="btn btn-default">Lihat di google calendar</a>
+								<button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Delete</button>
+								<button class="btn btn-success pull-right" style="margin-right: 5px;"><i class="fa fa-edit"></i> Edit</button>
+							</div>
+		          		</div>
+		          	</div>
+	          	</div>
+            </div><!-- /.col -->
 	    	<div class="col-md-4">
 	      		<div class="box box-primary">
 	        		<div class="box-body no-padding">
