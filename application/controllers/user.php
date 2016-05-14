@@ -27,7 +27,7 @@ class User extends Private_Controller {
                 $this->load->model($model);
                 $user->roled_data = $this->$model->get_by(array('id_user' => $user->id));
 
-                $data['id_user']             = $user->id;
+                $data['id_user']        = $user->id;
                 $data['role']           = $user->role;
                 $data['nama']           = $user->nama;
                 $data['username']       = $user->username;
