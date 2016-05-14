@@ -11,7 +11,7 @@
 	    </h1>
 	    <ol class="breadcrumb">
 	      	<li><a href="#">Event</a></li>
-	      	<li class="active"><?php echo $title ?></li>
+	      	<li class="active"><?php echo $nama_event ?></li>
 	    </ol>
 	</section>
 
@@ -26,12 +26,32 @@
 		              	<div class="table-responsive">
 			                <table class="table">
 			                  	<tr>
-				                    <th style="width:20%">Title:</th>
-				                    <td><?php echo $title ?></td>
+				                    <th style="width:20%">Nama Event:</th>
+				                    <td><?php echo $nama_event ?></td>
 			                  	</tr>
 			                  	<tr>
-				                    <th>Start:</th>
-				                    <td><?php echo $start ?></td>
+				                    <th>Tanggal Event:</th>
+				                    <td><?php echo $tanggal ?></td>
+			                  	</tr>
+			                  	<tr>
+				                    <th>Pengaju:</th>
+				                    <td><?php echo $pengaju ?></td>
+			                  	</tr>
+			                  	<tr>
+			                  		<th>Status:</th>
+			                  		<td>
+				                      	<?php if ($status == null) { ?>
+				                      		<span class="label label-warning">Pending</span></td>
+				                      	<?php } else if ($status == 'disetujui') { ?>
+				                      		<span class="label label-success">Disetujui</span></td>
+				                      	<?php } else if ($status == 'ditolak') { ?>
+				                      		<span class="label label-danger">Ditolak</span></td>
+				                      	<?php } ?>
+			                      	<td>
+			                  	</tr>
+			                  	<tr>
+				                    <th>Penanggungjawab:</th>
+				                    <td><?php echo ($penanggungjawab) ? $penanggungjawab : '-' ; ?></td>
 			                  	</tr>
 			                </table>
 		             	</div>
