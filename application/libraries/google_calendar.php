@@ -65,7 +65,7 @@ class Google_calendar {
  			'title'			=> $event->summary,
  			'start'			=> $eventdate->format("Y").'-'.$eventdate->format("m").'-'.$eventdate->format("j"),
  			'google_url'	=> $event->htmlLink,
- 			'url'			=> base_url('event/detail/'.$event->id)
+ 			'url'			=> base_url('event?id='.$event->id)
  			);
 	}
 
