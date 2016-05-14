@@ -79,12 +79,11 @@
                       <?php echo $nama ?>
                       <small>
                       <?php 
-                      $jenis_user = $jenis;
-                      if ($jenis_user == 'kaur') { 
+                      if ($jenis == 'kaur') { 
                         echo 'Kepala Urusan Kemahasiswaan';
-                      } elseif ($jenis_user == 'staff_kemahasiswaan') {
+                      } elseif ($jenis == 'staff_kemahasiswaan') {
                         echo 'Staff Kemahasiswaan';
-                      } elseif ($jenis_user == 'staff_admin') {
+                      } elseif ($jenis == 'staff_admin') {
                         echo 'Staff Admin';
                       } else {
                         echo 'Mahasiswa';
@@ -96,7 +95,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="<?php echo base_url() ?>user/edit" class="btn btn-default btn-flat">Edit Profile</a>
+                      <a href="<?php echo base_url() ?>user/<?php echo $username ?>" class="btn btn-default btn-flat">Profil</a>
                     </div>
                     <div class="pull-right">
                       <a href="<?php echo base_url() ?>user/logout" class="btn btn-default btn-flat">Logout</a>

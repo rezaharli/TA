@@ -8,7 +8,7 @@ class Himpunan extends Private_Controller {
 	}
 
 	function index(){
-        $user = $this->get_user_dan_role();
+        $user = $this->get_user_dan_role_by_id();
 		
 		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
 
@@ -20,7 +20,7 @@ class Himpunan extends Private_Controller {
 	}
 
 	function do_update(){
-        $user = $this->get_user_dan_role();
+        $user = $this->get_user_dan_role_by_id();
 		
 		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
 

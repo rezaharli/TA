@@ -42,32 +42,31 @@ class Google_calendar {
 	}
 
 	private function event_to_array($event){
-			$eventDateStr = $event->start->dateTime;
-         	if(empty($eventDateStr)) {
-             	// it's an all day event
-             	$eventDateStr = $event->start->date;
-         	}
+		$eventDateStr = $event->start->dateTime;
+        if(empty($eventDateStr)) {
+          	// it's an all day event
+          	$eventDateStr = $event->start->date;
+        }
  
-         	$temp_timezone = $event->start->timeZone;
- 			//THIS OVERRIDES THE CALENDAR TIMEZONE IF THE EVENT HAS A SPECIAL TZ
-         	if (!empty($temp_timezone)) {
-         		$timezone = new DateTimeZone($temp_timezone); //GET THE TIME ZONE
-                //Set your default timezone in case your events don't have one
-     		} else if (!empty($this->calTimeZone)) {
-     			$timezone = new DateTimeZone($this->calTimeZone);
-         	}
+        $temp_timezone = $event->start->timeZone;
+ 		//THIS OVERRIDES THE CALENDAR TIMEZONE IF THE EVENT HAS A SPECIAL TZ
+        if (!empty($temp_timezone)) {
+        	$timezone = new DateTimeZone($temp_timezone); //GET THE TIME ZONE
+             //Set your default timezone in case your events don't have one
+     	} else if (!empty($this->calTimeZone)) {
+     		$timezone = new DateTimeZone($this->calTimeZone);
+        }
 
-         	$eventdate = new DateTime($eventDateStr);
- 		 	$link = $event->htmlLink;
+        $eventdate = new DateTime($eventDateStr);
+ 		$link = $event->htmlLink;
 
-
- 		 	return array(
- 		 		'id'			=> $event->id,
- 		 		'title'			=> $event->summary,
- 		 		'start'			=> $eventdate->format("Y").'-'.$eventdate->format("m").'-'.$eventdate->format("j"),
- 		 		'google_url'	=> $event->htmlLink,
- 		 		'url'			=> base_url('event/detail/'.$event->id)
- 		 		);
+ 		return array(
+ 			'id'			=> $event->id,
+ 			'title'			=> $event->summary,
+ 			'start'			=> $eventdate->format("Y").'-'.$eventdate->format("m").'-'.$eventdate->format("j"),
+ 			'google_url'	=> $event->htmlLink,
+ 			'url'			=> base_url('event/detail/'.$event->id)
+ 			);
 	}
 
 }
