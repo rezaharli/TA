@@ -20,10 +20,7 @@
 	    	</div><!-- /.col -->
 	  	</div><!-- /.row -->
 	</section><!-- /.content -->
-
-	<pre>
-	  	<?php var_dump($this->session->userdata()); ?>
-	</pre>
+	
 </div>
 <!-- /.content-wrapper -->
 
@@ -42,9 +39,9 @@
 				right: 'prev,next'
 			},
 			height: 'auto',
-			editable: true,
+			editable: false,
 			eventLimit: 2, // allow "more" link when too many events
-			events: '<?php echo base_url('home/calendar'); ?>'
+			events: '<?php echo base_url('event/get_calendar'); ?>'
 		});
 		
 	});

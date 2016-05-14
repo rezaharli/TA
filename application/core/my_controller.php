@@ -34,22 +34,23 @@ class Private_Controller extends MY_Controller {
         }
     }
 
-    public function get_user_dan_role(){
+    public function get_user_dan_role_by_id(){
         $this->load->model('user_model');
         $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-       
-        $this->load->model($user->role.'_model', 'roled_user_model');
-        $user->roled_data = $this->roled_user_model->get_by(array('id_user' => $user->id));
-
+        
+        $model = $user->role.'_model';
+        $this->load->model($model);
+        $user->roled_data = $this->$model->get_by(array('id_user' => $user->id));
         return $user;
     }
 
-    public function load_page($page = '', $content_data){
-        $user = $this->get_user_dan_role();
+    public function load_page($page = '', $content_data = null){
+        $user = $this->get_user_dan_role_by_id();
 
         $header_data['username']    = $user->username;
         $header_data['nama']        = $user->nama;
         $header_data['email']       = $user->email;
+        $header_data['foto_profil'] = ($user->foto_profil) ? $user->foto_profil : 'default.png' ;
         $header_data['jenis']       = $user->roled_data->jenis;
 
         $sidebar_data['role']   = $user->role;
