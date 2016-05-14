@@ -5,7 +5,6 @@ class Google_calendar {
 	const CALENDAR_ID 	= 'kelompokg2012@gmail.com';
 
 	private $cal;
-	private $calTimeZone;
 
     public function __construct() {
         require_once APPPATH.'third_party/Google/google.php';
@@ -23,50 +22,30 @@ class Google_calendar {
 			);
 
 		$events = $this->cal->events->listEvents(self::CALENDAR_ID, $params); 
-		$this->calTimeZone = $events->timeZone; //GET THE TZ OF THE CALENDAR
-		date_default_timezone_set($this->calTimeZone);
 
 		$calendar_datas = array();
 
 		foreach ($events->getItems() as $event) {
 
- 		 	array_push($calendar_datas, $this->event_to_array($event));
+			$eventDateStr = $event->start->dateTime;
+	        if(empty($eventDateStr)) {
+	          	// it's an all day event
+	          	$eventDateStr = $event->start->date;
+	        }
+
+	        $eventdate = new DateTime($eventDateStr);
+
+	        $result = new stdClass();
+	 		$result->id			= $event->id;
+	 		$result->nama		= $event->summary;
+	 		$result->tanggal	= $eventdate->format("Y").'-'.$eventdate->format("m").'-'.$eventdate->format("j");
+	 		$result->google_url	= $event->htmlLink;
+	 		$result->url		= base_url('event?id='.$event->id);
+
+ 		 	array_push($calendar_datas, $result);
 
 	    }
 	    return $calendar_datas;
-	}
-
-	function get_by_id($event_id){
-		$event = $this->cal->events->get(self::CALENDAR_ID, $event_id);
-		return $this->event_to_array($event);
-	}
-
-	private function event_to_array($event){
-		$eventDateStr = $event->start->dateTime;
-        if(empty($eventDateStr)) {
-          	// it's an all day event
-          	$eventDateStr = $event->start->date;
-        }
- 
-        $temp_timezone = $event->start->timeZone;
- 		//THIS OVERRIDES THE CALENDAR TIMEZONE IF THE EVENT HAS A SPECIAL TZ
-        if (!empty($temp_timezone)) {
-        	$timezone = new DateTimeZone($temp_timezone); //GET THE TIME ZONE
-             //Set your default timezone in case your events don't have one
-     	} else if (!empty($this->calTimeZone)) {
-     		$timezone = new DateTimeZone($this->calTimeZone);
-        }
-
-        $eventdate = new DateTime($eventDateStr);
- 		$link = $event->htmlLink;
-
- 		return array(
- 			'id'			=> $event->id,
- 			'title'			=> $event->summary,
- 			'start'			=> $eventdate->format("Y").'-'.$eventdate->format("m").'-'.$eventdate->format("j"),
- 			'google_url'	=> $event->htmlLink,
- 			'url'			=> base_url('event?id='.$event->id)
- 			);
 	}
 
 }
