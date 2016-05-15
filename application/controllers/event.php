@@ -25,7 +25,14 @@ class Event extends Private_Controller {
 
 			$this->load_page('page/private/detail_event.php', $data);
 		} else {
-			$data['events'] = $this->event_model->order_by('tanggal_event')->get_all();
+			$this->load->model('user_model');
+			$user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
+
+			if($user->role == 'mahasiswa'){
+				$data['events'] = $this->event_model->order_by('tanggal_event')->get_many_by(array('status' => 'disetujui'));
+			} else if($user->role == 'staff'){
+				$data['events'] = $this->event_model->order_by('tanggal_event')->get_all();
+			}
 			$this->load_page('page/private/event.php', $data);
 		}
     }
@@ -69,6 +76,7 @@ class Event extends Private_Controller {
 	function pengajuan(){
 		$this->load_page('page/private/pengajuan_event.php');
 	}
+
 
 }
 
