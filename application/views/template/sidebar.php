@@ -20,7 +20,7 @@
             
             <?php if ($jenis == 'kaur' || $jenis == 'staff_kemahasiswaan') { ?>
               <li><a href="<?php echo base_url('event') ?>"><i class="fa fa-circle-o"></i>Daftar pengajuan event</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i>Tambah Event</a></li>
+              <li><a href="<?php echo base_url('event/tambah') ?>"><i class="fa fa-circle-o"></i>Tambah Event</a></li>
             <?php } ?>
           
           </ul>
