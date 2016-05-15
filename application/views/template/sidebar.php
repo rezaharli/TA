@@ -14,6 +14,7 @@
           <ul class="treeview-menu">
 
             <?php if($role == 'mahasiswa' || $jenis == 'staff_admin') { ?>
+              <li><a href="#"><i class="fa fa-circle-o"></i>Lihat event</a></li>
               <li><a href="#"><i class="fa fa-circle-o"></i>Ajukan event</a></li>
             <?php } ?>
             
@@ -33,7 +34,7 @@
         <?php if ($jenis == 'kaur' || $jenis == 'himpunan') { ?>
           <li class="header">Menu Khusus</li>
           <?php if ($jenis == 'kaur') { ?>
-            <li><a href="#"><i class="fa fa-book"></i> <span>Menu Kaur</span></a></li>
+            <li><a href="<?php echo base_url(); ?>staff/list_staff"><i class="fa fa-book"></i> <span>Daftar Staff</span></a></li>
           <?php } elseif ($jenis == 'himpunan') { ?>
             <li>
               <a href="#">
