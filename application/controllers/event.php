@@ -73,8 +73,12 @@ class Event extends Private_Controller {
         echo json_encode($results);
 	}
 
-	function pengajuan(){
+	function pengajuan() {
 		$this->load_page('page/private/pengajuan_event.php');
+	}
+
+	function tambah() {
+		$this->load_page('page/private/staff/tambah_event.php');
 	}
 
 
