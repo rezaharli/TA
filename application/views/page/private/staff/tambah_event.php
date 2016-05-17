@@ -24,12 +24,12 @@
           </div>
           <div class="box-body">
 
-            <form class="form-horizontal" method="post" action="<?php echo base_url() ?>event/do_tambah">
+            <form class="form-horizontal" method="post" action="<?php echo base_url() ?>user/do_datadiri_edit">
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Nama Event</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" name="nama"/>
+                  <input type="text" class="form-control" nama="nama-event"/>
                 </div>
               </div>
 
@@ -60,7 +60,7 @@
   $(function () {
     //Date range picker
     $('#input-tanggal-event').datepicker({
-      format: 'yyyy-mm-dd'
+      format: 'yyyy/mm/dd'
     });
   });
 </script>

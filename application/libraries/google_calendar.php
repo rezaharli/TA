@@ -1,54 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Google_calendar {
 
+	const DEVELOPER_KEY = 'AIzaSyCBE0Wy0OpxfSJbkcoYyVi9Y1teUyOtPDE';
 	const CALENDAR_ID 	= 'kelompokg2012@gmail.com';
-	const TIMEZONE 		= 'Asia/Jakarta';
 
 	private $cal;
 
     public function __construct() {
         require_once APPPATH.'third_party/Google/google.php';
 
-    	$client_email = 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
-        $private_key = file_get_contents(APPPATH.'libraries/hmmmm-b42b43fec140.p12');
-        $scopes = array('https://www.googleapis.com/auth/calendar');
-
-        $client = new Google_Client();
-
-        $this->cal = new Google_Service_Calendar($client);
-
-        $credentials = new Google_Auth_AssertionCredentials(
-            $client_email,
-            $scopes,
-            $private_key
-        );
-
-        $client->setAssertionCredentials($credentials);
-        if ($client->getAuth()->isAccessTokenExpired()) {
-          $client->getAuth()->refreshTokenWithAssertion();
-        }
-    }
-
-    function add($summary, $start, $end = ''){
-    	$start_date = new DateTime($start);
-    	if($end == ''){
-    		$end = $start_date->modify('+1 day');
-    		$end = $end->format('Y-m-d');
-    	}
-    	$data = new Google_Service_Calendar_Event(array(
-		  'summary' => $summary,
-		  'start' => array(
-		    'date' => $start,
-		    'timeZone' => self::TIMEZONE,
-		  ),
-		  'end' => array(
-		    'date' => $end,
-		    'timeZone' => self::TIMEZONE,
-		  )
-		));
-
-		$event = $this->cal->events->insert(self::CALENDAR_ID, $data);
-		printf('Event created: %s\n', $event->htmlLink);
+    	$this->client = new Google_Client();
+		$this->client->setApplicationName(APP_NAME);
+		$this->client->setDeveloperKey(self::DEVELOPER_KEY);
+		$this->cal = new Google_Service_Calendar($this->client);
     }
 
 	function get() {
