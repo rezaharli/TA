@@ -58,6 +58,12 @@ class Event extends Private_Controller {
         }
     }
 
+    function do_tambah(){
+    	$this->load->library('google_calendar');
+
+    	$this->google_calendar->add($this->input->post('nama'), $this->input->post('tanggal'));
+    }
+
 	function get_calendar() {
 		$events = $this->event_model->get_all();
 		$results = array();
