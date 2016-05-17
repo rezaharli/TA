@@ -47,8 +47,7 @@ class Google_calendar {
 		  )
 		));
 
-		$event = $this->cal->events->insert(self::CALENDAR_ID, $data);
-		printf('Event created: %s\n', $event->htmlLink);
+		return $this->cal->events->insert(self::CALENDAR_ID, $data);
     }
 
 	function get() {

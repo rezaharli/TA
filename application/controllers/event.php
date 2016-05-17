@@ -61,7 +61,23 @@ class Event extends Private_Controller {
     function do_tambah(){
     	$this->load->library('google_calendar');
 
-    	$this->google_calendar->add($this->input->post('nama'), $this->input->post('tanggal'));
+    	$nama 		= $this->input->post('nama');
+    	$tanggal 	= $this->input->post('tanggal');
+
+    	$event = $this->google_calendar->add($nama, $tanggal);
+    	
+    	$data = array(
+    		'id'				=> $event->id,
+			'nama_event' 		=> $nama,
+			'tanggal_event' 	=> $tanggal,
+			// karena pengaju adalah staff kemahasiswaan, maka langsung, tidak ada proses approval
+			'status'			=> 'disetujui',
+			'penanggungjawab'	=> $this->session->userdata('nip'),
+			'google_url'		=> $event->htmlLink
+			);
+        
+        $this->event_model->insert($data);
+        redirect('event');
     }
 
 	function get_calendar() {
