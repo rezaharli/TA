@@ -57,6 +57,8 @@
                     <li><a href="<?php echo base_url('proposal_himpunan/list_proposal') ?>"><i class="fa fa-circle-o"></i>Logbook Pengajuan</a></li>
                   </ul>
                 </li>
+                <li>
+                  <a href="<?php echo base_url('laporan') ?>"><i class="fa fa-circle-o"></i> <span>Lihat Laporan</span></a></li>
               </ul>
             </li>
           <?php } ?>

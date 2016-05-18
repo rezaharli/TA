@@ -39,7 +39,7 @@ class Proposal_himpunan extends Private_Controller{
         $ext        = end($tmp);
         $filename   = $last_id_pengajuan_proposal.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
 
-        $path = './assets/upload/proposal/pengajuan-'.$last_id_pengajuan_proposal.'/';
+        $path = './assets/upload/proposal_himpunan/pengajuan-'.$last_id_pengajuan_proposal.'/';
         if(!is_dir($path)) {
             mkdir($path, 0777, true);
         }

@@ -10,7 +10,8 @@
     <section class="content-header">
         <h1>
             Daftar Pengajuan Proposal Kegiatan
-            <small>Data Pengajuan Proposal</small>
+            <small><?php echo $himpunan->nama ?></small>
+            <small><?php echo $this->session->flashdata('error'); ?></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -35,12 +36,13 @@
                                 <th>Pengaju</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Judul Proposal Pengajuan</th>
+                                <th>Tanggal Upload Proposal</th>
                                 <th>Status Approve</th>
                                 <th>Penanggungjawab Proposal</th>
                               </tr>
                             </thead>
                             <tbody>
-                                <?php $i=1; ?>
+                                <!-- <?php $i=1; ?>
                                 <?php foreach ($staffs as $staff) { ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
@@ -52,7 +54,7 @@
                                     <td><?php echo $staff['telp']; ?></td>
                                   </tr>
                                 <?php $i++; ?>
-                                <?php } ?> 
+                                <?php } ?>  -->
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->
