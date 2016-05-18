@@ -49,9 +49,12 @@
                   </ul>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> <span>Proposal</span><i class="fa fa-angle-left pull-right"></i></a>
+                  <a href="#"><i class="fa fa-circle-o"></i> <span>Pengajuan</span><i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li><a href="<?php echo base_url('proposal_himpunan') ?>"><i class="fa fa-circle-o"></i>Upload Proposal</a></li>
+                  </ul>
+                  <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('proposal_himpunan/list_proposal') ?>"><i class="fa fa-circle-o"></i>Logbook Pengajuan</a></li>
                   </ul>
                 </li>
               </ul>
