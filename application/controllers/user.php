@@ -48,7 +48,8 @@ class User extends Private_Controller {
                 $this->load_page('errors/404.php');
             }
         } else {
-            $user = $this->get_user_dan_role_by_id();
+            $this->load->model('user_model');
+            $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
             redirect('user/'.$user->username);
         }
     }
