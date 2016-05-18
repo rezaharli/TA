@@ -17,7 +17,8 @@ class Proposal_himpunan extends Private_Controller{
     }
 
     function index(){
-        $user = $this->get_user_dan_role_by_id();
+        $this->load->model('user_model');
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
 
         $data['himpunan'] = $himpunan;
@@ -29,7 +30,8 @@ class Proposal_himpunan extends Private_Controller{
         $id_proposal = $this->input->post('id');
         $nama_input_file = 'file_proposal';
 
-        $user = $this->get_user_dan_role_by_id();
+        $this->load->model('user_model');
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $id_himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim))->id;
 
         $this->load->model('pengajuan_proposal_himpunan_model');
@@ -119,7 +121,8 @@ class Proposal_himpunan extends Private_Controller{
         redirect('proposal_himpunan');
     }
     function list_proposal(){
-        $user = $this->get_user_dan_role_by_id();
+        $this->load->model('user_model');
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
 
         $data['himpunan'] = $himpunan;
