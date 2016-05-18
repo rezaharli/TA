@@ -13,7 +13,10 @@ class Google_calendar {
         $private_key = file_get_contents(APPPATH.'libraries/hmmmm-e411eec713f8.p12');
         $scopes = array('https://www.googleapis.com/auth/calendar');
 
-        $client = new Google_Client();
+        $config = new Google_Config();
+		$config->setClassConfig('Google_Cache_File', array('directory' => '../../tmp/google/cache'));
+
+		$client = new Google_Client($config);
 
         $this->cal = new Google_Service_Calendar($client);
 
