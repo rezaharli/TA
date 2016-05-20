@@ -20,13 +20,9 @@ class User extends Private_Controller {
         $username = $this->uri->segment(2);
 
         if($username){
-            $user = $this->user_model->get_by(array('username' => $username));
+            $user = $this->user_model->get_user_dan_role_by(array('username' => $username));
 
             if ($user) {
-                $model = $user->role.'_model';
-                $this->load->model($model);
-                $user->roled_data = $this->$model->get_by(array('id_user' => $user->id));
-
                 $data['id_user']        = $user->id;
                 $data['role']           = $user->role;
                 $data['nama']           = $user->nama;
