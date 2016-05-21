@@ -9,14 +9,13 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Pengajuan Proposal Kegiatan
-            <small><?php echo $himpunan->nama ?></small>
-            <small><?php echo $this->session->flashdata('error'); ?></small>
+            Daftar Proposal
+            <small>Himpunan</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Pengajuan</a></li>
-            <li class="active">Logbook Pengajuan</li>
+            <li><a href="#">Tables</a></li>
+            <li class="active">Data tables</li>
         </ol>
     </section>
 
@@ -26,7 +25,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                         <a href="<?php echo base_url() ?>proposal_himpunan/list_proposal"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span></button></a>
+                         <a href="#"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Lalalalla </button></a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -34,27 +33,31 @@
                               <tr>
                                 <th>No</th>
                                 <th>Pengaju</th>
+                                <th>Judul Proposal</th>
                                 <th>Tanggal Pengajuan</th>
-                                <th>Judul Proposal Pengajuan</th>
-                                <th>Tanggal Upload Proposal</th>
-                                <th>Status Approve</th>
-                                <th>Penanggungjawab Proposal</th>
+                                <th>Status</th>
+                                <th>Penanggung Jawab</th>
+                                <th>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
-                                <!-- <?php $i=1; ?>
-                                <?php foreach ($staffs as $staff) { ?>
+                                <?php $i=1; ?>
+                                <?php foreach ($proposals as $proposal) { ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $staff['nip']; ?></td>
-                                    <td><?php echo $staff['username']; ?></td>
-                                    <td><?php echo $staff['nama']; ?></td>  
-                                    <td><?php echo $staff['email']; ?></td>
-                                    <td><?php echo $staff['alamat']; ?></td>
-                                    <td><?php echo $staff['telp']; ?></td>
+                                    <td><?php echo $proposal['pengaju']; ?></td>
+                                    <td><?php echo $proposal['judul']; ?></td>  
+                                    <td><?php echo $proposal['tanggal_pengajuan']; ?></td>
+                                    <td><?php echo $proposal['status_approve']; ?></td>
+                                    <td><?php echo $proposal['penanggungjawab']; ?></td>
+                                    <td>
+                                      <a href="#">
+                                        <button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Lihat Detail</button>
+                                      </a>
+                                    </td>
                                   </tr>
                                 <?php $i++; ?>
-                                <?php } ?>  -->
+                                <?php } ?> 
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->
@@ -68,21 +71,13 @@
     <script>
       $(function () {
         $("#example1").DataTable({
-            "paging": true,
+          "paging": true,
           "lengthChange": true,
           "searching": true,
-          "ordering": true,
-          "info": true,
+          "ordering": false,
+          "info": false,
           "autoWidth": true
 
-        });
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
         });
       });
     </script>
