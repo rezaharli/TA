@@ -34,7 +34,7 @@
         <?php if ($jenis == 'kaur' || $jenis == 'himpunan') { ?>
           <li class="header">Menu Khusus</li>
           <?php if ($jenis == 'kaur') { ?>
-            <li><a href="<?php echo base_url(); ?>staff/list_staff"><i class="fa fa-book"></i> <span>Daftar Staff</span></a></li>
+            <li><a href="<?php echo base_url(); ?>staff/list"><i class="fa fa-book"></i> <span>Data Staff</span></a></li>
           <?php } elseif ($jenis == 'himpunan') { ?>
             <li>
                   <a href="#"><i class="fa fa-book"></i>Akun<i class="fa fa-angle-left pull-right"></i></a>
