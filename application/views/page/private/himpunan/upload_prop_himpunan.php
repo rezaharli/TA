@@ -115,7 +115,7 @@ $(function() {
                             </div><!-- /.box-body -->
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary"> Submit </button>
                         </div>
                     </div>
                 </div>
