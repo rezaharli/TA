@@ -28,7 +28,6 @@ class Proposal_himpunan extends Private_Controller{
     }
 
     function upload_pengajuan(){
-        $id_proposal = $this->input->post('id');
         $nama_input_file = 'file_proposal';
 
         // $this->load->model('user_model');
@@ -54,12 +53,10 @@ class Proposal_himpunan extends Private_Controller{
         $this->load->library('upload', $config);
 
         if ( ! $this->upload->do_upload($nama_input_file)) {
-
             rmdir($path);
             $this->pengajuan_proposal_himpunan_model->delete($last_id_pengajuan_proposal);
             $this->session->set_flashdata('error', $this->upload->display_errors());
         } else {
-
             date_default_timezone_set("Asia/Jakarta");
             $data = array(
                 'id_pengajuan_proposal' => $last_id_pengajuan_proposal,
@@ -90,8 +87,7 @@ class Proposal_himpunan extends Private_Controller{
 
     }
 
-function upload_proposal(){
-        $id_proposal = $this->input->post('id');
+    function upload_proposal(){
         $nama_input_file = 'file_proposal';
 
         // $this->load->model('user_model');
@@ -99,7 +95,7 @@ function upload_proposal(){
         $id_himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim))->id;
 
         // $this->load->model('pengajuan_proposal_himpunan_model');
-        $last_id_pengajuan_proposal = $this->pengajuan_proposal_himpunan_model->insert(array('pengaju_proposal' => $id_himpunan));
+        // $last_id_pengajuan_proposal = $this->pengajuan_proposal_himpunan_model->insert(array('pengaju_proposal' => $id_himpunan));
 
         $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
         $ext        = end($tmp);
@@ -199,7 +195,7 @@ function upload_proposal(){
         foreach ($proposals as $proposal) {
             $pengaju = $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
             $get_id_staff = $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
-            $penanggungjawab = $this->user_model->get($get_id_staff->id_user);
+            $penanggungjawab = ($get_id_staff == null) ? null : $this->user_model->get($get_id_staff->id_user);
 
             array_push($data['proposals'], array(
                 'pengaju'                   => $pengaju->nama,
@@ -207,7 +203,7 @@ function upload_proposal(){
                 'judul'                     => $proposal->judul,
                 'tanggal_proposal_terakhir' => $proposal->tanggal_proposal_terakhir,
                 'status_approve'            => $proposal->status_approve,
-                'penanggungjawab'           => $penanggungjawab->nama
+                'penanggungjawab'           => ($penanggungjawab == null) ? '-' : $penanggungjawab->nama
                 ));
         }
 

@@ -56,7 +56,7 @@
                                         <?php } else if ($proposal['status_approve'] == 'n') { ?>
                                           <span class="label label-danger">Ditolak</span></td>
                                         <?php } ?>
-                                    // <td><?php echo $proposal['penanggungjawab']; ?></td>
+                                    <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
                                       <a href="#">
                                         <button class="btn btn-info pull-right"></i> Lihat Detail</button>
