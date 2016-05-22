@@ -30,7 +30,7 @@
 			                      <th>Nama Event</th>
 			                      <th width="90px">Tanggal Mulai</th>			                      
 			                      <th width="50px">Status</th>
-			                      <th width="175px">Aksi</th>
+			                      <th width="60px">Aksi</th>
 			                    </tr>
 		                    </thead>
 		                    <tbody>
@@ -47,9 +47,7 @@
 					                      		<span class="label label-danger">Ditolak</span></td>
 					                      	<?php } ?>
 				                      	<td>
-											<a href="<?php echo base_url('event?id='.$event->id) ?>" class="btn btn-danger pull-right btn-xs"><i class="fa fa-trash-o"></i> Delete</a>
-											<button class="btn btn-success pull-right btn-xs" style="margin-right: 5px;"><i class="fa fa-edit"></i> Edit</button>
-											<a href="<?php echo base_url('event?id='.$event->id) ?>" class="btn btn-primary pull-right btn-xs" style="margin-right: 5px;"><i class="fa fa-calendar"></i> Lihat Detail</a>
+											<a class="btn btn-primary pull-right btn-xs" style="margin-right: 5px;" href="<?php echo base_url('event?id='.$event->id); ?>"><i class="fa fa-calendar"></i> Lihat Detail</a>
 				                        </td>
 				                    </tr>
 		                    	<?php } ?>
@@ -100,7 +98,8 @@
 	        "searching": false,
 	        "info": false,
 	        "autoWidth": false,
-	        "bSort" : false
+	        "bSort" : false,
+       		"pageLength" : 8
         });
   	});
 </script>

@@ -9,13 +9,13 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Staff
-            <small>Kemahasiswaan</small>
+            Daftar Pengajuan Proposal Kegiatan
+            <small>Data Pengajuan Proposal</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Data tables</li>
+            <li><a href="#">Pengajuan</a></li>
+            <li class="active">Logbook Pengajuan</li>
         </ol>
     </section>
 
@@ -25,20 +25,18 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                         <a href="<?php echo base_url() ?>staff/add"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Tambah Staff </button></a>
+                         <a href="<?php echo base_url() ?>proposal_himpunan/list_proposal"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span></button></a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Nip</th>
-                                <th>Username</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Alamat</th>
-                                <th>Telp</th>
-                                <th>Aksi</th>
+                                <th>Pengaju</th>
+                                <th>Tanggal Pengajuan</th>
+                                <th>Judul Proposal Pengajuan</th>
+                                <th>Status Approve</th>
+                                <th>Penanggungjawab Proposal</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -52,11 +50,6 @@
                                     <td><?php echo $staff['email']; ?></td>
                                     <td><?php echo $staff['alamat']; ?></td>
                                     <td><?php echo $staff['telp']; ?></td>
-                                    <td>
-                                      <a href="<?php echo base_url()?>staff/do_delete/<?php echo $staff['nip']; ?>/<?php echo $staff['id']; ?> ">
-                                        <button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Delete</button>
-                                      </a>
-                                    </td>
                                   </tr>
                                 <?php $i++; ?>
                                 <?php } ?> 

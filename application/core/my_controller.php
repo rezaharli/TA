@@ -34,18 +34,9 @@ class Private_Controller extends MY_Controller {
         }
     }
 
-    public function get_user_dan_role_by_id(){
-        $this->load->model('user_model');
-        $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-        
-        $model = $user->role.'_model';
-        $this->load->model($model);
-        $user->roled_data = $this->$model->get_by(array('id_user' => $user->id));
-        return $user;
-    }
-
     public function load_page($page = '', $content_data = null){
-        $user = $this->get_user_dan_role_by_id();
+        $this->load->model('user_model');
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
         $header_data['username']    = $user->username;
         $header_data['nama']        = $user->nama;

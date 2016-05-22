@@ -14,12 +14,13 @@
           <ul class="treeview-menu">
 
             <?php if($role == 'mahasiswa' || $jenis == 'staff_admin') { ?>
+              <li><a href="<?php echo base_url('event') ?>"><i class="fa fa-circle-o"></i>Lihat event</a></li>
               <li><a href="#"><i class="fa fa-circle-o"></i>Ajukan event</a></li>
             <?php } ?>
             
             <?php if ($jenis == 'kaur' || $jenis == 'staff_kemahasiswaan') { ?>
               <li><a href="<?php echo base_url('event') ?>"><i class="fa fa-circle-o"></i>Daftar pengajuan event</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i>Tambah Event</a></li>
+              <li><a href="<?php echo base_url('event/tambah') ?>"><i class="fa fa-circle-o"></i>Tambah Event</a></li>
             <?php } ?>
           
           </ul>
@@ -33,7 +34,7 @@
         <?php if ($jenis == 'kaur' || $jenis == 'himpunan') { ?>
           <li class="header">Menu Khusus</li>
           <?php if ($jenis == 'kaur') { ?>
-            <li><a href="<?php echo base_url(); ?>staff/list_staff"><i class="fa fa-book"></i> <span>Daftar Staff</span></a></li>
+            <li><a href="<?php echo base_url(); ?>staff/list"><i class="fa fa-book"></i> <span>Data Staff</span></a></li>
           <?php } elseif ($jenis == 'himpunan') { ?>
             <li>
               <a href="#">
@@ -48,9 +49,12 @@
                   </ul>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> <span>Proposal</span><i class="fa fa-angle-left pull-right"></i></a>
+                  <a href="#"><i class="fa fa-circle-o"></i> <span>Pengajuan</span><i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li><a href="<?php echo base_url('proposal_himpunan') ?>"><i class="fa fa-circle-o"></i>Upload Proposal</a></li>
+                  </ul>
+                  <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('proposal_himpunan/list_proposal') ?>"><i class="fa fa-circle-o"></i>Logbook Pengajuan</a></li>
                   </ul>
                 </li>
               </ul>
