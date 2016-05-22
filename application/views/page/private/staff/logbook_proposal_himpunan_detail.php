@@ -25,36 +25,40 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                         <a href="<?php echo base_url() ?>staff/add"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Lalalalla </button></a>
+                         
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Pengaju</th>
-                                <th>Judul</th>
-                                <th>Tema Kegiatan</th>
-                                <th>Tanggal Pengajuan</th>
+                                <th>Judul Proposal</th>
+                                <th>Tanggal Upload</th>
                                 <th>Status</th>
-                                <th>Aksi</th>
+                                <th colspan="2" align="center">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($staffs as $staff) { ?>
+                                <?php foreach ($proposals as $proposal) { ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $staff['nip']; ?></td>
-                                    <td><?php echo $staff['username']; ?></td>
-                                    <td><?php echo $staff['nama']; ?></td>  
-                                    <td><?php echo $staff['email']; ?></td>
-                                    <td><?php echo $staff['alamat']; ?></td>
+                                    <td><?php echo $proposal['judul']; ?></td>
+                                    <td><?php echo $proposal['tanggal_upload']; ?></td>  
                                     <td>
-                                      <a href="<?php echo base_url()?>staff/do_delete/<?php echo $staff['nip']; ?>/<?php echo $staff['id']; ?> ">
-                                        <button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Delete</button>
+                                        <?php if ($proposal['status'] == 'y') { ?>
+                                          <span class="label label-success">Disetujui</span></td>
+                                        <?php } else if ($proposal['status'] == 'n') { ?>
+                                          <span class="label label-danger">Ditolak</span></td>
+                                        <?php } ?> 
+                                    <td>
+                                      <a href="#">
+                                        <button class="btn btn-info pull-right"></i>Lihat Detail</button>
                                       </a>
                                     </td>
+                                    <td><a href="#">
+                                        <button class="btn btn-info pull-left"></i>Download</button>
+                                      </a></td>
                                   </tr>
                                 <?php $i++; ?>
                                 <?php } ?> 
@@ -71,21 +75,13 @@
     <script>
       $(function () {
         $("#example1").DataTable({
-            "paging": true,
+          "paging": true,
           "lengthChange": true,
           "searching": true,
-          "ordering": true,
+          "ordering": false,
           "info": true,
           "autoWidth": true
 
-        });
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
         });
       });
     </script>

@@ -48,7 +48,7 @@
                             <input type="text" class="form-control" placeholder="Telp" name="telp">
                         </div>
                         <div class="form-group">
-                            <input type="hidden" class="form-control" placeholder="Telp" name="role" value="staff">
+                            <input type="hidden" class="form-control" placeholder="role" name="role" value="staff">
                         </div>
                     </div><!-- /.box-body -->
 

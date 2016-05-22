@@ -9,13 +9,13 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Pengajuan Proposal Kegiatan
-            <small>Data Pengajuan Proposal</small>
+            Daftar Proposal
+            <small>Himpunan</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Pengajuan</a></li>
-            <li class="active">Logbook Pengajuan</li>
+            <li><a href="#">Tables</a></li>
+            <li class="active">Data tables</li>
         </ol>
     </section>
 
@@ -25,7 +25,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                         <a href="<?php echo base_url() ?>proposal_himpunan/list_proposal"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span></button></a>
+                         
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -51,12 +51,12 @@
                                     <td>
                                         <?php if ($proposal['status_approve'] == 'y') { ?>
                                           <span class="label label-success">Disetujui</span></td>
-                                        <?php } else if ($event->status == 'n') { ?>
+                                        <?php } else if ($proposal['status_approve'] == 'n') { ?>
                                           <span class="label label-danger">Ditolak</span></td>
                                         <?php } ?>
                                     <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
-                                      <a href="#">
+                                      <a href="<?php echo base_url('props/detail?id='.$proposal['id']); ?>">
                                         <button class="btn btn-info pull-right"></i> Lihat Detail</button>
                                       </a>
                                     </td>
@@ -76,21 +76,13 @@
     <script>
       $(function () {
         $("#example1").DataTable({
-            "paging": true,
+          "paging": true,
           "lengthChange": true,
           "searching": true,
-          "ordering": true,
+          "ordering": false,
           "info": true,
           "autoWidth": true
 
-        });
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
         });
       });
     </script>
