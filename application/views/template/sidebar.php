@@ -37,19 +37,13 @@
             <li><a href="<?php echo base_url(); ?>staff/list_staff"><i class="fa fa-book"></i> <span>Daftar Staff</span></a></li>
           <?php } elseif ($jenis == 'himpunan') { ?>
             <li>
-              <a href="#">
-                <i class="fa fa-book"></i> <span>Menu Himpunan</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li>
-                  <a href="#"><i class="fa fa-circle-o"></i>Akun<i class="fa fa-angle-left pull-right"></i></a>
+                  <a href="#"><i class="fa fa-book"></i>Akun<i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li><a href="<?php echo base_url('himpunan') ?>"><i class="fa fa-circle-o"></i>Edit profil</a></li>
                   </ul>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> <span>Pengajuan</span><i class="fa fa-angle-left pull-right"></i></a>
+                  <a href="#"><i class="fa fa-book"></i> <span>Pengajuan</span><i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                     <li><a href="<?php echo base_url('proposal_himpunan') ?>"><i class="fa fa-circle-o"></i>Upload Proposal</a></li>
                   </ul>
@@ -58,9 +52,7 @@
                   </ul>
                 </li>
                 <li>
-                  <a href="<?php echo base_url('laporan') ?>"><i class="fa fa-circle-o"></i> <span>Lihat Laporan</span></a></li>
-              </ul>
-            </li>
+                  <a href="<?php echo base_url('laporan') ?>"><i class="fa fa-book"></i> <span>Lihat Laporan</span></a></li>
           <?php } ?>
         <?php } ?>
 

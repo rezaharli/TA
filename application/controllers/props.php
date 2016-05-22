@@ -3,7 +3,7 @@
 class Props extends Private_Controller {
 	function __construct() {
 		parent::__construct();
-		$this->load->model('logbook_pengajuan_himpunan_model');
+		$this->load->model('logbook_proposal_himpunan_model');
 		$this->load->model('himpunan_model');
 		$this->load->model('user_model');
 		$this->load->model('staff_model');
@@ -13,10 +13,10 @@ class Props extends Private_Controller {
 		$user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 		
 		if ($user->role == 'staff') {
-			$proposals = $this->logbook_pengajuan_himpunan_model->get_all();
+			$proposals = $this->logbook_proposal_himpunan_model->get_all();
 		}else {
 			$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
-			$proposals = $this->logbook_pengajuan_himpunan_model->get_many_by(array('pengaju' => $himpunan->id));
+			$proposals = $this->logbook_proposal_himpunan_model->get_many_by(array('pengaju' => $himpunan->id));
 		}
 		
 		$data['proposals'] = array();
@@ -38,7 +38,7 @@ class Props extends Private_Controller {
 		if ($user->role == 'staff') {
 			$this->load_page('page/private/staff/logbook_proposal_himpunan', $data);
 		}else{
-			$this->load_page('page/private/himpunan/list_proposal_himpunan', $data);
+			$this->load_page('page/private/himpunan/logbook_proposal', $data);
 		}
 		
 	}

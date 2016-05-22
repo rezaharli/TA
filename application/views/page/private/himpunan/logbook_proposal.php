@@ -12,6 +12,7 @@
             Daftar Pengajuan Proposal Kegiatan
             <!-- <small><?php echo $himpunan->nama ?></small> -->
             <small><?php echo $this->session->flashdata('error'); ?></small>
+            
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -26,7 +27,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                      <a href="<?php echo base_url() ?>proposal_himpunan/add"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Tambah Proposal </button></a>
+                        <a href="<?php echo base_url() ?>proposal_himpunan/add"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Tambah Pengajuan </button></a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -37,30 +38,33 @@
                                 <th>Judul Proposal</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Status</th>
-                                <th>Tanggal Upload Terakhir</th>
                                 <th>Penanggung Jawab</th>
                                 <th>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($proposals as $proposal) { ?>
+                                <?php foreach ($proposals as $proposal) : ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $proposal['pengaju']; ?></td>
                                     <td><?php echo $proposal['judul']; ?></td>  
                                     <td><?php echo $proposal['tanggal_pengajuan']; ?></td>
-                                    <td><?php echo $proposal['status_approve']; ?></td>
-                                    <td><?php echo $proposal['tanggal_proposal_terakhir']; ?></td>
-                                    <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
-                                    <a href="#">
-                                      <button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Upload LPJ </button>
-                                    </a>
+                                        <?php if ($proposal['status_approve'] == 'y') { ?>
+                                          <span class="label label-success">Disetujui</span></td>
+                                        <?php } else if ($proposal['status_approve'] == 'n') { ?>
+                                          <span class="label label-danger">Ditolak</span></td>
+                                        <?php } ?>
+                                    // <td><?php echo $proposal['penanggungjawab']; ?></td>
+                                    <td>
+                                      <a href="#">
+                                        <button class="btn btn-info pull-right"></i> Lihat Detail</button>
+                                      </a>
                                     </td>
                                   </tr>
                                 <?php $i++; ?>
-                                <?php } ?> 
+                                <?php endforeach; ?> 
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->
