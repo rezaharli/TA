@@ -39,7 +39,7 @@ $(function() {
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url("proposal_himpunan/upload_process"); ?>" enctype="multipart/form-data">
+            <form role="form" method="post" action="<?php echo base_url("proposal_himpunan/upload_proposal"); ?>" enctype="multipart/form-data">
             
                 <div class="col-md-6">
                     <!-- general form elements -->
