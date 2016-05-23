@@ -23,14 +23,14 @@ $(function() {
   <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Proposal Dana Kegiatan
+            Pengajuan Proposal Dana Kegiatan
             <small><?php echo $himpunan->nama ?></small>
             <small><?php echo $this->session->flashdata('error'); ?></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Pengajuan</a></li>
-            <li class="active">Upload Proposal</li>
+            <li class="active">Upload Proposal Pengajuan</li>
         </ol>
     </section>
 
@@ -39,7 +39,7 @@ $(function() {
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url("proposal_himpunan/upload_pengajuan"); ?>" enctype="multipart/form-data">
+            <form role="form" method="post" action="<?php echo base_url("proposal_himpunan/do_upload_pengajuan"); ?>" enctype="multipart/form-data">
             
                 <div class="col-md-6">
                     <!-- general form elements -->
@@ -100,20 +100,10 @@ $(function() {
                             </div>
                         
                             <div class="form-group">
-                                <label>Upload Proposal</label>
-                                <input type="file" class="form-control" id="file" name="file_proposal">
+                                <label>Upload Pengajuan Proposal</label>
+                                <input type="file" class="form-control" id="file" name="file_pengajuan">
                             </div>
-                            <div class="form-group">
-                                <label></label>
-                                <div class="col-sm-9">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="1" name="drive_upload">Upload ke Google Drive
-                                        </label>
-                                    </div>
-                                </div>
-                            </div><!-- /.box-body -->
-                        </div>
+                        </div><!-- /.box-body -->
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary"> Submit </button>
                         </div>
