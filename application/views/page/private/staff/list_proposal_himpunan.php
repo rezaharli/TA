@@ -9,8 +9,8 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Staff
-            <small>Kemahasiswaan</small>
+            Daftar Proposal
+            <small>Himpunan</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -25,19 +25,18 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                         <a href="<?php echo base_url() ?>staff/add"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Tambah Staff </button></a>
+                         <a href="<?php echo base_url() ?>staff/add"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Lalalalla </button></a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Nip</th>
-                                <th>Username</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Alamat</th>
-                                <th>Telp</th>
+                                <th>Pengaju</th>
+                                <th>Judul</th>
+                                <th>Tema Kegiatan</th>
+                                <th>Tanggal Pengajuan</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                               </tr>
                             </thead>
@@ -51,7 +50,6 @@
                                     <td><?php echo $staff['nama']; ?></td>  
                                     <td><?php echo $staff['email']; ?></td>
                                     <td><?php echo $staff['alamat']; ?></td>
-                                    <td><?php echo $staff['telp']; ?></td>
                                     <td>
                                       <a href="<?php echo base_url()?>staff/do_delete/<?php echo $staff['nip']; ?>/<?php echo $staff['id']; ?> ">
                                         <button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Delete</button>
