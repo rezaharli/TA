@@ -25,7 +25,7 @@ class Props extends Private_Controller {
 		foreach ($proposals as $proposal) {
 			$pengaju 		= $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
 			$get_id_staff 	= $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
-			$get_nama_user 	= $this->user_model->get($get_id_staff->id_user);
+			$get_nama_user 	= ($get_id_staff == null) ? null : $this->user_model->get($get_id_staff->id_user);
 
 			array_push($data['proposals'], array(
 				'id'						=> $proposal->id,
@@ -34,7 +34,7 @@ class Props extends Private_Controller {
 				'judul' 					=> $proposal->judul,
 				'tanggal_proposal_terakhir' => $proposal->tanggal_proposal_terakhir,
 				'status_approve' 			=> $proposal->status_approve,
-				'penanggungjawab'			=> $get_nama_user->nama
+				'penanggungjawab'			=> ($get_nama_user == null) ? '-' :$get_nama_user->nama
 			));
 		}
 
@@ -61,16 +61,7 @@ class Props extends Private_Controller {
 			));
 			
 		}
-		// $results = array();
-		// foreach ($proposals as $proposal) {
-		// 	$result = array(
-		// 		'judul'				=> $proposal->judul,
-		// 		'tanggal_upload'	=> $proposal->waktu_upload,
-		// 		'status'			=> $proposal->status_approve
-		// 	);
-		// 	array_push($results, $result);
-		// }
-		// json_encode($results);
+		
 		$this->load_page('page/private/staff/logbook_proposal_himpunan_detail', $data);
 	}
 }
