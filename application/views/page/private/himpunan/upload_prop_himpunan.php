@@ -29,7 +29,7 @@ $(function() {
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Pengajuan</a></li>
+            <li><a href="#">Pengajuan Proposal</a></li>
             <li class="active">Upload Proposal</li>
         </ol>
     </section>
@@ -39,7 +39,7 @@ $(function() {
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url("proposal_himpunan/upload_proposal"); ?>" enctype="multipart/form-data">
+            <form role="form" method="post" action="<?php echo base_url("proposal_himpunan/do_upload_proposal"); ?>" enctype="multipart/form-data">
             
                 <div class="col-md-6">
                     <!-- general form elements -->
