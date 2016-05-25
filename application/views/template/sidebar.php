@@ -37,22 +37,32 @@
             <li><a href="<?php echo base_url(); ?>staff/list"><i class="fa fa-book"></i> <span>Data Staff</span></a></li>
           <?php } elseif ($jenis == 'himpunan') { ?>
             <li>
-                  <a href="#"><i class="fa fa-book"></i>Akun<i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('himpunan') ?>"><i class="fa fa-circle-o"></i>Edit profil</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-book"></i> <span>Pengajuan</span><i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('proposal_himpunan') ?>"><i class="fa fa-circle-o"></i>Upload Proposal</a></li>
-                  </ul>
-                  <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('proposal_himpunan/logbook_himpunan') ?>"><i class="fa fa-circle-o"></i>Logbook Pengajuan</a></li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="<?php echo base_url('laporan') ?>"><i class="fa fa-book"></i> <span>Lihat Laporan</span></a></li>
+              <a href="#"><i class="fa fa-user"></i>Akun<i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                  <li><a href="<?php echo base_url('himpunan') ?>"><i class="fa fa-edit"></i>Edit profil</a></li>
+                </ul>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-book"></i> <span>Pengajuan</span><i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                  <li><a href="<?php echo base_url('proposal_himpunan/upload_pengajuan') ?>"><i class="fa fa-file-o"></i>Upload Proposal</a></li>
+                </ul>
+                <ul class="treeview-menu">
+                  <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan') ?>"><i class="fa fa-table"></i>Logbook Pengajuan</a></li>
+                </ul>
+            </li>
+            <li>
+              <a href="#"><i class="fa  fa-tasks"></i> <span>Acara Himpunan</span><i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                  <li><a href="<?php echo base_url('kegiatan_himpunan/list_kegiatan') ?>"><i class="fa fa-user-plus"></i>Lihat Acara</a></li>
+                </ul>
+                <ul class="treeview-menu">
+                  <li><a href="<?php echo base_url('') ?>"><i class="fa fa-print"></i>Cetak Sertifikat</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="<?php echo base_url('laporan') ?>"><i class="fa fa-area-chart"></i> <span>Lihat Laporan</span></a>
+            </li>
           <?php } ?>
         <?php } ?>
 
