@@ -32,7 +32,7 @@ class Google_calendar {
         }
     }
 
-    function add($summary, $start, $end = ''){
+    function insert($summary, $start, $end = ''){
     	$start_date = new DateTime($start);
     	if($end == ''){
     		$end = $start_date->modify('+1 day');
@@ -84,6 +84,35 @@ class Google_calendar {
 
 	    }
 	    return $calendar_datas;
+	}
+
+	function update($id, $summary, $date){
+		// First retrieve the event from the API.
+		$event = $this->cal->events->get(self::CALENDAR_ID, $id);
+
+		$start = new DateTime($date);
+		$start_date = $start->format('Y-m-d');
+		$end = $start->modify('+1 day');
+		$end_date = $end->format('Y-m-d');
+
+		var_dump($end);
+
+    	$data = new Google_Service_Calendar_Event(array(
+		  'summary' => $summary,
+		  'start' => array(
+		    'date' => $start_date,
+		    'timeZone' => self::TIMEZONE,
+		  ),
+		  'end' => array(
+		    'date' => $end_date,
+		    'timeZone' => self::TIMEZONE,
+		  )
+		));
+
+		$updatedEvent = $this->cal->events->update(self::CALENDAR_ID, $event->getId(), $data);
+
+		// Print the updated date.
+		echo $updatedEvent->getUpdated();
 	}
 
 }

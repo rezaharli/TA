@@ -70,8 +70,15 @@
 			              	<div class="row no-print">
 								<div class="col-xs-12">
 									<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur') { ?>
-										<a href="<?php echo '' ?>" class="btn btn-success pull-left"><i class="fa fa-check"></i> Setuju</button>
-										<a href="<?php echo '' ?>" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
+										<?php if ($status != 'disetujui') { ?>
+											<a href="<?php echo '' ?>" class="btn btn-success pull-left"><i class="fa fa-check"></i> Setuju</button>
+										<?php } ?>
+										<?php if ($status != null) { ?>
+											<a href="<?php echo '' ?>" class="btn btn-warning pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tunda</a>
+										<?php } ?>
+										<?php if ($status != 'ditolak') { ?>
+											<a href="<?php echo '' ?>" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
+										<?php } ?>
 									
 										<button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Delete</button>
 									<?php } ?>
