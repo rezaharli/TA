@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Props extends Private_Controller {
+class Log extends Private_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('pengajuan_proposal_himpunan_model');
@@ -11,7 +11,7 @@ class Props extends Private_Controller {
 		$this->load->model('user_model');
 	}
 
-	function logbook(){
+	function pengajuan(){
 		$user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 		
 		if ($user->role == 'staff') {
@@ -23,9 +23,9 @@ class Props extends Private_Controller {
 		
 		$data['proposals'] = array();
 		foreach ($proposals as $proposal) {
-			$pengaju 		= $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
-			$get_id_staff 	= $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
-			$get_nama_user 	= ($get_id_staff == null) ? null : $this->user_model->get($get_id_staff->id_user);
+			$pengaju 			= $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
+			$get_id_staff 		= $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
+			$get_nama_user 		= ($get_id_staff == null) ? null : $this->user_model->get($get_id_staff->id_user);
 
 			array_push($data['proposals'], array(
 				'id'						=> $proposal->id,
@@ -46,7 +46,7 @@ class Props extends Private_Controller {
 		
 	}
 
-	function detail(){
+	function proposal(){
 		$id_pengajuan = $this->input->get('id');
 
 		$proposals = $this->proposal_himpunan_model->get_many_by(array('id_pengajuan_proposal' => $id_pengajuan));
@@ -55,6 +55,7 @@ class Props extends Private_Controller {
 		foreach ($proposals as $proposal) {
 
 			array_push($data['proposals'], array(
+				'id_proposal'		=> $proposal->id,
 				'judul'				=> $proposal->judul,
 				'tanggal_upload'	=> $proposal->waktu_upload,
 				'status'			=> $proposal->status_approve
@@ -63,5 +64,9 @@ class Props extends Private_Controller {
 		}
 		
 		$this->load_page('page/private/staff/logbook_proposal_himpunan_detail', $data);
+	}
+
+	function detail(){
+		$this->load_page('page/private/staff/detail_proposal_himpunan', null);
 	}
 }

@@ -9,7 +9,7 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Proposal
+            Daftar Pengajuan
             <small>Himpunan</small>
         </h1>
         <ol class="breadcrumb">
@@ -56,7 +56,7 @@
                                         <?php } ?>
                                     <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
-                                      <a href="<?php echo base_url('props/detail?id='.$proposal['id']); ?>">
+                                      <a href="<?php echo base_url('log/proposal?id='.$proposal['id']); ?>">
                                         <button class="btn btn-info pull-right"></i> Lihat Detail</button>
                                       </a>
                                     </td>
