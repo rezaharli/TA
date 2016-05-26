@@ -10,9 +10,14 @@ class Sertifikat extends Private_Controller {
 	}
 
     function index (){
-        $this->load->model('user_model');
-        $user_data = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-        $this->load_page('page/private/'.$user_data->role.'/logbook_sertifikat', null);
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $this->db->select('*');
+        $this->db->from('upload_sertifikat');
+        $this->db->where('nim', $user->username);
+        $result = $this->db->get()->result();
+        $data['result']=$result;
+        // print_r($data);die();
+        $this->load_page('page/private/mahasiswa/logbook_sertifikat', $data);
     }
 
     function add (){
@@ -77,7 +82,7 @@ class Sertifikat extends Private_Controller {
                 'tema_lomba'            => $this->input->post('tema'),
                 'penyelenggara_lomba'   => $this->input->post('penyelenggara_lomba'),
                 'waktu_lomba'           => date('Y-n-j h:i:s'),
-                'sertifikat'              => $_FILES[$sertifikat_input_file]['name'],
+                'sertifikat'             => $_FILES[$sertifikat_input_file]['name'],
                 'foto_pelaksanaan1'      => $_FILES[$kegiatan1_input_file]['name'],
                 'foto_pelaksanaan2'      => $_FILES[$kegiatan2_input_file]['name'],
                 'foto_pelaksanaan3'      => $_FILES[$kegiatan3_input_file]['name'],
@@ -97,4 +102,5 @@ class Sertifikat extends Private_Controller {
         redirect('sertifikat'); 
 
     }
+    
 }

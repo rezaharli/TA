@@ -3,7 +3,7 @@
   <section class="content-header">
     <h1>
       Sertifikat Lomba
-      <small><?php echo $nama ?></small>
+      <!-- <small><?php echo $nama ?></small> -->
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-files-o"></i> Home</a></li>
@@ -24,23 +24,24 @@
                     <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                     <thead>
                       <tr role="row">
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="No">No</th>
-                        <th class="sorting_desc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Tema" aria-sort="descending">Tema</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Penyelenggara">Penyelenggara</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Tahun">Tahun</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Status">Status</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label=""></th>
+                        <th align="center">No</th>
+                        <th align="center">Tema</th>
+                        <th align="center">Penyelenggara</th>
+                        <th align="center">Tahun</th>
+                        <th align="center">Aksi</th>
                       </tr>
                     </thead>
                     <tbody role="" class="odd">
-                      <tr>
-                        <td>1</td>
-                        <td>Animation and Video</td>
-                        <td>Gemestest</td>
-                        <td>2016</td>
-                        <td></td>
-                        <td align="center text"><a href=""><button type="button" class="btn btn-default"><span class=""></span> preview </button></a></td>
-                      </tr>
+                      <?php $i=1; ?>
+                      <?php foreach ($result as $baris) {?>
+                        <tr>
+                          <td><?php echo $i; ?></td>
+                          <td><?php echo $baris->tema_lomba; ?></td>
+                          <td><?php echo $baris->penyelenggara_lomba; ?></td>
+                          <td><?php echo $baris->waktu_lomba; ?></td>
+                          <td align="center text"><a href=""><button type="button" button class="btn btn-info pull-right"> preview </button></a></td>
+                        </tr>
+                        <?php } ?>
                     </tbody>
                     </table>
                 <div class="box-header">
