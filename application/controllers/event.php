@@ -108,8 +108,19 @@ class Event extends Private_Controller {
     	$tanggal 	= $this->input->post('tanggal-event');
 
     	$event = $this->google_calendar->update($id, $nama, $tanggal);
+        redirect('event?id='.$id);
+    }
 
-        redirect('event');
+    function do_edit_status($id){
+    	$status = null;
+    	if ($this->input->get('s') == 't') {
+    		$status = 'disetujui';
+    	} else if ($this->input->get('s') == 'f') {
+    		$status = 'ditolak';
+    	}
+
+    	$this->event_model->update($id, array('status' => $status));
+    	redirect('event?id='.$id);
     }
 
     function edit(){
