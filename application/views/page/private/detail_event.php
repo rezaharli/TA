@@ -23,7 +23,9 @@
         		<div class="nav-tabs-custom">
           			<ul class="nav nav-tabs">
               			<li class="active"><a href="#event" data-toggle="tab">Event</a></li>
-              			<li><a href="#edit" data-toggle="tab">Edit</a></li>
+              			<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur' || (($jenis_user != 'staff_kemahasiswaan' || $jenis_user != 'kaur') && $status != 'disetujui')) { ?>
+              				<li><a href="#edit" data-toggle="tab">Edit</a></li>
+              			<?php } ?>
           			</ul>
           			<div class="tab-content">
           				<div class="active tab-pane" id="event">
@@ -39,7 +41,7 @@
 				                  	</tr>
 				                  	<tr>
 					                    <th>Pengaju:</th>
-					                    <td><?php echo $pengaju ?></td>
+					                    <td><a href="user/<?php echo $username_pengaju ?>"><?php echo $nama_pengaju ?></a></td>
 				                  	</tr>
 				                  	<tr>
 				                  		<th>Status:</th>
@@ -55,19 +57,37 @@
 				                  	</tr>
 				                  	<tr>
 					                    <th>Penanggungjawab:</th>
-					                    <td><?php echo ($penanggungjawab) ? $penanggungjawab : '-' ; ?></td>
+					                    <td>
+					                    	<?php if (isset($username_penanggungjawab) && isset($nama_penanggungjawab)) { ?>
+					                    		<a href="user/<?php echo $username_penanggungjawab ?>"><?php echo $nama_penanggungjawab ?></a>
+					                    	<?php } else { ?>
+					                    		Belum ada penyetuju event.
+					                    	<?php } ?>
+					                    </td>
 				                  	</tr>
 				                </table>
 			             	</div>
 			              	<div class="row no-print">
 								<div class="col-xs-12">
-									<a href="<?php echo $google_url ?>" target="_blank" class="btn btn-default">Lihat di google calendar</a>
-									<button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Delete</button>
+									<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur') { ?>
+										<?php if ($status != 'disetujui') { ?>
+											<a href="event/do_edit_status/<?php echo $id ?>?s=t" class="btn btn-success pull-left"><i class="fa fa-check"></i> Setuju</button>
+										<?php } ?>
+										<?php if ($status != null) { ?>
+											<a href="event/do_edit_status/<?php echo $id ?>?s=p" class="btn btn-warning pull-left" style="margin-left: 5px;"><i class="fa fa-refresh"></i> Tunda</a>
+										<?php } ?>
+										<?php if ($status != 'ditolak') { ?>
+											<a href="event/do_edit_status/<?php echo $id ?>?s=f" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
+										<?php } ?>
+									
+										<button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Delete</button>
+									<?php } ?>
+									<a href="<?php echo $google_url ?>" target="_blank" class="btn btn-default pull-right" style="margin-right: 5px;">Lihat di google calendar</a>
 								</div>
 			          		</div>
               			</div><!-- /.tab-pane -->
               			<div class="tab-pane" id="edit">
-			                <form class="form-horizontal" method="post" action="<?php echo base_url() ?>event/do_edit">
+			                <form class="form-horizontal" method="post" action="<?php echo base_url() ?>event/do_edit/<?php echo $id ?>">
 			                  	<div class="form-group">
 				                    <label class="col-sm-2 control-label">Nama Event</label>
 				                    <div class="col-sm-10">
@@ -83,17 +103,7 @@
 			                  	<div class="form-group">
 				                    <label class="col-sm-2 control-label">Pengaju Event</label>
 				                    <div class="col-sm-10">
-				                      	<input type="text" class="form-control" value="<?php echo $pengaju ?>" disabled>
-				                    </div>
-			                  	</div>
-			                  	<div class="form-group">
-				                    <label class="col-sm-2 control-label">Status Event</label>
-				                    <div class="col-sm-10">
-				                      	<select class="form-control" name="status-event">
-					                    	<option disabled <?php if ($status == null) echo "selected"; ?>>Pending</option>
-					                    	<option value="disetujui" <?php if ($status == 'disetujui') echo "selected"; ?>>Setuju</option>
-					                    	<option value="ditolak" <?php if ($status == 'ditolak') echo "selected"; ?>>Tolak</option>
-					                    </select>
+				                      	<input type="text" class="form-control" value="<?php echo $nama_pengaju ?>" disabled>
 				                    </div>
 			                  	</div>
 			                  	<div class="form-group">
@@ -143,7 +153,8 @@
 			height: 'auto',
 			editable: false,
 			eventLimit: 2, // allow "more" link when too many events
-			events: '<?php echo base_url('event/get_calendar'); ?>'
+			events: '<?php echo base_url('event/get_calendar'); ?>',
+			defaultDate: '<?php echo $tanggal ?>'
 		});
 		
 	});
