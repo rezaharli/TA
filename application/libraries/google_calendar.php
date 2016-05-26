@@ -32,6 +32,10 @@ class Google_calendar {
         }
     }
 
+    function delete($id){
+    	$this->cal->events->delete(self::CALENDAR_ID, $id);
+    }
+
     function insert($summary, $start, $end = ''){
     	$start_date = new DateTime($start);
     	if($end == ''){
