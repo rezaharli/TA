@@ -16,7 +16,6 @@ class Sertifikat extends Private_Controller {
         $this->db->where('nim', $user->username);
         $result = $this->db->get()->result();
         $data['result']=$result;
-        // print_r($data);die();
         $this->load_page('page/private/mahasiswa/logbook_sertifikat', $data);
     }
 

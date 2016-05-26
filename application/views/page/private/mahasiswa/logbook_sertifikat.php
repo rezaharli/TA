@@ -41,6 +41,7 @@
                           <td><?php echo $baris->waktu_lomba; ?></td>
                           <td align="center text"><a href=""><button type="button" button class="btn btn-info pull-right"> preview </button></a></td>
                         </tr>
+                        <?php $i++; ?>
                         <?php } ?>
                     </tbody>
                     </table>
