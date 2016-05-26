@@ -80,7 +80,7 @@
 											<a href="event/do_edit_status/<?php echo $id ?>?s=f" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
 										<?php } ?>
 									
-										<button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Delete</button>
+										<a href="event/hapus?id=<?php echo $id ?>" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Hapus</a>
 									<?php } ?>
 									<a href="<?php echo $google_url ?>" target="_blank" class="btn btn-default pull-right" style="margin-right: 5px;">Lihat di google calendar</a>
 								</div>

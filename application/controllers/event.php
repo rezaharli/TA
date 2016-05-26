@@ -60,6 +60,9 @@ class Event extends Private_Controller {
     	$this->load->library('google_calendar');
 
         $google_events = $this->google_calendar->get();
+        $this->event_model->soft_delete = TRUE;
+        $this->event_model->delete_by(array('id !=' => ''));
+        $this->event_model->soft_delete = FALSE;
         foreach ($google_events as $google_event) {
         	$event = $this->event_model->get_by(array('id' => $google_event->id));
     		$data = array(
@@ -156,6 +159,15 @@ class Event extends Private_Controller {
 			array_push($results, $result);
 		}
         echo json_encode($results);
+	}
+
+	function hapus(){
+		$id = $this->input->get('id');
+		$event = $this->google_calendar->delete($id);
+
+		$this->event_model->soft_delete = FALSE;
+    	$this->event_model->delete($id);
+		redirect('event');
 	}
 
 	function pengajuan() {
