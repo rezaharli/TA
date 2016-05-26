@@ -50,9 +50,9 @@ class Sertifikat extends Private_Controller {
 
 
 
-        // $tmp        = explode(".", $_FILES[$sertifikat_input_file]['name']);
-        // $ext        = end($tmp);
-        // $filename   = sha1($_FILES[$sertifikat_input_file]['name']).'.'.$ext;
+        $tmp        = explode(".", $_FILES[$sertifikat_input_file]['name']);
+        $ext        = end($tmp);
+        $filename   = sha1($_FILES[$sertifikat_input_file]['name']).'.'.$ext;
 
         $path = './assets/upload/sertifikat/';
         if(!is_dir($path)) {
@@ -64,13 +64,9 @@ class Sertifikat extends Private_Controller {
         // $config['file_name']        = $filename;
 
         $this->load->library('upload', $config);
-
-        // if ( ! $this->upload->do_upload($sertifikat_input_file)) {
-
-        //     rmdir($path);
-        //     $this->sertifikat_model->delete($last_id_sertifikat);
-        //     $this->session->set_flashdata('error', $this->upload->display_errors());
-        // } else {
+            if ( ! $this->upload->do_upload($sertifikat_input_file)) {
+                rmdir($path);
+                 } else {
 
         // print_r($_FILES[$sertifikat_input_file]);
         // die();
@@ -80,7 +76,7 @@ class Sertifikat extends Private_Controller {
                 'nim'                   => $user->username,
                 'tema_lomba'            => $this->input->post('tema'),
                 'penyelenggara_lomba'   => $this->input->post('penyelenggara_lomba'),
-                'waktu_lomba'           => date('Y-n-j h:i:s'),
+                'waktu_lomba'           => $this->input->post('tanggal_sertifikat'),
                 'sertifikat'             => $_FILES[$sertifikat_input_file]['name'],
                 'foto_pelaksanaan1'      => $_FILES[$kegiatan1_input_file]['name'],
                 'foto_pelaksanaan2'      => $_FILES[$kegiatan2_input_file]['name'],
@@ -102,4 +98,5 @@ class Sertifikat extends Private_Controller {
 
     }
     
+}
 }
