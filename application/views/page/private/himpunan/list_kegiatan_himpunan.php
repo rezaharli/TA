@@ -59,7 +59,7 @@
                                         <?php }?>
                                     <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
-                                      <a href="#">
+                                      <a href="<?php echo base_url('proposal_himpunan/detail_kegiatan?id='.$proposal['id']); ?>">
                                         <button class="btn btn-info pull-right"></i> Lihat Detail</button>
                                       </a>
                                     </td>

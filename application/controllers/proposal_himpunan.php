@@ -162,27 +162,56 @@ class Proposal_himpunan extends Private_Controller{
 
     }
 
-    function get_google_client(){
+    // function get_google_client(){
+    //     $this->load->library('google_drive');
+    //     $google_token = $this->session->userdata('google_token');
+    //     $upload_data = $this->session->userdata('upload_data');
+
+    //     if (empty($google_token)) {
+    //         if (empty($this->input->get('code'))) {
+    //             $this->google_drive->getAuthCode();
+    //         }
+    //         $authCode = $this->input->get('code');
+    //         $client = $this->google_drive->getClient($authCode);
+    //     }else{
+    //         $client = new Google_Client();
+    //         $google_token = json_encode($google_token);
+    //         $client->setAccessToken($google_token);
+    //     }
+
+    //     $service = new Google_Service_Drive($client);
+
+    //     $file = new Google_Service_Drive_DriveFile();
+    //     $file->name = $upload_data['raw_name'];
+    //     $data = file_get_contents($upload_data['full_path']);
+    //     $createdFile = $service->files->create($file, array(
+    //         'data' => $data,
+    //         'mimeType' => $upload_data['file_type'],
+    //         'uploadType' => 'media'
+    //     ));
+
+    //     $this->session->set_flashdata(array('status' => true));
+    //     redirect('proposal_himpunan/logbook_pengajuan');
+    // }
+
+    function upload_to_drive($upload_data){
         $this->load->library('google_drive');
-        $google_token = $this->session->userdata('google_token');
-        $upload_data = $this->session->userdata('upload_data');
-
-        if (empty($google_token)) {
-            if (empty($this->input->get('code'))) {
-                $this->google_drive->getAuthCode();
-            }
-            $authCode = $this->input->get('code');
-            $client = $this->google_drive->getClient($authCode);
-        }else{
-            $client = new Google_Client();
-            $google_token = json_encode($google_token);
-            $client->setAccessToken($google_token);
-        }
-
+        $client = new Google_Client();
+        $client_email = 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
+        $private_key = file_get_contents(FCPATH.'/hmmmm-4c2bd9a777d8.p12');
+        $scopes = array('https://www.googleapis.com/auth/drive');
+        $credentials = new Google_Auth_AssertionCredentials(
+            $client_email,
+            $scopes,
+            $private_key
+        );
+        $client->setAssertionCredentials($credentials);
         $service = new Google_Service_Drive($client);
 
         $file = new Google_Service_Drive_DriveFile();
-        $file->name = $upload_data['raw_name'];
+        $folderId = '0B38ZX0d3LMfBWVo2Z1ZnSklPTU0';
+        $file->name = $upload_data['orig_name'];
+        $file->parents = array($folderId);
         $data = file_get_contents($upload_data['full_path']);
         $createdFile = $service->files->create($file, array(
             'data' => $data,
