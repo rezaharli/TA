@@ -1,5 +1,7 @@
 <?php
 class Event_model extends MY_Model {
+
+	public $soft_delete = FALSE;
 	
 	public function order_by($field, $order = 'asc') {
         $this->db->order_by($field, $order);

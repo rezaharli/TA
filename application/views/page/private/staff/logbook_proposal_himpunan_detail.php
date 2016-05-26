@@ -10,7 +10,7 @@
     <section class="content-header">
         <h1>
             Daftar Proposal
-            <small>Himpunan</small>
+            <small></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -52,7 +52,7 @@
                                           <span class="label label-danger">Ditolak</span></td>
                                         <?php } ?> 
                                     <td>
-                                      <a href="#">
+                                      <a href="<?php echo base_url('log/detail?id='.$proposal['id_proposal']); ?>">
                                         <button class="btn btn-info pull-right"></i>Lihat Detail</button>
                                       </a>
                                     </td>
