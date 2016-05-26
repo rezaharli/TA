@@ -28,7 +28,7 @@ class Staff extends Private_Controller {
     }
 
 	function add(){
-		$this->load_page('page/private/staff/add_new_staff', null);
+		$this->load_page('page/private/staff/tambah_staff', null);
 	}
 
 	function do_add(){

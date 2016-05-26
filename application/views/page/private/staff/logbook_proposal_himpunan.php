@@ -9,7 +9,7 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Proposal
+            Daftar Pengajuan
             <small>Himpunan</small>
         </h1>
         <ol class="breadcrumb">
@@ -25,7 +25,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                         <a href="#"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Lalalalla </button></a>
+                         
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -48,11 +48,16 @@
                                     <td><?php echo $proposal['pengaju']; ?></td>
                                     <td><?php echo $proposal['judul']; ?></td>  
                                     <td><?php echo $proposal['tanggal_pengajuan']; ?></td>
-                                    <td><?php echo $proposal['status_approve']; ?></td>
+                                    <td>
+                                        <?php if ($proposal['status_approve'] == 'y') { ?>
+                                          <span class="label label-success">Disetujui</span></td>
+                                        <?php } else if ($proposal['status_approve'] == 'n') { ?>
+                                          <span class="label label-danger">Ditolak</span></td>
+                                        <?php } ?>
                                     <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
-                                      <a href="#">
-                                        <button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Lihat Detail</button>
+                                      <a href="<?php echo base_url('log/proposal?id='.$proposal['id']); ?>">
+                                        <button class="btn btn-info pull-right"></i> Lihat Detail</button>
                                       </a>
                                     </td>
                                   </tr>
@@ -75,7 +80,7 @@
           "lengthChange": true,
           "searching": true,
           "ordering": false,
-          "info": false,
+          "info": true,
           "autoWidth": true
 
         });
