@@ -22,6 +22,12 @@ class Public_Controller extends MY_Controller {
         }
     }
 
+    public function load_page($page = '', $content_data = null){
+        $this->load->view('page/public/template/header');
+        $this->load->view($page, $content_data);
+        $this->load->view('page/public/template/footer');
+    }
+
 }
 
 class Private_Controller extends MY_Controller {
@@ -47,10 +53,10 @@ class Private_Controller extends MY_Controller {
         $sidebar_data['role']   = $user->role;
         $sidebar_data['jenis']  = $user->roled_data->jenis;
 
-        $this->load->view('template/header', $header_data);
-        $this->load->view('template/sidebar', $sidebar_data);
+        $this->load->view('page/private/template/header', $header_data);
+        $this->load->view('page/private/template/sidebar', $sidebar_data);
         $this->load->view($page, $content_data);
-        $this->load->view('template/footer');
+        $this->load->view('page/private/template/footer');
     }
 }
 
