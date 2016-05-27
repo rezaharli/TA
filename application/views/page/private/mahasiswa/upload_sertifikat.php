@@ -62,11 +62,11 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Upload Sertifikat</label>
-                                <input type="file" class="form-control" id="upload_sertifikat" name="upload_sertifikat" required="true">
+                                <input type="file" class="form-control" id="bukti_lomba" name="sertifikat1" required="true">
                             </div>
                             <div class="form-group">
                                 <label>Upload Foto Kegiatan</label>
-                                <input type="file" class="form-control" id="upload_kegiatan1" name="upload_kegiatan1" required="true">
+                                <input type="file" class="form-control" id="upload_kegiatan1" name="kegiatan1" required="true">
                             </div>
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
@@ -83,15 +83,15 @@ $(function() {
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Upload Foto Kegiatan</label>
-                                <input type="file" class="form-control" id="upload_kegiatan2" name="upload_kegiatan2" required="true">
+                                <input type="file" class="form-control" id="upload_kegiatan2" name="kegiatan2" required="true">
                             </div>
                             <div class="form-group">
                                 <label>Upload Foto Kegiatan</label>
-                                <input type="file" class="form-control" id="upload_kegiatan3" name="upload_kegiatan3" required="true">
+                                <input type="file" class="form-control" id="upload_kegiatan3" name="kegiatan3" required="true">
                             </div>
                             <div class="form-group">
                                 <label>Upload Foto Kegiatan</label>
-                                <input type="file" class="form-control" id="upload_kegiatan4" name="upload_kegiatan4" required="true">
+                                <input type="file" class="form-control" id="upload_kegiatan4" name="kegiatan4" required="true">
                             </div>
                             <div class="form-group">
                                 

@@ -23,12 +23,12 @@ $(function() {
   <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Pengajuan Proposal Dana Kegiatan
+            Upload Proposal Lomba
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Pengajuan</a></li>
-            <li class="active">Upload Proposal Pengajuan</li>
+            <li><a href="#">Event</a></li>
+            <li class="active">Upload Proposal Lomba</li>
         </ol>
     </section>
 

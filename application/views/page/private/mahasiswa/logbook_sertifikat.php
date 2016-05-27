@@ -36,7 +36,7 @@
                       <?php foreach ($result as $baris) {?>
                         <tr>
                           <td><?php echo $i; ?></td>
-                          <td><?php echo $baris->tema_lomba; ?></td>
+                          <td><?php echo $baris->nama_lomba; ?></td>
                           <td><?php echo $baris->penyelenggara_lomba; ?></td>
                           <td><?php echo $baris->waktu_lomba; ?></td>
                           <td align="center text"><a href=""><button type="button" button class="btn btn-info pull-right"> preview </button></a></td>

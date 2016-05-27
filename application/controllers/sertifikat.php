@@ -4,17 +4,16 @@ class Sertifikat extends Private_Controller {
 	
 	function __construct() {
 		parent::__construct();
-        $this->load->model('upload_sertifikat_model');
+        $this->load->model('bukti_lomba_model');
         $this->load->model('user_model');
 
 	}
 
     function index (){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-        $this->db->select('*');
-        $this->db->from('upload_sertifikat');
-        $this->db->where('nim', $user->username);
-        $result = $this->db->get()->result();
+
+        $result = $this->bukti_lomba_model->get_many_by(array('pengupload' => $user->username));
+
         $data['result']=$result;
         $this->load_page('page/private/mahasiswa/logbook_sertifikat', $data);
     }
@@ -22,62 +21,39 @@ class Sertifikat extends Private_Controller {
     function add (){
         $this->load->model('user_model');
         $user_data = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-    	$this->load_page('page/private/'.$user_data->role.'/upload_sertifikat', null);
+    	$this->load_page('page/private/mahasiswa/upload_sertifikat', null);
     }
 
-
     function upload_process(){
-        $id_upload_sertifikat = $this->input->post('id');
-        $sertifikat_input_file = 'upload_sertifikat';
-        $kegiatan1_input_file = 'upload_kegiatan1';
-        $kegiatan2_input_file = 'upload_kegiatan2';
-        $kegiatan3_input_file = 'upload_kegiatan3';
-        $kegiatan4_input_file = 'upload_kegiatan4';
-
         $this->load->model('user_model');
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
-        $tmp        = explode(".", $_FILES[$sertifikat_input_file]['name']);
-        $ext        = end($tmp);
-        $filename   = sha1($_FILES[$sertifikat_input_file]['name']).'.'.$ext;
+        $data = array(
+            'pengupload'             => $user->username,
+            'nama_lomba'             => $this->input->post('tema'),
+            'penyelenggara_lomba'    => $this->input->post('penyelenggara_lomba'),
+            'waktu_lomba'            => $this->input->post('tanggal_sertifikat')
+        );
 
-        $path = './assets/upload/sertifikat/';
-        if(!is_dir($path)) {
-            mkdir($path, 0777, true);
+        $tmp        = explode(".", $_FILES['sertifikat1']['name']);
+        $ext        = end($tmp);
+        $filename   = sha1($_FILES['sertifikat1']['name']).'.'.$ext;
+
+        $data['sertifikat'] = $filename;
+
+        for ($i=1; $i <= 4; $i++) { 
+            $tmp        = explode(".", $_FILES['kegiatan'.$i]['name']);
+            $ext        = end($tmp);
+            $filename   = sha1($_FILES['kegiatan'.$i]['name']).'.'.$ext;
+
+            $data['foto_pelaksanaan'.$i] = $filename;
         }
 
-        $config['upload_path']      = $path;
-        $config['allowed_types']    = '*';
+        $id_upload_sertifikat = $this->bukti_lomba_model->insert($data);
 
-        $this->load->library('upload', $config);
-            if ( ! $this->upload->do_upload($sertifikat_input_file)) {
-                rmdir($path);
-                 } else {
-
-            date_default_timezone_set("Asia/Jakarta");
-            $data = array(
-                'nim'                    => $user->username,
-                'tema_lomba'             => $this->input->post('tema'),
-                'penyelenggara_lomba'    => $this->input->post('penyelenggara_lomba'),
-                'waktu_lomba'            => $this->input->post('tanggal_sertifikat'),
-                'sertifikat'             => $_FILES[$sertifikat_input_file]['name'],
-                'foto_pelaksanaan1'      => $_FILES[$kegiatan1_input_file]['name'],
-                'foto_pelaksanaan2'      => $_FILES[$kegiatan2_input_file]['name'],
-                'foto_pelaksanaan3'      => $_FILES[$kegiatan3_input_file]['name'],
-                'foto_pelaksanaan4'      => $_FILES[$kegiatan4_input_file]['name']
-            );
-
-            $id_upload_sertifikat = $this->upload_sertifikat_model->insert($data);
-            if ($this->input->post('drive_upload') == 1) {
-                $this->session->set_userdata('upload_data', $upload_data);
-                $this->get_google_client();
-            }
-
-            $this->session->set_flashdata(array('status' => true));
+        $this->session->set_flashdata(array('status' => true));
 
         redirect('sertifikat'); 
-
-    }
     
-}
+    }
 }
