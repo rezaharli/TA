@@ -45,11 +45,9 @@
                 
               </li>
               <li class="list-group-item">
-                <b>Telp</b> <a class="pull-right"><?php echo $telp ?></a>
+                <b>No. Telepon</b> <a class="pull-right"><?php echo $telp ?></a>
               </li>
             </ul>
-
-            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
           </div><!-- /.box-body -->
         </div><!-- /.box -->
 
