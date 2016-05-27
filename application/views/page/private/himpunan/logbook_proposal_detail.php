@@ -14,11 +14,10 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Data tables</li>
+            <li><a href="#">Pengajuan</a></li>
+            <li class="active">Detail Proposal</li>
         </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -26,7 +25,7 @@
                 <div class="box">
                     <div class="box-header">
                         <?php if ($status_approve  != 'y') { ?>
-                          <a href="<?php echo base_url() ?>proposal_himpunan/upload_proposal"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Tambah Proposal </button>
+                          <a href="<?php echo base_url('proposal_himpunan/upload_proposal?id_pengajuan='.$id_pengajuan); ?>"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Tambah Proposal </button>
                           </a>
                         <?php }?> 
                     </div><!-- /.box-header -->
@@ -59,7 +58,7 @@
                                         <?php }?> 
                                     <td>
                                       <a href="#">
-                                        <button class="btn btn-info pull-right"></i>Lihat Detail</button>
+                                        <button class="btn btn-info pull-left"></i>Lihat Detail</button>
                                       </a>
                                     </td>
                                   </tr>
