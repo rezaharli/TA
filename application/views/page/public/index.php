@@ -91,13 +91,12 @@
                                 </div>
                                 <div class="bg"></div>
                                 <div class="name">
-                                    <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
                                 </div>
                                 <div class="text">
                                     <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
                                     <p class="buttons">
-                                        <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
-                                        <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
                                     </p>
                                 </div>
                             </div>
@@ -112,13 +111,12 @@
                                 </div>
                                 <div class="bg"></div>
                                 <div class="name">
-                                    <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
                                 </div>
                                 <div class="text">
                                     <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
                                     <p class="buttons">
-                                        <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
-                                        <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
                                     </p>
                                 </div>
                             </div>
@@ -133,13 +131,12 @@
                                 </div>
                                 <div class="bg"></div>
                                 <div class="name">
-                                    <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
                                 </div>
                                 <div class="text">
                                     <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
                                     <p class="buttons">
-                                        <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
-                                        <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
                                     </p>
                                 </div>
                             </div>
@@ -154,13 +151,12 @@
                                 </div>
                                 <div class="bg"></div>
                                 <div class="name">
-                                    <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
                                 </div>
                                 <div class="text">
                                     <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
                                     <p class="buttons">
-                                        <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
-                                        <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
                                     </p>
                                 </div>
                             </div>
@@ -174,13 +170,12 @@
                                 </div>
                                 <div class="bg"></div>
                                 <div class="name">
-                                    <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
                                 </div>
                                 <div class="text">
                                     <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
                                     <p class="buttons">
-                                        <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
-                                        <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
                                     </p>
                                 </div>
                             </div>
@@ -194,13 +189,12 @@
                                 </div>
                                 <div class="bg"></div>
                                 <div class="name">
-                                    <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
                                 </div>
                                 <div class="text">
                                     <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
                                     <p class="buttons">
-                                        <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
-                                        <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
                                     </p>
                                 </div>
                             </div>
@@ -214,13 +208,12 @@
                                 </div>
                                 <div class="bg"></div>
                                 <div class="name">
-                                    <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
                                 </div>
                                 <div class="text">
                                     <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
                                     <p class="buttons">
-                                        <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
-                                        <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
                                     </p>
                                 </div>
                             </div>
@@ -233,13 +226,12 @@
                                 </div>
                                 <div class="bg"></div>
                                 <div class="name">
-                                    <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
                                 </div>
                                 <div class="text">
                                     <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
                                     <p class="buttons">
-                                        <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
-                                        <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
                                     </p>
                                 </div>
                             </div>
@@ -252,13 +244,12 @@
                                 </div>
                                 <div class="bg"></div>
                                 <div class="name">
-                                    <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
                                 </div>
                                 <div class="text">
                                     <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
                                     <p class="buttons">
-                                        <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
-                                        <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
                                     </p>
                                 </div>
                             </div>
