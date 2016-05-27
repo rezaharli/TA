@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		    // Fire off the request to /form.php
 		    request = $.ajax({
-		        url: "<?php echo base_url(); ?>guest/login",
+		        url: "<?php echo base_url(); ?>guest/do_login",
 		        type: "post",
 		        data: serializedData
 		    });
