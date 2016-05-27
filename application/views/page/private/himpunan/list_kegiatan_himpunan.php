@@ -31,36 +31,23 @@
                             <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Pengaju</th>
-                                <th>Judul Proposal</th>
-                                <th>Tanggal Pengajuan</th>
-                                <th>Tanggal Upload Terakhir</th>
-                                <th>Status</th>
-                                <th>Penanggung Jawab</th>
+                                <th>Nama Kegiatan</th>
+                                <th>Tanggal Pelaksanaan</th>
+                                <th>Tempat Pelaksanaan</th>
                                 <th>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($proposals as $proposal) : ?>
+                                <?php foreach ($kegiatans as $kegiatan) : ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $proposal['pengaju']; ?></td>
-                                    <td><?php echo $proposal['judul']; ?></td>  
-                                    <td><?php echo $proposal['tanggal_pengajuan']; ?></td>
-                                    <td><?php echo $proposal['tanggal_proposal_terakhir']; ?></td>
+                                    <td><?php echo $kegiatan['nama_kegiatan']; ?></td>
+                                    <td><?php echo $kegiatan['tanggal_pelaksanaan']; ?></td>  
+                                    <td><?php echo $kegiatan['tempat_kegiatan']; ?></td>
                                     <td>
-                                        <?php if ($proposal['status_approve'] == 'y') { ?>
-                                          <span class="label label-success">Disetujui</span></td>
-                                        <?php } else if ($proposal['status_approve'] == 'n') { ?>
-                                          <span class="label label-danger">Ditolak</span></td>
-                                        <?php } else { ?>
-                                          <span class="label label-warning">Pending</span></td>
-                                        <?php }?>
-                                    <td><?php echo $proposal['penanggungjawab']; ?></td>
-                                    <td>
-                                      <a href="<?php echo base_url('proposal_himpunan/detail_kegiatan?id='.$proposal['id']); ?>">
-                                        <button class="btn btn-info pull-right"></i> Lihat Detail</button>
+                                      <a href="#">
+                                        <button class="btn btn-info pull-left"></i> Lihat Detail</button>
                                       </a>
                                     </td>
                                   </tr>

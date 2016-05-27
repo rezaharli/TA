@@ -92,7 +92,7 @@ $(function() {
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Anggaran Biaya (Total)</label>
-                                <input type="text" class="form-control" id="anggaran" placeholder="Anggaran Biaya" name="anggaran">
+                                <input type="text" class="form-control" id="anggaran" placeholder="ex:1000000" name="anggaran">
                             </div>
                             <div class="form-group">
                                 <label>Penutup</label>
