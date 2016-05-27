@@ -58,6 +58,7 @@ class Proposal_himpunan extends Private_Controller{
             $this->pengajuan_proposal_himpunan_model->delete($last_id_pengajuan_proposal);
             $this->session->set_flashdata('error', $this->upload->display_errors());
         } else {
+            $upload_data = $this->upload->data();
             date_default_timezone_set("Asia/Jakarta");
             $data = array(
                 'id_pengajuan_proposal' => $last_id_pengajuan_proposal,
@@ -75,10 +76,7 @@ class Proposal_himpunan extends Private_Controller{
             );
 
             $id_proposal = $this->proposal_himpunan_model->insert($data);
-            if ($this->input->post('drive_upload') == 1) {
-                $this->session->set_userdata('upload_data', $upload_data);
-                $this->get_google_client();
-            }
+            $this->upload_to_drive($upload_data);
 
             $this->session->set_flashdata(array('status' => true));
 
@@ -89,17 +87,24 @@ class Proposal_himpunan extends Private_Controller{
     }
 
     function upload_proposal(){
+        $id_pengajuan = $this->input->get('id_pengajuan');
+
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
         // $pengajuan = $this->pengajuan_proposal_himpunan_model->get_by(array('' => , );
-
         $data['himpunan'] = $himpunan;
         $data['user'] = $user;
+        $data['id_pengajuan'] = $id_pengajuan;
+
+
         $this->load_page('page/private/himpunan/upload_prop_himpunan', $data);
     }
 
     function do_upload_proposal(){
-        $id_pengajuan = $this->input->get('id');
+        $id_pengajuan = $this->input->get('id_pengajuan');
+
+        // echo ($id_pengajuan);
+        // die;
         
         $nama_input_file = 'file_proposal';
 
@@ -112,7 +117,7 @@ class Proposal_himpunan extends Private_Controller{
 
         $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
         $ext        = end($tmp);
-        $filename   = $last_id_pengajuan_proposal.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
+        $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
 
         $path = './assets/upload/proposal_himpunan/pengajuan-'.$last_id_pengajuan_proposal.'/';
         if(!is_dir($path)) {
@@ -131,10 +136,10 @@ class Proposal_himpunan extends Private_Controller{
             // $this->pengajuan_proposal_himpunan_model->delete($last_id_pengajuan_proposal);
             $this->session->set_flashdata('error', $this->upload->display_errors());
         } else {
-
+            $upload_data = $this->upload->data();
             date_default_timezone_set("Asia/Jakarta");
             $data = array(
-                // 'id_pengajuan_proposal' => $last_id_pengajuan_proposal,
+                'id_pengajuan_proposal' => $id_pengajuan,
                 'judul'                 => $this->input->post('judul'),
                 'tema_kegiatan'         => $this->input->post('tema_kegiatan'),
                 'tujuan_kegiatan'       => $this->input->post('tujuan_kegiatan'),
@@ -147,42 +152,68 @@ class Proposal_himpunan extends Private_Controller{
                 'waktu_upload'          => date('Y-n-j h:i:s'),
                 'file'                  => $this->upload->data()['file_name']
             );
-
+        
             $id_proposal = $this->proposal_himpunan_model->insert($data);
-            if ($this->input->post('drive_upload') == 1) {
-                $this->session->set_userdata('upload_data', $upload_data);
-                $this->get_google_client();
-            }
-
+            $this->upload_to_drive($upload_data);
             $this->session->set_flashdata(array('status' => true));
 
         }
 
-        redirect('proposal_himpunan/logbook_pengajuan'); 
+
+        redirect('proposal_himpunan/detail_pengajuan?id_pengajuan='.$id_pengajuan); 
 
     }
 
-    function get_google_client(){
+    // function get_google_client(){
+    //     $this->load->library('google_drive');
+    //     $google_token = $this->session->userdata('google_token');
+    //     $upload_data = $this->session->userdata('upload_data');
+
+    //     if (empty($google_token)) {
+    //         if (empty($this->input->get('code'))) {
+    //             $this->google_drive->getAuthCode();
+    //         }
+    //         $authCode = $this->input->get('code');
+    //         $client = $this->google_drive->getClient($authCode);
+    //     }else{
+    //         $client = new Google_Client();
+    //         $google_token = json_encode($google_token);
+    //         $client->setAccessToken($google_token);
+    //     }
+
+    //     $service = new Google_Service_Drive($client);
+
+    //     $file = new Google_Service_Drive_DriveFile();
+    //     $file->name = $upload_data['raw_name'];
+    //     $data = file_get_contents($upload_data['full_path']);
+    //     $createdFile = $service->files->create($file, array(
+    //         'data' => $data,
+    //         'mimeType' => $upload_data['file_type'],
+    //         'uploadType' => 'media'
+    //     ));
+
+    //     $this->session->set_flashdata(array('status' => true));
+    //     redirect('proposal_himpunan/logbook_pengajuan');
+    // }
+
+    function upload_to_drive($upload_data){
         $this->load->library('google_drive');
-        $google_token = $this->session->userdata('google_token');
-        $upload_data = $this->session->userdata('upload_data');
-
-        if (empty($google_token)) {
-            if (empty($this->input->get('code'))) {
-                $this->google_drive->getAuthCode();
-            }
-            $authCode = $this->input->get('code');
-            $client = $this->google_drive->getClient($authCode);
-        }else{
-            $client = new Google_Client();
-            $google_token = json_encode($google_token);
-            $client->setAccessToken($google_token);
-        }
-
+        $client = new Google_Client();
+        $client_email = 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
+        $private_key = file_get_contents(FCPATH.'/hmmmm-4c2bd9a777d8.p12');
+        $scopes = array('https://www.googleapis.com/auth/drive');
+        $credentials = new Google_Auth_AssertionCredentials(
+            $client_email,
+            $scopes,
+            $private_key
+        );
+        $client->setAssertionCredentials($credentials);
         $service = new Google_Service_Drive($client);
 
         $file = new Google_Service_Drive_DriveFile();
-        $file->name = $upload_data['raw_name'];
+        $folderId = '0B38ZX0d3LMfBVHgydlRQanRCWXM';
+        $file->name = $upload_data['orig_name'];
+        $file->parents = array($folderId);
         $data = file_get_contents($upload_data['full_path']);
         $createdFile = $service->files->create($file, array(
             'data' => $data,
@@ -191,7 +222,6 @@ class Proposal_himpunan extends Private_Controller{
         ));
 
         $this->session->set_flashdata(array('status' => true));
-        redirect('proposal_himpunan/logbook_pengajuan');
     }
     
     function logbook_pengajuan(){
@@ -230,7 +260,7 @@ class Proposal_himpunan extends Private_Controller{
     }
 
     function detail_pengajuan(){
-        $id_pengajuan = $this->input->get('id');
+        $id_pengajuan = $this->input->get('id_pengajuan');
 
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
@@ -243,11 +273,12 @@ class Proposal_himpunan extends Private_Controller{
             array_push($data['proposals'], array(
                 'judul'             => $proposal->judul,
                 'tanggal_upload'    => $proposal->waktu_upload,
-                'status_approve'    => $proposal->status_approve
+                'status_approve'    => ($proposal->status_approve == null) ? '-' :$proposal->status_approve
             ));
             $status_approve = $proposal->status_approve;
         }
 
+        $data['id_pengajuan'] = $id_pengajuan;
         $data['himpunan'] = $himpunan;
         $data['status_approve'] = $status_approve;
         $this->load_page('page/private/himpunan/logbook_proposal_detail', $data);

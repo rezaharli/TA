@@ -30,7 +30,7 @@
 			                      <th>Nama Event</th>
 			                      <th width="90px">Tanggal Mulai</th>			                      
 			                      <th width="50px">Status</th>
-			                      <th width="60px">Aksi</th>
+			                      <th width="60px" align="center">Aksi</th>
 			                    </tr>
 		                    </thead>
 		                    <tbody>
@@ -47,7 +47,8 @@
 					                      		<span class="label label-danger">Ditolak</span></td>
 					                      	<?php } ?>
 				                      	<td>
-											<a class="btn btn-primary pull-right btn-xs" style="margin-right: 5px;" href="<?php echo base_url('event?id='.$event->id); ?>"><i class="fa fa-calendar"></i> Lihat Detail</a>
+											<a class="btn btn-primary pull-left btn-xs" style="margin-right: 1px;" href="<?php echo base_url('event?id='.$event->id); ?>"><i class="fa fa-calendar"></i> Lihat Detail</a>
+											<a class="btn btn-primary pull-left btn-xs" style="margin-right: 1px;" href="<?php echo base_url("proposal/upload_pengajuan");; ?>"><i class="fa fa-calendar"></i> Ajukan Proposal</a>
 				                        </td>
 				                    </tr>
 		                    	<?php } ?>

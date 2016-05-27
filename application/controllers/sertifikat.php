@@ -34,21 +34,8 @@ class Sertifikat extends Private_Controller {
         $kegiatan3_input_file = 'upload_kegiatan3';
         $kegiatan4_input_file = 'upload_kegiatan4';
 
-
-        //var_dump($_FILES);
-        // echo $_FILES[$sertifikat_input_file]['name'];
-        // echo pathinfo($_FILES[$sertifikat_input_file]['name'], PATHINFO_EXTENSION);
-        // echo basename($_FILES[$sertifikat_input_file]['name'],".". pathinfo($_FILES[$sertifikat_input_file]['name'], PATHINFO_EXTENSION));
-        // echo $_FILES[$kegiatan1_input_file]['name'];
-        // die();
-
-
         $this->load->model('user_model');
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-        // print_r($user);
-        // die();
-
-
 
         $tmp        = explode(".", $_FILES[$sertifikat_input_file]['name']);
         $ext        = end($tmp);
@@ -61,22 +48,18 @@ class Sertifikat extends Private_Controller {
 
         $config['upload_path']      = $path;
         $config['allowed_types']    = '*';
-        // $config['file_name']        = $filename;
 
         $this->load->library('upload', $config);
             if ( ! $this->upload->do_upload($sertifikat_input_file)) {
                 rmdir($path);
                  } else {
 
-        // print_r($_FILES[$sertifikat_input_file]);
-        // die();
-
             date_default_timezone_set("Asia/Jakarta");
             $data = array(
-                'nim'                   => $user->username,
-                'tema_lomba'            => $this->input->post('tema'),
-                'penyelenggara_lomba'   => $this->input->post('penyelenggara_lomba'),
-                'waktu_lomba'           => $this->input->post('tanggal_sertifikat'),
+                'nim'                    => $user->username,
+                'tema_lomba'             => $this->input->post('tema'),
+                'penyelenggara_lomba'    => $this->input->post('penyelenggara_lomba'),
+                'waktu_lomba'            => $this->input->post('tanggal_sertifikat'),
                 'sertifikat'             => $_FILES[$sertifikat_input_file]['name'],
                 'foto_pelaksanaan1'      => $_FILES[$kegiatan1_input_file]['name'],
                 'foto_pelaksanaan2'      => $_FILES[$kegiatan2_input_file]['name'],
@@ -91,8 +74,6 @@ class Sertifikat extends Private_Controller {
             }
 
             $this->session->set_flashdata(array('status' => true));
-
-        // }
 
         redirect('sertifikat'); 
 

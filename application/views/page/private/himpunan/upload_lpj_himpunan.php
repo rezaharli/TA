@@ -92,7 +92,7 @@ $(function() {
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Realisasi Anggaran Biaya Total</label>
-                                <input type="text" class="form-control" id="realisasi_total_anggaran" placeholder="Realisasi Anggaran Biaya Total" name="realisasi_total_anggaran">
+                                <input type="text" class="form-control" id="realisasi_total_anggaran" placeholder="ex:1000000" name="realisasi_total_anggaran">
                             </div>
                             <div class="form-group">
                                 <label>Rekomendasi</label>
