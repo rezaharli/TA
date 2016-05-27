@@ -1,4 +1,4 @@
 <?php
-class Kegiatan_himpunan_model extends MY_Model {
+class Bukti_lomba_model extends MY_Model {
 	
 }
