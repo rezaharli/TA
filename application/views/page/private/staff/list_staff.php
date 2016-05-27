@@ -54,7 +54,7 @@
                                     <td><?php echo $staff['telp']; ?></td>
                                     <td>
                                       <a href="<?php echo base_url()?>staff/do_delete/<?php echo $staff['nip']; ?>/<?php echo $staff['id']; ?> ">
-                                        <button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Delete</button>
+                                        <button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Hapus</button>
                                       </a>
                                     </td>
                                   </tr>
@@ -73,21 +73,13 @@
     <script>
       $(function () {
         $("#example1").DataTable({
-            "paging": true,
+          "paging": true,
           "lengthChange": true,
           "searching": true,
-          "ordering": true,
+          "ordering": false,
           "info": true,
           "autoWidth": true
 
-        });
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
         });
       });
     </script>

@@ -68,7 +68,6 @@
                             <label>Jenis Staff</label>
                             <select class="form-control select2" style="width: 100%;" name="jenisstaff">
                                 <option selected="selected" disabled="">--Jenis Staff--</option>
-                                <option value="kaur">Kaur</option>
                                 <option value="staff_admin">Staff Admin</option>
                                 <option value="staff_kemahasiswaan">Staff Kemahasiswaan</option>
                             </select>
@@ -76,10 +75,10 @@
                         <div id="form-group-username" class="form-group">
                           <label>Username</label>
                           <div>
-                            <div class="col-md-7">
+                            <div class="col-md-3">
                               <input type="text" class="form-control" id="input-username" name="username">
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                               <h5 id="status-username" class="text-center"></h5>
                             </div>
                           </div>

@@ -1,9 +1,13 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/documentation/style.css">
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Data Proposal
-            <small></small>
+            General Form Elements
+            <small>Preview</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -12,73 +16,90 @@
         </ol>
     </section>
 
-    <!-- Main content -->
+<!-- Main content -->
     <section class="content">
         <div class="row">
-            <!-- left column -->
-            <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url() ?>" autocomplete="off">
-            
+        <!-- left column -->
             <div class="col-md-12">
-                <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Data Proposal</h3>
+                        <h3 class="box-title">Horizontal Form</h3>
                     </div><!-- /.box-header -->
-                    
                     <div class="box-body">
-                        <div class="form-group">
-                            <label>Judul</label>
-                            <input type="text" class="form-control" placeholder="NIP" name="nip" value="<?php  ?>">
+                        <div class="table-responsive">
+                            <div class="col-sm-2">
+                                <label>Judul</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $judul_detail ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Tema Kegiatan</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $tema_kegiatan ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Tujuan Kegiatan</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $tujuan_kegiatan ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Sasaran Kegiatan</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $sasaran_kegiatan ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Tanggal Kegiatan</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $tanggal_kegiatan ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Tempat Kegiatan</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $tempat_kegiatan ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Bentuk Kegiatan</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $bentuk_kegiatan ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Anggaran</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $anggaran ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Penutup</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $penutup ?></pre>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Tema Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Nama" name="nama">
-                        </div>
-                        <div class="form-group">
-                            <label>Tujuan Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label>Sasaran Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Alamat" name="alamat">
-                        </div>
-                        <div class="form-group">
-                            <label>Tanggal Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                        <div class="form-group">
-                            <label>Tempat Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                        <div class="form-group">
-                            <label>Bentuk Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                        <div class="form-group">
-                            <label>Anggaran</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                        <div class="form-group">
-                            <label>Penutup Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                        <div class="form-group">
-                            <label>Tanggal Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                    </div><!-- /.box-body -->
-
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Setuju</button>
-                        <button type="submit" class="btn btn-primary">Tolak</button>
                     </div>
-                </div><!-- /.box -->
+                    <div class="box-footer">
+                        <?php if ($status != 'disetujui') { ?>
+                                <a href="#" class="btn btn-success pull-left"><i class="fa fa-check"></i> Setuju</button>
+                            <?php } ?>
+                            <?php if ($status != null) { ?>
+                                <a href="#" class="btn btn-warning pull-left" style="margin-left: 5px;"><i class="fa fa-refresh"></i> Tunda</a>
+                            <?php } ?>
+                            <?php if ($status != 'ditolak') { ?>
+                                <a href="#" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
+                            <?php }?>
+                    </div><!-- /.box-footer -->
+                </div>
             </div>
-            </form>
-        </div>
-    </section>
-</div>
-
-<!-- cek username -->
-<script src="<?php echo base_url() ?>assets/js/cek_username.js"></script>
+        <!-- right column -->
+            
+                    
+                
+        </div>   <!-- /.row -->
+    </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
