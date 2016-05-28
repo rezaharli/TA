@@ -27,6 +27,15 @@
         </li>
 
         <?php if($role == 'mahasiswa') { ?>
+          <li>
+              <a href="#"><i class="fa fa-clipboard"></i> <span>Pengajuan Lomba</span><i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                  <li><a href="<?php echo base_url('proposal/upload_pengajuan') ?>"><i class="fa fa-file-o"></i>Upload Proposal</a></li>
+                </ul>
+                <ul class="treeview-menu">
+                  <li><a href="<?php echo base_url('proposal/logbook_pengajuan_proposal_lomba') ?>"><i class="fa fa-table"></i>Logbook Pengajuan</a></li>
+                </ul>
+          </li>
           <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-files-o"></i> <span>Beasiswa</span></a></li>
           <li><a href="<?php echo base_url('laporan') ?>"><i class="fa fa-map-o"></i> <span>Lihat Laporan</span></a></li>
         <?php } ?>
