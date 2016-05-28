@@ -36,20 +36,12 @@
                             <td><?php echo $tema_kegiatan ?></td>
                           </tr>
                           <tr>
-                            <th>Tujuan Kegiatan</th>
-                            <td><?php echo $tujuan_kegiatan ?></td>
-                          </tr>
-                          <tr>
                             <th>Tanggal Pelaksanaan</th>
                             <td><?php echo $tanggal_kegiatan ?><td>
                           </tr>
                           <tr>
                             <th>Tempat Pelaksanaan</th>
                             <td><?php echo $tempat_kegiatan ?><td>
-                          </tr>
-                          <tr>
-                            <th>Bentuk Kegiatan</th>
-                            <td><?php echo $bentuk_kegiatan ?><td>
                           </tr>
                       </table>
                   </div>

@@ -10,7 +10,7 @@
     <section class="content-header">
         <h1>
             Daftar Peserta Kegiatan
-            <large><?php echo $judul ?> </large>
+            <small><?php echo $judul ?> </small>
             <small><?php echo $this->session->flashdata('error'); ?></small>
             
         </h1>

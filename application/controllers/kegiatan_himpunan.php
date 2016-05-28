@@ -52,10 +52,8 @@ class Kegiatan_himpunan extends Private_Controller{
         $data['id_pengajuan_proposal']  = $proposal->id_pengajuan_proposal;
         $data['judul']                  = $proposal->judul;
         $data['tema_kegiatan']          = $proposal->tema_kegiatan;
-        $data['tujuan_kegiatan']        = $proposal->tujuan_kegiatan;
         $data['tanggal_kegiatan']       = $proposal->tanggal_kegiatan;
         $data['tempat_kegiatan']        = $proposal->tempat_kegiatan;
-        $data['bentuk_kegiatan']        = $proposal->bentuk_kegiatan;
         $data['id_acara'] = $id_acara;
 
         $data['himpunan'] = $himpunan;
@@ -85,5 +83,9 @@ class Kegiatan_himpunan extends Private_Controller{
         $data['himpunan'] = $himpunan;
 
         $this->load_page('page/private/himpunan/list_peserta', $data);
+    }
+
+    function cetak_sertifikat(){
+        
     }
 }
