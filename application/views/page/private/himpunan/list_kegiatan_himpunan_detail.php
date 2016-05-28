@@ -13,68 +13,62 @@
       <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Kegiatan</a></li>
-            <li class="active"><?php echo $nama_event ?></li>
+            <li class="active"><?php echo $judul ?></li>
         </ol>
   </section>
 
   <section class="content">
       <div class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-12">
           <div class="box box-solid">
                   <div class="box-header with-border">
-                      <h3 class="box-title">Detail Event</h3>
+                      <h3 class="box-title">Informasi Detail Kegiatan</h3>
                   </div>
                   <div class="box-body">
                     <div class="table-responsive">
                       <table class="table">
                           <tr>
-                            <th style="width:20%">Nama Event:</th>
-                            <td><?php echo $nama_event ?></td>
+                            <th>Nama Kegiatan</th>
+                            <td><?php echo $judul ?></td>
                           </tr>
                           <tr>
-                            <th>Tanggal Event:</th>
-                            <td><?php echo $tanggal ?></td>
+                            <th>Tema Kegiatan</th>
+                            <td><?php echo $tema_kegiatan ?></td>
                           </tr>
                           <tr>
-                            <th>Pengaju:</th>
-                            <td><?php echo $pengaju ?></td>
+                            <th>Tujuan Kegiatan</th>
+                            <td><?php echo $tujuan_kegiatan ?></td>
                           </tr>
                           <tr>
-                            <th>Status:</th>
-                            <td>
-                                <?php if ($status == null) { ?>
-                                  <span class="label label-warning">Pending</span></td>
-                                <?php } else if ($status == 'disetujui') { ?>
-                                  <span class="label label-success">Disetujui</span></td>
-                                <?php } else if ($status == 'ditolak') { ?>
-                                  <span class="label label-danger">Ditolak</span></td>
-                                <?php } ?>
-                              <td>
+                            <th>Tanggal Pelaksanaan</th>
+                            <td><?php echo $tanggal_kegiatan ?><td>
                           </tr>
                           <tr>
-                            <th>Penanggungjawab:</th>
-                            <td><?php echo ($penanggungjawab) ? $penanggungjawab : '-' ; ?></td>
+                            <th>Tempat Pelaksanaan</th>
+                            <td><?php echo $tempat_kegiatan ?><td>
+                          </tr>
+                          <tr>
+                            <th>Bentuk Kegiatan</th>
+                            <td><?php echo $bentuk_kegiatan ?><td>
                           </tr>
                       </table>
                   </div>
                     <div class="row no-print">
               <div class="col-xs-12">
-                <a href="<?php echo $google_url ?>" target="_blank" class="btn btn-default">Lihat di google calendar</a>
-                <button class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Delete</button>
-                <button class="btn btn-success pull-right" style="margin-right: 5px;"><i class="fa fa-edit"></i> Edit</button>
+                <a href="<?php echo base_url('kegiatan_himpunan/detail_peserta?id_acara='.$id_acara.''); ?>" class="btn btn-info pull-right">Lihat peserta</a>
               </div>
                   </div>
                 </div>
               </div>
             </div><!-- /.col -->
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
             <div class="box box-primary">
               <div class="box-body no-padding">
-                  <!-- THE CALENDAR -->
+                  THE CALENDAR
                   <div id="calendar"></div>
               </div><!-- /.box-body -->
             </div><!-- /. box -->
-        </div><!-- /.col -->
+        </div><!-- /.col --> -->
       </div><!-- /.row -->
   </section><!-- /.content -->
   

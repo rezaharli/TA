@@ -48,7 +48,7 @@
             <li>
               <a href="#"><i class="fa fa-user"></i>Akun<i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                  <li><a href="<?php echo base_url('himpunan') ?>"><i class="fa fa-edit"></i>Edit profil</a></li>
+                  <li><a href="<?php echo base_url('himpunan/update_himpunan') ?>"><i class="fa fa-edit"></i>Edit profil</a></li>
                 </ul>
             </li>
             <li>
@@ -66,7 +66,7 @@
                   <li><a href="<?php echo base_url('kegiatan_himpunan/list_kegiatan') ?>"><i class="fa fa-user-plus"></i>Lihat Acara</a></li>
                 </ul>
                 <ul class="treeview-menu">
-                  <li><a href="<?php echo base_url('') ?>"><i class="fa fa-print"></i>Cetak Sertifikat</a></li>
+                  <li><a href="<?php echo base_url('kegiatan_himpunan/') ?>"><i class="fa fa-print"></i>Cetak Sertifikat</a></li>
                 </ul>
             </li>
             <li>
