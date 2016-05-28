@@ -23,6 +23,12 @@ class Public_Controller extends MY_Controller {
         }
     }
 
+    public function load_page($page = '', $content_data = null){
+        $this->load->view('page/public/template/header');
+        $this->load->view($page, $content_data);
+        $this->load->view('page/public/template/footer');
+    }
+
 }
 
 class Private_Controller extends MY_Controller {
