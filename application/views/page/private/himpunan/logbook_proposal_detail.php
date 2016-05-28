@@ -24,7 +24,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <?php if ($status_approve  != 'y') { ?>
+                        <?php if ($status_approve  != null || $status_approve  != '-') { ?>
                           <a href="<?php echo base_url('proposal_himpunan/upload_proposal?id_pengajuan='.$id_pengajuan); ?>"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Tambah Proposal </button>
                           </a>
                         <?php }?> 

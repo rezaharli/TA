@@ -304,8 +304,9 @@ class Proposal_himpunan extends Private_Controller{
         $id_proposal = $this->input->get('id_proposal');
 
         $user       = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-        $proposal = $this->proposal_himpunan_model->get_by(array('id' => $id_proposal));
+        $proposal   = $this->proposal_himpunan_model->get_by(array('id' => $id_proposal));
 
+        $data['id']                 = $proposal->id;
         $data['judul_detail']       = $proposal->judul;
         $data['tema_kegiatan']      = $proposal->tema_kegiatan;
         $data['tujuan_kegiatan']    = $proposal->tujuan_kegiatan;
@@ -325,8 +326,17 @@ class Proposal_himpunan extends Private_Controller{
         
     }
 
-    function do_edit_status(){
+    function do_edit_status($id){
+        $status = null;
+        if ($this->input->get('s') == 't') {
+            $status = 'y';
+        } else if ($this->input->get('s') == 'f') {
+            $status = 'n';
+        }
 
+        $this->proposal_himpunan_model->update($id, array('status_approve' => $status));
+
+        redirect('proposal_himpunan/detail_proposal?id_proposal='.$id);
     }
 
     function upload_lpj(){
@@ -392,10 +402,7 @@ class Proposal_himpunan extends Private_Controller{
             );
 
             $id_lpj = $this->lpj_himpunan_model->insert($data);
-            if ($this->input->post('drive_upload') == 1) {
-                $this->session->set_userdata('upload_data', $upload_data);
-                $this->get_google_client();
-            }
+            $this->upload_to_drive($upload_data);
 
             $this->session->set_flashdata(array('status' => true));
 

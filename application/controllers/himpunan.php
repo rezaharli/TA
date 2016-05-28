@@ -7,7 +7,7 @@ class Himpunan extends Private_Controller {
 		$this->load->model('himpunan_model');
 	}
 
-	function index(){
+	function update_himpunan(){
 		$this->load->model('user_model');
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 		
@@ -34,7 +34,7 @@ class Himpunan extends Private_Controller {
 			$status = $this->himpunan_model->update($himpunan->id, $data);
 
 			$this->session->set_flashdata(array('status' => ($status != 0) ? true : false));
-			redirect('himpunan');
+			redirect('himpunan/update_himpunan');
 		}
 	}
 }
