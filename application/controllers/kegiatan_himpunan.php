@@ -75,8 +75,8 @@ class Kegiatan_himpunan extends Private_Controller{
                 
         $data['pesertas'] = array();
         foreach ($pesertas as $peserta) {
-        $proposal = $this->proposal_himpunan_model->get_by(array('id_pengajuan_proposal' => $kegiatan->id));
-
+        $proposal = $this->proposal_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_acara));
+        // die($this->db->last_query());      
             array_push($data['pesertas'], array(
                 'nama'         => $peserta->nama
             ));

@@ -10,7 +10,7 @@
     <section class="content-header">
         <h1>
             Daftar Peserta Kegiatan
-            <small><?php echo $judul ?> ?></small>
+            <large><?php echo $judul ?> </large>
             <small><?php echo $this->session->flashdata('error'); ?></small>
             
         </h1>
@@ -30,7 +30,7 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                               <tr>
-                                <th style="width:30px;">No</th>
+                                <th style="width:50px;">No</th>
                                 <th>Nama Peserta</th>
                               </tr>
                             </thead>
