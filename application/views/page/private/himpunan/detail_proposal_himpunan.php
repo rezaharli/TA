@@ -95,17 +95,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                         </div>
                     </div>
-                    <div class="box-footer">
-                            <?php if ($status != 'y') { ?>
-                                <a href="do_edit_status/<?php echo $id ?>?s=t" class="btn btn-success pull-left"><i class="fa fa-check"></i> Setuju</button>
-                            <?php } ?>
-                            <?php if ($status != null) { ?>
-                                <a href="do_edit_status/<?php echo $id ?>?s=p" class="btn btn-warning pull-left" style="margin-left: 5px;"><i class="fa fa-refresh"></i> Tunda</a>
-                            <?php } ?>
-                            <?php if ($status != 'n') { ?>
-                                <a href="do_edit_status/<?php echo $id ?>?s=f" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
-                            <?php }?>
-                    </div><!-- /.box-footer -->
                 </div>
             </div>
         <!-- right column -->

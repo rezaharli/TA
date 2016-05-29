@@ -327,6 +327,9 @@ class Proposal_himpunan extends Private_Controller{
     }
 
     function do_edit_status($id){
+        $user       = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $penyetuju  = $this->staff_model->get_by(array('id_user' => $user->id));
+
         $status = null;
         if ($this->input->get('s') == 't') {
             $status = 'y';
@@ -334,7 +337,7 @@ class Proposal_himpunan extends Private_Controller{
             $status = 'n';
         }
 
-        $this->proposal_himpunan_model->update($id, array('status_approve' => $status));
+        $this->proposal_himpunan_model->update($id, array('status_approve' => $status, 'penyetuju' => $penyetuju->nip));
 
         redirect('proposal_himpunan/detail_proposal?id_proposal='.$id);
     }
