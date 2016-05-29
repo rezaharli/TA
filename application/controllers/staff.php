@@ -4,6 +4,7 @@ class Staff extends Private_Controller {
 	function __construct() {
 		parent::__construct();
 	    $this->load->model('user_model');
+        $this->load->model('staff_model');
 	}
 
 	function list(){
@@ -66,15 +67,19 @@ class Staff extends Private_Controller {
         redirect('staff/list');		
 	}
 
-    function do_delete(){
-        $this->load->model('staff_model');
-
-        $nip    = $this->uri->segment(3);
-        $id     = $this->uri->segment(4);
+    function do_delete($id){
+        $nip = $this->input->get('nip');
 
         $this->staff_model->delete_by(array('nip' => $nip));
         $this->user_model->delete($id);
 
+        redirect('staff/list');
+    }
+
+    function do_reset_password($id){
+        $nip = $this->input->get('nip');
+
+        $this->user_model->update($id, array('password' => sha1($nip)));
         redirect('staff/list');
     }
 }
