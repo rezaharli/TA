@@ -66,7 +66,7 @@
                   <li><a href="<?php echo base_url('kegiatan_himpunan/list_kegiatan') ?>"><i class="fa fa-user-plus"></i>Lihat Acara</a></li>
                 </ul>
                 <ul class="treeview-menu">
-                  <li><a href="<?php echo base_url('kegiatan_himpunan/') ?>"><i class="fa fa-print"></i>Cetak Sertifikat</a></li>
+                  <li><a href="<?php echo base_url('kegiatan_himpunan/cetak_sertifikat') ?>"><i class="fa fa-print"></i>Cetak Sertifikat</a></li>
                 </ul>
             </li>
             <li>

@@ -63,6 +63,76 @@
         </div><!-- /.col --> -->
       </div><!-- /.row -->
   </section><!-- /.content -->
+
+
+  <section class="content">
+        <div class="row">
+        <!-- left column -->
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Informasi Detail Kegiatan</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <div class="col-sm-2">
+                                <label>Judul</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $judul ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Tema Kegiatan</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $tema_kegiatan ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Tanggal Kegiatan</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $tanggal_kegiatan ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Tempat Kegiatan</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $tempat_kegiatan ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Bentuk Kegiatan</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $bentuk_kegiatan ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Anggaran</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $anggaran ?></pre>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Penutup</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <pre class="prettyprint"><?php echo $penutup ?></pre>
+                            </div>
+                        </div>
+                        <div class="row no-print">
+                            <div class="col-xs-12">
+                              <a href="<?php echo base_url('kegiatan_himpunan/detail_peserta?id_acara='.$id_acara.''); ?>" class="btn btn-info pull-right">Lihat peserta</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- right column -->
+            
+                    
+                
+        </div>   <!-- /.row -->
+    </section><!-- /.content -->
+
   
 </div>
 <!-- /.content-wrapper -->
