@@ -62,11 +62,31 @@ class Log extends Private_Controller {
 			));
 			
 		}
-		
+		echo print_r($data);
+		die();
 		$this->load_page('page/private/staff/logbook_proposal_himpunan_detail', $data);
 	}
 
 	function detail(){
-		$this->load_page('page/private/staff/detail_proposal_himpunan', null);
+		$id_proposal = $this->input->get('id_proposal');
+
+		$proposal = $this->proposal_himpunan_model->get_by(array('id' => $id_proposal));
+
+		$data['judul_detail'] 		= $proposal->judul;
+		$data['tema_kegiatan'] 		= $proposal->tema_kegiatan;
+		$data['tujuan_kegiatan'] 	= $proposal->tujuan_kegiatan;
+		$data['sasaran_kegiatan'] 	= $proposal->sasaran_kegiatan;
+		$data['tanggal_kegiatan'] 	= $proposal->tanggal_kegiatan;
+		$data['tempat_kegiatan'] 	= $proposal->tempat_kegiatan;
+		$data['bentuk_kegiatan'] 	= $proposal->bentuk_kegiatan;
+		$data['anggaran'] 			= $proposal->anggaran;
+		$data['penutup'] 			= $proposal->penutup;
+		$data['status']				= $proposal->status_approve;
+
+		$this->load_page('page/private/staff/detail_proposal_himpunan', $data);
+	}
+
+	function tes(){
+		$this->load_page('page/private/staff/detail_proposal_him', null);
 	}
 }
