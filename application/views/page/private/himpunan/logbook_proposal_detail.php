@@ -24,10 +24,13 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <?php if ($status_approve  != 'y') { ?>
+                        <?php if ($status_approve == null || $status_approve == 'y') { ?>
+                          <a href="<?php echo base_url('proposal_himpunan/upload_proposal?id_pengajuan='.$id_pengajuan); ?>"><button type="button" class="btn btn-default" disabled><span class="fa fa-plus"></span> Tambah Proposal </button>
+                          </a>
+                        <?php } else if ($status_approve == 'n'){ ?> 
                           <a href="<?php echo base_url('proposal_himpunan/upload_proposal?id_pengajuan='.$id_pengajuan); ?>"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Tambah Proposal </button>
                           </a>
-                        <?php }?> 
+                        <?php } ?>
                     </div><!-- /.box-header -->
 
                     <div class="box-body">
@@ -38,7 +41,7 @@
                                 <th>Judul Proposal</th>
                                 <th>Tanggal Upload</th>
                                 <th>Status Approve</th>
-                                <th colspan="2" align="center">Aksi</th>
+                                <th align="center">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -94,4 +97,17 @@
           "autoWidth": false
         });
       });
+
+      <!-- alert sukses tidak -->
+      <?php
+      if($this->session->flashdata('status') !== null){
+          echo '<script type="text/javascript">';
+          if ($this->session->flashdata('status')) {
+              echo 'alert("Upload proposal berhasil")';
+          } else {
+              echo 'alert("Upload proposal gagal")';
+          }
+          echo '</script>';
+      }
+      ?>
     </script>

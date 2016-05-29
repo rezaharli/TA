@@ -49,15 +49,17 @@
                                     <td><?php echo $proposal['judul']; ?></td>  
                                     <td><?php echo $proposal['tanggal_pengajuan']; ?></td>
                                     <td>
-                                        <?php if ($proposal['status_approve'] == 'y') { ?>
+                                        <?php if ($proposal['status_approve'] == null) { ?>
+                                          <span class="label label-warning">Pending</span></td>
+                                        <?php } else if ($proposal['status_approve'] == 'y') { ?>
                                           <span class="label label-success">Disetujui</span></td>
                                         <?php } else if ($proposal['status_approve'] == 'n') { ?>
                                           <span class="label label-danger">Ditolak</span></td>
                                         <?php } ?>
                                     <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
-                                      <a href="<?php echo base_url('log/proposal?id='.$proposal['id']); ?>">
-                                        <button class="btn btn-info pull-right"></i> Lihat Detail</button>
+                                      <a href="<?php echo base_url('proposal_himpunan/detail_pengajuan?id_pengajuan='.$proposal['id']); ?>">
+                                        <button class="btn btn-info btn-sm pull-right"></i> Lihat Detail</button>
                                       </a>
                                     </td>
                                   </tr>

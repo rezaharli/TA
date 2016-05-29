@@ -35,7 +35,7 @@
                                 <th>Judul Proposal</th>
                                 <th>Tanggal Upload</th>
                                 <th>Status</th>
-                                <th colspan="2" align="center">Aksi</th>
+                                <th>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -46,19 +46,21 @@
                                     <td><?php echo $proposal['judul']; ?></td>
                                     <td><?php echo $proposal['tanggal_upload']; ?></td>  
                                     <td>
-                                        <?php if ($proposal['status'] == 'y') { ?>
+                                        <?php if ($proposal['status_approve'] == null || $proposal['status_approve'] == '-') { ?>
+                                          <span class="label label-warning">Pending</span></td>
+                                        <?php } else if ($proposal['status_approve'] == 'y') { ?>
                                           <span class="label label-success">Disetujui</span></td>
-                                        <?php } else if ($proposal['status'] == 'n') { ?>
+                                        <?php } else if ($proposal['status_approve'] == 'n') { ?>
                                           <span class="label label-danger">Ditolak</span></td>
                                         <?php } ?> 
-                                    <td>
-                                      <a href="<?php echo base_url('log/detail?id='.$proposal['id_proposal']); ?>">
-                                        <button class="btn btn-info pull-right"></i>Lihat Detail</button>
+                                    <td style="width: 185px;">
+                                      <a href="#">
+                                        <button class="btn btn-info btn-sm pull-left"><i class="fa fa-download"></i>&nbsp;Download</button>
+                                      </a>
+                                      <a href="<?php echo base_url('proposal_himpunan/detail_proposal?id_proposal='.$proposal['id_proposal']); ?>">
+                                        <button class="btn btn-info btn-sm pull-right"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
                                       </a>
                                     </td>
-                                    <td><a href="#">
-                                        <button class="btn btn-info pull-left"></i>Download</button>
-                                      </a></td>
                                   </tr>
                                 <?php $i++; ?>
                                 <?php } ?> 

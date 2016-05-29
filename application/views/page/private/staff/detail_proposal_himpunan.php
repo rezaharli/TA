@@ -1,9 +1,13 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/documentation/style.css">
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Data Proposal
-            <small></small>
+            General Form Elements
+            <small>Preview</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -12,73 +16,93 @@
         </ol>
     </section>
 
-    <!-- Main content -->
+<!-- Main content -->
     <section class="content">
         <div class="row">
-            <!-- left column -->
-            <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url() ?>" autocomplete="off">
-            
+        <!-- left column -->
             <div class="col-md-12">
-                <!-- general form elements -->
                 <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Data Proposal</h3>
-                    </div><!-- /.box-header -->
-                    
                     <div class="box-body">
-                        <div class="form-group">
-                            <label>Judul</label>
-                            <input type="text" class="form-control" placeholder="NIP" name="nip" value="<?php  ?>">
-                        </div>
-                        <div class="form-group">
-                            <label>Tema Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Nama" name="nama">
-                        </div>
-                        <div class="form-group">
-                            <label>Tujuan Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label>Sasaran Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Alamat" name="alamat">
-                        </div>
-                        <div class="form-group">
-                            <label>Tanggal Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                        <div class="form-group">
-                            <label>Tempat Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                        <div class="form-group">
-                            <label>Bentuk Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                        <div class="form-group">
-                            <label>Anggaran</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                        <div class="form-group">
-                            <label>Penutup Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                        <div class="form-group">
-                            <label>Tanggal Kegiatan</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
-                        </div>
-                    </div><!-- /.box-body -->
+                        <div class="table-responsive">
+                            <div class="col-sm-12 box-header with-border">
+                                <h4 class="box-title"># Judul</h4>
+                            </div><!-- /.box-header -->
+                            <div class="col-sm-12">
+                                <pre class="prettyprint"><?php echo $judul_detail ?></pre>
+                            </div>
 
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Setuju</button>
-                        <button type="submit" class="btn btn-primary">Tolak</button>
+                            <div class="col-sm-12 box-header with-border">
+                                <h4 class="box-title"># Tema Kegiatan</h4>
+                            </div><!-- /.box-header -->
+                            <div class="col-sm-12">
+                                <pre class="prettyprint"><?php echo $tema_kegiatan ?></pre>
+                            </div>
+
+                            <div class="col-sm-12 box-header with-border">
+                                <h4 class="box-title"># Tujuan Kegiatan</h4>
+                            </div><!-- /.box-header -->
+                            <div class="col-sm-12">
+                                <pre class="prettyprint"><?php echo $tujuan_kegiatan ?></pre>
+                            </div>
+
+                            <div class="col-sm-12 box-header with-border">
+                                <h4 class="box-title"># Sasaran Kegiatan</h4>
+                            </div><!-- /.box-header -->
+                            <div class="col-sm-12">
+                                <pre class="prettyprint"><?php echo $sasaran_kegiatan ?></pre>
+                            </div>
+
+                            <div class="col-sm-12 box-header with-border">
+                                <h4 class="box-title"># Tanggal Kegiatan</h4>
+                            </div><!-- /.box-header -->
+                            <div class="col-sm-12">
+                                <pre class="prettyprint"><?php echo $tanggal_kegiatan ?></pre>
+                            </div>
+
+                            <div class="col-sm-12 box-header with-border">
+                                <h4 class="box-title"># Tempat Kegiatan</h4>
+                            </div><!-- /.box-header -->
+                            <div class="col-sm-12">
+                                <pre class="prettyprint"><?php echo $tempat_kegiatan ?></pre>
+                            </div>
+
+                            <div class="col-sm-12 box-header with-border">
+                                <h4 class="box-title"># Anggaran</h4>
+                            </div><!-- /.box-header -->
+                            <div class="col-sm-12">
+                                <pre class="prettyprint"><?php echo $anggaran ?></pre>
+                            </div>
+                            
+                            <div class="col-sm-12 box-header with-border">
+                                <h4 class="box-title"># Status</h4>
+                            </div><!-- /.box-header -->
+                            <div class="col-sm-12">
+                                    <?php if ($status == null) { ?>
+                                        <span class="label label-warning">Pending</span></td>
+                                    <?php } else if ($status == 'y') { ?>
+                                        <span class="label label-success">Disetujui</span></td>
+                                    <?php } else if ($status == 'n') { ?>
+                                        <span class="label label-danger">Ditolak</span></td>
+                                    <?php } ?> 
+                                </div>
+                            
+                        </div>
                     </div>
-                </div><!-- /.box -->
+                    <div class="box-footer">
+                            <?php if ($status != 'n') { ?>
+                                <a href="do_edit_status/<?php echo $id ?>?s=f" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
+                            <?php } ?>
+                            <?php if ($status != 'y') { ?>
+                                <a href="do_edit_status/<?php echo $id ?>?s=t" class="btn btn-success pull-left" style="margin-left: 5px;"><i class="fa fa-check"></i> Setuju</a>
+                            <?php } ?>
+                            
+                    </div><!-- /.box-footer -->
+                </div>
             </div>
-            </form>
-        </div>
-    </section>
-</div>
-
-<!-- cek username -->
-<script src="<?php echo base_url() ?>assets/js/cek_username.js"></script>
+        <!-- right column -->
+            
+                    
+                
+        </div>   <!-- /.row -->
+    </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
