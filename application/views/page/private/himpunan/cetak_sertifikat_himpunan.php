@@ -47,7 +47,7 @@
                                     <td><?php echo $kegiatan['tempat_kegiatan']; ?></td>
                                     <td>
                                       <a href="<?php echo base_url('kegiatan_himpunan/do_cetak_sertifikat?id_acara='.$kegiatan['id_pengajuan_proposal']); ?>">
-                                        <button class="btn btn-info pull-left"><i class="fa fa-print"></i> &nbsp;Cetak Sertifikat</button>
+                                        <button class="btn btn-info pull-left"><i class="fa fa-print"></i>&nbsp;Cetak Sertifikat</button>
                                       </a>
                                     </td>
                                   </tr>

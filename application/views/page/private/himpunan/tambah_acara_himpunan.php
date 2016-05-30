@@ -23,14 +23,14 @@ $(function() {
   <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Pengajuan Proposal Dana Kegiatan
+            Acara Himpunan
             <small><?php echo $himpunan->nama ?></small>
             <small><?php echo $this->session->flashdata('error'); ?></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Pengajuan</a></li>
-            <li class="active">Upload Proposal Pengajuan</li>
+            <li class="active">Upload LPJ</li>
         </ol>
     </section>
 
@@ -39,40 +39,40 @@ $(function() {
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url("proposal_himpunan/do_upload_pengajuan"); ?>" enctype="multipart/form-data">
+            <form role="form" method="post" action="<?php echo base_url("proposal_himpunan/upload_lpj"); ?>" enctype="multipart/form-data">
             
                 <div class="col-md-6">
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Data Proposal</h3>
+                            <h3 class="box-title">Data LPJ</h3>
                         </div><!-- /.box-header -->
                         
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Judul Proposal</label>
-                                <input type="text" class="form-control" id="judul" placeholder="Judul Proposal" name="judul">
+                                <label>Judul Laporan</label>
+                                <input type="text" class="form-control" id="judul_laporan" placeholder="Judul Laporan" name="judul_laporan">
                             </div>
                             <div class="form-group">
-                                <label>Tema Kegiatan</label>
-                                <textarea class="form-control" id="tema_kegiatan" placeholder="Tema Kegiatan" name="tema_kegiatan"></textarea> 
+                                <label>Deskripsi Laporan</label>
+                                <textarea class="form-control" id="deskripsi_laporan" placeholder="Deskripsi Laporan" name="deskripsi_laporan"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Tujuan Kegiatan</label>
-                                <textarea class="form-control" id="tujuan_kegiatan" placeholder="Tujuan Kegiatan" name="tujuan_kegiatan"></textarea> 
+                                <label>Ketercapaian Tujuan</label>
+                                <textarea class="form-control" id="ketercapaian_tujuan" placeholder="Ketercapaian Tujuan" name="ketercapaian_tujuan"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Sasaran Kegiatan</label>
-                                <textarea class="form-control" id="sasaran_kegiatan" placeholder="Sasaran Kegiatan" name="sasaran_kegiatan"></textarea> 
+                                <label>Realisasi Sasaran Kegiatan</label>
+                                <textarea class="form-control" id="realisasi_sasaran_kegiatan" placeholder="Realisasi Sasaran Kegiatan" name="realisasi_sasaran_kegiatan"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Tanggal Kegiatan</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Kegiatan" name="tanggal_kegiatan">
+                                <label>Tanggal Pelaksanaan</label>
+                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Pelaksanaan" name="tanggal_pelaksanaan">
                             </div>
                             <div class="form-group">
-                                <label>Tempat Kegiatan</label>
-                                <input type="text" class="form-control" id="tempat_kegiatan" placeholder="Tempat Kegiatan" name="tempat_kegiatan">
-                            </div>
+                                <label>Tempat Pelaksanaan</label>
+                                <input type="text" class="form-control" id="tempat_pelaksanaan" placeholder="Tempat Pelaksanaan" name="tempat_pelaksanaan">
+                            </div>   
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
                 </div>
@@ -87,23 +87,27 @@ $(function() {
                         
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Bentuk Kegiatan</label>
-                                <textarea class="form-control" id="bentuk_kegiatan" placeholder="Bentuk Kegiatan" name="bentuk_kegiatan"></textarea> 
+                                <label>Realisasi Kegiatan</label>
+                                <textarea class="form-control" id="realisasi_kegiatan" placeholder="Realisasi Kegiatan" name="realisasi_kegiatan"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Anggaran Biaya (Total)</label>
-                                <input type="text" class="form-control" id="anggaran" placeholder="ex:1000000" name="anggaran">
+                                <label>Realisasi Anggaran Biaya Total</label>
+                                <input type="text" class="form-control" id="realisasi_total_anggaran" placeholder="ex:1000000" name="realisasi_total_anggaran">
+                            </div>
+                            <div class="form-group">
+                                <label>Rekomendasi</label>
+                                <textarea class="form-control" id="rekomendasi" placeholder="Rekomendasi" name="rekomendasi"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Penutup</label>
-                                <textarea class="form-control" id="penutup" placeholder="Penutup" name="penutup"></textarea> 
+                                <textarea class="form-control" id="penutup" placeholder="Penutup" name="penutup"></textarea>
                             </div>
                         
                             <div class="form-group">
-                                <label>Upload Pengajuan Proposal</label>
-                                <input type="file" class="form-control" id="file" name="file_pengajuan">
-                            </div>
-                        </div><!-- /.box-body -->
+                                <label>Upload LPJ</label>
+                                <input type="file" class="form-control" id="file" name="file_lpj">
+                            </div><!-- /.box-body -->
+                        </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
@@ -120,9 +124,9 @@ $(function() {
 if($this->session->flashdata('status') !== null){
     echo '<script type="text/javascript">';
     if ($this->session->flashdata('status')) {
-        echo 'alert("Upload pengajuan proposal berhasil")';
+        echo 'alert("Buat acara himpunan berhasil")';
     } else {
-        echo 'alert("Upload pengajuan proposal gagal")';
+        echo 'alert("Buat acara himpunan gagal")';
     }
     echo '</script>';
 }

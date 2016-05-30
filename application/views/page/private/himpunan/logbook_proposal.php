@@ -27,7 +27,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <a href="<?php echo base_url() ?>proposal_himpunan/upload_pengajuan"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Tambah Pengajuan </button></a>
+                        <a href="<?php echo base_url() ?>proposal_himpunan/upload_pengajuan"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span>&nbsp;Tambah Pengajuan</button></a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -35,7 +35,7 @@
                               <tr>
                                 <th align="center">No</th>
                                 <th align="center">Pengaju</th>
-                                <th align="center" style="width: 200px">Judul Proposal</th>
+                                <th align="center" style="width: 125px">Judul Proposal</th>
                                 <th align="center" style="width: 35px">Tanggal Pengajuan</th>
                                 <th align="center" style="width: 35px">Tanggal Upload Terakhir</th>
                                 <th align="center">Status</th>
@@ -62,17 +62,29 @@
                                         <?php }?>
                                     <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
-                                      <a href="<?php echo base_url('proposal_himpunan/detail_pengajuan?id_pengajuan='.$proposal['id']); ?>">
-                                        <button class="btn btn-info pull-leftt"></i> Lihat Detail</button>
-                                      </a>
-                                    
-                                    <?php if ($proposal['status_approve'] == 'n' || $proposal['status_approve'] == null) { ?>
+                                      <?php if ($proposal['status_approve'] == 'n' || $proposal['status_approve'] == null) { ?>
                                       <a href="<?php echo base_url() ?>proposal_himpunan/upload_lpj">
-                                        <button class="btn btn-info pull-right" disabled></i>Upload LPJ</button>
+                                        <button class="btn btn-sm btn-info pull-left" disabled><i class="fa fa-plus-circle"></i>&nbsp;Buat Acara</button>
                                       </a>
                                     <?php } else { ?>
                                       <a href="<?php echo base_url() ?>proposal_himpunan/upload_lpj">
-                                        <button class="btn btn-info pull-right"></i>Upload LPJ</button>
+                                        <button class="btn btn-sm btn-info pull-left"><i class="fa fa-plus-circle"></i>&nbsp;Buat Acara</button>
+                                      </a>
+                                    <?php } ?>
+                                      &nbsp;
+                                      <a href="<?php echo base_url('proposal_himpunan/detail_pengajuan?id_pengajuan='.$proposal['id']); ?>">
+                                        <button class="btn btn-sm btn-info"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
+                                      </a>
+                                    
+                                    <?php if ($proposal['status_approve'] == 'n' || $proposal['status_approve'] == null) { ?>
+                                      &nbsp;
+                                      <a href="<?php echo base_url() ?>proposal_himpunan/upload_lpj">
+                                        <button class="btn btn-sm btn-info" disabled><i class="fa fa-upload"></i>&nbsp;Upload LPJ</button>
+                                      </a>
+                                    <?php } else { ?>
+                                      &nbsp;
+                                      <a href="<?php echo base_url() ?>proposal_himpunan/upload_lpj">
+                                        <button class="btn btn-sm btn-info"><i class="fa fa-upload"></i>&nbsp;Upload LPJ</button>
                                       </a>
                                     <?php } ?>
                                     </td>

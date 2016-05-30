@@ -14,6 +14,7 @@ class Kegiatan_himpunan extends Private_Controller{
         $this->load->model('himpunan_model');
         $this->load->model('kegiatan_himpunan_model');
         $this->load->model('proposal_himpunan_model');
+        $this->load->model('acara_himpunan_model');
         $this->load->model('peserta_model');
     }
 
@@ -46,18 +47,30 @@ class Kegiatan_himpunan extends Private_Controller{
         $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
         $id_acara = $this->input->get('id_acara');
 
-        $proposal = $this->proposal_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_acara));
+        //menampilkan detail acara
+        $acara = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_acara));
         // die($this->db->last_query());
 
-        $data['id_pengajuan_proposal']  = $proposal->id_pengajuan_proposal;
-        $data['judul']                  = $proposal->judul;
-        $data['tema_kegiatan']          = $proposal->tema_kegiatan;
-        $data['tujuan_kegiatan']        = $proposal->tujuan_kegiatan;
-        $data['tanggal_kegiatan']       = $proposal->tanggal_kegiatan;
-        $data['tempat_kegiatan']        = $proposal->tempat_kegiatan;
-        $data['bentuk_kegiatan']        = $proposal->bentuk_kegiatan;
-        $data['id_acara'] = $id_acara;
+        $data['id']                     = $acara->id;    
+        $data['id_pengajuan_proposal']  = $acara->id_pengajuan_proposal;
+        $data['nama_acara']             = $acara->nama_acara;
+        $data['tempat_acara']           = $acara->tempat_acara;
+        $data['tanggal_acara']          = $acara->tanggal_acara;
+        $data['deskripsi_acara']        = $acara->deskripsi_acara;
 
+        // var_dump($data);
+        // die;
+
+        //menampilkan daftar peserta
+        $pesertas = $this->peserta_model->get_many_by(array('id_acara' => $data['id']));
+
+        $data['pesertas'] = array();
+        foreach ($pesertas as $peserta) {
+            array_push($data['pesertas'], array(
+                'nama' => $peserta->nama
+            ));
+        }
+        
         $data['himpunan'] = $himpunan;
 
         $this->load_page('page/private/himpunan/list_kegiatan_himpunan_detail', $data);
@@ -84,7 +97,7 @@ class Kegiatan_himpunan extends Private_Controller{
         $data['judul']    = $proposal->judul;
         $data['himpunan'] = $himpunan;
 
-        $this->load_page('page/private/himpunan/list_peserta', $data);
+        $this->load_page('page/private/himpunan/list_kegiatan_himpunan_detail', $data);
     }
 
     function cetak_sertifikat(){
