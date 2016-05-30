@@ -9,6 +9,8 @@ class Proposal extends Private_Controller {
 		$this->load->model('pengajuan_proposal_mahasiswa_model');
 		$this->load->model('staff_model');
 		$this->load->model('event_model');
+        $this->load->model('detail_tim_model');
+        $this->load->model('mahasiswa_model');
 	}
 
     function upload_pengajuan (){
@@ -52,13 +54,24 @@ class Proposal extends Private_Controller {
         $filename   = sha1($_FILES['file_pengajuan']['name']).'.'.$ext;
 
         $data['file'] = $filename;
-
-
         $id_upload_proposal = $this->proposal_lomba_model->insert($data);
+        for($i=1; $i <= 5; $i++){
+            if ($this->input->post('nim_anggota'.$i) == "") {
+                continue;
+            }else{
+                $data = array(
+                    'id_proposal_lomba'     => $id_upload_proposal,
+                    'nama_tim'              => $this->input->post('nama_tim'),
+                    'nim_tim'               => $this->input->post('nim_anggota'.$i)
+                ); 
+                $id_detail_tim = $this->detail_tim_model->insert($data);  
+              
+            }
+            
+        }
 
         $this->session->set_flashdata(array('status' => true));
-
-        redirect('proposal/upload_tim'); 
+        redirect('proposal/logbook_pengajuan_proposal_lomba');
     
     	// $nama_input_file = 'file_pengajuan';
 
@@ -128,31 +141,28 @@ class Proposal extends Private_Controller {
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
         $data['user'] = $user;
-        $this->load_page('page/private/mahasiswa/logbook_proposal_lomba', $data);
+        $this->load_page('page/private/mahasiswa/logbook_pengajuan_proposal_lomba', $data);
     }
 
-    function upload_tim(){
+    function upload_proposal(){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
         $data['user'] = $user;
-        $this->load_page('page/private/mahasiswa/upload_tim', $data);
+        $this->load_page('page/private/mahasiswa/upload_proposal', $data);
     }
 
-    function do_upload_tim(){
-        // $user           = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+    function detail_pengajuan(){
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
-        // $data = array(
-        //     'id_proposal_lomba'            => $proposal_lomba->id,
-        //     'nama_tim'                     => $this->input->post('nama_tim'),
-        //     'nim_tim'                      => $this->input->post('nim_tim'),
+        $data['user'] = $user;
+        $this->load_page('page/private/mahasiswa/logbook_detail_pengajuan', $data);
+    }
 
-        //     );
+    function detail_tim(){
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
-        //  $tim = $this->detail_tim_model->insert($data);
-
-        //  redirect('proposal/logbook_pengajuan_proposal_lomba'); 
-
-
+        $data['user'] = $user;
+        $this->load_page('page/private/mahasiswa/logbook_detail_tim', $data);
     }
 }
 
