@@ -48,7 +48,9 @@
 					                      	<?php } ?>
 				                      	<td>
 											<a class="btn btn-primary pull-left btn-xs" style="margin-right: 1px;" href="<?php echo base_url('event?id='.$event->id); ?>"><i class="fa fa-calendar"></i> Lihat Detail</a>
-											<a class="btn btn-primary pull-left btn-xs" style="margin-right: 1px;" href="<?php echo base_url("proposal/upload_pengajuan");; ?>"><i class="fa fa-calendar"></i> Ajukan Proposal</a>
+											<!-- <?php if ($role_user == 'mahasiswa') { ?>
+												<a class="btn btn-primary pull-left btn-xs" style="margin-right: 1px;" href="<?php echo base_url("proposal/upload_pengajuan?id=".$event->id); ?>"><i class="fa fa-calendar"></i> Ajukan Proposal</a>
+											<?php } ?> -->
 				                        </td>
 				                    </tr>
 		                    	<?php } ?>

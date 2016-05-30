@@ -48,8 +48,12 @@ $(function() {
                         
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Nama Kompetisi</label>
-                                <input type="text" class="form-control" id="nama_kompetisi" placeholder="Nama Kompetisi" name="nama_kompetisi">
+                                <label>Event</label>
+                                <select class="form-control" name="event">
+                                    <?php foreach ($events as $event) { ?>
+                                        <option value="<?php echo $event->id ?>"><?php echo $event->nama_event ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Penyelenggara</label>
@@ -94,12 +98,11 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Anggaran Kompetisi</label>
-                                <input type="text" class="form-control" id="anggaran" placeholder="anggaran" name="anggaran">
+                                <input type="text" class="form-control" id="anggaran" placeholder="anggaran" name="anggaran_biaya">
                             </div>
-                        
                             <div class="form-group">
                                 <label>Upload Pengajuan Proposal</label>
-                                <input type="file" class="form-control" id="file" name="file_pengajuan">
+                                <input type="file" class="form-control" id="file_pengajuan" name="file_pengajuan">
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
