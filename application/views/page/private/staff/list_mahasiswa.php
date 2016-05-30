@@ -9,8 +9,8 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Staff
-            <small>Kemahasiswaan</small>
+            Daftar Mahasiswa
+            <small></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -25,39 +25,40 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                         <a href="<?php echo base_url() ?>staff/add"><button type="button" class="btn btn-primary"><span class="fa fa-plus"></span> Tambah Staff </button></a>
+                         <a href="#"><button type="button" class="btn btn-primary"><span class="fa fa-plus"></span> Tambah Staff </button></a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                               <tr>
                                 <th>No</th>
-                                <th>NIP</th>
+                                <th>NIM</th>
+                                <th>Prodi</th>
+                                <th>Kelas</th>
                                 <th>Username</th>
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Alamat</th>
                                 <th>Telp</th>
-                                <th style="width: 170px;">Aksi</th>
+                                <th>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($staffs as $staff) { ?>
+                                <?php foreach ($mahasiswas as $mahasiswa) { ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $staff['nip']; ?></td>
-                                    <td><?php echo $staff['username']; ?></td>
-                                    <td><?php echo $staff['nama']; ?></td>  
-                                    <td><?php echo $staff['email']; ?></td>
-                                    <td><?php echo $staff['alamat']; ?></td>
-                                    <td><?php echo $staff['telp']; ?></td>
+                                    <td><?php echo $mahasiswa['nim']; ?></td>
+                                    <td><?php echo $mahasiswa['prodi']; ?></td>
+                                    <td><?php echo $mahasiswa['kelas']; ?></td>
+                                    <td><?php echo $mahasiswa['username']; ?></td>
+                                    <td><?php echo $mahasiswa['nama']; ?></td>  
+                                    <td><?php echo $mahasiswa['email']; ?></td>
+                                    <td><?php echo $mahasiswa['alamat']; ?></td>
+                                    <td><?php echo $mahasiswa['telp']; ?></td>
                                     <td>
-                                      <a href="<?php echo base_url()?>staff/do_reset_password/<?php echo $staff['id']; ?>?nip=<?php echo $staff['nip']; ?>">
+                                      <a href="<?php echo base_url()?>mahasiswa/do_reset_password/<?php echo $mahasiswa['id']; ?>?nim=<?php echo $mahasiswa['nim']; ?>">
                                         <button class="btn btn-warning btn-sm pull-left"><i class="fa fa-refresh"></i> &nbsp;Reset Password</button>
-                                      </a>
-                                      <a href="<?php echo base_url()?>staff/do_delete/<?php echo $staff['id']; ?>?nip=<?php echo $staff['nip']; ?> ">
-                                        <button class="btn btn-danger btn-sm pull-right"><i class="fa fa-trash-o"></i> &nbsp;Hapus</button>
                                       </a>
                                     </td>
                                   </tr>
