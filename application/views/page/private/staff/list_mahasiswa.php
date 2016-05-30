@@ -24,14 +24,10 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <div class="box-header">
-                         <a href="#"><button type="button" class="btn btn-primary"><span class="fa fa-plus"></span> Tambah Staff </button></a>
-                    </div><!-- /.box-header -->
                     <div class="box-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="tabel-mahasiswa" class="table table-bordered table-striped">
                             <thead>
                               <tr>
-                                <th>No</th>
                                 <th>NIM</th>
                                 <th>Prodi</th>
                                 <th>Kelas</th>
@@ -43,28 +39,6 @@
                                 <th>Aksi</th>
                               </tr>
                             </thead>
-                            <tbody>
-                                <?php $i=1; ?>
-                                <?php foreach ($mahasiswas as $mahasiswa) { ?>
-                                  <tr>
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $mahasiswa['nim']; ?></td>
-                                    <td><?php echo $mahasiswa['prodi']; ?></td>
-                                    <td><?php echo $mahasiswa['kelas']; ?></td>
-                                    <td><?php echo $mahasiswa['username']; ?></td>
-                                    <td><?php echo $mahasiswa['nama']; ?></td>  
-                                    <td><?php echo $mahasiswa['email']; ?></td>
-                                    <td><?php echo $mahasiswa['alamat']; ?></td>
-                                    <td><?php echo $mahasiswa['telp']; ?></td>
-                                    <td>
-                                      <a href="<?php echo base_url()?>mahasiswa/do_reset_password/<?php echo $mahasiswa['id']; ?>?nim=<?php echo $mahasiswa['nim']; ?>">
-                                        <button class="btn btn-warning btn-sm pull-left"><i class="fa fa-refresh"></i> &nbsp;Reset Password</button>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                <?php $i++; ?>
-                                <?php } ?> 
-                            </tbody>
                         </table>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -76,14 +50,16 @@
 <!-- page script -->
     <script>
       $(function () {
-        $("#example1").DataTable({
-          "paging": true,
-          "lengthChange": true,
-          "searching": true,
-          "ordering": false,
-          "info": true,
-          "autoWidth": true
-
+        $("#tabel-mahasiswa").DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": false,
+            "info": true,
+            "autoWidth": true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": "<?php echo base_url('lists/get_list_mahasiswa') ?>"
         });
       });
     </script>
