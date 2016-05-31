@@ -50,7 +50,7 @@ $lang['activation_email_unsuccessful']		        = 'Tidak Dapat Mengirimkan Email
 
 // Login / Logout
 $lang['login_successful']							= 'Log In Berhasil';
-$lang['login_unsuccessful']							= 'Log In Gagal';
+$lang['login_unsuccessful']							= 'Kombinasi username atau password anda salah';
 $lang['login_unsuccessful_not_active']	            = 'Akun Tidak Aktif';
 $lang['login_timeout']								= 'Sementara Terkunci. Coba Beberapa Saat Lagi.';
 $lang['logout_successful']							= 'Log Out Berhasil';

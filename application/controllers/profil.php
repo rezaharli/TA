@@ -98,13 +98,13 @@ class Profil extends Private_Controller {
     function do_password_edit(){
     	$password = $this->input->post('password');
     	$this->user_model->update($this->session->userdata('id'), array('password' => sha1($password)));
-    	$this->logout();
+    	redirect('auth/logout');
     }
 
     function do_username_edit(){
     	$username = $this->input->post('username');
     	$this->user_model->update($this->session->userdata('id'), array('username' => $username));
-    	$this->logout();
+    	redirect('auth/logout');
     }
 
     function do_datadiri_edit(){
@@ -115,13 +115,6 @@ class Profil extends Private_Controller {
         $this->user_model->update($this->session->userdata('id'), array('email' => $email, 'alamat' => $alamat, 'telp' => $telp ));
 
         redirect('user');
-    }
-
-	function logout(){
-	    if($this->session->userdata('id')) {
-        	$this->session->sess_destroy();
-	    }
-	    redirect('');
     }
 
     function show_profile($username){
