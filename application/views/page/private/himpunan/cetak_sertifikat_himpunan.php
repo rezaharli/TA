@@ -9,15 +9,15 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Peserta Kegiatan
-            <small><?php echo $judul ?> </small>
+            Daftar Kegiatan Himpunan
+            <small><?php echo $himpunan->nama ?></small>
             <small><?php echo $this->session->flashdata('error'); ?></small>
             
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Kegiatan</a></li>
-            <li class="active">List Peserta</li>
+            <li class="active">List Kegiatan</li>
         </ol>
     </section>
 
@@ -30,21 +30,26 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                               <tr>
-                                <th style="width:50px;">No</th>
-                                <th>Nama Peserta</th>
+                                <th>No</th>
+                                <th>Nama Kegiatan</th>
+                                <th>Tanggal Pelaksanaan</th>
+                                <th>Tempat Pelaksanaan</th>
+                                <th>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($pesertas as $peserta) : ?>
+                                <?php foreach ($kegiatans as $kegiatan) : ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $peserta['nama']; ?></td>
-                                    <!-- <td>
-                                      <a href="<?php echo base_url('kegiatan_himpunan/detail_kegiatan?id_acara='.$peserta['id_acara']); ?>">
-                                        <button class="btn btn-info pull-left"></i> Lihat Detail</button>
+                                    <td><?php echo $kegiatan['nama_kegiatan']; ?></td>
+                                    <td><?php echo $kegiatan['tanggal_pelaksanaan']; ?></td>  
+                                    <td><?php echo $kegiatan['tempat_kegiatan']; ?></td>
+                                    <td>
+                                      <a href="<?php echo base_url('kegiatan_himpunan/do_cetak_sertifikat?id_acara='.$kegiatan['id_pengajuan_proposal']); ?>">
+                                        <button class="btn btn-info pull-left"><i class="fa fa-print"></i>&nbsp;Cetak Sertifikat</button>
                                       </a>
-                                    </td> -->
+                                    </td>
                                   </tr>
                                 <?php $i++; ?>
                                 <?php endforeach; ?> 

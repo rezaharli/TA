@@ -1,6 +1,9 @@
-<!-- fullCalendar 2.7.0-->
-<link href='<?php echo base_url() ?>assets/fullcalendar-2.7.0/fullcalendar.css' rel='stylesheet' />
-<link href='<?php echo base_url() ?>assets/fullcalendar-2.7.0/fullcalendar.print.css' rel='stylesheet' media='print' />
+<!-- DataTables -->
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/plugins/datatables/dataTables.bootstrap.css">
+
+<!-- DataTables -->
+<script src="<?php echo base_url() ?>assets/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url() ?>assets/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
 <!--Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -13,89 +16,125 @@
       <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Kegiatan</a></li>
-            <li class="active"><?php echo $judul ?></li>
+            <li class="active"><?php echo $nama_acara ?></li>
         </ol>
   </section>
 
+
   <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box box-solid">
-                  <div class="box-header with-border">
-                      <h3 class="box-title">Informasi Detail Kegiatan</h3>
-                  </div>
-                  <div class="box-body">
-                    <div class="table-responsive">
-                      <table class="table">
-                          <tr>
-                            <th>Nama Kegiatan</th>
-                            <td><?php echo $judul ?></td>
-                          </tr>
-                          <tr>
-                            <th>Tema Kegiatan</th>
-                            <td><?php echo $tema_kegiatan ?></td>
-                          </tr>
-                          <tr>
-                            <th>Tujuan Kegiatan</th>
-                            <td><?php echo $tujuan_kegiatan ?></td>
-                          </tr>
-                          <tr>
-                            <th>Tanggal Pelaksanaan</th>
-                            <td><?php echo $tanggal_kegiatan ?><td>
-                          </tr>
-                          <tr>
-                            <th>Tempat Pelaksanaan</th>
-                            <td><?php echo $tempat_kegiatan ?><td>
-                          </tr>
-                          <tr>
-                            <th>Bentuk Kegiatan</th>
-                            <td><?php echo $bentuk_kegiatan ?><td>
-                          </tr>
-                      </table>
-                  </div>
-                    <div class="row no-print">
-              <div class="col-xs-12">
-                <a href="<?php echo base_url('kegiatan_himpunan/detail_peserta?id_acara='.$id_acara.''); ?>" class="btn btn-info pull-right">Lihat peserta</a>
-              </div>
-                  </div>
+        <div class="row">
+            
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Informasi Detail Kegiatan</h3>
+                    </div><!-- /.box-header -->
+                    
+                    <!-- <div class="box-body"> -->
+                    <table class="table">
+                      <tr>
+                        <th>Nama Acara</th>
+                        <td><?php echo $nama_acara ?></td>
+                      </tr>
+                      <tr>
+                        <th>Tempat Acara</th>
+                        <td><?php echo $tempat_acara ?></td>
+                      </tr>
+                      <tr>
+                        <th>Tanggal Acara</th>
+                        <td><?php echo $tanggal_acara ?><td>
+                      </tr>
+                      <tr>
+                        <th>Deskripsi Acara</th>
+                        <td><?php echo $deskripsi_acara ?><td>
+                      </tr>
+                  </table>
+                    <!-- </div><!-- /.box-body -->                   
+                </div><!-- /.box -->
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Daftar Panitia</h3>
+                    </div><!-- /.box-header -->
+                    
+                    <table class="table">
+                      <!-- <tr>
+                        <th>Nama Kegiatan</th>
+                        <td><?php echo $judul ?></td>
+                      </tr>
+                      <tr>
+                        <th>Tema Kegiatan</th>
+                        <td><?php echo $tema_kegiatan ?></td>
+                      </tr>
+                      <tr>
+                        <th>Tanggal Pelaksanaan</th>
+                        <td><?php echo $tanggal_kegiatan ?><td>
+                      </tr>
+                      <tr>
+                        <th>Tempat Pelaksanaan</th>
+                        <td><?php echo $tempat_kegiatan ?><td>
+                      </tr> -->
+                  </table>
                 </div>
-              </div>
-            </div><!-- /.col -->
-        <!-- <div class="col-md-4">
-            <div class="box box-primary">
-              <div class="box-body no-padding">
-                  THE CALENDAR
-                  <div id="calendar"></div>
-              </div><!-- /.box-body -->
-            </div><!-- /. box -->
-        </div><!-- /.col --> -->
-      </div><!-- /.row -->
-  </section><!-- /.content -->
+            </div>
+
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Daftar Peserta</h3>
+                    </div><!-- /.box-header -->
+                    
+                    <div class="box-body">
+                      <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Nama Peserta</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php $i=1; ?>
+                          <?php foreach ($pesertas as $peserta) : ?>
+                            <tr>
+                              <td><?php echo $i; ?></td>
+                              <td><?php echo $peserta['nama']; ?></td>
+                            </tr>
+                          <?php $i++; ?>
+                          <?php endforeach; ?> 
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </section>
+
   
 </div>
 <!-- /.content-wrapper -->
 
-<script src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/lib/moment.min.js'></script>
-<script src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/lib/jquery.min.js'></script>
-<script src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/fullcalendar.min.js'></script>
-<script type='text/javascript' src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/gcal.js'></script>
+<!-- page script -->
 <script>
+  $(function () {
+    $("#example1").DataTable({
+        "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true
 
-  $(document).ready(function() {
-
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'today',
-        center: 'title',
-        right: 'prev,next'
-      },
-      height: 'auto',
-      editable: false,
-      eventLimit: 2, // allow "more" link when too many events
-      events: '<?php echo base_url('event/get_calendar'); ?>'
     });
-    
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
   });
-
 </script>
-    

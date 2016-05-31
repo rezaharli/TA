@@ -25,10 +25,10 @@
                 <div class="box">
                     <div class="box-header">
                         <?php if ($status_approve == null || $status_approve == 'y') { ?>
-                          <a href="<?php echo base_url('proposal_himpunan/upload_proposal?id_pengajuan='.$id_pengajuan); ?>"><button type="button" class="btn btn-default" disabled><span class="fa fa-plus"></span> Tambah Proposal </button>
+                          <a href="<?php echo base_url('proposal_himpunan/upload_proposal?id_pengajuan='.$id_pengajuan); ?>"><button type="button" class="btn btn-default" disabled><span class="fa fa-plus"></span>&nbsp;Tambah Proposal </button>
                           </a>
                         <?php } else if ($status_approve == 'n'){ ?> 
-                          <a href="<?php echo base_url('proposal_himpunan/upload_proposal?id_pengajuan='.$id_pengajuan); ?>"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span> Tambah Proposal </button>
+                          <a href="<?php echo base_url('proposal_himpunan/upload_proposal?id_pengajuan='.$id_pengajuan); ?>"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span>&nbsp;Tambah Proposal </button>
                           </a>
                         <?php } ?>
                     </div><!-- /.box-header -->
@@ -38,7 +38,7 @@
                             <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Judul Proposal</th>
+                                <th>Nama Acara</th>
                                 <th>Tanggal Upload</th>
                                 <th>Status Approve</th>
                                 <th align="center">Aksi</th>
@@ -60,8 +60,8 @@
                                           <span class="label label-warning">Pending</span></td>
                                         <?php }?> 
                                     <td>
-                                      <a href="#">
-                                        <button class="btn btn-info pull-left"></i>Lihat Detail</button>
+                                      <a href="<?php echo base_url('proposal_himpunan/detail_proposal?id_proposal='.$proposal['id_proposal']); ?>">
+                                        <button class="btn btn-info btn-sm pull-leftht"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
                                       </a>
                                     </td>
                                   </tr>
