@@ -47,7 +47,7 @@
                                     <td><?php echo $kegiatan['tempat_kegiatan']; ?></td>
                                     <td>
                                       <a href="<?php echo base_url('kegiatan_himpunan/detail_kegiatan?id_acara='.$kegiatan['id_pengajuan_proposal']); ?>">
-                                        <button class="btn btn-info pull-left"></i> Lihat Detail</button>
+                                        <button class="btn btn-sm btn-info pull-left"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
                                       </a>
                                     </td>
                                   </tr>

@@ -55,15 +55,15 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi Laporan</label>
-                                <input type="text" class="form-control" id="deskripsi_laporan" placeholder="Deskripsi Laporan" name="deskripsi_laporan">
+                                <textarea class="form-control" id="deskripsi_laporan" placeholder="Deskripsi Laporan" name="deskripsi_laporan"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Ketercapaian Tujuan</label>
-                                <input type="text" class="form-control" id="ketercapaian_tujuan" placeholder="Ketercapaian Tujuan" name="ketercapaian_tujuan">
+                                <textarea class="form-control" id="ketercapaian_tujuan" placeholder="Ketercapaian Tujuan" name="ketercapaian_tujuan"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Realisasi Sasaran Kegiatan</label>
-                                <input type="text" class="form-control" id="realisasi_sasaran_kegiatan" placeholder="Realisasi Sasaran Kegiatan" name="realisasi_sasaran_kegiatan">
+                                <textarea class="form-control" id="realisasi_sasaran_kegiatan" placeholder="Realisasi Sasaran Kegiatan" name="realisasi_sasaran_kegiatan"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Pelaksanaan</label>
@@ -72,11 +72,7 @@ $(function() {
                             <div class="form-group">
                                 <label>Tempat Pelaksanaan</label>
                                 <input type="text" class="form-control" id="tempat_pelaksanaan" placeholder="Tempat Pelaksanaan" name="tempat_pelaksanaan">
-                            </div>
-                            <div class="form-group">
-                                <label>Realisasi Kegiatan</label>
-                                <input type="text" class="form-control" id="realisasi_kegiatan" placeholder="Realisasi Kegiatan" name="realisasi_kegiatan">
-                            </div>
+                            </div>   
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
                 </div>
@@ -91,35 +87,29 @@ $(function() {
                         
                         <div class="box-body">
                             <div class="form-group">
+                                <label>Realisasi Kegiatan</label>
+                                <textarea class="form-control" id="realisasi_kegiatan" placeholder="Realisasi Kegiatan" name="realisasi_kegiatan"></textarea>
+                            </div>
+                            <div class="form-group">
                                 <label>Realisasi Anggaran Biaya Total</label>
                                 <input type="text" class="form-control" id="realisasi_total_anggaran" placeholder="ex:1000000" name="realisasi_total_anggaran">
                             </div>
                             <div class="form-group">
                                 <label>Rekomendasi</label>
-                                <input type="text" class="form-control" id="rekomendasi" placeholder="Rekomendasi" name="rekomendasi">
+                                <textarea class="form-control" id="rekomendasi" placeholder="Rekomendasi" name="rekomendasi"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Penutup</label>
-                                <input type="text" class="form-control" id="penutup" placeholder="Penutup" name="penutup">
+                                <textarea class="form-control" id="penutup" placeholder="Penutup" name="penutup"></textarea>
                             </div>
                         
                             <div class="form-group">
                                 <label>Upload LPJ</label>
                                 <input type="file" class="form-control" id="file" name="file_lpj">
-                            </div>
-                            <div class="form-group">
-                                <label></label>
-                                <div class="col-sm-9">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="1" name="drive_upload">Upload ke Google Drive
-                                        </label>
-                                    </div>
-                                </div>
                             </div><!-- /.box-body -->
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary"> Submit </button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -134,9 +124,9 @@ $(function() {
 if($this->session->flashdata('status') !== null){
     echo '<script type="text/javascript">';
     if ($this->session->flashdata('status')) {
-        echo 'alert("Upload proposal berhasil")';
+        echo 'alert("Upload LPJ berhasil")';
     } else {
-        echo 'alert("Upload proposal gagal")';
+        echo 'alert("Upload LPJ gagal")';
     }
     echo '</script>';
 }
