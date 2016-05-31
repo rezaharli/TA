@@ -71,6 +71,9 @@
                 <ul class="treeview-menu">
                   <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan') ?>"><i class="fa fa-table"></i>Logbook Pengajuan</a></li>
                 </ul>
+                <ul class="treeview-menu">
+                  <li><a href="<?php echo base_url('proposal_himpunan/logbook_lpj') ?>"><i class="fa fa-table"></i>Logbook LPJ</a></li>
+                </ul>
             </li>
             <li>
               <a href="#"><i class="fa  fa-tasks"></i> <span>Acara Himpunan</span><i class="fa fa-angle-left pull-right"></i></a>
