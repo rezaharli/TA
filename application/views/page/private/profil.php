@@ -171,7 +171,7 @@
             <?php if ($this->session->userdata('id') == $id_user) { ?>
               <div class="tab-pane" id="ubah-username-password">
 
-                <form class="form-horizontal" autocomplete="off" method="post" enctype="multipart/form-data" action="<?php echo base_url() ?>user/do_foto_profil_edit">
+                <form class="form-horizontal" autocomplete="off" method="post" enctype="multipart/form-data" action="<?php echo base_url() ?>profil/do_foto_profil_edit">
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Foto Profil</label>
                     <div class="col-sm-5">
@@ -185,7 +185,7 @@
 
                 <hr />
 
-                <form class="form-horizontal" autocomplete="off" method="post" action="<?php echo base_url() ?>user/do_username_edit" id="form-username">
+                <form class="form-horizontal" autocomplete="off" method="post" action="<?php echo base_url() ?>profil/do_username_edit" id="form-username">
                   <div id="form-group-username" class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Username</label>
                     <div class="col-sm-10">
@@ -204,7 +204,7 @@
 
                 <hr />
 
-                <form class="form-horizontal" autocomplete="off" method="post" action="<?php echo base_url() ?>user/do_password_edit" id="form-password">
+                <form class="form-horizontal" autocomplete="off" method="post" action="<?php echo base_url() ?>profil/do_password_edit" id="form-password">
                 <div id="form-group-password" class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Password</label>
                     <div class="col-sm-10">
@@ -231,7 +231,7 @@
               <script src="<?php echo base_url() ?>assets/js/cek_password.js"></script>
 
               <div class="tab-pane" id="ubah-data-diri">
-                <form class="form-horizontal" method="post" action="<?php echo base_url() ?>user/do_datadiri_edit">
+                <form class="form-horizontal" method="post" action="<?php echo base_url() ?>profil/do_datadiri_edit">
                   <div class="form-group">
                     <?php if ($role == 'staff') { ?>
                       <label for="inputName" class="col-sm-2 control-label">NIP</label>

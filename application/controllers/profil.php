@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User extends Private_Controller {
+class Profil extends Private_Controller {
 	
 	function __construct() {
 		parent::__construct();
@@ -46,7 +46,7 @@ class User extends Private_Controller {
         } else {
             $this->load->model('user_model');
             $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-            redirect('user/'.$user->username);
+            redirect('profil/'.$user->username);
         }
     }
 
@@ -79,13 +79,16 @@ class User extends Private_Controller {
     }
 
 	function do_username_check(){
-		$username = $this->input->post('username');
+		$username       = $this->input->post('username');
+        $aksi           = $this->input->post('aksi');
+        $username_lama  = $this->input->post('username_lama');
+        
         $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
 
         //jika username sama seperti sebelumnya (tidak berubah)
         //hanya untuk edit profil user
-		if($username == $user->username && $this->uri->segment(3) == 'user' && $this->uri->segment(4) == 'edit'){ 
-			echo '3';
+		if($username == $user->username && $aksi == 'edit'){ 
+			echo 'sama seperti sebelumnya';
 		} else {
 			$user = $this->user_model->get_by(array('username' => $username));
 			echo isset($user);
@@ -126,6 +129,3 @@ class User extends Private_Controller {
     }
 
 }
-
-/* End of file user.php */
-/* Location: ./application/controllers/user.php */
