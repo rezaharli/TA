@@ -41,7 +41,7 @@
 				                  	</tr>
 				                  	<tr>
 					                    <th>Pengaju:</th>
-					                    <td><a href="user/<?php echo $username_pengaju ?>"><?php echo $nama_pengaju ?></a></td>
+					                    <td><a href="profil/<?php echo $username_pengaju ?>"><?php echo $nama_pengaju ?></a></td>
 				                  	</tr>
 				                  	<tr>
 				                  		<th>Status:</th>
@@ -59,7 +59,7 @@
 					                    <th>Penanggungjawab:</th>
 					                    <td>
 					                    	<?php if (isset($username_penanggungjawab) && isset($nama_penanggungjawab)) { ?>
-					                    		<a href="user/<?php echo $username_penanggungjawab ?>"><?php echo $nama_penanggungjawab ?></a>
+					                    		<a href="profil/<?php echo $username_penanggungjawab ?>"><?php echo $nama_penanggungjawab ?></a>
 					                    	<?php } else { ?>
 					                    		Belum ada penyetuju event.
 					                    	<?php } ?>
