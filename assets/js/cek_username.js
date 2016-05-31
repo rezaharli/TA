@@ -1,26 +1,27 @@
 $("#input-username").on('focus change keyup', function(event){
-     var value = $("#input-username").val();
+     var username = $("#input-username").val();
 
-     var str = window.location.href;
-     var status = "/" + str.split(window.location.origin + "/hmmmm/").pop();
-// Fire off the request to /form.php
+     var segment = window.location.href.split("/");
      
-     var url = window.location.origin + "/hmmmm/user/do_username_check" + status;
+     var url = window.location.origin + "/hmmmm/profil/do_username_check";
+
+     // jika berada di halaman profil berarti aksi pasti edit selain itu bukan edit
+     if(segment[4] == 'profil') var aksi = 'edit';
 
      request = $.ajax({
           url: url,
           type: "post",
-          data: 'username='+value
+          data: 'username='+username+'&aksi='+aksi+'&username_lama='+segment[5]
      });
 
      if($("#input-username").val() != ""){
           request.done(function (response){
                if(response != ''){
-                    if(response == '1'){
+                    if(response == '1'){ //jika username sudah digunakan
                          $("#status-username").html('Sudah digunakan');
                          $("#form-group-username").removeClass("has-success");
                          $("#form-group-username").addClass("has-error");
-                    } else {
+                    } else { //jika username sama dengan sebelumnya
                          $("#status-username").html('');
                          $("#form-group-username").removeClass("has-success");
                          $("#form-group-username").removeClass("has-error");
@@ -28,7 +29,7 @@ $("#input-username").on('focus change keyup', function(event){
                     $("#button-username-submit").prop("disabled", true);
                     $("#status-username").removeClass("text-green");
                     $("#status-username").addClass("text-red");
-               } else if(response == ''){
+               } else if(response == ''){ // jika username belum digunakan
                     $("#status-username").html('Tersedia');
                     $("#status-username").removeClass("text-red");
                     $("#status-username").addClass("text-green");
@@ -37,7 +38,7 @@ $("#input-username").on('focus change keyup', function(event){
                     $("#form-group-username").addClass("has-success");
                }
          });
-     } else {
+     } else { // jika input tidak diisi
           $("#status-username").html('silahkan isi');
           $("#status-username").removeClass("text-green");
           $("#status-username").addClass("text-red");
