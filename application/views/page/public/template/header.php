@@ -84,7 +84,7 @@
                                     <a href="<?php echo base_url() ?>guest/events">Temukan Event</a>
                                 </li>
                                 <li class="use-yamm yamm-fw">
-                                    <a href="<?php echo base_url() ?>guest/login">Log in</a>
+                                    <a href="<?php echo base_url() ?>auth/login">Log in</a>
                                 </li>
                             </ul>
 
