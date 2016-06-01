@@ -67,12 +67,17 @@ body :-ms-input-placeholder {
           transition-timing-function: ease-in-put;
   font-weight: 200;
 }
+a{
+  width: 250px;
+  color: white;
+  text-decoration: none;
+}
 form {
   padding: 20px 0;
   position: relative;
   z-index: 2;
 }
-form input {
+form input[type="text"], form input[type="password"] {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -82,7 +87,7 @@ form input {
   width: 250px;
   border-radius: 3px;
   padding: 10px 15px;
-  margin: 0 auto 10px auto;
+  margin: 10px auto 10px auto;
   display: block;
   text-align: center;
   font-size: 18px;
@@ -91,10 +96,16 @@ form input {
           transition-duration: 0.25s;
   font-weight: 300;
 }
+form label input[type="checkbox"]{
+  position: relative;
+  vertical-align: middle;
+  bottom: 1px;
+  padding: 10px 15px;
+}
 form input:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
-form input:focus {
+form input[type="text"]:focus, form input[type="password"]:focus {
   background-color: white;
   width: 300px;
   color: #367FA9;
@@ -107,6 +118,7 @@ form button {
   background-color: white;
   border: 0;
   padding: 10px 15px;
+  margin: 10px auto 10px auto;
   color: #367FA9;
   border-radius: 3px;
   width: 250px;
