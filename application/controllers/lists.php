@@ -5,6 +5,7 @@ class Lists extends Private_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('user_model');
+        $this->load->library('datatables');
 	}
 
 	function mahasiswa(){
@@ -12,9 +13,7 @@ class Lists extends Private_Controller {
 	}
 
 	function get_list_mahasiswa(){
-        $this->load->library('datatables');
-
-        $kolom = array('nim', 'prodi', 'kelas', 'username', 'nama', 'email', 'alamat', 'telp');
+        $kolom = array('nim', 'prodi', 'kelas', 'username', 'nama', 'email');
 
         $table = $this->datatables->make_table(
             array('user', 'mahasiswa'),		//tabel
@@ -23,12 +22,24 @@ class Lists extends Private_Controller {
             'user.id = mahasiswa.id_user'	//where clause
             );
 
+        // echo "<pre>";
+        // var_dump($table);
+        // die();
 	    for ($i = 0; $i < count($table['data']); $i++) {
         	array_push($table['data'][$i], 
-        		'<a href="'.base_url('mahasiswa/do_reset_password/').'?nim='.$table['data'][$i][1].'">
-					<button class="btn btn-warning btn-sm pull-left"><i class="fa fa-refresh"></i> &nbsp;Reset Password</button>
-				</a>');
+                '<a href="'.base_url('mahasiswa/detail/').'?nim='.$table['data'][$i][0].'">
+                    <button class="btn btn-info btn-sm pull-left">
+                        <i class="fa fa-list"></i> &nbsp;Lihat Detail
+                    </button>
+                </a> 
+                <a href="'.base_url('mahasiswa/do_reset_password/').'?nim='.$table['data'][$i][0].'">
+                    <button class="btn btn-warning btn-sm pull-right">
+                        <i class="fa fa-refresh"></i> &nbsp;Reset Password
+                    </button>
+                </a>
+                ');
         }
         echo json_encode($table);
     }
+
 }

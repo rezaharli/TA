@@ -34,26 +34,18 @@ class Staff extends Private_Controller {
 	}
 
 	function do_add(){
-		$this->load->model('staff_model');
-
 		$jenisstaff = $this->input->post('jenisstaff');
-		$nip = $this->input->post('nip');
-
-        $username   = $this->input->post('username');
+		$nip        = $this->input->post('nip');
 		$nama       = $this->input->post('nama');
 		$email      = $this->input->post('email');
-        $alamat     = $this->input->post('alamat');
-        $telp       = $this->input->post('telp');
         $role       = $this->input->post('role');
 
         $this->user_model->insert(
             array(
-                'username'  => $username, 
-                'password'  => sha1($username), 
+                'username'  => $nip, 
+                'password'  => sha1($nip), 
                 'nama'      => $nama, 
                 'email'     => $email, 
-                'alamat'    => $alamat, 
-                'telp'      => $telp, 
                 'role'      => $role), 
             FALSE);
 
@@ -81,5 +73,15 @@ class Staff extends Private_Controller {
 
         $this->user_model->update($id, array('password' => sha1($nip)));
         redirect('staff/list');
+    }
+
+    function do_nip_check(){
+        $nip        = $this->input->post('nip');
+        $aksi       = $this->input->post('aksi');
+        $nip_lama   = $this->input->post('nip_lama');
+
+        $staff = $this->staff_model->get_by(array('nip' => $nip));
+            echo isset($staff);
+        
     }
 }
