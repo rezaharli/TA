@@ -46,7 +46,7 @@
                                   <td><?php echo $proposal['nama_event']; ?></td>
                                   <td><?php echo $proposal['tanggal_pengajuan']; ?></td>                                  
                                   <td><?php echo $proposal['tanggal_proposal_terakhir']; ?></td>
-                                  <td>qwerty</td>
+                                  <td><?php echo $proposal['nama_tim']; ?></td>
 
                                   <td>
                                     <?php if ($proposal['status'] == 'y') { ?>
@@ -89,28 +89,19 @@
           "ordering": true,
           "info": true,
           "autoWidth": true
-
-        });
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
         });
       });
+    </script>
 
-      <!-- alert sukses tidak -->
+      // alert sukses tidak
       <?php
       if($this->session->flashdata('status') !== null){
           echo '<script type="text/javascript">';
           if ($this->session->flashdata('status')) {
-              echo 'alert("Upload proposal berhasil")';
+              echo 'alert("Upload proposal berhasil");';
           } else {
-              echo 'alert("Upload proposal gagal")';
+              echo 'alert("Upload proposal gagal");';
           }
           echo '</script>';
       }
       ?>
-    </script>
