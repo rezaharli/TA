@@ -888,15 +888,15 @@ class Ion_auth_model extends CI_Model
 		}
 
 		// check if the default set in config exists in database
-		$query = $this->db->get_where($this->tables['groups'],array('name' => $this->config->item('default_group', 'ion_auth')),1)->row();
-		if( !isset($query->id) && empty($groups) )
-		{
-			$this->set_error('account_creation_invalid_default_group');
-			return FALSE;
-		}
+		// $query = $this->db->get_where($this->tables['groups'],array('name' => $this->config->item('default_group', 'ion_auth')),1)->row();
+		// if( !isset($query->id) && empty($groups) )
+		// {
+		// 	$this->set_error('account_creation_invalid_default_group');
+		// 	return FALSE;
+		// }
 
 		// capture default group details
-		$default_group = $query;
+		// $default_group = $query;
 
 		// IP Address
 		$ip_address = $this->_prepare_ip($this->input->ip_address());
@@ -929,19 +929,19 @@ class Ion_auth_model extends CI_Model
 		$id = $this->db->insert_id();
 
 		// add in groups array if it doesn't exists and stop adding into default group if default group ids are set
-		if( isset($default_group->id) && empty($groups) )
-		{
-			$groups[] = $default_group->id;
-		}
+		// if( isset($default_group->id) && empty($groups) )
+		// {
+		// 	$groups[] = $default_group->id;
+		// }
 
-		if (!empty($groups))
-		{
-			// add to groups
-			foreach ($groups as $group)
-			{
-				$this->add_to_group($group, $id);
-			}
-		}
+		// if (!empty($groups))
+		// {
+		// 	// add to groups
+		// 	foreach ($groups as $group)
+		// 	{
+		// 		$this->add_to_group($group, $id);
+		// 	}
+		// }
 
 		$this->trigger_events('post_register');
 
