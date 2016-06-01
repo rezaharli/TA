@@ -69,16 +69,16 @@
                   <li><a href="<?php echo base_url('proposal_himpunan/upload_pengajuan') ?>"><i class="fa fa-file-o"></i>Upload Proposal</a></li>
                 </ul>
                 <ul class="treeview-menu">
-                  <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan') ?>"><i class="fa fa-table"></i>Logbook Pengajuan</a></li>
+                  <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan') ?>"><i class="fa fa-calendar-check-o"></i>Logbook Pengajuan</a></li>
                 </ul>
                 <ul class="treeview-menu">
-                  <li><a href="<?php echo base_url('proposal_himpunan/logbook_lpj') ?>"><i class="fa fa-table"></i>Logbook LPJ</a></li>
+                  <li><a href="<?php echo base_url('proposal_himpunan/logbook_lpj') ?>"><i class="fa  fa-list-ol"></i>Logbook LPJ</a></li>
                 </ul>
             </li>
             <li>
               <a href="#"><i class="fa  fa-tasks"></i> <span>Acara Himpunan</span><i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                  <li><a href="<?php echo base_url('kegiatan_himpunan/list_kegiatan') ?>"><i class="fa fa-user-plus"></i>Lihat Acara</a></li>
+                  <li><a href="<?php echo base_url('kegiatan_himpunan/list_kegiatan') ?>"><i class="fa fa-calendar"></i>Lihat Acara</a></li>
                 </ul>
                 <ul class="treeview-menu">
                   <li><a href="<?php echo base_url('kegiatan_himpunan/cetak_sertifikat') ?>"><i class="fa fa-print"></i>Cetak Sertifikat</a></li>
