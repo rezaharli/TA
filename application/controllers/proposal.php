@@ -121,9 +121,42 @@ class Proposal extends Private_Controller {
 
     function detail_pengajuan(){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $this->load->model('logbook_proposal_mhs_model');
 
-        $data['user'] = $user;
-        $this->load_page('page/private/mahasiswa/logbook_detail_pengajuan', $data);
+        $id_pengajuan = $this->input->get('id_pengajuan');
+
+        $proposals  = $this->proposal_lomba_model->get_many_by(array('id_pengajuan_proposal' => $id_pengajuan));
+
+        if ($user->role == 'mahasiswa') {
+            $pengaju            = $this->mahasiswa_model->get_by(array('nim' => $proposal->pengaju));
+        }
+
+        $data['proposals'] = array();
+        $status;
+        foreach ($proposals as $proposal) {
+
+            array_push($data['proposals'], array(
+                'id_proposal'       => $proposal->id,
+                'nama_event'        => $proposal->nama_event,
+                'tanggal_upload'    => $proposal->waktu_upload,
+                'nama_tim'          => $proposal->nama_tim,
+                'status'            => ($proposal->status == null) ? '-' :$proposal->status
+            ));
+            $statuse = $proposal->status;
+        }
+
+        $data['id_pengajuan']   = $id_pengajuan;
+        $data['status'] = $status;
+
+        if ($user->role == 'staff') {
+            $this->load_page('page/private/staff/logbook_detail_pengajuan', $data);
+        }else if($user->role == 'mahasiswa'){
+            $data['user'] = $user;
+            $this->load_page('page/private/mahasiswa/logbook_detail_pengajuan', $data);
+        }
+
+
+        
     }
 
     function detail_tim(){

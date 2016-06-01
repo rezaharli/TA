@@ -37,9 +37,9 @@
                               <tr>
                                 <th align="center" style="width: 10px">No</th>
                                 <th align="center">Nama Event</th>
-                                <th align="center">Tanggal Pengajuan</th>
+                                <th align="center">Tanggal Upload</th>
                                 <th align="center">Status</th>
-                                <th align="center" style="width: 80px">Aksi</th>
+                                <th align="center">Nama Tim</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -50,11 +50,7 @@
                                   <td>
                                     <span class="label label-danger">Ditolak</span>
                                   </td>
-                                  <td>
-                                    <a href="<?php echo base_url('proposal/detail_tim') ?>">
-                                      <button class="btn btn-info pull-leftt">Detail Tim</button>
-                                    </a>
-                                  </td>
+                                  <td></td>
                                 </tr>
                             </tbody>
                         </table>
