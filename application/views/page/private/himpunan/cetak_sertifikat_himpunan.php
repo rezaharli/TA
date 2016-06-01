@@ -31,24 +31,26 @@
                             <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Nama Kegiatan</th>
-                                <th>Tanggal Pelaksanaan</th>
-                                <th>Tempat Pelaksanaan</th>
+                                <th>Nama Acara</th>
+                                <th>Tempat Acara</th>
+                                <th>Tanggal Acara</th>
+                                <th>Deskripsi Acara</th>
                                 <th>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($kegiatans as $kegiatan) : ?>
+                                <?php foreach ($acaras as $acara) : ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $kegiatan['nama_kegiatan']; ?></td>
-                                    <td><?php echo $kegiatan['tanggal_pelaksanaan']; ?></td>  
-                                    <td><?php echo $kegiatan['tempat_kegiatan']; ?></td>
+                                    <td><?php echo $acara['nama_acara']; ?></td>
+                                    <td><?php echo $acara['tempat_acara']; ?></td>  
+                                    <td><?php echo $acara['tanggal_acara']; ?></td>
+                                    <td><?php echo $acara['deskripsi_acara']; ?></td>
                                     <td>
-                                      <a href="<?php echo base_url('kegiatan_himpunan/do_cetak_sertifikat?id_acara='.$kegiatan['id_pengajuan_proposal']); ?>">
+                                      <!-- <a href="<?php echo base_url('kegiatan_himpunan/do_cetak_sertifikat')."/".$id_acara; ?>">
                                         <button class="btn btn-info pull-left"><i class="fa fa-print"></i>&nbsp;Cetak Sertifikat</button>
-                                      </a>
+                                      </a> -->
                                     </td>
                                   </tr>
                                 <?php $i++; ?>
