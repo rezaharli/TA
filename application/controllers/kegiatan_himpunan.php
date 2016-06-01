@@ -14,6 +14,7 @@ class Kegiatan_himpunan extends Private_Controller{
         $this->load->model('himpunan_model');
         $this->load->model('kegiatan_himpunan_model');
         $this->load->model('proposal_himpunan_model');
+        $this->load->model('pengajuan_proposal_himpunan_model');
         $this->load->model('acara_himpunan_model');
         $this->load->model('peserta_model');
     }
@@ -102,47 +103,41 @@ class Kegiatan_himpunan extends Private_Controller{
 
     function cetak_sertifikat(){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-
         $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
-        $kegiatans = $this->kegiatan_himpunan_model->get_all();
 
-
-        $data['kegiatans'] = array();
-        foreach ($kegiatans as $kegiatan) {
-            $proposal = $this->proposal_himpunan_model->get_by(array('id_pengajuan_proposal' => $kegiatan->id));
-
-            array_push($data['kegiatans'], array(
-                'id_pengajuan_proposal' => $proposal->id_pengajuan_proposal,
-                'nama_kegiatan'         => $kegiatan->nama_kegiatan,
-                'tanggal_pelaksanaan'   => $kegiatan->tanggal_pelaksanaan,
-                'tempat_kegiatan'       => $kegiatan->tempat_kegiatan
+        $proposal = $this->pengajuan_proposal_himpunan_model->get_by(array('pengaju_proposal' => $himpunan->id));
+        $acaras = $this->acara_himpunan_model->get_all();
+        
+        $data['acaras'] = array();
+        foreach ($acaras as $acara) {
+            array_push($data['acaras'], array(
+                'id_acara'              => $acara->id,
+                'id_pengajuan_proposal' => $proposal->id,
+                'nama_acara'            => $acara->nama_acara,
+                'tempat_acara'          => $acara->tempat_acara,
+                'tanggal_acara'         => $acara->tanggal_acara,
+                'deskripsi_acara'       => $acara->deskripsi_acara
             ));
         }
+
         $data['himpunan'] = $himpunan;
 
         $this->load_page('page/private/himpunan/cetak_sertifikat_himpunan', $data);
     }
 
-    function do_cetak_sertifikat(){
-        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+    function do_cetak_sertifikat($id_acara){
+        $this->load->library('phpword');
+        $pesertas = array(
+            array(
+                'nama' => 'Anto'
+            ),
+            array(
+                'nama' => 'Anti'
+            )
+        );
 
-        $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
-        $kegiatans = $this->kegiatan_himpunan_model->get_all();
-
-
-        $data['kegiatans'] = array();
-        foreach ($kegiatans as $kegiatan) {
-            $proposal = $this->proposal_himpunan_model->get_by(array('id_pengajuan_proposal' => $kegiatan->id));
-
-            array_push($data['kegiatans'], array(
-                'id_pengajuan_proposal' => $proposal->id_pengajuan_proposal,
-                'nama_kegiatan'         => $kegiatan->nama_kegiatan,
-                'tanggal_pelaksanaan'   => $kegiatan->tanggal_pelaksanaan,
-                'tempat_kegiatan'       => $kegiatan->tempat_kegiatan
-            ));
+        foreach ($pesertas as $peserta) {
+            $this->phpword->generateSertifikat('assets/doc_template/sertifikat.docx', $peserta);
         }
-        $data['himpunan'] = $himpunan;
-
-        $this->load_page('page/private/himpunan/cetak_sertifikat_himpunan', $data);
     }
 }
