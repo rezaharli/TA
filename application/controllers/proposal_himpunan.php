@@ -17,6 +17,7 @@ class Proposal_himpunan extends Private_Controller{
         $this->load->model('pengajuan_proposal_himpunan_model');
         $this->load->model('logbook_proposal_himpunan_model');
         $this->load->model('lpj_himpunan_model');
+        $this->load->model('acara_himpunan_model');
     }
 
     function index(){
@@ -115,49 +116,82 @@ class Proposal_himpunan extends Private_Controller{
 
     }
 
-    // function tambah_acara(){
-    //     $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-    //     $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
+    function tambah_acara(){
+        $id_pengajuan = $this->input->get('id_pengajuan');
 
-    //     $data['himpunan'] = $himpunan;
-    //     $data['user'] = $user;
-    //     $this->load_page('page/private/himpunan/tambah_acara_himpunan', $data);
-    // }
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
+        
+        $data['himpunan'] = $himpunan;
+        $data['user'] = $user;
+        $data['id_pengajuan'] = $id_pengajuan;
 
-    // function do_tambah_acara(){
-    //     $nama_input_file = 'file_pengajuan';
+        $this->load_page('page/private/himpunan/tambah_acara_himpunan', $data);
+    }
 
-    //     $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-    //     $id_himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim))->id;
+    function do_tambah_acara(){
+        $id_pengajuan = $this->input->get('id_pengajuan');
+        // echo $id_pengajuan; die();
+        $nama_input_file = 'poster_acara';
 
-    //     $last_id_pengajuan_proposal = $this->pengajuan_proposal_himpunan_model->insert(array('pengaju_proposal' => $id_himpunan));
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $id_himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim))->id;
 
-    //     $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
-    //     $ext        = end($tmp);
-    //     $filename   = $last_id_pengajuan_proposal.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
+        $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
+        $ext        = end($tmp);
+        $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
 
-    //     $data = array(
-    //         'id_pengajuan_proposal' => $last_id_pengajuan_proposal,
-    //         'judul'                 => $this->input->post('judul'),
-    //         'tema_kegiatan'         => $this->input->post('tema_kegiatan'),
-    //         'tujuan_kegiatan'       => $this->input->post('tujuan_kegiatan'),
-    //         'sasaran_kegiatan'      => $this->input->post('sasaran_kegiatan'),
-    //         'tanggal_kegiatan'      => $this->input->post('tanggal_kegiatan'),
-    //         'tempat_kegiatan'       => $this->input->post('tempat_kegiatan'),
-    //         'bentuk_kegiatan'       => $this->input->post('bentuk_kegiatan'),
-    //         'anggaran'              => $this->input->post('anggaran'),
-    //         'penutup'               => $this->input->post('penutup'),
-    //         'waktu_upload'          => date('Y-n-j h:i:s'),
-    //         'file'                  => $filename
-    //     );
+        $data = array(
+            'id_pengajuan_proposal' => $id_pengajuan,
+            'nama_acara'            => $this->input->post('nama_acara'),
+            'tempat_acara'          => $this->input->post('tempat_acara'),
+            'tanggal_acara'         => $this->input->post('tanggal_acara'),
+            'deskripsi_acara'       => $this->input->post('deskripsi_acara'),
+            'waktu_upload'          => date('Y-n-j h:i:s'),
+            'poster_acara'          => $filename
+        );
+    
+        $id_acara = $this->acara_himpunan_model->insert($data);
+        // $this->upload_to_drive($upload_data);
+        $this->session->set_flashdata(array('status' => true));
 
-    //     $id_proposal = $this->proposal_himpunan_model->insert($data);
-    //     $this->upload_to_drive($upload_data);
+        redirect('proposal_himpunan/tambah_panitia'); 
 
-    //     $this->session->set_flashdata(array('status' => true));
+    }
 
-    //     redirect('proposal_himpunan/logbook_pengajuan');
-    // }
+    function tambah_panitia(){
+        $id_acara = $this->input->get('id_acara');
+
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
+        
+        $data['himpunan'] = $himpunan;
+        $data['user'] = $user;
+        $data['id_pengajuan'] = $id_pengajuan;
+
+        $this->load_page('page/private/himpunan/tambah_acara_himpunan', $data);
+    }
+
+    function do_tambah_panitia(){
+        $id_acara = $this->input->get('id_acara');
+        // echo $id_pengajuan; die();
+
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $id_himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim))->id;
+
+        $data = array(
+            'nim'       => $this->input->post('nim'),
+            'nama'      => $this->input->post('nama_acara'),
+            'id_acara'  => $id_acara
+        );
+    
+        $id_panitia = $this->panitia_model->insert($data);
+        // $this->upload_to_drive($upload_data);
+        $this->session->set_flashdata(array('status' => true));
+
+        redirect('kegiatan_himpunan/list_kegiatan'); 
+
+    }
 
     // function get_google_client(){
     //     $this->load->library('google_drive');
@@ -247,7 +281,6 @@ class Proposal_himpunan extends Private_Controller{
                 ));
         }
 
-       
         if ($user->role == 'staff') {
             $this->load_page('page/private/staff/logbook_proposal_himpunan', $data);
         }else if($user->role == 'mahasiswa'){
@@ -337,17 +370,21 @@ class Proposal_himpunan extends Private_Controller{
     }
 
     function upload_lpj(){
+        $id_pengajuan = $this->input->get('id_pengajuan');
+
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
         
         $data['himpunan'] = $himpunan;
         $data['user'] = $user;
+        $data['id_pengajuan'] = $id_pengajuan;
+
         $this->load_page('page/private/himpunan/upload_lpj_himpunan', $data);
     }
 
     function do_upload_lpj(){
-        $id_pengajuan = $this->input->get('id');
-        
+        $id_pengajuan = $this->input->get('id_pengajuan');
+
         $nama_input_file = 'file_lpj';
 
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
@@ -355,11 +392,11 @@ class Proposal_himpunan extends Private_Controller{
 
         $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
         $ext        = end($tmp);
-        $filename   = $last_id_pengajuan_proposal.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
+        $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
 
         
         $data = array(
-            // 'id_pengajuan_proposal' => $last_id_pengajuan_proposal,
+            'id_pengajuan_proposal'      => $id_pengajuan,
             'judul_laporan'              => $this->input->post('judul_laporan'),
             'deskripsi_laporan'          => $this->input->post('deskripsi_laporan'),
             'ketercapaian_tujuan'        => $this->input->post('ketercapaian_tujuan'),
@@ -369,15 +406,66 @@ class Proposal_himpunan extends Private_Controller{
             'realisasi_kegiatan'         => $this->input->post('realisasi_kegiatan'),
             'realisasi_total_anggaran'   => $this->input->post('realisasi_total_anggaran'),
             'evaluasi_kegiatan'          => $this->input->post('evaluasi_kegiatan'),
-            'rekomendasi'                    => $this->input->post('rekomendasi'),
+            'rekomendasi'                => $this->input->post('rekomendasi'),
             'penutup'                    => $this->input->post('penutup'),
             'waktu_upload'               => date('Y-n-j h:i:s'),
             'file'                       => $filename
         );
+
         $id_lpj = $this->lpj_himpunan_model->insert($data);
-        $this->upload_to_drive($upload_data);
+        // $this->upload_to_drive($upload_data);
         $this->session->set_flashdata(array('status' => true));
 
-        redirect('proposal_himpunan/logbook_pengajuan'); 
+        redirect('proposal_himpunan/logbook_lpj'); 
+    }
+
+    function logbook_lpj(){
+        $id_pengajuan = $this->input->get('id_pengajuan');
+
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $himpunan   = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
+        $proposal  = $this->logbook_proposal_himpunan_model->get_by(array('pengaju' => $himpunan->id, 'status_approve' => 'y'));
+        
+        $pengaju    = $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
+        $lpjs       = $this->lpj_himpunan_model->get_all();
+        
+        $data['lpjs'] = array();
+        foreach ($lpjs as $lpj) { 
+            array_push($data['lpjs'], array(
+                'id'                => $lpj->id,
+                'pengaju'           => $pengaju->nama,
+                'judul_laporan'     => $lpj->judul_laporan,
+                'tanggal_upload'    => $lpj->waktu_upload
+                ));
+        }
+
+        $data['himpunan'] = $himpunan;
+        $this->load_page('page/private/himpunan/logbook_lpj', $data);
+
+    }
+
+    function detail_lpj(){
+        $id_lpj = $this->input->get('id_lpj');
+        // print_r($id_lpj);
+        $user       = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $himpunan   = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
+        $lpj        = $this->lpj_himpunan_model->get_by(array('id' => $id_lpj));
+        
+        $data['id']                         = $lpj->id;
+        $data['judul_laporan']              = $lpj->judul_laporan;
+        $data['deskripsi_laporan']          = $lpj->deskripsi_laporan;
+        $data['ketercapaian_tujuan']        = $lpj->ketercapaian_tujuan;
+        $data['realisasi_sasaran_kegiatan'] = $lpj->realisasi_sasaran_kegiatan;
+        $data['tanggal_pelaksanaan']        = $lpj->tanggal_pelaksanaan;
+        $data['tempat_pelaksanaan']         = $lpj->tempat_pelaksanaan;
+        $data['realisasi_kegiatan']         = $lpj->realisasi_kegiatan;
+        $data['realisasi_total_anggaran']   = $lpj->realisasi_total_anggaran;
+        $data['evaluasi_kegiatan']          = $lpj->evaluasi_kegiatan;
+        $data['rekomendasi']                = $lpj->rekomendasi;
+        $data['penutup']                    = $lpj->penutup;
+
+        $data['himpunan'] = $himpunan;
+        
+        $this->load_page('page/private/himpunan/logbook_lpj_detail', $data);       
     }   
 }

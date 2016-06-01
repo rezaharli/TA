@@ -96,7 +96,7 @@
                       <a href="<?php echo base_url() ?>profil/<?php echo $username ?>" class="btn btn-default btn-flat">Profil</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo base_url() ?>profil/logout" class="btn btn-default btn-flat">Logout</a>
+                      <a href="<?php echo base_url() ?>auth/logout" class="btn btn-default btn-flat">Logout</a>
                     </div>
                   </li>
                 </ul>

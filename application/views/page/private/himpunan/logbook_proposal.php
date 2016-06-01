@@ -1,3 +1,7 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+
 <!-- DataTables -->
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/plugins/datatables/dataTables.bootstrap.css">
 
@@ -49,7 +53,7 @@
                                   <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $proposal['pengaju']; ?></td>
-                                    <td><?php echo $proposal['judul']; ?></td>  
+                                    <td><a href="<?php echo base_url('proposal_himpunan/detail_pengajuan?id_pengajuan='.$proposal['id']); ?>"><?php echo $proposal['judul']; ?></a></td>  
                                     <td><?php echo $proposal['tanggal_pengajuan']; ?></td>
                                     <td><?php echo $proposal['tanggal_proposal_terakhir']; ?></td>
                                     <td>
@@ -63,11 +67,11 @@
                                     <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
                                       <?php if ($proposal['status_approve'] == 'n' || $proposal['status_approve'] == null) { ?>
-                                      <a href="<?php echo base_url() ?>proposal_himpunan/upload_lpj">
+                                      <a href="<?php echo base_url('proposal_himpunan/tambah_acara?id_pengajuan='.$proposal['id']); ?>">
                                         <button class="btn btn-sm btn-info pull-left" disabled><i class="fa fa-plus-circle"></i>&nbsp;Buat Acara</button>
                                       </a>
                                     <?php } else { ?>
-                                      <a href="<?php echo base_url() ?>proposal_himpunan/upload_lpj">
+                                      <a href="<?php echo base_url('proposal_himpunan/tambah_acara?id_pengajuan='.$proposal['id']); ?>">
                                         <button class="btn btn-sm btn-info pull-left"><i class="fa fa-plus-circle"></i>&nbsp;Buat Acara</button>
                                       </a>
                                     <?php } ?>
@@ -78,12 +82,12 @@
                                     
                                     <?php if ($proposal['status_approve'] == 'n' || $proposal['status_approve'] == null) { ?>
                                       &nbsp;
-                                      <a href="<?php echo base_url() ?>proposal_himpunan/upload_lpj">
+                                      <a href="<?php echo base_url('proposal_himpunan/upload_lpj?id_pengajuan='.$proposal['id']); ?>">
                                         <button class="btn btn-sm btn-info" disabled><i class="fa fa-upload"></i>&nbsp;Upload LPJ</button>
                                       </a>
                                     <?php } else { ?>
                                       &nbsp;
-                                      <a href="<?php echo base_url() ?>proposal_himpunan/upload_lpj">
+                                      <a href="<?php echo base_url('proposal_himpunan/upload_lpj?id_pengajuan='.$proposal['id']); ?>">
                                         <button class="btn btn-sm btn-info"><i class="fa fa-upload"></i>&nbsp;Upload LPJ</button>
                                       </a>
                                     <?php } ?>
@@ -101,37 +105,37 @@
 </div><!-- /.content-wrapper -->
 
 <!-- page script -->
-    <script>
-      $(function () {
-        $("#example1").DataTable({
-            "paging": true,
-          "lengthChange": true,
-          "searching": true,
-          "ordering": true,
-          "info": true,
-          "autoWidth": true
+<script>
+  $(function () {
+    $("#example1").DataTable({
+        "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true
 
-        });
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
-      });
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
 
-      <!-- alert sukses tidak -->
-      <?php
-      if($this->session->flashdata('status') !== null){
-          echo '<script type="text/javascript">';
-          if ($this->session->flashdata('status')) {
-              echo 'alert("Upload proposal berhasil")';
-          } else {
-              echo 'alert("Upload proposal gagal")';
-          }
-          echo '</script>';
+  <!-- alert sukses tidak -->
+  <?php
+  if($this->session->flashdata('status') !== null){
+      echo '<script type="text/javascript">';
+      if ($this->session->flashdata('status')) {
+          echo 'alert("Upload proposal berhasil")';
+      } else {
+          echo 'alert("Upload proposal gagal")';
       }
-      ?>
-    </script>
+      echo '</script>';
+  }
+  ?>
+</script>

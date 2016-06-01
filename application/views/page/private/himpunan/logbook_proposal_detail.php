@@ -38,7 +38,7 @@
                             <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Nama Acara</th>
+                                <th>Judul Proposal</th>
                                 <th>Tanggal Upload</th>
                                 <th>Status Approve</th>
                                 <th align="center">Aksi</th>

@@ -39,7 +39,7 @@ $(function() {
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url("proposal_himpunan/upload_lpj"); ?>" enctype="multipart/form-data">
+            <form role="form" method="post" action="<?php echo base_url("proposal_himpunan/do_upload_lpj?id_pengajuan=".$id_pengajuan); ?>" enctype="multipart/form-data">
             
                 <div class="col-md-6">
                     <!-- general form elements -->
@@ -72,6 +72,10 @@ $(function() {
                             <div class="form-group">
                                 <label>Tempat Pelaksanaan</label>
                                 <input type="text" class="form-control" id="tempat_pelaksanaan" placeholder="Tempat Pelaksanaan" name="tempat_pelaksanaan">
+                            </div>
+                            <div class="form-group">
+                                <label>Realisasi Kegiatan</label>
+                                <textarea class="form-control" id="realisasi_kegiatan" placeholder="Realisasi Kegiatan" name="realisasi_kegiatan"></textarea>
                             </div>   
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
@@ -87,12 +91,12 @@ $(function() {
                         
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Realisasi Kegiatan</label>
-                                <textarea class="form-control" id="realisasi_kegiatan" placeholder="Realisasi Kegiatan" name="realisasi_kegiatan"></textarea>
-                            </div>
-                            <div class="form-group">
                                 <label>Realisasi Anggaran Biaya Total</label>
                                 <input type="text" class="form-control" id="realisasi_total_anggaran" placeholder="ex:1000000" name="realisasi_total_anggaran">
+                            </div>
+                            <div class="form-group">
+                                <label>Evaluasi Kegiatan</label>
+                                <textarea class="form-control" id="evaluasi_kegiatan" placeholder="Evaluasi Kegiatan" name="evaluasi_kegiatan"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Rekomendasi</label>
