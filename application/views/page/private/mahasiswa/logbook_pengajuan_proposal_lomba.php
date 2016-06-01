@@ -30,21 +30,35 @@
                               <tr>
                                 <th align="center" style="width: 10px">No</th>
                                 <th align="center">Nama Event</th>
-                                <th align="center" style="width: 100px">Tanggal Pengajuan</th>
-                                <th align="center" style="width: 30px">Status</th>
+                                <th align="center" style="width: 100px">Waktu Pengajuan</th>
+                                <th align="center" style="width: 100px">Tanggal Upload</th>
                                 <th align="center" >Nama Tim</th>
+                                <th align="center" style="width: 30px">Status</th>
+                                <th align="center" style="width: 30px">Penanggung Jawab</th>
                                 <th align="center" style="width: 198px">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
+                              <?php $i=1; ?>
+                              <?php foreach ($proposals as $proposal) : ?>
                                 <tr>
-                                  <td>1</td>
+                                  <td><?php echo $i; ?></td>
+                                  <td><?php echo $proposal['nama_event']; ?></td>
+                                  <td><?php echo $proposal['tanggal_pengajuan']; ?></td>                                  
+                                  <td><?php echo $proposal['tanggal_proposal_terakhir']; ?></td>
                                   <td>qwerty</td>
-                                  <td>qwerty</td>
+
                                   <td>
-                                    <span class="label label-danger">Ditolak</span>
+                                    <?php if ($proposal['status'] == 'y') { ?>
+                                          <span class="label label-success">Disetujui</span></td>
+                                    <?php } else if ($proposal['status'] == 'n') { ?>
+                                          <span class="label label-danger">Ditolak</span></td>
+                                        <?php } else { ?>
+                                          <span class="label label-warning">Pending</span></td>
+                                    <?php }?>
                                   </td>
-                                  <td>qwerty</td>
+                                  <td><?php echo $proposal['penanggungjawab']; ?></td>
+
                                   <td>
                                     <a href="<?php echo base_url('proposal/detail_pengajuan') ?>"> 
                                       <button class="btn btn-info pull-leftt"></i> Detail Pengajuan</button>
@@ -54,6 +68,8 @@
                                     </a>
                                   </td>
                                 </tr>
+                              <?php $i++; ?>
+                              <?php endforeach; ?> 
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->
