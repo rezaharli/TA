@@ -5,6 +5,7 @@ class Lists extends Private_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('user_model');
+        $this->load->library('datatables');
 	}
 
 	function mahasiswa(){
@@ -12,8 +13,6 @@ class Lists extends Private_Controller {
 	}
 
 	function get_list_mahasiswa(){
-        $this->load->library('datatables');
-
         $kolom = array('nim', 'prodi', 'kelas', 'username', 'nama', 'email');
 
         $table = $this->datatables->make_table(
