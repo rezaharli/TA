@@ -39,7 +39,7 @@
                           <td><?php echo $baris->nama_lomba; ?></td>
                           <td><?php echo $baris->penyelenggara_lomba; ?></td>
                           <td><?php echo $baris->waktu_lomba; ?></td>
-                          <td align="center text"><a href=""><button type="button" button class="btn btn-info pull-right"> preview </button></a></td>
+                          <td align="center text"><a href=""><button type="button" button class="btn btn-info pull-right"> Lihat Proposal </button></a></td>
                         </tr>
                         <?php $i++; ?>
                         <?php } ?>

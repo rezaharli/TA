@@ -27,25 +27,20 @@
                     </div><!-- /.box-header -->
                     
                     <div class="box-body">
-                        <div class="form-group">
-                            <label>NIP</label>
-                            <input type="text" class="form-control" placeholder="NIP" name="nip">
+                        <div id="form-group-nip" class="form-group">
+                          <label>NIP</label>            
+                          <input type="text" class="form-control" id="input-nip" name="nip">
+                          <h5 id="status-nip" class="text-left"></h5>
                         </div>
                         <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" class="form-control" placeholder="Nama" name="nama">
+                            <div>
+                                <input type="text" class="form-control" placeholder="Nama" name="nama">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
                             <input type="text" class="form-control" placeholder="Email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label>Alamat</label>
-                            <input type="text" class="form-control" placeholder="Alamat" name="alamat">
-                        </div>
-                        <div class="form-group">
-                            <label>Telp</label>
-                            <input type="text" class="form-control" placeholder="Telp" name="telp">
                         </div>
                         <div class="form-group">
                             <input type="hidden" class="form-control" placeholder="role" name="role" value="staff">
@@ -60,33 +55,23 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Data Akun</h3>
+                        <h3 class="box-title"></h3>
                     </div><!-- /.box-header -->
                     
                     <div class="box-body">
                         <div class="form-group">
                             <label>Jenis Staff</label>
                             <select class="form-control select2" style="width: 100%;" name="jenisstaff">
-                                <option selected="selected" disabled="">--Jenis Staff--</option>
+                                <option selected="selected" disabled="">Jenis Staff</option>
                                 <option value="staff_admin">Staff Admin</option>
                                 <option value="staff_kemahasiswaan">Staff Kemahasiswaan</option>
                             </select>
                         </div>
-                        <div id="form-group-username" class="form-group">
-                          <label>Username</label>
-                          <div>
-                            <div class="col-md-3">
-                              <input type="text" class="form-control" id="input-username" name="username">
-                            </div>
-                            <div class="col-md-3">
-                              <h5 id="status-username" class="text-center"></h5>
-                            </div>
-                          </div>
-                        </div>
+                        
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <input type="submit" value="Submit" class="btn btn-primary" id="button-nip-submit" disabled>
                     </div>
                 </div>
             </div>
@@ -96,5 +81,5 @@
     </section>
 </div>
 
-<!-- cek username -->
+<!-- cek nip -->
 <script src="<?php echo base_url() ?>assets/js/cek_username.js"></script>

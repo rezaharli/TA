@@ -3,6 +3,10 @@ class MY_Controller extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
+
+        $this->load->add_package_path(APPPATH.'third_party/Ion_auth');
+        $this->load->library('ion_auth');
+
         date_default_timezone_set("Asia/Jakarta");
     }
 
@@ -18,7 +22,7 @@ class Public_Controller extends MY_Controller {
     public function __construct() {
        	parent::__construct();
 
-       	if ($this->is_logged_in()) {
+       	if ($this->ion_auth->logged_in()) {
             redirect('home');
         }
     }
@@ -36,8 +40,8 @@ class Private_Controller extends MY_Controller {
     public function __construct() {
     	parent::__construct();
 
-    	if ( ! $this->is_logged_in()) {
-            redirect('');
+    	if( ! $this->ion_auth->logged_in()) {
+            redirect('auth/login');
         }
     }
 

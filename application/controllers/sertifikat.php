@@ -56,4 +56,8 @@ class Sertifikat extends Private_Controller {
         redirect('sertifikat'); 
     
     }
+
+    function lihat_proposal(){
+
+    }
 }
