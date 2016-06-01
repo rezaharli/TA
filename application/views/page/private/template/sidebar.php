@@ -34,7 +34,7 @@
           </a>
           <ul class="treeview-menu">
             <li>
-              <a href="<?php echo base_url('proposal_himpunan') ?>"><i class="fa fa-circle-o"></i>Himpunan</a>
+              <a href="<?php echo base_url('proposal_himpunan/update_himpunan') ?>"><i class="fa fa-circle-o"></i>Himpunan</a>
             </li>
           </ul>
         </li>
@@ -96,9 +96,6 @@
               <a href="#"><i class="fa  fa-tasks"></i> <span>Acara Himpunan</span><i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                   <li><a href="<?php echo base_url('kegiatan_himpunan/list_kegiatan') ?>"><i class="fa fa-calendar"></i>Lihat Acara</a></li>
-                </ul>
-                <ul class="treeview-menu">
-                  <li><a href="<?php echo base_url('kegiatan_himpunan/cetak_sertifikat') ?>"><i class="fa fa-print"></i>Cetak Sertifikat</a></li>
                 </ul>
             </li>
             <li>
