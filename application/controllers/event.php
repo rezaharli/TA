@@ -13,8 +13,11 @@ class Event extends Private_Controller {
         $id_event = $this->input->get('id');
 
         $this->load->model('user_model');
+        $user 	= $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+    	$data['role_user']					= $user->role;
+    	$data['jenis_user']					= $user->roled_data->jenis;
+        
         if($id_event){
-        	$user 	= $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 			
 			$event 		= $this->event_model->get_by(array('id' => $id_event));
 			$pengaju 	= $this->user_model->get($event->pengaju_event);
@@ -38,8 +41,6 @@ class Event extends Private_Controller {
 			
 			$data['google_url']					= $event->google_url;
 			$data['url']						= base_url('event?id='.$event->id);
-        	$data['role_user']					= $user->role;
-        	$data['jenis_user']					= $user->roled_data->jenis;
 
 			$this->load_page('page/private/detail_event.php', $data);
 		} else {
