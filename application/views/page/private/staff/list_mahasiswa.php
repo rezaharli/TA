@@ -24,19 +24,18 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
+                    
                     <div class="box-body">
                         <table id="tabel-mahasiswa" class="table table-bordered table-striped">
                             <thead>
                               <tr>
-                                <th>NIM</th>
-                                <th>Prodi</th>
-                                <th>Kelas</th>
-                                <th>Username</th>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Alamat</th>
-                                <th>Telp</th>
-                                <th>Aksi</th>
+                                <th style="width: 40px;">NIM</th>
+                                <th style="width: 30px;">Prodi</th>
+                                <th style="width: 10px;">Kelas</th>
+                                <th style="width: 50px;">Username</th>
+                                <th >Nama</th>
+                                <th style="width: 200px;">Email</th>
+                                <th style="width: 190px; text-align: center;">Aksi</th>
                               </tr>
                             </thead>
                         </table>
