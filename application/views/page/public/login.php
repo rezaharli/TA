@@ -13,8 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    <div class="wrapper">
 			<div class="container">
 				<h1>Selamat Datang</h1>
-				<div id="message"></div>
 				<form id="login" class="form" >
+					<div id="message"></div>
 					<?php echo form_input($identity);?>
 					<?php echo form_input($password);?>
 					<p>
