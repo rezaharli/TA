@@ -31,6 +31,9 @@ class Auth extends MY_Controller {
 	}
 
 	function login(){
+		if ($this->ion_auth->logged_in()) {
+			redirect('home');
+		}
 		$this->data['title'] = $this->lang->line('login_heading');
 
 		$this->form_validation->set_rules('identity', str_replace(':', '', $this->lang->line('login_identity_label')), 'required');
