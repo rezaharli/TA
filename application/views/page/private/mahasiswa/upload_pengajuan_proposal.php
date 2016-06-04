@@ -69,11 +69,28 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Tujuan Kompetisi</label>
-                                <input type="text" class="form-control" id="tujuan_kompetisi" placeholder="Tujuan Kompetisi" name="tujuan_kompetisi">
+                                <textarea type="text" class="form-control" id="tujuan_kompetisi" placeholder="Tujuan Kompetisi" name="tujuan_kompetisi"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Sasaran Kompetisi</label>
                                 <input type="text" class="form-control" id="sasaran_kompetisi" placeholder="Sasaran Kompetisi" name="sasaran_kompetisi">
+                            </div>
+                        </div><!-- /.box-body -->                   
+                    </div><!-- /.box -->
+                </div>
+
+
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"></h3>
+                        </div><!-- /.box-header -->
+                        
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Nama Tim</label>
+                                <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim">
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Kompetisi</label>
@@ -90,43 +107,6 @@ $(function() {
                             <div class="form-group">
                                 <label>Upload Pengajuan Proposal</label>
                                 <input type="file" class="form-control" id="file_pengajuan" name="file_pengajuan">
-                            </div>
-                        </div><!-- /.box-body -->                   
-                    </div><!-- /.box -->
-                </div>
-
-
-                <div class="col-md-6">
-                    <!-- general form elements -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Data Tim</h3>
-                        </div><!-- /.box-header -->
-                        
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label>Nama Tim</label>
-                                <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Ketua</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa" placeholder="Ketua" name="nim_anggota1">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa" placeholder="NIM Anggota 1" name="nim_anggota2">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa" placeholder="NIM Anggota 2" name="nim_anggota3">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa" placeholder="NIM Anggota 3" name="nim_anggota4">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa" placeholder="NIM Anggota 4" name="nim_anggota5">
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">

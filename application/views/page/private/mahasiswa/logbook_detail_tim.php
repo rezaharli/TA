@@ -33,15 +33,14 @@
                               </tr>
                             </thead>
                             <tbody>
+                                <?php $i=1; ?>
+                              <?php foreach ($tims as $tim) : ?>
                                 <tr>
-                                  <td>1</td>
-                                  <td>Lorem Ipsum</td>
+                                  <td><?php echo $i; ?></td>
+                                  <td><?php echo $tim['nama_tim']; ?></td>
                                 </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td>Dolor Quadro</td>
-                                </tr>
-                            </tbody>
+                              <?php $i++; ?>
+                              <?php endforeach; ?> 
                         </table>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->

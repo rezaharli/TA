@@ -60,11 +60,8 @@
                                   <td><?php echo $proposal['penanggungjawab']; ?></td>
 
                                   <td>
-                                    <a href="<?php echo base_url('proposal/detail_pengajuan') ?>"> 
+                                    <a href="<?php echo base_url('proposal/detail_pengajuan?id_pengajuan='.$proposal['id_pengajuan']) ?>"> 
                                       <button class="btn btn-info pull-leftt"></i> Detail Pengajuan</button>
-                                    </a>
-                                    <a href="<?php echo base_url('proposal/detail_tim') ?>">
-                                      <button class="btn btn-info pull-leftt"></i> Detail Tim</button>
                                     </a>
                                   </td>
                                 </tr>
