@@ -198,8 +198,8 @@ class Proposal extends Private_Controller {
         $data['proposal']   = $id_proposal;
         $user               = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $proposal           = $this->proposal_lomba_model->get_by(array('id' => $id_proposal));
-        $event              = $this->event_model->get_by(array($this->session->userdata('id_pengajuan')));
 
+        $data['id_pengajuan_proposal_mahasiswa']    = $proposal->id_pengajuan_proposal_mahasiswa;
         $data['id']                 = $proposal->id;
         $data['penyelenggara']      = $proposal->penyelenggara;
         $data['tingkat_kompetisi']  = $proposal->tingkat_kompetisi;
@@ -211,25 +211,13 @@ class Proposal extends Private_Controller {
         $data['nama_tim']           = $proposal->nama_tim;
         $data['sasaran_kompetisi']  = $proposal->sasaran_kompetisi;
 
-
         $data['user']       = $user;
         $this->load_page('page/private/mahasiswa/logbook_detail_proposal', $data);
     }
 
     function detail_tim(){
-        $id_proposal    = $this->input->get('id_proposal');
         $user           = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-        $tims      = $this->detail_tim_model->get_many_by(array('id_tim' => $id_proposal));
-
-        $data['proposals'] = array();
-        $status;
-        foreach ($tims as $tim) {
-
-            array_push($data['tims'], array(
-                'id_tim'               => $tim->id,
-                'anggota'              => $tim->nim_anggota
-            ));
-        }
+        
         $data['user'] = $user;
         $this->load_page('page/private/mahasiswa/logbook_detail_tim', $data);
     }

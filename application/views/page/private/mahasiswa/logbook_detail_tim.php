@@ -9,7 +9,7 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Pengajuan Proposal Lomba
+            Detail Tim Proposal Lomba
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -33,14 +33,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                                <?php $i=1; ?>
-                              <?php foreach ($tims as $tim) : ?>
-                                <tr>
-                                  <td><?php echo $i; ?></td>
-                                  <td><?php echo $tim['nama_tim']; ?></td>
-                                </tr>
-                              <?php $i++; ?>
-                              <?php endforeach; ?> 
+                            </tbody>
                         </table>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
