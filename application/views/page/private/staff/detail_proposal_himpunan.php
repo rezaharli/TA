@@ -78,11 +78,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div><!-- /.box-header -->
                             <div class="col-sm-12">
                                     <?php if ($status == null) { ?>
-                                        <span class="label label-warning">Pending</span></td>
+                                        <span class="label label-warning">Pending</span>
                                     <?php } else if ($status == 'y') { ?>
-                                        <span class="label label-success">Disetujui</span></td>
+                                        <span class="label label-success">Disetujui</span>
                                     <?php } else if ($status == 'n') { ?>
-                                        <span class="label label-danger">Ditolak</span></td>
+                                        <span class="label label-danger">Ditolak</span>
                                     <?php } ?> 
                                 </div>
                             
