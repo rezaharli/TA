@@ -14,7 +14,7 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Pengajuan</a></li>
-            <li class="active">Logbook Pengajuan</li>
+            <li class="active">Detail Tim</li>
         </ol>
     </section>
 
@@ -29,10 +29,20 @@
                             <thead>
                               <tr>
                                 <th align="center" style="width: 10px">No</th>
+                                <th align="center" style="width: 150px">Nim Anggota</th>
                                 <th align="center">Nama Anggota</th>
                               </tr>
                             </thead>
                             <tbody>
+                              <?php $i=1; ?>
+                              <?foreach ($tims as $tim) : ?>
+                                <tr>
+                                  <td><?php echo $i; ?></td>
+                                  <td><?php echo $tim->nim; ?></td>
+                                  <td><?php echo $tim->nama; ?></td>
+                                </tr>
+                              <?php $i++; ?>
+                              <?php endforeach; ?> 
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->

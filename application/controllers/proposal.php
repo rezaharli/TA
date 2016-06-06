@@ -11,6 +11,7 @@ class Proposal extends Private_Controller {
 		$this->load->model('event_model');
         $this->load->model('detail_tim_model');
         $this->load->model('mahasiswa_model');
+        $this->load->model('logbook_detail_tim_model');
 	}
 
     function upload_pengajuan (){
@@ -216,9 +217,10 @@ class Proposal extends Private_Controller {
     }
 
     function detail_tim(){
-        $user           = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $id_proposal        = $this->input->get('id_proposal');
+        $user               = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $data['tims']       = $this->logbook_detail_tim_model->get_many_by(array('id' => $id_proposal));
         
-        $data['user'] = $user;
         $this->load_page('page/private/mahasiswa/logbook_detail_tim', $data);
     }
 }
