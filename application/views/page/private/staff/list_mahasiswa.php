@@ -35,7 +35,7 @@
                                 <th style="width: 50px;">Username</th>
                                 <th >Nama</th>
                                 <th style="width: 200px;">Email</th>
-                                <th style="width: 190px; text-align: center;">Aksi</th>
+                                <th width="190px" style="text-align: center;">Aksi</th>
                               </tr>
                             </thead>
                         </table>
