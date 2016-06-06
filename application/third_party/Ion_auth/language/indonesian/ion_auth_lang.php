@@ -73,7 +73,7 @@ $lang['group_name_admin_not_alter']			    	= 'Nama Grup Admin Tidak Bisa Diubah'
 
 // Activation Email
 $lang['email_activation_subject']					= 'Aktivasi Akun';
-$lang['email_activate_heading']						= 'Aktifkan Akun dari %s';
+$lang['email_activate_heading']						= 'Aktifkan Akun %s';
 $lang['email_activate_subheading']				    = 'Silahkan klik tautan berikut untuk %s.';
 $lang['email_activate_link']						= 'Aktifkan Akun Anda';
 
