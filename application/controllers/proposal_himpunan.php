@@ -18,6 +18,11 @@ class Proposal_himpunan extends Private_Controller{
         $this->load->model('logbook_proposal_himpunan_model');
         $this->load->model('lpj_himpunan_model');
         $this->load->model('acara_himpunan_model');
+
+        // config upload
+        $this->config_upload['upload_path']     = './assets/upload/proposal_himpunan';
+        $this->config_upload['allowed_types']   = 'pdf|doc|docx';
+        $this->config_upload['max_size']        = '100000';
     }
 
     function index(){
@@ -61,9 +66,18 @@ class Proposal_himpunan extends Private_Controller{
         );
 
         $id_proposal = $this->proposal_himpunan_model->insert($data);
-        $this->upload_to_drive($upload_data);
+        
+        $this->load->library('upload', $this->config_upload);
+        if ($this->upload->do_upload($nama_input_file)) {
+            $upload_data = $this->upload->data();
+            $upload_data['orig_name'] = $filename;
+            $this->upload_to_drive($upload_data);
+            unlink($upload_data['full_path']);
+            $this->session->set_flashdata(array('status' => 1));
+        }else{
+            $this->session->set_flashdata(array('status' => 2));
 
-        $this->session->set_flashdata(array('status' => true));
+        }
 
         redirect('proposal_himpunan/logbook_pengajuan');
     }
@@ -109,8 +123,18 @@ class Proposal_himpunan extends Private_Controller{
         );
     
         $id_proposal = $this->proposal_himpunan_model->insert($data);
-        $this->upload_to_drive($upload_data);
-        $this->session->set_flashdata(array('status' => true));
+        
+        $this->load->library('upload', $this->config_upload);
+        if ($this->upload->do_upload($nama_input_file)) {
+            $upload_data = $this->upload->data();
+            $upload_data['orig_name'] = $filename;
+            $this->upload_to_drive($upload_data);
+            unlink($upload_data['full_path']);
+            $this->session->set_flashdata(array('status' => 1));
+        }else{
+            $this->session->set_flashdata(array('status' => 2));
+
+        }
 
         redirect('proposal_himpunan/detail_pengajuan?id_pengajuan='.$id_pengajuan); 
 
@@ -413,8 +437,18 @@ class Proposal_himpunan extends Private_Controller{
         );
 
         $id_lpj = $this->lpj_himpunan_model->insert($data);
-        // $this->upload_to_drive($upload_data);
-        $this->session->set_flashdata(array('status' => true));
+        
+        $this->load->library('upload', $this->config_upload);
+        if ($this->upload->do_upload($nama_input_file)) {
+            $upload_data = $this->upload->data();
+            $upload_data['orig_name'] = $filename;
+            $this->upload_to_drive($upload_data);
+            unlink($upload_data['full_path']);
+            $this->session->set_flashdata(array('status' => 1));
+        }else{
+            $this->session->set_flashdata(array('status' => 2));
+
+        }
 
         redirect('proposal_himpunan/logbook_lpj'); 
     }

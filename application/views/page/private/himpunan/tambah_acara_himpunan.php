@@ -213,7 +213,7 @@ $(function() {
     <?php
     if($this->session->flashdata('status') !== null){
         echo '<script type="text/javascript">';
-        if ($this->session->flashdata('status')) {
+        if ($this->session->flashdata('status') == 1) {
             echo 'alert("Buat acara himpunan berhasil")';
         } else {
             echo 'alert("Buat acara himpunan gagal")';

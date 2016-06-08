@@ -115,15 +115,20 @@ $(function() {
     </section>
 </div>
 
-<!-- alert sukses tidak -->
-<?php
-if($this->session->flashdata('status') !== null){
-    echo '<script type="text/javascript">';
-    if ($this->session->flashdata('status')) {
-        echo 'alert("Upload proposal berhasil")';
-    } else {
-        echo 'alert("Upload proposal gagal")';
+<!-- page script -->
+<script>
+  $(function () {
+    // alert sukses tidak
+    <?php
+    if($this->session->flashdata('status  ') !== null){
+        echo '<script type="text/  javascript">';
+        if ($this->session->flashdata(' status') == 1) {
+            echo 'alert("Upload   proposal berhasil")';
+        } else {
+            echo 'alert("Upload   proposal gagal")';
+        }
+        echo '</script>';
     }
-    echo '</script>';
-}
-?>
+    ?>
+  }); 
+</script>

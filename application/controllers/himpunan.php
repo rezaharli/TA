@@ -9,18 +9,20 @@ class Himpunan extends Private_Controller {
 	}
 
 	function update_himpunan(){
+		$this->load->model('user_model');
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 		
 		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
 
-		$data['title'] 	= $himpunan->nama;
-		$data['himpunan'] 	= $himpunan;
-		$data['user'] 		= $user;
+		$view_data['title'] 	= $himpunan->nama;
+		$view_data['himpunan'] 	= $himpunan;
+		$view_data['user'] 		= $user;
 
 		$this->load_page('page/private/himpunan/edit_himpunan', $view_data);
 	}
 
 	function do_update(){
+		$this->load->model('user_model');
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 		
 		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
