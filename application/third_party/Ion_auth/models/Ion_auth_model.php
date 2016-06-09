@@ -1075,7 +1075,6 @@ class Ion_auth_model extends CI_Model
 	 * @return	boolean
 	 */
 	public function is_time_locked_out($identity) {
-
 		return $this->is_max_login_attempts_exceeded($identity) && $this->get_last_attempt_time($identity) > time() - $this->config->item('lockout_time', 'ion_auth');
 	}
 
@@ -1101,6 +1100,10 @@ class Ion_auth_model extends CI_Model
 		}
 
 		return 0;
+	}
+
+	public function get_remaining_attempt_time($identity){
+		return $this->config->item('lockout_time','ion_auth') - (time() - $this->ion_auth_model->get_last_attempt_time($identity));
 	}
 
 	/**

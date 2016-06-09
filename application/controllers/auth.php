@@ -116,6 +116,14 @@ class Auth extends MY_Controller {
 							$data['message']	.= $this->ion_auth_model->message_start_delimiter;
 							$data['message']	.= $replaced_error.', klik <a href="javascript:void(0);" id="a-aktivasi" onClick="aktivasi()" style="text-decoration: underline">di sini</a> untuk aktivasi akun';
 							$data['message']	.= $this->ion_auth_model->message_end_delimiter;
+						} else if ($replaced_error == $this->lang->line('login_timeout')) {
+
+							$this->load->model('user_model');
+
+							$user = $this->user_model->get_by(array($this->config->item('identity','ion_auth') => $identity));
+							$data['message']	.= $this->ion_auth_model->message_start_delimiter;
+							$data['message']	.= $replaced_error.' Coba lagi dalam: '.$this->ion_auth_model->get_remaining_attempt_time($identity).' detik';
+							$data['message']	.= $this->ion_auth_model->message_end_delimiter;
 						} else {
 							$data['message'] .= $error;
 						}
