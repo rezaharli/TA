@@ -26,16 +26,22 @@ class Proposal extends Private_Controller {
     }
 
     function do_upload_pengajuan(){
+        $nama_input_file = 'file_pengajuan';
         //user yg login
         $user           = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-
         $data = array(
             'id_event'          => $this->input->post('event'),
             'pengaju_proposal'  => $user->roled_data->nim
             );
-
+        
         $pengaju = $this->pengajuan_proposal_mahasiswa_model->insert($data);
         $this->session->set_userdata('id_pengajuan', $pengaju);
+        
+        $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
+        $ext        = end($tmp);
+        $filename   = $pengaju.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
+
+        
         
         $data = array(
             'id_pengajuan_proposal_mahasiswa' => $pengaju,
@@ -48,19 +54,46 @@ class Proposal extends Private_Controller {
             'tempat_kompetisi'      => $this->input->post('tempat_kompetisi'),
             'anggaran_biaya'        => $this->input->post('anggaran_biaya'),
             'nama_tim'              => $this->input->post('nama_tim'),
-            'waktu_upload'          => date('Y-n-j h:i:s')
+            'waktu_upload'          => date('Y-n-j h:i:s'),
+            'file'                  => $filename
         );
 
-        $tmp        = explode(".", $_FILES['file_pengajuan']['name']);
-        $ext        = end($tmp);
-        $filename   = sha1($_FILES['file_pengajuan']['name']).'.'.$ext;
-        $data['file'] = $filename;
         $id_upload_proposal = $this->proposal_lomba_model->insert($data);
         $this->session->set_userdata('id_proposal', $id_upload_proposal);
+
+
         //gawe nampilno status
         $this->session->set_flashdata(array('status' => true));
         $data['user'] = $user;
         $this->load_page('page/private/mahasiswa/upload_tim', $data);;
+    }
+
+    function upload_to_drive($upload_data){
+        $this->load->library('google_drive');
+        $client = new Google_Client();
+        $client_email = 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
+        $private_key = file_get_contents(FCPATH.'/hmmmm-4c2bd9a777d8.p12');
+        $scopes = array('https://www.googleapis.com/auth/drive');
+        $credentials = new Google_Auth_AssertionCredentials(
+            $client_email,
+            $scopes,
+            $private_key
+        );
+        $client->setAssertionCredentials($credentials);
+        $service = new Google_Service_Drive($client);
+
+        $file = new Google_Service_Drive_DriveFile();
+        $folderId = '0B38ZX0d3LMfBVHgydlRQanRCWXM';
+        $file->name = $upload_data['orig_name'];
+        $file->parents = array($folderId);
+        $data = file_get_contents($upload_data['full_path']);
+        $createdFile = $service->files->create($file, array(
+            'data' => $data,
+            'mimeType' => $upload_data['file_type'],
+            'uploadType' => 'media'
+        ));
+
+        $this->session->set_flashdata(array('status' => true));
     }
 
 

@@ -35,7 +35,7 @@
                             </thead>
                             <tbody>
                               <?php $i=1; ?>
-                              <?foreach ($tims as $tim) : ?>
+                              <?php foreach ($tims as $tim) : ?>
                                 <tr>
                                   <td><?php echo $i; ?></td>
                                   <td><?php echo $tim->nim; ?></td>

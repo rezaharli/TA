@@ -15,7 +15,7 @@
 
             <?php if($role == 'mahasiswa' || $jenis == 'staff_admin') { ?>
               <li><a href="<?php echo base_url('event') ?>"><i class="fa fa-circle-o"></i>Lihat event</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i>Ajukan event</a></li>
+              <li><a href="<?php echo base_url('event/pengajuan') ?>"><i class="fa fa-circle-o"></i>Ajukan event</a></li>
             <?php } ?>
             
             <?php if ($jenis == 'kaur' || $jenis == 'staff_kemahasiswaan') { ?>

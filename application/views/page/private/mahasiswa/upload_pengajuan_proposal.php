@@ -102,7 +102,7 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Anggaran Kompetisi</label>
-                                <input type="text" class="form-control" id="anggaran" placeholder="anggaran" name="anggaran_biaya">
+                                <input type="text" class="form-control" id="anggaran" placeholder="ex : 1000000" name="anggaran_biaya">
                             </div>
                             <div class="form-group">
                                 <label>Upload Pengajuan Proposal</label>

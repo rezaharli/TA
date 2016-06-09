@@ -172,7 +172,11 @@ class Event extends Private_Controller {
 	}
 
 	function pengajuan() {
-		$this->load_page('page/private/pengajuan_event.php');
+		$this->load_page('page/private/mahasiswa/ajukan_event.php');
+	}
+
+	function do_pengajuan(){
+		
 	}
 
 	function tambah() {
