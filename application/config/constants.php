@@ -84,4 +84,6 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-defined('APP_NAME')  OR define('APP_NAME', 'hmmmm');
+defined('APP_NAME')  			OR define('APP_NAME', 'hmmmm');
+defined('APP_EMAIL')			OR define('APP_EMAIL', 'kelompokg2012@gmail.com');
+defined('APP_EMAIL_PASSWORD')	OR define('APP_EMAIL_PASSWORD', 'ayamgoreng2012');
