@@ -51,7 +51,7 @@ $lang['activation_email_unsuccessful']		        = 'Tidak Dapat Mengirimkan Email
 // Login / Logout
 $lang['login_successful']							= 'Log In Berhasil';
 $lang['login_unsuccessful']							= 'Kombinasi username atau password anda salah';
-$lang['login_unsuccessful_not_active']	            = 'Akun Tidak Aktif';
+$lang['login_unsuccessful_not_active']	            = 'Akun tidak aktif';
 $lang['login_timeout']								= 'Sementara Terkunci. Coba Beberapa Saat Lagi.';
 $lang['logout_successful']							= 'Log Out Berhasil';
 
@@ -73,7 +73,7 @@ $lang['group_name_admin_not_alter']			    	= 'Nama Grup Admin Tidak Bisa Diubah'
 
 // Activation Email
 $lang['email_activation_subject']					= 'Aktivasi Akun';
-$lang['email_activate_heading']						= 'Aktifkan Akun dari %s';
+$lang['email_activate_heading']						= 'Aktifkan Akun %s';
 $lang['email_activate_subheading']				    = 'Silahkan klik tautan berikut untuk %s.';
 $lang['email_activate_link']						= 'Aktifkan Akun Anda';
 
