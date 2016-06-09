@@ -134,6 +134,7 @@ $lang['forgot_password_submit_btn']              = 'Kirim';
 $lang['forgot_password_validation_email_label']  = 'Alamat Email';
 $lang['forgot_password_username_identity_label'] = 'Nama Pengguna';
 $lang['forgot_password_email_identity_label']    = 'Email';
+$lang['forgot_password_identity_not_found']      = 'Identitas yang anda masukkan tidak ditemukan.';
 $lang['forgot_password_email_not_found']         = 'Tidak ada data dari email tersebut.';
 
 // Reset Password
