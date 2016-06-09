@@ -153,7 +153,7 @@ class Ion_auth
 
 				if(!$this->config->item('use_ci_email', 'ion_auth'))
 				{
-					$this->set_message('forgot_password_successful');
+					// $this->set_message('forgot_password_successful');
 					return $data;
 				}
 				else

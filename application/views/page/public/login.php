@@ -116,15 +116,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	    var form = $(this).serializeArray();
 	    form.push(
-	    	{name: "id", value: '<?php echo $this->session->flashdata('id') ?>'},
+	    	<?php if($this->session->flashdata('id')) { ?>
+	    		{name: "id", value: '<?php echo $this->session->flashdata('id') ?>'},
+	    	<?php } ?>
 	    	{name: "code", value: '<?php echo $this->session->flashdata('code') ?>'}
 	    	);
 
 	    var request = $.ajax({
-	        url: "aktivasi",
+	        url: "reset_password/<?php echo ($this->session->flashdata('id')) ? 'aktivasi' : 'lupa_password'; ?>",
 	        type: "post",
 	        data: form
 	    });
+
+		$('#message-register').html("Mohon tunggu");
 
 	    request.done(function (response){
 	    	var message;
@@ -134,6 +138,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    	} else {
 	    		$('#message-login').html("<p><?php echo lang('activate_successful') ?></p>");
 	    		showHalaman('form-register-password', 'form-login');
+	    	}
+	    });
+	});
+
+	$("#form-forgot-password").submit(function(event){
+		event.preventDefault();
+
+	    var form = $(this);
+
+	    var request = $.ajax({
+	        url: "lupa_password",
+	        type: "post",
+	        data: form.serialize()
+	    });
+
+		$('#message-forgot').html("Mohon tunggu");
+
+	    request.done(function (response){
+	    	var message;
+	    	if(response){
+	    		var json = JSON.parse(response);
+	    		$('#message-forgot').html(json.message);
+	    	} else {
+	    		// $('#message-login').html("<p><?php echo lang('activate_successful') ?></p>");
+	    		// showHalaman('form-register-password', 'form-login');
 	    	}
 	    });
 	});
@@ -152,7 +181,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		request = $.ajax({
 	        url: "aktivasi",
 	        type: "post",
-	        data: {id: id, code: code, a: false}
+	        data: {id: id, code: code}
 	    });
 
 		$('#message-login').html("Mohon tunggu");
