@@ -118,7 +118,7 @@
                             <div class="product">
                                 <div class="image">
                                     <a href="<?php echo base_url('guest/detail_event/'.$event['id']) ?>">
-                                        <img src="<?php echo base_url() ?>assets/universal/img/default-lomba.jpg" alt="" class="img-responsive image1">
+                                        <img src="<?php echo base_url() . (($event['gambar']) ? $event['gambar'] : 'assets/universal/img/default-lomba.jpg') ; ?>" alt="" class="img-responsive image1">
                                     </a>
                                 </div>
                                 <div class="text">
