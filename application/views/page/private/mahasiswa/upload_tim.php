@@ -50,27 +50,27 @@ $(function() {
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="tema" placeholder="tema lomba" name="nim_anggota1">
+                                <input type="text" class="form-control" id="nim_anggota1" placeholder="Nim Anggota" name="nim_anggota1">
                             </div>
                             <div class="form-group">
                                 <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="penyelenggara_lomba" placeholder="Penyelenggara" name="nim_anggota2">
+                                <input type="text" class="form-control" id="nim_anggota2" placeholder="Nim Anggota" name="nim_anggota2">
                             </div>
                             <div class="form-group">
                                 <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="penyelenggara_lomba" placeholder="Penyelenggara" name="nim_anggota3">
+                                <input type="text" class="form-control" id="nim_anggota3" placeholder="Nim Anggota" name="nim_anggota3">
                             </div>
                             <div class="form-group">
                                 <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="penyelenggara_lomba" placeholder="Penyelenggara" name="nim_anggota4">
+                                <input type="text" class="form-control" id="nim_anggota4" placeholder="Nim Anggota" name="nim_anggota4">
                             </div>
                             <div class="form-group">
                                 <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="penyelenggara_lomba" placeholder="Penyelenggara" name="nim_anggota5">
+                                <input type="text" class="form-control" id="nim_anggota5" placeholder="Nim Anggota" name="nim_anggota5">
                             </div>
                             <div class="form-group">
                                 <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="penyelenggara_lomba" placeholder="Penyelenggara" name="nim_anggota6">
+                                <input type="text" class="form-control" id="nim_anggota6" placeholder="Nim Anggota" name="nim_anggota6">
                             </div>
                             <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
