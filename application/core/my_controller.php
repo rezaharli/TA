@@ -8,6 +8,7 @@ class MY_Controller extends CI_Controller {
         $this->load->library('ion_auth');
 
         date_default_timezone_set("Asia/Jakarta");
+        setlocale(LC_ALL, 'IND');
     }
 
     public function is_logged_in() {
@@ -21,10 +22,6 @@ class Public_Controller extends MY_Controller {
 
     public function __construct() {
        	parent::__construct();
-
-       	if ($this->ion_auth->logged_in()) {
-            redirect('home');
-        }
     }
 
     public function load_page($page = '', $content_data = null){

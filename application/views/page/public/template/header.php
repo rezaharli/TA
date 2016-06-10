@@ -64,7 +64,7 @@
                     <div class="container">
                         <div class="navbar-header">
 
-                            <a class="navbar-brand home" href="index.html">
+                            <a class="navbar-brand home" href="<?php echo base_url() ?>">
                                 <img src="<?php echo base_url() ?>assets/universal/img/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
                                 <img src="<?php echo base_url() ?>assets/universal/img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
                             </a>
@@ -83,9 +83,20 @@
                                 <li class="use-yamm yamm-fw">
                                     <a href="<?php echo base_url() ?>guest/events">Temukan Event</a>
                                 </li>
-                                <li class="use-yamm yamm-fw">
-                                    <a href="<?php echo base_url() ?>auth/login">Log in</a>
-                                </li>
+
+                                <?php if( ! $this->session->userdata('id')) { ?>
+                                    <li class="use-yamm yamm-fw">
+                                        <a href="<?php echo base_url() ?>auth/login">Log in</a>
+                                    </li>
+                                <?php } else { ?>
+                                    <li class="dropdown">
+                                        <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Akun <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="<?php echo base_url() ?>home/">Dashboard</a></li>
+                                            <li><a href="<?php echo base_url() ?>auth/logout">Log out</a></li>
+                                        </ul>
+                                    </li>
+                                <?php } ?>
                             </ul>
 
                         </div>
