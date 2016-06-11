@@ -77,37 +77,36 @@
 </div><!-- /.content-wrapper -->
 
 <!-- page script -->
-    <script>
-      $(function () {
-        $("#example1").DataTable({
-            "paging": true,
-          "lengthChange": true,
-          "searching": true,
-          "ordering": true,
-          "info": true,
-          "autoWidth": true
+<script>
+  $(function () {
+    $("#example1").DataTable({
+        "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true
 
-        });
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
-      });
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
 
-      <!-- alert sukses tidak -->
-      <?php
-      if($this->session->flashdata('status') !== null){
-          echo '<script type="text/javascript">';
-          if ($this->session->flashdata('status')) {
-              echo 'alert("Upload proposal berhasil")';
-          } else {
-              echo 'alert("Upload proposal gagal")';
-          }
-          echo '</script>';
+  // <!-- alert sukses tidak -->
+  <?php
+    if(!empty($this->session->userdata('notif_upload'))){
+      if ($this->session->userdata('notif_upload')) {
+          echo 'alert("Upload proposal berhasil")';
+      } else {
+          echo 'alert("Upload proposal gagal")';
       }
-      ?>
-    </script>
+      $this->session->unset_userdata('notif_upload');
+    }
+  ?>
+</script>
