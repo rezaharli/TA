@@ -123,7 +123,7 @@ $(function() {
     </section>
 </div>
 
-<!-- alert sukses tidak -->
+<!-- alert sukses tidak
 <?php
     if(!empty($this->session->userdata('notif_upload'))){
         if ($this->session->userdata('notif_upload')) {
@@ -131,5 +131,6 @@ $(function() {
         } else {
             echo 'alert("Upload LPJ gagal")';
         }
+        $this->session->unset_userdata('notif_upload');
     }
-?>
+?> -->

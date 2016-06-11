@@ -94,6 +94,7 @@
           } else {
               echo 'alert("Upload LPJ gagal")';
           }
+          $this->session->unset_userdata('notif_upload');
       }
   ?>
 </script>

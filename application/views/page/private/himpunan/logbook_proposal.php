@@ -128,11 +128,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     // <!-- alert sukses tidak -->
     <?php
         if(!empty($this->session->userdata('notif_upload'))){
-            if ($this->session->userdata('notif_upload')) {
-                echo 'alert("Upload pengajuan proposal berhasil")';
-            } else {
-                echo 'alert("Upload pengajuan proposal gagal")';
-            }
+          if ($this->session->userdata('notif_upload')) {
+              echo 'alert("Upload pengajuan proposal berhasil")';
+          } else {
+              echo 'alert("Upload pengajuan proposal gagal")';
+          }
+          $this->session->unset_userdata('notif_upload');
         }
     ?>
 

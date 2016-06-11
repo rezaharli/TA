@@ -124,3 +124,15 @@ $(function() {
         </div>
     </section>
 </div>
+
+<!-- alert sukses tidak
+<?php
+    if(!empty($this->session->userdata('notif_upload'))){
+        if ($this->session->userdata('notif_upload')) {
+            echo 'alert("Upload LPJ berhasil")';
+        } else {
+            echo 'alert("Upload LPJ gagal")';
+        }
+        $this->session->unset_userdata('notif_upload');
+    }
+?> -->

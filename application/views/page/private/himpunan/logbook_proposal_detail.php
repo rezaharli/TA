@@ -100,12 +100,13 @@
 
   // <!-- alert sukses tidak -->
   <?php
-      if(!empty($this->session->userdata('notif_upload'))){
-          if ($this->session->userdata('notif_upload')) {
-              echo 'alert("Upload proposal berhasil")';
-          } else {
-              echo 'alert("Upload proposal gagal")';
-          }
+    if(!empty($this->session->userdata('notif_upload'))){
+      if ($this->session->userdata('notif_upload')) {
+          echo 'alert("Upload proposal berhasil")';
+      } else {
+          echo 'alert("Upload proposal gagal")';
       }
+      $this->session->unset_userdata('notif_upload');
+    }
   ?>
 </script>
