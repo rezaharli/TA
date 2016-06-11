@@ -14,19 +14,18 @@
                             </div>
 
                             <div class="panel-body">
-                                <form role="search">
+                                <form method="get" action="<?php echo base_url('guest/events') ?>">
                                     <div class="input-group" style="width: 100%;padding-right: 1px;">
                                         <?php $kategori = ($this->uri->segment(3) == null) ? 'event lomba atau kegiatan himpunan' : (($this->uri->segment(3) == 'lomba') ? 'event lomba' : (($this->uri->segment(3) == 'kegiatan') ? 'kegiatan himpunan' : '')); ?> 
-                                        <input type="text" class="form-control" placeholder="Cari <?php echo $kategori ?>">
+                                        <input type="text" name="cari" class="form-control" placeholder="Cari <?php echo $kategori ?>">
                                     </div>
                                     <div class="input-group" style="width: 100%">
-                                        <select type="text" name="tanggal" class="form-control">
-                                            <option>Semua tanggal</option>
-                                            <option>Hari Ini</option>
-                                            <option>Besok</option>
-                                            <option>Besok</option>
-                                            <option>Besok</option>
-                                            <option>Besok</option>
+                                        <select type="text" name="rentang" class="form-control">
+                                            <option value="">Semua tanggal</option>
+                                            <option value="1">Hari Ini</option>
+                                            <option value="7">Jarak 7 hari ke depan</option>
+                                            <option value="30">Jarak 1 bulan ke depan</option>
+                                            <option value="365">Jarak 1 tahun ke depan</option>
                                         </select>
                                         <span class="input-group-btn">
 

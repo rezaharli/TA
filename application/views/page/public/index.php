@@ -86,7 +86,7 @@
                 <div class="row portfolio">
                     
                     <div class="col-md-12">
-                        <form>
+                        <form method="get" action="<?php echo base_url('guest/events') ?>">
                             <div class="row">
                                 <div class="col-sm-7">
                                     <div class="form-group">
@@ -95,13 +95,12 @@
                                 </div>
                                 <div class="col-sm-3 text-right">
                                     <div class="form-group">
-                                        <select type="text" name="tanggal" class="form-control">
-                                            <option>Semua tanggal</option>
-                                            <option>Hari Ini</option>
-                                            <option>Besok</option>
-                                            <option>Besok</option>
-                                            <option>Besok</option>
-                                            <option>Besok</option>
+                                        <select type="text" name="rentang" class="form-control">
+                                            <option value="">Semua tanggal</option>
+                                            <option value="1">Hari Ini</option>
+                                            <option value="7">Jarak 7 hari ke depan</option>
+                                            <option value="30">Jarak 1 bulan ke depan</option>
+                                            <option value="365">Jarak 1 tahun ke depan</option>
                                         </select>
                                     </div>
                                 </div>

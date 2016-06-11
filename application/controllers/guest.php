@@ -18,7 +18,7 @@ class Guest extends Public_Controller {
         $where          = array('status' => 'disetujui');
         $total_event    = $this->event_model->count_by($where);
         
-        $where['tanggal_event >=']  = date('Y-n-j');
+        $where = array_merge($where, array('tanggal_event >=' => date('Y-n-j')));
         $list_event                 = $this->event_model->order_by('tanggal_event')->limit(12, 0)->get_many_by($where);
         $this->set_list_gabungan_event($list_event, 'lomba');
 
@@ -44,22 +44,44 @@ class Guest extends Public_Controller {
         $this->load->model('acara_himpunan_model');
         $kategori = $this->uri->segment(3);
 
-        $key        = $this->input->get('search');
-        $tanggal    = $this->input->get('tanggal');
+        $key        = $this->input->get('cari');
+        $rentang    = $this->input->get('rentang');
 
         if (isset($kategori)) {
             if (! ($kategori == 'lomba' || $kategori == 'kegiatan')) show_404();
         }
 
         if( ! isset($kategori) || $kategori == 'lomba'){
-            $list_event = $this->event_model->order_by('tanggal_event')->get_many_by(array('status' => 'disetujui'));
-            
+            $event = $this->event_model;
+
+            if (isset($key) && $key != '') {
+                $event = $event->like('nama_event', $key);
+            }
+
+            $where = array('status' => 'disetujui');
+            if (isset($rentang) && $rentang != '') {
+                $where = array_merge($where, array('tanggal_event >=' => date('Y-n-j')));
+                $where = array_merge($where, array('tanggal_event <=' => date('Y-n-j', strtotime(date('Y-n-j') . ' +'.$rentang.' day'))));
+            }
+
+            $list_event = $event->order_by('tanggal_event')->get_many_by($where);
             $this->set_list_gabungan_event($list_event, 'lomba');
         }
 
         if ( ! isset($kategori) || $kategori == 'kegiatan') {
-            $list_acara_himpunan = $this->acara_himpunan_model->order_by('tanggal_acara')->get_all();
+            $acara_himpunan = $this->acara_himpunan_model;
+            
+            if (isset($key) && $key != '') {
+                $acara_himpunan = $acara_himpunan->like('nama_acara', $key);
+            }
 
+            $where = array();
+            if (isset($rentang) && $rentang != '') {
+                $where = array('tanggal_acara >=' => date('Y-n-j'));
+                $where = array_merge($where, array('tanggal_acara <=' => date('Y-n-j', strtotime(date('Y-n-j') . ' +'.$rentang.' day'))));
+            }
+
+            $list_acara_himpunan = $acara_himpunan->order_by('tanggal_acara')->get_many_by($where);
             $this->set_list_gabungan_event($list_acara_himpunan, 'kegiatan');
         }
 
@@ -103,7 +125,19 @@ class Guest extends Public_Controller {
     }
 	
     function lomba() {
-        $this->load_page('page/public/detail-event');
+        $this->load->model('event_model');
+
+        $event = $this->event_model->get_by(array('id' => $this->uri->segment(3), 'status' => 'disetujui'));
+            
+        $data['event'] = array(
+            'id'                => $event->id,
+            'nama'              => $event->nama_event,
+            'tanggal'           => $event->tanggal_event,
+            'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_event),
+            'gambar'            => ($event->bukti_event) ? $event->bukti_event : 'assets/universal/img/default-lomba.jpg',
+            );
+
+        $this->load_page('page/public/detail-event', $data);
     }
     
     function kegiatan() {
