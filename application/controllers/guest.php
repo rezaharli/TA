@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Guest extends Public_Controller {
 
+    private $list_gabungan_event = array();
+
     public function __construct() {
         parent::__construct();
     }
@@ -13,61 +15,103 @@ class Guest extends Public_Controller {
         $this->load->model('detail_tim_model');
         $this->load->model('peserta_model');
 
-        $list_gabungan_event = array();
+        $where          = array('status' => 'disetujui');
+        $total_event    = $this->event_model->count_by($where);
+        
+        $where['tanggal_event >=']  = date('Y-n-j');
+        $list_event                 = $this->event_model->order_by('tanggal_event')->limit(12, 0)->get_many_by($where);
+        $this->set_list_gabungan_event($list_event, 'lomba');
 
-        $where = array('status' => 'disetujui');
-        $total_event = $this->event_model->count_by($where);
-        $where['tanggal_event >='] = date('Y-n-j');
-        $list_event = $this->event_model->order_by('tanggal_event')->limit(12, 0)->get_many_by($where);
-
-        foreach ($list_event as $event) {
-            array_push($list_gabungan_event, array(
-                'id'                => $event->id,
-                'nama'              => $event->nama_event,
-                'tanggal'           => $event->tanggal_event,
-                'tanggal_display'   => strftime('%A, %e %B %Y', strtotime($event->tanggal_event)),
-                'gambar'            => $event->bukti_event,
-                'jenis'             => 'Lomba'
-                ));
-        }
-
-        $total_acara_himpunan = $this->acara_himpunan_model->count_all();
-        $list_acara_himpunan = $this->acara_himpunan_model
-                                            ->order_by('tanggal_acara')
-                                            ->limit(12, 0)
-                                            ->get_many_by(array('tanggal_acara >= ' => date('Y-n-j')));
-
-        foreach ($list_acara_himpunan as $event) {
-            array_push($list_gabungan_event, array(
-                'id'        => $event->id,
-                'nama'      => $event->nama_acara,
-                'tanggal'   => $event->tanggal_acara,
-                'tanggal_display'   => strftime('%A, %e %B %Y', strtotime($event->tanggal_acara)),
-                'gambar'    => $event->poster_acara,
-                'jenis'     => 'Kegiatan himpunan'
-                ));
-        }
-
-        usort($list_gabungan_event, function($a, $b) { 
-            return strnatcmp($a['tanggal'], $b['tanggal']); 
-        });
+        $total_acara_himpunan   = $this->acara_himpunan_model->count_all();
+        $list_acara_himpunan    = $this->acara_himpunan_model
+                                        ->order_by('tanggal_acara')
+                                        ->limit(12, 0)
+                                        ->get_many_by(array('tanggal_acara >= ' => date('Y-n-j')));
+        $this->set_list_gabungan_event($list_acara_himpunan, 'kegiatan');
 
         $total_peserta = $this->detail_tim_model->count_all() + $this->peserta_model->count_all();
 
         $data['total_event']            = $total_event;
         $data['total_acara_himpunan']   = $total_acara_himpunan;
-        $data['event_mendatang']        = array_slice($list_gabungan_event, 0, 12);
+        $data['event_mendatang']        = array_slice($this->list_gabungan_event, 0, 12);
         $data['total_peserta']          = $total_peserta;
 
         $this->load_page('page/public/index', $data);
     }
 
     public function events() {
-        $this->load_page('page/public/temukan-event');
+        $this->load->model('event_model');
+        $this->load->model('acara_himpunan_model');
+        $kategori = $this->uri->segment(3);
+
+        $key        = $this->input->get('search');
+        $tanggal    = $this->input->get('tanggal');
+
+        if (isset($kategori)) {
+            if (! ($kategori == 'lomba' || $kategori == 'kegiatan')) show_404();
+        }
+
+        if( ! isset($kategori) || $kategori == 'lomba'){
+            $list_event = $this->event_model->order_by('tanggal_event')->get_many_by(array('status' => 'disetujui'));
+            
+            $this->set_list_gabungan_event($list_event, 'lomba');
+        }
+
+        if ( ! isset($kategori) || $kategori == 'kegiatan') {
+            $list_acara_himpunan = $this->acara_himpunan_model->order_by('tanggal_acara')->get_all();
+
+            $this->set_list_gabungan_event($list_acara_himpunan, 'kegiatan');
+        }
+
+        $data['events']                 = $this->list_gabungan_event;
+        $data['total_event']            = $this->event_model->count_by(array('status' => 'disetujui'));
+        $data['total_acara_himpunan']   = $this->acara_himpunan_model->count_all();
+
+        $this->load_page('page/public/temukan-event', $data);
+    }
+
+    private function set_list_gabungan_event($events, $jenis){
+        if($jenis == 'lomba') {
+            $gambar_default = 'assets/universal/img/default-lomba.jpg';
+            foreach ($events as $event) {
+                array_push($this->list_gabungan_event, array(
+                    'id'                => $event->id,
+                    'nama'              => $event->nama_event,
+                    'tanggal'           => $event->tanggal_event,
+                    'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_event),
+                    'gambar'            => ($event->bukti_event) ? $event->bukti_event : $gambar_default,
+                    'jenis'             => 'lomba'
+                    ));
+            }
+        } else if ($jenis == 'kegiatan') {
+            $gambar_default = 'assets/universal/img/default-kegiatan.jpg';
+            foreach ($events as $event) {
+                array_push($this->list_gabungan_event, array(
+                    'id'                => $event->id,
+                    'nama'              => $event->nama_acara,
+                    'tanggal'           => $event->tanggal_acara,
+                    'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_acara),
+                    'gambar'            => ($event->poster_acara) ? $event->poster_acara : $gambar_default,
+                    'jenis'             => 'kegiatan'
+                    ));
+            }
+        }
+
+        usort($this->list_gabungan_event, function($a, $b) { 
+            return strnatcmp($a['tanggal'], $b['tanggal']); 
+        });
     }
 	
-    public function detail_event() {
+    function lomba() {
         $this->load_page('page/public/detail-event');
+    }
+    
+    function kegiatan() {
+        $this->load_page('page/public/detail-event');
+    }
+
+    private function get_tanggal_formatted($tanggal){
+        return strftime('%A, %e %B %Y', strtotime($tanggal));
     }
 
 }

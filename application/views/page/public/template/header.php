@@ -54,6 +54,40 @@
 
         <header>
 
+            <!-- *** TOP ***
+_________________________________________________________ -->
+            <div id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 contact">
+                            <p class="hidden-sm hidden-xs">Kontak kami ke <?php echo APP_EMAIL ?></p>
+                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                            </p>
+                        </div>
+                        <div class="col-xs-7">
+
+                            <div class="login">
+                                <?php if( ! $this->session->userdata('id')) { ?>
+                                    <a href="<?php echo base_url('auth/login') ?>" data-toggle="modal" data-animate-hover="pulse">
+                                        <i class="fa fa-sign-in"></i> 
+                                        <span class="hidden-xs text-uppercase">Login</span>
+                                    </a>
+                                <?php } else { ?>                            
+                                    <a href="<?php echo base_url('home') ?>" data-toggle="modal"><span class="hidden-xs text-uppercase">Dashboard</span></a>
+                                    <a href="<?php echo base_url('auth/logout') ?>" data-toggle="modal" data-animate-hover="pulse">
+                                        <i class="fa fa-sign-in"></i> 
+                                        <span class="hidden-xs text-uppercase">Logout</span>
+                                    </a>
+                                <?php } ?>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- *** TOP END *** -->
+
             <!-- *** NAVBAR ***
     _________________________________________________________ -->
 
@@ -80,23 +114,12 @@
                         <div class="navbar-collapse collapse" id="navigation">
 
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="use-yamm yamm-fw">
+                                <li class="use-yamm yamm-fw <?php if( ! $this->uri->segment(1) || ( ! $this->uri->segment(2) && $this->uri->segment(1) == 'guest')) echo 'active' ?>">
+                                    <a href="<?php echo base_url() ?>">Home</a>
+                                </li>
+                                <li class="use-yamm yamm-fw <?php if( $this->uri->segment(2) == 'events') echo 'active' ?>">
                                     <a href="<?php echo base_url() ?>guest/events">Temukan Event</a>
                                 </li>
-
-                                <?php if( ! $this->session->userdata('id')) { ?>
-                                    <li class="use-yamm yamm-fw">
-                                        <a href="<?php echo base_url() ?>auth/login">Log in</a>
-                                    </li>
-                                <?php } else { ?>
-                                    <li class="dropdown">
-                                        <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Akun <b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="<?php echo base_url() ?>home/">Dashboard</a></li>
-                                            <li><a href="<?php echo base_url() ?>auth/logout">Log out</a></li>
-                                        </ul>
-                                    </li>
-                                <?php } ?>
                             </ul>
 
                         </div>

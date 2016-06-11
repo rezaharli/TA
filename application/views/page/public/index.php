@@ -96,12 +96,12 @@
                                 <div class="col-sm-3 text-right">
                                     <div class="form-group">
                                         <select type="text" name="tanggal" class="form-control">
-                                        <option>Semua tanggal</option>
-                                        <option>Hari Ini</option>
-                                        <option>Besok</option>
-                                        <option>Besok</option>
-                                        <option>Besok</option>
-                                        <option>Besok</option>
+                                            <option>Semua tanggal</option>
+                                            <option>Hari Ini</option>
+                                            <option>Besok</option>
+                                            <option>Besok</option>
+                                            <option>Besok</option>
+                                            <option>Besok</option>
                                         </select>
                                     </div>
                                 </div>
@@ -117,12 +117,12 @@
                         <div class="col-md-4">
                             <div class="product">
                                 <div class="image">
-                                    <a href="<?php echo base_url('guest/detail_event/'.$event['id']) ?>">
-                                        <img src="<?php echo base_url() . (($event['gambar']) ? $event['gambar'] : 'assets/universal/img/default-lomba.jpg') ; ?>" alt="" class="img-responsive image1">
+                                    <a href="<?php echo base_url('guest/'.$event['jenis'].'/'.$event['id']) ?>">
+                                        <img src="<?php echo base_url() . $event['gambar']; ?>" alt="" class="img-responsive image1">
                                     </a>
                                 </div>
                                 <div class="text">
-                                    <h3><a href="<?php echo base_url('guest/detail_event/'.$event['id']) ?>"><?php echo $event['jenis'] . ': ' . $event['nama'] ?></a></h3>
+                                    <h3><a href="<?php echo base_url('guest/'.$event['jenis'].'/'.$event['id']) ?>"><?php echo $event['jenis'] . ': ' . $event['nama'] ?></a></h3>
                                     <p class="price"><?php echo $event['tanggal_display'] ?></p>
                                 </div>
                             </div>
