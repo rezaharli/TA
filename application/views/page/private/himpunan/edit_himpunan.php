@@ -30,18 +30,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div><!-- /.box-header -->
                     
                     <div class="box-body">
+                        <?php if (!empty(validation_errors())): ?>
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                <ul>
+                                    <?php echo validation_errors('<li>', '</li>'); ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+
                         <div class="form-group">
-                            <label>Nama Himpunan</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Nama Himpunan" value="<?= $himpunan->nama ?>" name="nama">
+                            <label>Nama Himpunan *</label>
+                            <input type="text" class="form-control" id="nama" placeholder="Nama Himpunan" value="<?= set_value('nama', $himpunan->nama) ?>" name="nama">
 
                         </div>
                         <div class="form-group">
-                            <label>Program Studi</label>
-                            <input type="text" class="form-control" id="prodi" placeholder="Program Studi" value="<?= $himpunan->prodi ?>" name="prodi">
+                            <label>Program Studi *</label>
+                            <input type="text" class="form-control" id="prodi" placeholder="Program Studi" value="<?= set_value('prodi', $himpunan->prodi) ?>" name="prodi">
                         </div>
                         <div class="form-group">
                             <label>Penanggung Jawab</label>
-                            <input type="text" disabled class="form-control" id="id_penanggungjawab" placeholder="NIM" value= "<?= $himpunan->id_penanggungjawab ?>" name="id_penanggungjawab">
+                            <input type="text" disabled class="form-control" id="id_penanggungjawab" placeholder="NIM" value= "<?= $himpunan->id_penanggungjawab ?> - <?= $user->nama ?>" name="id_penanggungjawab">
                         </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">

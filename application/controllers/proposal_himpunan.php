@@ -46,6 +46,10 @@ class Proposal_himpunan extends Private_Controller{
 
         $last_id_pengajuan_proposal = $this->pengajuan_proposal_himpunan_model->insert(array('pengaju_proposal' => $id_himpunan));
 
+        // rule
+        $this->form_validation->set_rules('nama', 'Nama Himpunan', 'required');
+        $this->form_validation->set_rules('prodi', 'Program Studi', 'required');
+
         $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
         $ext        = end($tmp);
         $filename   = $last_id_pengajuan_proposal.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
@@ -68,17 +72,17 @@ class Proposal_himpunan extends Private_Controller{
         $id_proposal = $this->proposal_himpunan_model->insert($data);
         
         $this->load->library('upload', $this->config_upload);
-        if ($this->upload->do_upload($nama_input_file)) {
-            $upload_data = $this->upload->data();
-            $upload_data['orig_name'] = $filename;
-            $this->upload_to_drive($upload_data);
-            unlink($upload_data['full_path']);
-            $this->session->set_flashdata(array('status' => 1));
-        }else{
-            $this->session->set_flashdata(array('status' => 2));
-
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->upload->do_upload($nama_input_file)) {
+                $upload_data = $this->upload->data();
+                $upload_data['orig_name'] = $filename;
+                $this->upload_to_drive($upload_data);
+                unlink($upload_data['full_path']);
+                $this->session->set_userdata('notif_upload', true);
+            }else{
+                $this->session->set_userdata('notif_upload', false);    
+            }
         }
-
         redirect('proposal_himpunan/logbook_pengajuan');
     }
 
@@ -125,19 +129,18 @@ class Proposal_himpunan extends Private_Controller{
         $id_proposal = $this->proposal_himpunan_model->insert($data);
         
         $this->load->library('upload', $this->config_upload);
-        if ($this->upload->do_upload($nama_input_file)) {
-            $upload_data = $this->upload->data();
-            $upload_data['orig_name'] = $filename;
-            $this->upload_to_drive($upload_data);
-            unlink($upload_data['full_path']);
-            $this->session->set_flashdata(array('status' => 1));
-        }else{
-            $this->session->set_flashdata(array('status' => 2));
-
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->upload->do_upload($nama_input_file)) {
+                $upload_data = $this->upload->data();
+                $upload_data['orig_name'] = $filename;
+                $this->upload_to_drive($upload_data);
+                unlink($upload_data['full_path']);
+                $this->session->set_userdata('notif_upload', true);
+            }else{
+                $this->session->set_userdata('notif_upload', false);    
+            }
         }
-
         redirect('proposal_himpunan/detail_pengajuan?id_pengajuan='.$id_pengajuan); 
-
     }
 
     function tambah_acara(){
@@ -274,7 +277,7 @@ class Proposal_himpunan extends Private_Controller{
             'uploadType' => 'media'
         ));
 
-        $this->session->set_flashdata(array('status' => true));
+        $this->session->set_userdata('notif_upload', true);
     }
     
     function logbook_pengajuan(){
@@ -439,15 +442,16 @@ class Proposal_himpunan extends Private_Controller{
         $id_lpj = $this->lpj_himpunan_model->insert($data);
         
         $this->load->library('upload', $this->config_upload);
-        if ($this->upload->do_upload($nama_input_file)) {
-            $upload_data = $this->upload->data();
-            $upload_data['orig_name'] = $filename;
-            $this->upload_to_drive($upload_data);
-            unlink($upload_data['full_path']);
-            $this->session->set_flashdata(array('status' => 1));
-        }else{
-            $this->session->set_flashdata(array('status' => 2));
-
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->upload->do_upload($nama_input_file)) {
+                $upload_data = $this->upload->data();
+                $upload_data['orig_name'] = $filename;
+                $this->upload_to_drive($upload_data);
+                unlink($upload_data['full_path']);
+                $this->session->set_userdata('notif_upload', true);
+            }else{
+                $this->session->set_userdata('notif_upload', false);
+            }
         }
 
         redirect('proposal_himpunan/logbook_lpj'); 

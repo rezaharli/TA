@@ -125,17 +125,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       "autoWidth": false
     });
 
-    // alert sukses tidak
+    // <!-- alert sukses tidak -->
     <?php
-    if($this->session->flashdata('status  ') !== null){
-        echo '<script type="text/javascript">';
-        if ($this->session->flashdata(' status') == 1) {
-            echo 'alert("Upload   proposal berhasil")';
-        } else {
-            echo 'alert("Upload   proposal gagal")';
+        if(!empty($this->session->userdata('notif_upload'))){
+            if ($this->session->userdata('notif_upload')) {
+                echo 'alert("Upload pengajuan proposal berhasil")';
+            } else {
+                echo 'alert("Upload pengajuan proposal gagal")';
+            }
         }
-        echo '</script>';
-    }
     ?>
 
   }); 
