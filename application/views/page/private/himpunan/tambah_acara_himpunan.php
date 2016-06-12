@@ -136,7 +136,7 @@ $(function() {
                                 <thead>
                                     <tr >
                                         <th class="text-center">
-                                            No
+                                            #
                                         </th>
                                         <th class="text-center">
                                             NIM
@@ -200,7 +200,7 @@ $(function() {
 
     var i=1;
     $("#add_row").click(function(){
-      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name"+i+"' type='text' placeholder='Name' class='form-control input-md'  /> </td><td><input  name='mail"+i+"' type='text' placeholder='Mail'  class='form-control input-md'></td><td><input  name='mobile"+i+"' type='text' placeholder='Mobile'  class='form-control input-md'></td>");
+      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input nim='nim"+i+"' type='text' placeholder='NIM' class='form-control input-md'  /> </td><td><input  name='nama"+i+"' type='text' placeholder='Nama'  class='form-control input-md'></td>");
 
       $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
       i++; 

@@ -13,9 +13,9 @@
             <small><?php echo $himpunan->nama ?></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Pengajuan</a></li>
-            <li class="active">Detail Proposal</li>
+            <li><a href="<?php echo base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan'); ?>">Logbook Pengajuan</a></li>
+            <li class="active">Detail Logbook Pengajuan</li>
         </ol>
     </section>
     <!-- Main content -->

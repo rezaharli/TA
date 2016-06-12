@@ -28,8 +28,7 @@ $(function() {
             <small><?php echo $this->session->flashdata('error'); ?></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Pengajuan</a></li>
+            <li><a href="<?php echo base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Upload Proposal Pengajuan</li>
         </ol>
     </section>
@@ -61,7 +60,7 @@ $(function() {
 
                             <div class="form-group">
                                 <label>Judul Proposal *</label>
-                                <input type="text" class="form-control" id="judul" placeholder="Judul Proposal" name="judul">
+                                <input type="text" class="form-control" id="judul" placeholder="Judul Proposal" name="judul" value="<?= set_value('judul') ?>">
                             </div>
                             <div class="form-group">
                                 <label>Tema Kegiatan *</label>
@@ -77,7 +76,7 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Kegiatan *</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Kegiatan" name="tanggal_kegiatan">
+                                <input type="text" class="form-control" id="datepicker" placeholder="ex:yyyy-mm-dd" name="tanggal_kegiatan">
                             </div>
                             <div class="form-group">
                                 <label>Tempat Kegiatan *</label>
@@ -102,7 +101,7 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Anggaran Biaya (Total) *</label>
-                                <input type="text" class="form-control" id="anggaran" placeholder="ex:1000000" name="anggaran">
+                                <input type="text" class="form-control" id="anggaran" placeholder="ex:1xxxxxxx" name="anggaran">
                             </div>
                             <div class="form-group">
                                 <label>Penutup *</label>

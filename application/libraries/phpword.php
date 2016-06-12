@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require 'PHPWord/vendor/autoload.php';
+require APPPATH.'third_party/PHPWord/vendor/autoload.php';
 
-class CI_Phpword {
+class Phpword {
 
     function generateSertifikat($templateLocation, $data){
         setlocale(LC_TIME, "Indonesian");

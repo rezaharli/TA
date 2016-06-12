@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require 'google/apiclient/src/Google/autoload.php';
+require APPPATH.'third_party/DriveGoogle/apiclient/src/Google/autoload.php';
 
-class CI_Google_Drive {
+class Google_Drive {
     public $CI;
     public function __construct(){
 
@@ -21,34 +21,34 @@ class CI_Google_Drive {
     * Returns an authorized API client.
     * @return Google_Client the authorized client object
     */
-    function getClient($authCode) {
-        $client = new Google_Client();
-        $client->setApplicationName(APPLICATION_NAME);
-        $client->setScopes(SCOPES);
-        $client->addScope("https://www.googleapis.com/auth/drive");
-        $client->addScope("profile");
-        $client->addScope("email");
-        $client->setAuthConfigFile(CLIENT_SECRET_PATH);
+    // function getClient($authCode) {
+    //     $client = new Google_Client();
+    //     $client->setApplicationName(APPLICATION_NAME);
+    //     $client->setScopes(SCOPES);
+    //     $client->addScope("https://www.googleapis.com/auth/drive");
+    //     $client->addScope("profile");
+    //     $client->addScope("email");
+    //     $client->setAuthConfigFile(CLIENT_SECRET_PATH);
 
-        // Exchange authorization code for an access token.
-        $accessToken = $client->authenticate($authCode);
+    //     // Exchange authorization code for an access token.
+    //     $accessToken = $client->authenticate($authCode);
 
-        $accessToken = json_decode($accessToken);
-        $this->CI->session->set_userdata('google_token', $accessToken);
-        return $client;
-    }
+    //     $accessToken = json_decode($accessToken);
+    //     $this->CI->session->set_userdata('google_token', $accessToken);
+    //     return $client;
+    // }
 
-    function getAuthCode(){
-        $client = new Google_Client();
-        $client->setApplicationName(APPLICATION_NAME);
-        $client->setScopes(SCOPES);
-        $client->addScope("https://www.googleapis.com/auth/drive");
-        $client->addScope("profile");
-        $client->addScope("email");
-        $client->setAuthConfigFile(CLIENT_SECRET_PATH);
-        $authUrl = $client->createAuthUrl();
-        redirect($authUrl);
-    }
+    // function getAuthCode(){
+    //     $client = new Google_Client();
+    //     $client->setApplicationName(APPLICATION_NAME);
+    //     $client->setScopes(SCOPES);
+    //     $client->addScope("https://www.googleapis.com/auth/drive");
+    //     $client->addScope("profile");
+    //     $client->addScope("email");
+    //     $client->setAuthConfigFile(CLIENT_SECRET_PATH);
+    //     $authUrl = $client->createAuthUrl();
+    //     redirect($authUrl);
+    // }
 
 
     /**
