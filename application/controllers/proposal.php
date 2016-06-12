@@ -12,6 +12,10 @@ class Proposal extends Private_Controller {
         $this->load->model('detail_tim_model');
         $this->load->model('mahasiswa_model');
         $this->load->model('logbook_detail_tim_model');
+
+        $this->config_upload['upload_path']     = './assets/upload/proposal_lomba';
+        $this->config_upload['allowed_types']   = 'pdf|doc|docx';
+        $this->config_upload['max_size']        = '100000';
 	}
 
     function upload_pengajuan (){
@@ -61,6 +65,18 @@ class Proposal extends Private_Controller {
         $id_upload_proposal = $this->proposal_lomba_model->insert($data);
         $this->session->set_userdata('id_proposal', $id_upload_proposal);
 
+        $this->load->library('upload', $this->config_upload);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->upload->do_upload($nama_input_file)) {
+                $upload_data = $this->upload->data();
+                $upload_data['orig_name'] = $filename;
+                $this->upload_to_drive($upload_data);
+                unlink($upload_data['full_path']);
+                $this->session->set_userdata('notif_upload', true);
+            }else{
+                $this->session->set_userdata('notif_upload', false);    
+            }
+        }
 
         //gawe nampilno status
         $this->session->set_flashdata(array('status' => true));
@@ -83,7 +99,7 @@ class Proposal extends Private_Controller {
         $service = new Google_Service_Drive($client);
 
         $file = new Google_Service_Drive_DriveFile();
-        $folderId = '0B38ZX0d3LMfBVHgydlRQanRCWXM';
+        $folderId = '0B38ZX0d3LMfBTHhYczEwR0RBU2M';
         $file->name = $upload_data['orig_name'];
         $file->parents = array($folderId);
         $data = file_get_contents($upload_data['full_path']);
