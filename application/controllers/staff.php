@@ -34,7 +34,7 @@ class Staff extends Private_Controller {
                 'jenis'     => $jenisstaff), 
             FALSE);
 
-        redirect('staff/list');		
+        redirect('lists/staff');		
 	}
 
     function do_delete($id){
@@ -43,14 +43,14 @@ class Staff extends Private_Controller {
         $this->staff_model->delete_by(array('nip' => $nip));
         $this->user_model->delete($id);
 
-        redirect('staff/list');
+        redirect('lists/staff');
     }
 
     function do_reset_password($id){
         $nip = $this->input->get('nip');
 
         $this->user_model->update($id, array('password' => sha1($nip)));
-        redirect('staff/list');
+        redirect('lists/staff');
     }
 
     function do_nip_check(){

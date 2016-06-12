@@ -37,7 +37,7 @@
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($himpunans as $himpunan) { ?>
+                                <?php foreach ($himpunans as $himpunan) : ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $himpunan['nama_himpunan']; ?></td>
@@ -54,7 +54,7 @@
                                     </td>
                                   </tr>
                                 <?php $i++; ?>
-                                <?php } ?> 
+                                <?php endforeach; ?> 
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->

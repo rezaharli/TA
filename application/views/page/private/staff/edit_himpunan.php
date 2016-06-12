@@ -44,9 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="form-group">
                             <label>Penanggung Jawab</label>
                             <select class="form-control select2" style="width: 100%;" name="penanggungjawab">
-                              <?php foreach ($mahasiswas as $mahasiswa) { ?>
-                                <option value=""> </option>
-                              <?php } ?>
+                              
                             </select>
                         </div>
                     </div><!-- /.box-body -->
@@ -95,8 +93,8 @@ if($this->session->flashdata('status') !== null){
                     return {
                         results: $.map(data, function (mahasiswas) {
                             return {
-                                text: mahasiswas.nim,
-                                id: mahasiswas.nim
+                                id: mahasiswas.nim,
+                                text:'blabalbal'
                             }
                         })
                     };

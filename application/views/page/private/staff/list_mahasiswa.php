@@ -40,6 +40,27 @@
                             </thead>
                         </table>
                     </div><!-- /.box-body -->
+
+                    <!-- ResetPassword Modal -->
+                    <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog modal-sm center" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Konfirmasi</h4>
+                          </div>
+                          <div class="modal-body">
+                            Apakah yakin ingin mereset password?
+                          </div>
+                          <div class="modal-footer">
+                            <a href="<?php echo base_url()?>staff/do_reset_password/<?php echo $staff['id']; ?>?nip=<?php echo $staff['nip']; ?>">
+                                <button class="btn btn-warning btn-sm"><i class="fa fa-refresh"></i> &nbsp;Reset Password</button>
+                            </a>&nbsp;
+                            <button type="button" class="btn btn-default btn-sm pull-right" data-dismiss="modal">Tidak</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div> <!-- /modal -->
                 </div><!-- /.box -->
             </div><!-- /.col -->
         </div><!-- /.row -->

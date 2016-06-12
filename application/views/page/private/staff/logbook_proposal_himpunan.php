@@ -42,7 +42,7 @@
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($proposals as $proposal) { ?>
+                                <?php foreach ($proposals as $proposal) : ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $proposal['pengaju']; ?></td>
@@ -64,7 +64,7 @@
                                     </td>
                                   </tr>
                                 <?php $i++; ?>
-                                <?php } ?> 
+                                <?php endforeach; ?> 
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->

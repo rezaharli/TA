@@ -12,14 +12,6 @@ class Lists extends Private_Controller {
 		$this->load_page('page/private/staff/list_mahasiswa');
 	}
 
-    function asd(){
-        $this->load->model('mahasiswa_model');
-        $mahasiswas = $this->mahasiswa_model
-            ->like('nim', $this->input->get('term')['term'])
-            ->get_all();
-        echo json_encode($mahasiswas);
-    }
-
 	function get_list_mahasiswa(){
         $kolom = array('nim', 'prodi', 'kelas', 'username', 'nama', 'email');
 
@@ -61,7 +53,7 @@ class Lists extends Private_Controller {
 
         foreach ($staffs as $staff) {
             $this->load->model($staff->role.'_model', 'roled_user_model');
-            $roled_user_data = $this->roled_user_model->get_many_by(array('id_user' => $staff->id));
+            $roled_user_data = $this->roled_user_model->get_by(array('id_user' => $staff->id));
 
             array_push($data['staffs'], array(
                 'id'        => $staff->id,
@@ -88,16 +80,18 @@ class Lists extends Private_Controller {
 
         $data['himpunans'] = array();
         foreach ($himpunans as $himpunan) {
-            $get_nim        = $this->mahasiswa_model->get_by(array('nim' => $himpunan->id_penanggungjawab));
-            $get_username   = $this->user_model->get_by(array('id' => $get_nim->id_user));
+            if($himpunan->id_penanggungjawab != NULL){
+                $get_nim        = $this->mahasiswa_model->get_by(array('nim' => $himpunan->id_penanggungjawab));
+                $get_username   = $this->user_model->get_by(array('id' => $get_nim->id_user));
 
-            array_push($data['himpunans'], array(
-                'username'      => $get_username->username,
-                'id'            => $himpunan->id,
-                'nama_himpunan' => $himpunan->nama,
-                'prodi'         => $himpunan->prodi,
-                'nim_pj'        => $himpunan->id_penanggungjawab
-            ));
+                array_push($data['himpunans'], array(
+                    'username'      => $get_username->username,
+                    'id'            => $himpunan->id,
+                    'nama_himpunan' => $himpunan->nama,
+                    'prodi'         => $himpunan->prodi,
+                    'nim_pj'        => $himpunan->id_penanggungjawab
+                ));
+            }
         }
 
         $this->load_page('page/private/staff/list_himpunan', $data);

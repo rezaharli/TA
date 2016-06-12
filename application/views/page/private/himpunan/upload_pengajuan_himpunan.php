@@ -71,7 +71,7 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Tempat Kegiatan</label>
-                                <input type="text" class="form-control" id="tempat_kegiatan" placeholder="Tempat Kegiatan" name="tempat_kegiatan">
+                                <textarea class="form-control" id="tempat_kegiatan" placeholder="Tempat Kegiatan" name="tempat_kegiatan"></textarea>
                             </div>
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
