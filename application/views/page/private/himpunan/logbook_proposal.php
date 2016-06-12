@@ -19,8 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Pengajuan</a></li>
+            <li><a href="<?php echo base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Logbook Pengajuan</li>
         </ol>
     </section>
@@ -124,18 +123,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       "info": true,
       "autoWidth": false
     });
-  });
 
-  <!-- alert sukses tidak -->
-  <?php
-  if($this->session->flashdata('status') !== null){
-      echo '<script type="text/javascript">';
-      if ($this->session->flashdata('status')) {
-          echo 'alert("Upload proposal berhasil")';
-      } else {
-          echo 'alert("Upload proposal gagal")';
-      }
-      echo '</script>';
-  }
-  ?>
+    // <!-- alert sukses tidak -->
+    <?php
+        if(!empty($this->session->userdata('notif_upload'))){
+          if ($this->session->userdata('notif_upload')) {
+              echo 'alert("Upload pengajuan proposal berhasil")';
+          } else {
+              echo 'alert("Upload pengajuan proposal gagal")';
+          }
+          $this->session->unset_userdata('notif_upload');
+        }
+    ?>
+
+  }); 
 </script>
