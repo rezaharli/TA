@@ -47,8 +47,10 @@
                                     <td><?php echo $kegiatan['tempat_kegiatan']; ?></td>
                                     <td>
                                       <a href="<?php echo base_url('kegiatan_himpunan/detail_kegiatan?id_acara='.$kegiatan['id_pengajuan_proposal']); ?>">
-                                        <button class="btn btn-sm btn-info pull-left"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
+                                        <button class="btn btn-sm btn-info pull-left"><i class="fa fa-list"></i>&nbsp; Lihat Detail</button>
                                       </a>
+                                      &nbsp;
+                                      <a class="btn btn-sm btn-info" href="<?php echo base_url('kegiatan_himpunan/do_cetak_sertifikat')."/".$kegiatan['id_pengajuan_proposal']; ?>"><i class="fa fa-print"></i>&nbsp; Cetak Sertifikat</a>
                                     </td>
                                   </tr>
                                 <?php $i++; ?>
