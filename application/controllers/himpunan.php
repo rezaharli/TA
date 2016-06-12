@@ -6,6 +6,7 @@ class Himpunan extends Private_Controller {
 		parent::__construct();
 		$this->load->model('himpunan_model');
 		$this->load->model('user_model');
+		$this->load->library('form_validation');
 	}
 
 	function update_himpunan(){
@@ -13,9 +14,9 @@ class Himpunan extends Private_Controller {
 		
 		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
 
-		$data['title'] 	= $himpunan->nama;
-		$data['himpunan'] 	= $himpunan;
-		$data['user'] 		= $user;
+		$view_data['title'] 	= $himpunan->nama;
+		$view_data['himpunan'] 	= $himpunan;
+		$view_data['user'] 		= $user;
 
 		$this->load_page('page/private/himpunan/edit_himpunan', $view_data);
 	}
@@ -25,14 +26,24 @@ class Himpunan extends Private_Controller {
 		
 		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
 
-		if($_SERVER['REQUEST_METHOD'] == 'POST'){
-			$data = array(
-				'nama' 	=> $this->input->post('nama'),
-				'prodi' => $this->input->post('prodi')
-			);
-			$status = $this->himpunan_model->update($himpunan->id, $data);
+		// rule
+		$this->form_validation->set_rules('nama', 'Nama Himpunan', 'required');
+		$this->form_validation->set_rules('prodi', 'Program Studi', 'required');
 
-			$this->session->set_flashdata(array('status' => ($status != 0) ? true : false));
+		if($_SERVER['REQUEST_METHOD'] == 'POST'){
+			if ($this->form_validation->run() !== FALSE) {
+				$data = array(
+					'nama' 	=> $this->input->post('nama'),
+					'prodi' => $this->input->post('prodi')
+				);
+				$status = $this->himpunan_model->update($himpunan->id, $data);
+	
+				$this->session->set_flashdata(array('status' => ($status != 0) ? true : false));
+				redirect('himpunan/update_himpunan');
+			} else {
+				$this->update_himpunan();
+			}
+		} else {
 			redirect('himpunan/update_himpunan');
 		}
 	}
@@ -60,7 +71,7 @@ class Himpunan extends Private_Controller {
 	}
 
 	function asd(){
-        $this->load->model('mahasiswa_model');
+        // $this->load->model('mahasiswa_model');
         $mahasiswas = $this->mahasiswa_model
             ->like('nim', $this->input->get('term')['term'])
             ->get_all();
