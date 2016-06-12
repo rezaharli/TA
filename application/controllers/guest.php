@@ -141,7 +141,21 @@ class Guest extends Public_Controller {
     }
     
     function kegiatan() {
-        $this->load_page('page/public/detail-event');
+        $this->load->model('acara_himpunan_model');
+
+        $event = $this->acara_himpunan_model->get_by(array('id' => $this->uri->segment(3)));
+            
+        $data['event'] = array(
+            'id'                => $event->id,
+            'nama'              => $event->nama_acara,
+            'deskripsi'         => $event->deskripsi_acara,
+            'tempat'            => $event->tempat_acara,
+            'tanggal'           => $event->tanggal_acara,
+            'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_acara),
+            'gambar'            => ($event->poster_acara) ? $event->poster_acara : 'assets/universal/img/default-himpunan.jpg',
+            );
+
+        $this->load_page('page/public/detail-event', $data);
     }
 
     private function get_tanggal_formatted($tanggal){
