@@ -90,6 +90,12 @@ $(function() {
                         <div class="box-header with-border">
                             <h3 class="box-title">Data Panitia</h3>
                         </div><!-- /.box-header -->
+
+                        <div>
+                            <a id="add_row"><button  class="btn btn-default pull-left"><span class="fa fa-plus"></span>&nbsp; Add Row</button></a>
+                            &nbsp;
+                            <a id="delete_row"><button  class="btn btn-default"><span class="fa fa-minus"></span>&nbsp; Delete Row</button></a>
+                        </div>
                         
                         <!-- <a href=""><button id="add_row" type="button" class="btn btn-default"><span class="fa fa-plus"></span>&nbsp;Tambah Baris</button></a>
                         &nbsp;
@@ -133,13 +139,10 @@ $(function() {
                                             #
                                         </th>
                                         <th class="text-center">
-                                            Name
+                                            NIM
                                         </th>
                                         <th class="text-center">
-                                            Mail
-                                        </th>
-                                        <th class="text-center">
-                                            Mobile
+                                            Nama
                                         </th>
                                     </tr>
                                 </thead>
@@ -149,13 +152,10 @@ $(function() {
                                         1
                                         </td>
                                         <td>
-                                        <input type="text" name='name0'  placeholder='Name' class="form-control"/>
+                                        <input type="text" name='nim0'  placeholder='NIM' class="form-control"/>
                                         </td>
                                         <td>
-                                        <input type="text" name='mail0' placeholder='Mail' class="form-control"/>
-                                        </td>
-                                        <td>
-                                        <input type="text" name='mobile0' placeholder='Mobile' class="form-control"/>
+                                        <input type="text" name='nama0' placeholder='Nama' class="form-control"/>
                                         </td>
                                     </tr>
                                     <tr id='addr1'></tr>
@@ -163,8 +163,11 @@ $(function() {
                             </table>
                         </div>
                     </div>
+                    <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
                     <div>
-                        <a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn-default">Delete Row</a>
+                        
                     </div>
                     
                 </div>
@@ -197,7 +200,7 @@ $(function() {
 
     var i=1;
     $("#add_row").click(function(){
-      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='name"+i+"' type='text' placeholder='Name' class='form-control input-md'  /> </td><td><input  name='mail"+i+"' type='text' placeholder='Mail'  class='form-control input-md'></td><td><input  name='mobile"+i+"' type='text' placeholder='Mobile'  class='form-control input-md'></td>");
+      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input nim='nim"+i+"' type='text' placeholder='NIM' class='form-control input-md'  /> </td><td><input  name='nama"+i+"' type='text' placeholder='Nama'  class='form-control input-md'></td>");
 
       $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
       i++; 
@@ -209,16 +212,14 @@ $(function() {
          }
      });
 
-    <!-- alert sukses tidak -->
+    // <!-- alert sukses tidak -->
     <?php
-    if($this->session->flashdata('status') !== null){
-        echo '<script type="text/javascript">';
-        if ($this->session->flashdata('status')) {
-            echo 'alert("Buat acara himpunan berhasil")';
-        } else {
-            echo 'alert("Buat acara himpunan gagal")';
+        if(!empty($this->session->userdata('    notif_upload'))){
+            if ($this->session->userdata('  notif_upload')) {
+                echo 'alert("Buat acara berhasil")';
+            } else {
+                echo 'alert("Buat acara gagal")';
+            }
         }
-        echo '</script>';
-    }
     ?>
 </script>

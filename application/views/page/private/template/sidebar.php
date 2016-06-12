@@ -75,9 +75,9 @@
 
           <?php } elseif ($jenis == 'himpunan') { ?>
             <li>
-              <a href="#"><i class="fa fa-user"></i>Akun<i class="fa fa-angle-left pull-right"></i></a>
+              <a href="#"><i class="fa fa-user"></i>Akun Himpunan<i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                  <li><a href="<?php echo base_url('himpunan/update_himpunan') ?>"><i class="fa fa-edit"></i>Edit profil</a></li>
+                  <li><a href="<?php echo base_url('himpunan/update_himpunan') ?>"><i class="fa fa-edit"></i>Edit Profil Himpunan</a></li>
                 </ul>
             </li>
             <li>
