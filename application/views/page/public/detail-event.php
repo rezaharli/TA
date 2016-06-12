@@ -40,24 +40,22 @@
                     <div class="col-sm-6">
                         <div class="box">
 
-                            <form>
-                                <div class="sizes">
+                            <div class="sizes">
+                                <h3><?php echo $event['tanggal_display'] ?></h3>
+                            </div>
 
-                                    <h3><?php echo $event['tanggal_display'] ?></h3>
+                            <p class="price"></p>
 
-                                </div>
+                            <?php if($this->uri->segment(2) == 'kegiatan') { ?>
+                                <p class="text-center">
+                                    <a href="<?php echo base_url('guest/kegiatan/'.$event['id'].'/daftar') ?>">
+                                        <?php if($event['daftarable'] == true){ ?>
+                                            <button class="btn btn-template-main"><i class="fa fa-shopping-cart"></i> Daftar</button>
+                                        <?php } ?>
+                                    </a>
+                                </p>
+                            <?php } ?>
 
-                                <p class="price"></p>
-
-
-                                <?php if($this->uri->segment(2) == 'kegiatan') { ?>
-                                    <p class="text-center">
-                                        <button type="submit" class="btn btn-template-main"><i class="fa fa-shopping-cart"></i> Daftar</button>
-                                        </button>
-                                    </p>
-                                <?php } ?>
-
-                            </form>
                         </div>
 
                         <div class="row" id="thumbs">

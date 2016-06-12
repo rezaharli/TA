@@ -114,7 +114,8 @@ class Guest extends Public_Controller {
                     'tanggal'           => $event->tanggal_acara,
                     'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_acara),
                     'gambar'            => ($event->poster_acara) ? $event->poster_acara : $gambar_default,
-                    'jenis'             => 'kegiatan'
+                    'jenis'             => 'kegiatan',
+                    'daftarable'        => $event->tanggal_acara >= date('Y-m-j')
                     ));
             }
         }
@@ -142,7 +143,6 @@ class Guest extends Public_Controller {
     
     function kegiatan() {
         $this->load->model('acara_himpunan_model');
-
         $event = $this->acara_himpunan_model->get_by(array('id' => $this->uri->segment(3)));
             
         $data['event'] = array(
@@ -153,10 +153,48 @@ class Guest extends Public_Controller {
             'tanggal'           => $event->tanggal_acara,
             'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_acara),
             'gambar'            => ($event->poster_acara) ? $event->poster_acara : 'assets/universal/img/default-himpunan.jpg',
+            'daftarable'        => $event->tanggal_acara >= date('Y-m-j')
             );
 
-        $this->load_page('page/public/detail-event', $data);
+        if($this->uri->segment(4)){
+            if ($this->uri->segment(4) == 'daftar') {
+                if($data['event']['daftarable'] == true){
+                    $this->load_page('page/public/daftar_event', $data);
+                } else show_404();
+            } else show_404();
+        } else {
+            $this->load_page('page/public/detail-event', $data);
+        }
     }
+    
+    function daftar() {
+        $this->load->model('acara_himpunan_model');
+        $this->load->model('peserta_model');
+
+        if( ! $this->input->post()) show_404();
+
+        $acara      = $this->acara_himpunan_model->get($this->uri->segment(3));
+        $daftarable = $acara->tanggal_acara >= date('Y-m-j');
+        if( ! $acara && ! $daftarable) show_404();
+
+        $nama   = $this->input->post('nama');
+        $email  = $this->input->post('email');
+
+        $peserta = $this->peserta_model->get_by(array('email' => $email));
+
+        if( ! $peserta) {
+            $last_inserted_id_peserta = $this->peserta_model->insert(array('nama' => $nama, 'email' => $email, 'id_acara' => $acara->id));
+            if ( ! $last_inserted_id_peserta) {
+                $this->session->set_flashdata('message', 'Pendaftaran gagal');
+            } else {
+                $this->session->set_flashdata('message', 'Pendaftaran berhasil');
+            }
+        } else {
+            $this->session->set_flashdata('message', 'Pendaftaran gagal, email telah terdaftar.');
+        }
+        redirect('guest/kegiatan/'.$acara->id.'/daftar');
+    }
+
 
     private function get_tanggal_formatted($tanggal){
         return strftime('%A, %e %B %Y', strtotime($tanggal));
