@@ -14,8 +14,8 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,500,700,800' rel='stylesheet' type='text/css'>
 
     <!-- Bootstrap and Font Awesome css -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/universal/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/universal/css/bootstrap.min.css">
 
     <!-- Css animations  -->
     <link href="<?php echo base_url() ?>assets/universal/css/animate.css" rel="stylesheet">
@@ -54,6 +54,40 @@
 
         <header>
 
+            <!-- *** TOP ***
+_________________________________________________________ -->
+            <div id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-5 contact">
+                            <p class="hidden-sm hidden-xs">Kontak kami ke <?php echo APP_EMAIL ?></p>
+                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                            </p>
+                        </div>
+                        <div class="col-xs-7">
+
+                            <div class="login">
+                                <?php if( ! $this->session->userdata('id')) { ?>
+                                    <a href="<?php echo base_url('auth/login') ?>" data-toggle="modal" data-animate-hover="pulse">
+                                        <i class="fa fa-sign-in"></i> 
+                                        <span class="hidden-xs text-uppercase">Login</span>
+                                    </a>
+                                <?php } else { ?>                            
+                                    <a href="<?php echo base_url('home') ?>" data-toggle="modal"><span class="hidden-xs text-uppercase">Dashboard</span></a>
+                                    <a href="<?php echo base_url('auth/logout') ?>" data-toggle="modal" data-animate-hover="pulse">
+                                        <i class="fa fa-sign-in"></i> 
+                                        <span class="hidden-xs text-uppercase">Logout</span>
+                                    </a>
+                                <?php } ?>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- *** TOP END *** -->
+
             <!-- *** NAVBAR ***
     _________________________________________________________ -->
 
@@ -64,7 +98,7 @@
                     <div class="container">
                         <div class="navbar-header">
 
-                            <a class="navbar-brand home" href="index.html">
+                            <a class="navbar-brand home" href="<?php echo base_url() ?>">
                                 <img src="<?php echo base_url() ?>assets/universal/img/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
                                 <img src="<?php echo base_url() ?>assets/universal/img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
                             </a>
@@ -80,11 +114,11 @@
                         <div class="navbar-collapse collapse" id="navigation">
 
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="use-yamm yamm-fw">
-                                    <a href="<?php echo base_url() ?>guest/events">Temukan Event</a>
+                                <li class="use-yamm yamm-fw <?php if( ! $this->uri->segment(1) || ( ! $this->uri->segment(2) && $this->uri->segment(1) == 'guest')) echo 'active' ?>">
+                                    <a href="<?php echo base_url() ?>">Home</a>
                                 </li>
-                                <li class="use-yamm yamm-fw">
-                                    <a href="<?php echo base_url() ?>auth/login">Log in</a>
+                                <li class="use-yamm yamm-fw <?php if( $this->uri->segment(2) == 'events') echo 'active' ?>">
+                                    <a href="<?php echo base_url() ?>guest/events">Temukan Event</a>
                                 </li>
                             </ul>
 
