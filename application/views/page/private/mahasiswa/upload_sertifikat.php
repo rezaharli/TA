@@ -61,48 +61,19 @@ $(function() {
                                 <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Lomba" name="tanggal_sertifikat">
                             </div>
                             <div class="form-group">
-                                <label>Upload Sertifikat</label>
+                                <label>Upload Sertifikat dan Kegiatan lomba</label>
                                 <input type="file" class="form-control" id="bukti_lomba" name="sertifikat1" required="true">
+                                *upload sertifikat dan foto kegiatan dalam format Zip/Rar maksimal 2 MB
                             </div>
-                            <div class="form-group">
-                                <label>Upload Foto Kegiatan</label>
-                                <input type="file" class="form-control" id="upload_kegiatan1" name="kegiatan1" required="true">
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
                 </div>
 
 
-                <div class="col-md-6">
-                    <!-- general form elements -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"></h3>
-                        </div><!-- /.box-header -->
-                        
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label>Upload Foto Kegiatan</label>
-                                <input type="file" class="form-control" id="upload_kegiatan2" name="kegiatan2" required="true">
-                            </div>
-                            <div class="form-group">
-                                <label>Upload Foto Kegiatan</label>
-                                <input type="file" class="form-control" id="upload_kegiatan3" name="kegiatan3" required="true">
-                            </div>
-                            <div class="form-group">
-                                <label>Upload Foto Kegiatan</label>
-                                <input type="file" class="form-control" id="upload_kegiatan4" name="kegiatan4" required="true">
-                            </div>
-                            <div class="form-group">
-                                
-                            </div><!-- /.box-body -->
-                            <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                        </div>
-                        
-                    </div>
-                </div>
+                
 
             </form>
         </div>

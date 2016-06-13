@@ -47,6 +47,15 @@ $(function() {
                         </div><!-- /.box-header -->
                         
                         <div class="box-body">
+                            <?php if (!empty(validation_errors())): ?>
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                    <ul>
+                                        <?php echo validation_errors('<li>', '</li>'); ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
                             <div class="form-group">
                                 <label>Event</label>
                                 <select class="form-control" name="event">
@@ -106,7 +115,7 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Upload Pengajuan Proposal</label>
-                                <input type="file" class="form-control" id="file_pengajuan" name="file_pengajuan">
+                                <input type="file" class="form-control" id="file_pengajuan" name="file_pengajuan" required>
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
@@ -121,14 +130,13 @@ $(function() {
 </div>
 
 <!-- alert sukses tidak -->
-<?php
-if($this->session->flashdata('status') !== null){
-    echo '<script type="text/javascript">';
-    if ($this->session->flashdata('status')) {
-        echo 'alert("Upload proposal berhasil")';
-    } else {
-        echo 'alert("Upload proposal gagal")';
+<!-- <?php
+    if(!empty($this->session->userdata('notif_upload'))){
+        if ($this->session->userdata('notif_upload')) {
+            echo 'alert("Upload proposal berhasil")';
+        } else {
+            echo 'alert("Upload proposal gagal")';
+        }
+        $this->session->unset_userdata('notif_upload');
     }
-    echo '</script>';
-}
-?>
+?> -->
