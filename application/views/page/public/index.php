@@ -77,184 +77,57 @@
                 </div>
             </div>
 
-            <!-- *** HOMEPAGE CAROUSEL END *** -->
-        </section>
-
-        <section class="bar background-white">
             <div class="container">
+
+                <div class="heading text-center">
+                    <h3>Event-event terbaru</h3>
+                </div>
+
                 <div class="row portfolio">
                     
-                    <div class="col-sm-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="<?php echo base_url() ?>assets/universal/img/portfolio-1.jpg" alt="" class="img-responsive">
+                    <div class="col-md-12">
+                        <form method="get" action="<?php echo base_url('guest/events') ?>">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <input type="text" name="cari" class="form-control" placeholder="Cari event lomba atau kegiatan himpunan">
+                                    </div>
                                 </div>
-                                <div class="bg"></div>
-                                <div class="name">
-                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
+                                <div class="col-sm-3 text-right">
+                                    <div class="form-group">
+                                        <select type="text" name="rentang" class="form-control">
+                                            <option value="">Semua tanggal</option>
+                                            <option value="1">Hari Ini</option>
+                                            <option value="7">Jarak 7 hari ke depan</option>
+                                            <option value="30">Jarak 1 bulan ke depan</option>
+                                            <option value="365">Jarak 1 tahun ke depan</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="text">
-                                    <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-                                    <p class="buttons">
-                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- /.box-image -->
-
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="<?php echo base_url() ?>assets/universal/img/portfolio-2.jpg" alt="" class="img-responsive">
-                                </div>
-                                <div class="bg"></div>
-                                <div class="name">
-                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
-                                </div>
-                                <div class="text">
-                                    <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-                                    <p class="buttons">
-                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
-                                    </p>
+                                <div class="col-sm-2 text-right">
+                                    <button type="submit" class="btn btn-template-primary" style="width: 100%">Cari</button>
                                 </div>
                             </div>
-                            <!-- /.box-image -->
+                            <!-- /.row -->
+                        </form>
+                    </div>
 
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="box-image">
+                    <?php foreach ($event_mendatang as $event) : ?>
+                        <div class="col-md-4">
+                            <div class="product">
                                 <div class="image">
-                                    <img src="<?php echo base_url() ?>assets/universal/img/portfolio-3.jpg" alt="" class="img-responsive">
-                                </div>
-                                <div class="bg"></div>
-                                <div class="name">
-                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
+                                    <a href="<?php echo base_url('guest/'.$event['jenis'].'/'.$event['id']) ?>">
+                                        <img src="<?php echo base_url() . $event['gambar']; ?>" alt="" class="img-responsive image1">
+                                    </a>
                                 </div>
                                 <div class="text">
-                                    <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-                                    <p class="buttons">
-                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
-                                    </p>
+                                    <h3><a href="<?php echo base_url('guest/'.$event['jenis'].'/'.$event['id']) ?>"><?php echo $event['jenis'] . ': ' . $event['nama'] ?></a></h3>
+                                    <p class="price"><?php echo $event['tanggal_display'] ?></p>
                                 </div>
                             </div>
-                            <!-- /.box-image -->
-
+                            <!-- /.product -->
                         </div>
-
-                        <div class="col-sm-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="<?php echo base_url() ?>assets/universal/img/portfolio-4.jpg" alt="" class="img-responsive">
-                                </div>
-                                <div class="bg"></div>
-                                <div class="name">
-                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
-                                </div>
-                                <div class="text">
-                                    <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-                                    <p class="buttons">
-                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- /.box-image -->
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="<?php echo base_url() ?>assets/universal/img/portfolio-5.jpg" alt="" class="img-responsive">
-                                </div>
-                                <div class="bg"></div>
-                                <div class="name">
-                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
-                                </div>
-                                <div class="text">
-                                    <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-                                    <p class="buttons">
-                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- /.box-image -->
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="<?php echo base_url() ?>assets/universal/img/portfolio-6.jpg" alt="" class="img-responsive">
-                                </div>
-                                <div class="bg"></div>
-                                <div class="name">
-                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
-                                </div>
-                                <div class="text">
-                                    <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-                                    <p class="buttons">
-                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- /.box-image -->
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="<?php echo base_url() ?>assets/universal/img/portfolio-7.jpg" alt="" class="img-responsive">
-                                </div>
-                                <div class="bg"></div>
-                                <div class="name">
-                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
-                                </div>
-                                <div class="text">
-                                    <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-                                    <p class="buttons">
-                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- /.box-image -->
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="<?php echo base_url() ?>assets/universal/img/portfolio-9.jpg" alt="" class="img-responsive">
-                                </div>
-                                <div class="bg"></div>
-                                <div class="name">
-                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
-                                </div>
-                                <div class="text">
-                                    <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-                                    <p class="buttons">
-                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- /.box-image -->
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="box-image">
-                                <div class="image">
-                                    <img src="<?php echo base_url() ?>assets/universal/img/portfolio-8.jpg" alt="" class="img-responsive">
-                                </div>
-                                <div class="bg"></div>
-                                <div class="name">
-                                    <h3><a href="<?php echo base_url() ?>guest/detail_event">Portfolio box-image</a></h3> 
-                                </div>
-                                <div class="text">
-                                    <p class="hidden-sm">Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-                                    <p class="buttons">
-                                        <a href="<?php echo base_url() ?>guest/detail_event" class="btn btn-template-transparent-primary">View</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- /.box-image -->
-                        </div>
+                    <?php endforeach; ?>
 
                 </div>
             </div>
@@ -265,20 +138,20 @@
                 <div class="row showcase">
                     <div class="col-md-4 col-sm-6">
                         <div class="item">
-                            <div class="icon"><i class="fa fa-calendar-o"></i></div>
-                            <h4><span class="counter">580</span><br>Event Tersedia</h4>
+                            <div class="icon"><i class="fa fa-calendar-o"></i></i></div>
+                            <h4><span class="counter"><?php echo $total_event ?></span><br>Total Event Lomba</h4>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-6">
                         <div class="item">
                             <div class="icon"><i class="fa fa-align-justify"></i></div>
-                            <h4><span class="counter">100</span><br>Total Event</h4>
+                            <h4><span class="counter"><?php echo $total_acara_himpunan ?></span><br>Total Event Himpunan</h4>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-6">
                         <div class="item">
                             <div class="icon"><i class="fa fa-users"></i></div>
-                            <h4><span class="counter">923</span><br> Total Pendaftar</h4>
+                            <h4><span class="counter"><?php echo $total_peserta ?></span><br> Total Pendaftar</h4>
                         </div>
                     </div>
                 </div>
