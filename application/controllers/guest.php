@@ -91,52 +91,13 @@ class Guest extends Public_Controller {
 
         $this->load_page('page/public/temukan-event', $data);
     }
-
-    private function set_list_gabungan_event($events, $jenis){
-        if($jenis == 'lomba') {
-            $gambar_default = 'assets/universal/img/default-lomba.jpg';
-            foreach ($events as $event) {
-                array_push($this->list_gabungan_event, array(
-                    'id'                => $event->id,
-                    'nama'              => $event->nama_event,
-                    'tanggal'           => $event->tanggal_event,
-                    'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_event),
-                    'gambar'            => ($event->bukti_event) ? $event->bukti_event : $gambar_default,
-                    'jenis'             => 'lomba'
-                    ));
-            }
-        } else if ($jenis == 'kegiatan') {
-            $gambar_default = 'assets/universal/img/default-kegiatan.jpg';
-            foreach ($events as $event) {
-                array_push($this->list_gabungan_event, array(
-                    'id'                => $event->id,
-                    'nama'              => $event->nama_acara,
-                    'tanggal'           => $event->tanggal_acara,
-                    'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_acara),
-                    'gambar'            => ($event->poster_acara) ? $event->poster_acara : $gambar_default,
-                    'jenis'             => 'kegiatan',
-                    'daftarable'        => $event->tanggal_acara >= date('Y-m-j')
-                    ));
-            }
-        }
-
-        usort($this->list_gabungan_event, function($a, $b) { 
-            return strnatcmp($a['tanggal'], $b['tanggal']); 
-        });
-    }
 	
     function lomba() {
         $this->load->model('event_model');
 
         $event = $this->event_model->get_by(array('id' => $this->uri->segment(3), 'status' => 'disetujui'));
             
-        $data['event'] = array(
-            'id'                => $event->id,
-            'nama'              => $event->nama_event,
-            'tanggal'           => $event->tanggal_event,
-            'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_event),
-            'gambar'            => ($event->bukti_event) ? $event->bukti_event : 'assets/universal/img/default-lomba.jpg',
-            );
+        $data['event'] = $this->make_lomba_array($event);
 
         $this->load_page('page/public/detail-event', $data);
     }
@@ -145,16 +106,7 @@ class Guest extends Public_Controller {
         $this->load->model('acara_himpunan_model');
         $event = $this->acara_himpunan_model->get_by(array('id' => $this->uri->segment(3)));
             
-        $data['event'] = array(
-            'id'                => $event->id,
-            'nama'              => $event->nama_acara,
-            'deskripsi'         => $event->deskripsi_acara,
-            'tempat'            => $event->tempat_acara,
-            'tanggal'           => $event->tanggal_acara,
-            'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_acara),
-            'gambar'            => ($event->poster_acara) ? $event->poster_acara : 'assets/universal/img/default-himpunan.jpg',
-            'daftarable'        => $event->tanggal_acara >= date('Y-m-j')
-            );
+        $data['event'] = $this->make_kegiatan_array($event);
 
         if($this->uri->segment(4)){
             if ($this->uri->segment(4) == 'daftar') {
@@ -195,6 +147,46 @@ class Guest extends Public_Controller {
         redirect('guest/kegiatan/'.$acara->id.'/daftar');
     }
 
+    private function set_list_gabungan_event($events, $jenis){
+        if($jenis == 'lomba') {
+            foreach ($events as $event) {
+                array_push($this->list_gabungan_event, $this->make_lomba_array($event));
+            }
+        } else if ($jenis == 'kegiatan') {
+            foreach ($events as $event) {
+                array_push($this->list_gabungan_event, $this->make_kegiatan_array($event));
+            }
+        }
+
+        usort($this->list_gabungan_event, function($a, $b) { 
+            return strnatcmp($a['tanggal'], $b['tanggal']); 
+        });
+    }
+
+    private function make_lomba_array($event) {
+        return array(
+            'id'                => $event->id,
+            'nama'              => $event->nama_event,
+            'tanggal'           => $event->tanggal_event,
+            'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_event),
+            'gambar'            => ($event->bukti_event) ? 'assets/upload/event_lomba/'.$event->bukti_event : 'assets/universal/img/default-lomba.jpg',
+            'jenis'             => 'lomba'
+            );
+    }
+
+    private function make_kegiatan_array($event) {
+        return array(
+            'id'                => $event->id,
+            'nama'              => $event->nama_acara,
+            'deskripsi'         => $event->deskripsi_acara,
+            'tempat'            => $event->tempat_acara,
+            'tanggal'           => $event->tanggal_acara,
+            'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_acara),
+            'gambar'            => ($event->poster_acara) ? 'assets/upload/acara/acara_idacara/'.$event->poster_acara : 'assets/universal/img/default-kegiatan.jpg',
+            'jenis'             => 'kegiatan',
+            'daftarable'        => $event->tanggal_acara >= date('Y-m-j')
+            );
+    }
 
     private function get_tanggal_formatted($tanggal){
         return strftime('%A, %e %B %Y', strtotime($tanggal));

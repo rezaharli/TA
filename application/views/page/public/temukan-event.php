@@ -67,15 +67,9 @@ _________________________________________________________ -->
                     <div class="container">
                         <div class="row">
                             <div class="col-md-7">
-                                <h1>Bla - bla bla</h1>
-                            </div>
-                            <div class="col-md-5">
-                                <ul class="breadcrumb">
-                                    <li><a href="index.html">Home</a>
-                                    </li>
-                                    <li>Bla - bla bla</li>
-                                </ul>
-
+                                <h1>
+                                Event - <?php echo ($this->uri->segment(3) == null) ? 'Semua' : (($this->uri->segment(3) == 'lomba') ? 'Lomba' : (($this->uri->segment(3) == 'kegiatan') ? 'Kegiatan himpunan' : '')); ?> 
+                                </h1>
                             </div>
                         </div>
                     </div>
@@ -117,12 +111,12 @@ _________________________________________________________ -->
                         </div>
                     </section>
                 <?php endforeach; ?>
-                <ul class="pager">
+                <!-- <ul class="pager">
                     <li class="previous"><a href="#">&larr; Older</a>
                     </li>
                     <li class="next disabled"><a href="#">Newer &rarr;</a>
                     </li>
-                </ul>
+                </ul> -->
 
 
 

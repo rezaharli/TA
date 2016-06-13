@@ -8,9 +8,9 @@
                 <ul class="breadcrumb">
                     <li><a href="index.html">Home</a>
                     </li>
-                    <li><a href="shop-category.html">Ladies</a>
-                    </li>
-                    <li><a href="shop-category.html">Tops</a>
+                    <li><a href="shop-category.html">
+                        <?php echo ($this->uri->segment(2) == 'lomba') ? 'Lomba' : (($this->uri->segment(2) == 'lomba') ? 'Lomba' : ''); ?>
+                        </a>
                     </li>
                     <li><?php echo $event['nama'] ?></li>
                 </ul>
@@ -46,11 +46,23 @@
 
                             <p class="price"></p>
 
+                            <?php if($this->uri->segment(2) == 'lomba') { ?>
+                                <blockquote>
+                                    <p><em>Silahkan <?php if( ! $this->session->userdata('id')) echo "login dan "; ?>masuk ke halaman dashboard kemudian upload proposal anda untuk mendaftar ke event ini</em>
+                                    </p>
+                                </blockquote>
+                            <?php } ?>
+
                             <?php if($this->uri->segment(2) == 'kegiatan') { ?>
                                 <p class="text-center">
                                     <a href="<?php echo base_url('guest/kegiatan/'.$event['id'].'/daftar') ?>">
                                         <?php if($event['daftarable'] == true){ ?>
                                             <button class="btn btn-template-main"><i class="fa fa-shopping-cart"></i> Daftar</button>
+                                        <?php } else { ?>
+                                            <blockquote>
+                                                <p><em>Masa pendaftaran event sudah habis</em>
+                                                </p>
+                                            </blockquote>
                                         <?php } ?>
                                     </a>
                                 </p>
@@ -69,9 +81,6 @@
                         <p>
                             <h4>Nama Acara</h4>
                             <p><?php echo $event['nama'] ?></p>
-                            
-                            <h4>Deskripsi</h4>
-                            <p><?php echo $event['deskripsi'] ?></p>
                             
                             <h4>Tempat acara</h4>
                             <p><?php echo $event['tempat'] ?></p>

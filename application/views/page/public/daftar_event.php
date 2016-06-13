@@ -8,7 +8,7 @@
                 <ul class="breadcrumb">
                     <li><a href="index.html">Home</a>
                     </li>
-                    <li>Checkout - <?php echo $event['nama'] ?></li>
+                    <li>Daftar - <?php echo $event['nama'] ?></li>
                 </ul>
 
             </div>
