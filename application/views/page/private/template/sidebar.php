@@ -19,8 +19,20 @@
             <?php } ?>
             
             <?php if ($jenis == 'kaur' || $jenis == 'staff_kemahasiswaan') { ?>
-              <li><a href="<?php echo base_url('event') ?>"><i class="fa fa-circle-o"></i>Daftar pengajuan event</a></li>
-              <li><a href="<?php echo base_url('event/tambah') ?>"><i class="fa fa-circle-o"></i>Tambah Event</a></li>
+              <li><a href="#"><i class="fa fa-circle-o"></i>Lomba <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                  <li><a href="<?php echo base_url('event/lomba/') ?>"><i class="fa fa-circle-o"></i>List Lomba</a></li>
+                  <li><a href="<?php echo base_url('event/lomba/pengajuan') ?>"><i class="fa fa-circle-o"></i>List Pengajuan Lomba</i></a>
+                  <li><a href="<?php echo base_url('event/lomba/tambah') ?>"><i class="fa fa-circle-o"></i>Tambah Lomba</a></li>
+                  </li>
+                </ul>
+              </li>
+              <li><a href="<?php echo base_url('event') ?>"><i class="fa fa-circle-o"></i>Kegiatan Himpunan <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                  <li><a href=""><i class="fa fa-circle-o"></i>List Kegiatan</a></li>
+                  </li>
+                </ul>
+              </li>
             <?php } ?>
           
           </ul>
@@ -108,3 +120,20 @@
     </section>
     <!-- /.sidebar -->
 </aside>
+
+<script>
+  var a = $('a[href="<?php echo base_url(uri_string()) ?>"]');
+  a.parent().addClass("active");
+  var lewati = true;
+  var parents = a.parents().map(function() {
+    if (lewati == true) {
+      if (this.tagName == "UL"){
+        lewati = false;
+      }
+    } else {
+      if (this.tagName == "LI"){
+        $(this).addClass("active");
+      }
+    }
+  });
+</script>
