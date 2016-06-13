@@ -14,9 +14,9 @@
             <small><?php echo $himpunan->nama ?></small>
       </h1>
       <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Kegiatan</a></li>
-            <li class="active"><?php echo $nama_acara ?></li>
+            <li><a href="<?php echo base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('kegiatan_himpunan/list_kegiatan'); ?>">List Kegiatan Himpunan</a></li>
+            <li class="active">Detail Kegiatan Himpunan <?php echo $nama_acara ?></li>
         </ol>
   </section>
 

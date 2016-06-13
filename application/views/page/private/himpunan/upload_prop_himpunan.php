@@ -29,8 +29,8 @@ $(function() {
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Pengajuan Proposal</a></li>
-            <li class="active">Upload Proposal</li>
+            <li><a href="<?php echo base_url("proposal_himpunan/detail_pengajuan?id_pengajuan=".$id_pengajuan); ?>">Detail Logbook Pengajuan</a></li>
+            <li class="active">Upload Proposal (Revisi)</li>
         </ol>
     </section>
 
@@ -49,28 +49,38 @@ $(function() {
                         </div><!-- /.box-header -->
                         
                         <div class="box-body">
+                            <?php if (!empty(validation_errors())): ?>
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                    <ul>
+                                        <?php echo validation_errors('<li>', '</li>'); ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
+
                             <div class="form-group">
-                                <label>Judul Proposal</label>
+                                <label>Judul Proposal *</label>
                                 <input type="text" class="form-control" id="judul" placeholder="Judul Proposal" name="judul">
                             </div>
                             <div class="form-group">
-                                <label>Tema Kegiatan</label>
+                                <label>Tema Kegiatan *</label>
                                 <textarea class="form-control" id="tema_kegiatan" placeholder="Tema Kegiatan" name="tema_kegiatan"></textarea> 
                             </div>
                             <div class="form-group">
-                                <label>Tujuan Kegiatan</label>
+                                <label>Tujuan Kegiatan *</label>
                                 <textarea class="form-control" id="tujuan_kegiatan" placeholder="Tujuan Kegiatan" name="tujuan_kegiatan"></textarea> 
                             </div>
                             <div class="form-group">
-                                <label>Sasaran Kegiatan</label>
+                                <label>Sasaran Kegiatan *</label>
                                 <textarea class="form-control" id="sasaran_kegiatan" placeholder="Sasaran Kegiatan" name="sasaran_kegiatan"></textarea> 
                             </div>
                             <div class="form-group">
-                                <label>Tanggal Kegiatan</label>
+                                <label>Tanggal Kegiatan *</label>
                                 <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Kegiatan" name="tanggal_kegiatan">
                             </div>
                             <div class="form-group">
-                                <label>Tempat Kegiatan</label>
+                                <label>Tempat Kegiatan *</label>
                                 <input type="text" class="form-control" id="tempat_kegiatan" placeholder="Tempat Kegiatan" name="tempat_kegiatan">
                             </div>
                         </div><!-- /.box-body -->                   
@@ -87,25 +97,25 @@ $(function() {
                         
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Bentuk Kegiatan</label>
+                                <label>Bentuk Kegiatan *</label>
                                 <textarea class="form-control" id="bentuk_kegiatan" placeholder="Bentuk Kegiatan" name="bentuk_kegiatan"></textarea> 
                             </div>
                             <div class="form-group">
-                                <label>Anggaran Biaya (Total)</label>
+                                <label>Anggaran Biaya (Total) *</label>
                                 <input type="text" class="form-control" id="anggaran" placeholder="ex:1000000" name="anggaran">
                             </div>
                             <div class="form-group">
-                                <label>Penutup</label>
+                                <label>Penutup *</label>
                                 <textarea class="form-control" id="penutup" placeholder="Penutup" name="penutup"></textarea>
                             </div>
                         
                             <div class="form-group">
-                                <label>Upload Proposal</label>
-                                <input type="file" class="form-control" id="file" name="file_proposal">
+                                <label>Upload Proposal (pdf, doc, docx) *</label>
+                                <input type="file" class="form-control" id="file" name="file_proposal" required>
                             </div><!-- /.box-body -->
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit &nbsp;<i class="fa fa-cloud-upload"></i></button>
                         </div>
                     </div>
                 </div>

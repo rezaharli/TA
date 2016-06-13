@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="<?php echo base_url('proposal_himpunan/detail_pengajuan?id_pengajuan='.$proposal['id']); ?>">Detail Logbook Pengajuan</a></li>
+            <li><a href="<?php echo base_url("proposal_himpunan/detail_pengajuan?id_pengajuan=".$id_pengajuan); ?>">Detail Logbook Pengajuan</a></li>
             <li>Detail Pengajuan Proposal <?php echo $judul_detail ?></li>
         </ol>
         </ol>
