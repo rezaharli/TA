@@ -42,7 +42,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Bukti Event</label>
                 <div class="col-sm-9">
-                  <input type="file" class="form-control" id="bukti_event" name="userfile" required="true">
+                  <input type="file" id="bukti_event" name="userfile" required="true">
                   *Poster/Screenshot web lomba maksimal 2 mb (.jpg/.png)
                 </div>
               </div>
