@@ -11,10 +11,7 @@
 	    <h1>
 	      	Event
 	    </h1>
-	    <ol class="breadcrumb">
-	      	<li><a href="#">Event</a></li>
-	      	<li class="active"><?php echo $nama_event ?></li>
-	    </ol>
+	    <?php echo $breadcrumb ?>
 	</section>
 
 	<section class="content">
@@ -23,7 +20,7 @@
         		<div class="nav-tabs-custom">
           			<ul class="nav nav-tabs">
               			<li class="active"><a href="#event" data-toggle="tab">Event</a></li>
-              			<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur' || (($jenis_user != 'staff_kemahasiswaan' || $jenis_user != 'kaur') && $status != 'disetujui')) { ?>
+              			<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur' || $isowner) { ?>
               				<li><a href="#edit" data-toggle="tab">Edit</a></li>
               			<?php } ?>
           			</ul>
@@ -32,81 +29,59 @@
           					<div class="table-responsive">
 				                <table class="table">
 				                  	<tr>
-					                    <th style="width:20%">Nama Event:</th>
-					                    <td><?php echo $nama_event ?></td>
+					                    <th style="width:20%">Nama Kegiatan:</th>
+					                    <td><?php echo $event->nama_acara ?></td>
 				                  	</tr>
 				                  	<tr>
-					                    <th>Tanggal Event:</th>
-					                    <td><?php echo $tanggal ?></td>
+					                    <th>Tempat Kegiatan:</th>
+					                    <td><?php echo $event->tempat_acara ?></td>
 				                  	</tr>
 				                  	<tr>
-					                    <th>Pengaju:</th>
-					                    <td><a href="profil/<?php echo $username_pengaju ?>"><?php echo $nama_pengaju ?></a></td>
+					                    <th>Tanggal Kegiatan:</th>
+					                    <td><?php echo $event->tanggal_acara ?></td>
 				                  	</tr>
 				                  	<tr>
-				                  		<th>Status:</th>
-				                  		<td>
-					                      	<?php if ($status == null) { ?>
-					                      		<span class="label label-warning">Pending</span>
-					                      	<?php } else if ($status == 'disetujui') { ?>
-					                      		<span class="label label-success">Disetujui</span>
-					                      	<?php } else if ($status == 'ditolak') { ?>
-					                      		<span class="label label-danger">Ditolak</span>
-					                      	<?php } ?>
-				                      	<td>
-				                  	</tr>
-				                  	<tr>
-					                    <th>Penanggungjawab:</th>
-					                    <td>
-					                    	<?php if (isset($username_penanggungjawab) && isset($nama_penanggungjawab)) { ?>
-					                    		<a href="profil/<?php echo $username_penanggungjawab ?>"><?php echo $nama_penanggungjawab ?></a>
-					                    	<?php } else { ?>
-					                    		Belum ada penyetuju event.
-					                    	<?php } ?>
-					                    </td>
+					                    <th>Deskripsi Kegiatan:</th>
+					                    <td><?php echo $event->deskripsi_acara ?></td>
 				                  	</tr>
 				                </table>
 			             	</div>
 			              	<div class="row no-print">
 								<div class="col-xs-12">
 									<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur') { ?>
-										<?php if ($status != 'disetujui') { ?>
-											<a href="event/do_edit_status/<?php echo $id ?>?s=t" class="btn btn-success pull-left"><i class="fa fa-check"></i> Setuju</button>
-										<?php } ?>
-										<?php if ($status != null) { ?>
-											<a href="event/do_edit_status/<?php echo $id ?>?s=p" class="btn btn-warning pull-left" style="margin-left: 5px;"><i class="fa fa-refresh"></i> Tunda</a>
-										<?php } ?>
-										<?php if ($status != 'ditolak') { ?>
-											<a href="event/do_edit_status/<?php echo $id ?>?s=f" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
-										<?php } ?>
-									
 										<a href="event/hapus?id=<?php echo $id ?>" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Hapus</a>
 									<?php } ?>
-									<a href="<?php echo $google_url ?>" target="_blank" class="btn btn-default pull-right" style="margin-right: 5px;">Lihat di google calendar</a>
+									<a href="<?php //echo $google_url ?>" target="_blank" class="btn btn-default pull-right" style="margin-right: 5px;">Lihat di google calendar</a>
 								</div>
 			          		</div>
               			</div><!-- /.tab-pane -->
 
 
-              			<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur' || (($jenis_user != 'staff_kemahasiswaan' || $jenis_user != 'kaur') && $status != 'disetujui')) { ?>
+              			<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur' || $isowner) { ?>
 	              			<div class="tab-pane" id="edit">
-				                <form class="form-horizontal" method="post" action="<?php echo base_url() ?>event/do_edit_event/<?php echo $id ?>">
+				                <form class="form-horizontal" method="post" action="<?php echo base_url('event/do_edit_kegiatan/'.$event->id) ?>">
 				                  	<div class="form-group">
-					                    <label class="col-sm-2 control-label">Nama Event</label>
+					                    <label class="col-sm-2 control-label">Nama Acara</label>
 					                    <div class="col-sm-10">
-					                      	<input type="text" class="form-control" name="nama-event" value="<?php echo $nama_event ?>">
+					                      	<input type="text" class="form-control" name="nama-acara" value="<?php echo $event->nama_acara ?>">
 					                    </div>
 				                  	</div>
 				                  	<div class="form-group">
-					                    <label class="col-sm-2 control-label">Tanggal Event</label>
+					                    <label class="col-sm-2 control-label">Tempat Acara</label>
 					                    <div class="col-sm-10">
-					                      	<input type="text" class="form-control" name="tanggal-event" value="<?php echo $tanggal ?>" id="input-tanggal-event">
+					                      	<input type="text" class="form-control" name="tempat-acara" value="<?php echo $event->tempat_acara ?>">
 					                    </div>
 				                  	</div>
 				                  	<div class="form-group">
-					                    <label class="col-sm-2 control-label">Pengaju Event</label>
+					                    <label class="col-sm-2 control-label">Tanggal Acara</label>
 					                    <div class="col-sm-10">
-					                      	<input type="text" class="form-control" value="<?php echo $nama_pengaju ?>" disabled>
+					                      	<input type="text" class="form-control" name="tanggal-acara" value="<?php echo $event->tanggal_acara ?>" id="input-tanggal-event">
+					                    </div>
+				                  	</div>
+				                  	<div class="form-group">
+					                    <label class="col-sm-2 control-label">Deskripsi Acara</label>
+					                    <div class="col-sm-10">
+					                      	<textarea class="form-control" name="deskripsi-acara"><?php echo $event->deskripsi_acara ?></textarea>
 					                    </div>
 				                  	</div>
 				                  	<div class="form-group">
@@ -158,7 +133,7 @@
 			editable: false,
 			eventLimit: 2, // allow "more" link when too many events
 			events: '<?php echo base_url('event/get_calendar'); ?>',
-			defaultDate: '<?php echo $tanggal ?>'
+			defaultDate: '<?php echo $event->tanggal_acara ?>'
 		});
 		
 	});

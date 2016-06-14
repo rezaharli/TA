@@ -55,6 +55,8 @@ class Private_Controller extends MY_Controller {
         $sidebar_data['role']   = $user->role;
         $sidebar_data['jenis']  = $user->roled_data->jenis;
 
+        $content_data['breadcrumb'] = $this->load->view('page/private/template/breadcrumb', NULL, TRUE);
+
         $this->load->view('page/private/template/header', $header_data);
         $this->load->view('page/private/template/sidebar', $sidebar_data);
         $this->load->view($page, $content_data);
