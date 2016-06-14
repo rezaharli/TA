@@ -5,6 +5,7 @@ class Event extends Private_Controller {
 	function __construct() {
 		parent::__construct();
 	    $this->load->model('event_model');
+	    $this->load->model('user_model');
         
         $this->awal();
 	}
@@ -172,7 +173,41 @@ class Event extends Private_Controller {
 	}
 
 	function pengajuan() {
-		$this->load_page('page/private/pengajuan_event.php');
+		$this->load_page('page/private/mahasiswa/ajukan_event.php');
+	}
+
+	function do_pengajuan(){
+		$config['upload_path'] = './assets/upload/event_lomba';
+		$config['allowed_types'] = 'jpg|png';
+		$config['max_size']	= '100';
+		$config['max_width']  = '1824';
+		$config['max_height']  = '1068';
+		$this->load->library('upload', $config);
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+			var_dump($error);
+			}
+		else
+		{
+			$nama 		= $this->input->post('nama_event');
+    		$tanggal 	= $this->input->post('tanggal_event');
+    		$event = $this->google_calendar->insert($nama, $tanggal);
+			$datafile = array('upload_data' => $this->upload->data());
+			$user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+			// echo $datafile['upload_data']['file_name'];
+			// die(); 
+		        $data = array(
+		        	'id'					=> $event->id,
+		        	'pengaju_event'			=> $user->id,
+		            'nama_event'            => $this->input->post('nama_event'),
+		            'tanggal_event'         => $this->input->post('tanggal_event'),
+		            'bukti_event'			=> $datafile['upload_data']['file_name']
+		        );
+		    $id_upload_event = $this->event_model->insert($data);
+		}
+        $this->session->set_flashdata(array('status' => true));
+        redirect('event');
 	}
 
 	function tambah() {
@@ -182,4 +217,4 @@ class Event extends Private_Controller {
 }
 
 /* End of file event.php */
-/* Location: ./application/controllers/event.php */
+/* Location: ./application/controllers/event.php */	
