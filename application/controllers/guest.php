@@ -182,7 +182,7 @@ class Guest extends Public_Controller {
             'tempat'            => $event->tempat_acara,
             'tanggal'           => $event->tanggal_acara,
             'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_acara),
-            'gambar'            => ($event->poster_acara) ? 'assets/upload/acara/acara_idacara/'.$event->poster_acara : 'assets/universal/img/default-kegiatan.jpg',
+            'gambar'            => ($event->poster_acara) ? 'assets/upload/acara/acara_'.$event->id.'/'.$event->poster_acara : 'assets/universal/img/default-kegiatan.jpg',
             'jenis'             => 'kegiatan',
             'daftarable'        => $event->tanggal_acara >= date('Y-m-j')
             );
