@@ -95,15 +95,45 @@ class Event extends Private_Controller {
     }
 
     function kegiatanhimpunan(){
+
     	if($this->uri->segment(3) == '') {
 
-	    	$this->load->model('user_model');
-			$user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
+	        $id_event = $this->input->get('id');
+
+	        $this->load->model('user_model');
+	        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+
+	    	$data['role_user']	= $user->role;
+	    	$data['jenis_user']	= $user->roled_data->jenis;
 
 			$this->load->model('acara_himpunan_model');
-			$ordered_event = $this->acara_himpunan_model->order_by('tanggal_acara');
-			$data['events'] = $ordered_event->get_all();
-			$this->load_page('page/private/list_kegiatan_himpunan', $data);
+    		
+    		if($id_event){
+    			$event = $this->acara_himpunan_model->get($id_event);
+
+    			if ($event) {
+    				$this->load->model('pengajuan_proposal_himpunan_model');
+    				$event->pengajuan = $this->pengajuan_proposal_himpunan_model->get($event->id_pengajuan_proposal);
+
+    				if($event->pengajuan) {
+    					$this->load->model('himpunan_model');
+    					$event->pengajuan->himpunan = $this->himpunan_model->get($event->pengajuan->pengaju_proposal);
+
+    					if ($event->pengajuan->himpunan) {
+							$this->load->model('mahasiswa_model');
+							$event->pengajuan->himpunan->penanggungjawab = $this->mahasiswa_model->get_by(array('nim' => $event->pengajuan->himpunan->id_penanggungjawab));
+    					}
+    				}
+    			}
+
+    			$data['isowner']	= ($this->session->userdata('id') == $event->pengajuan->himpunan->penanggungjawab->id_user);
+				$data['event'] 		= $event;
+				$this->load_page('page/private/detail_kegiatan_himpunan', $data);
+			} else {
+				$ordered_event = $this->acara_himpunan_model->order_by('tanggal_acara');
+				$data['events'] = $ordered_event->get_all();
+				$this->load_page('page/private/list_kegiatan_himpunan', $data);
+			}
 
 		} else show_404();
     }
@@ -134,12 +164,32 @@ class Event extends Private_Controller {
         redirect('event');
     }
 
-    function do_edit($id){
+    function do_edit($id, $nama, $tanggal){
+    	$event = $this->google_calendar->update($id, $nama, $tanggal);
+        redirect('event?id='.$id);
+    }
+
+    function do_edit_event($id){
     	$nama 		= $this->input->post('nama-event');
     	$tanggal 	= $this->input->post('tanggal-event');
 
-    	$event = $this->google_calendar->update($id, $nama, $tanggal);
-        redirect('event?id='.$id);
+    	$this->do_edit($id, $nama, $tanggal);
+        redirect('event/lomba?id='.$id);
+    }
+
+    function do_edit_kegiatan($id){
+    	$data = array(
+	    	'nama_acara' 		=> $this->input->post('nama-acara'),
+	    	'tempat_acara' 		=> $this->input->post('tempat-acara'),
+	    	'tanggal_acara' 	=> $this->input->post('tanggal-acara'),
+	    	'deskripsi_acara' 	=> $this->input->post('deskripsi-acara')
+	    	);
+
+    	$this->load->model('acara_himpunan_model');
+    	$this->acara_himpunan_model->update($id, $data);
+
+    	// $this->do_edit($id);
+        redirect('event/kegiatanhimpunan?id='.$id);
     }
 
     function do_edit_status($id){
