@@ -11,9 +11,7 @@
 	    <h1>
 	      	Event
 	    </h1>
-	    <ol class="breadcrumb">
-	      	<li class="active"><a href="#">Event</a></li>
-	    </ol>
+	    <?php echo $breadcrumb ?>
 	</section>
 
 	<section class="content">
