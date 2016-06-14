@@ -50,20 +50,20 @@ $(function() {
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Tema Lomba</label>
-                                <input type="text" class="form-control" id="tema" placeholder="tema lomba" name="tema">
+                                <input type="text" class="form-control" id="tema" placeholder="tema lomba" name="tema" required="true">
                             </div>
                             <div class="form-group">
                                 <label>Penyelenggara</label>
-                                <input type="text" class="form-control" id="penyelenggara_lomba" placeholder="Penyelenggara" name="penyelenggara_lomba">
+                                <input type="text" class="form-control" id="penyelenggara_lomba" placeholder="Penyelenggara" name="penyelenggara_lomba" required="true">
                             </div>
                             <div class="form-group">
                                 <label>Tanggal</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Lomba" name="tanggal_sertifikat">
+                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Lomba" name="tanggal_sertifikat" required="true">
                             </div>
                             <div class="form-group">
                                 <label>Upload Sertifikat dan Kegiatan lomba</label>
                                 <input type="file" class="form-control" id="bukti_lomba" name="sertifikat1" required="true">
-                                *upload sertifikat dan foto kegiatan dalam format Zip/Rar maksimal 2 MB
+                                *upload sertifikat dan foto kegiatan maksimal 2 MB (.zip/.rar)
                             </div>
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>

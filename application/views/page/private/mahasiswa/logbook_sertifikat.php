@@ -20,7 +20,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-7">
                 <div class="box">
                   <!-- /.box-header -->
                     <div class="box-body">
@@ -46,6 +46,15 @@
                                 <?php } ?>
                             </tbody>
                         </table>
+                        <div class="box-footer">
+                            <div class="col-sm-8">
+                              <div class="dataTables_info" id="example2_info" role="status" aria-live="polite" >*Silahkan upload sertifikat untuk pengajuan beasiswa prestasi
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <a href="<?php echo base_url('sertifikat/add') ?>"<button type="button" class="btn btn-default"><span class="fa fa-plus" ></span> Upload Sertifikat </button></a>
+                            </div>
+                        </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col -->

@@ -16,7 +16,7 @@ class Proposal extends Private_Controller {
         //config upload
         $this->config_upload['upload_path']     = './assets/upload/proposal_lomba';
         $this->config_upload['allowed_types']   = 'pdf|doc|docx';
-        $this->config_upload['max_size']        = '100000';
+        $this->config_upload['max_size']        = '30000';
 
         //form validasi
         $this->load->library('form_validation');
