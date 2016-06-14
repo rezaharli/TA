@@ -38,43 +38,46 @@ $(function() {
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url("sertifikat/upload_process"); ?>" enctype="multipart/form-data">
+            <form role="form" method="post" action="<?php echo base_url("proposal/upload_tim"); ?>" enctype="multipart/form-data">
             
                 <div class="col-md-6">
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Upload Sertifikat</h3>
+                            <h3 class="box-title">Upload Nim Tim Anda</h3>
                         </div><!-- /.box-header -->
                         
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Tema Lomba</label>
-                                <input type="text" class="form-control" id="tema" placeholder="tema lomba" name="tema" required="true">
+                                <label>Nim Anggota</label>
+                                <input type="text" class="form-control" id="nim_anggota1" placeholder="Nim Anggota" name="nim_anggota1">
                             </div>
                             <div class="form-group">
-                                <label>Penyelenggara</label>
-                                <input type="text" class="form-control" id="penyelenggara_lomba" placeholder="Penyelenggara" name="penyelenggara_lomba" required="true">
+                                <label>Nim Anggota</label>
+                                <input type="text" class="form-control" id="nim_anggota2" placeholder="Nim Anggota" name="nim_anggota2">
                             </div>
                             <div class="form-group">
-                                <label>Tanggal</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Lomba" name="tanggal_sertifikat" required="true">
+                                <label>Nim Anggota</label>
+                                <input type="text" class="form-control" id="nim_anggota3" placeholder="Nim Anggota" name="nim_anggota3">
                             </div>
                             <div class="form-group">
-                                <label>Upload Sertifikat dan Kegiatan lomba</label>
-                                <input type="file" class="form-control" id="bukti_lomba" name="sertifikat1" required="true">
-                                *upload sertifikat dan foto kegiatan maksimal 2 MB (.zip/.rar)
+                                <label>Nim Anggota</label>
+                                <input type="text" class="form-control" id="nim_anggota4" placeholder="Nim Anggota" name="nim_anggota4">
+                            </div>
+                            <div class="form-group">
+                                <label>Nim Anggota</label>
+                                <input type="text" class="form-control" id="nim_anggota5" placeholder="Nim Anggota" name="nim_anggota5">
+                            </div>
+                            <div class="form-group">
+                                <label>Nim Anggota</label>
+                                <input type="text" class="form-control" id="nim_anggota6" placeholder="Nim Anggota" name="nim_anggota6">
                             </div>
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
                 </div>
-
-
-                
-
             </form>
         </div>
     </section>

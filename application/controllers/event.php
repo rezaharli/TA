@@ -6,59 +6,7 @@ class Event extends Private_Controller {
 		parent::__construct();
 	    $this->load->model('event_model');
         
-        $this->awal();
-	}
-
-    function index() {
-        $id_event = $this->input->get('id');
-
-        $this->load->model('user_model');
-        $user 	= $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-    	$data['role_user']					= $user->role;
-    	$data['jenis_user']					= $user->roled_data->jenis;
-        
-        if($id_event){
-			
-			$event 		= $this->event_model->get_by(array('id' => $id_event));
-			$pengaju 	= $this->user_model->get($event->pengaju_event);
-
-			if($event->penanggungjawab){
-				$this->load->model('staff_model');
-				$penanggungjawab = $this->staff_model->get_staff_dan_user_by_nip($event->penanggungjawab);
-			}
-
-			$data['id']							= $event->id;
-			$data['nama_event']					= $event->nama_event;
-			$data['tanggal']					= $event->tanggal_event;
-			$data['username_pengaju']			= $pengaju->username;
-			$data['nama_pengaju']				= $pengaju->nama;
-			$data['status']						= $event->status;
-
-			if (isset($penanggungjawab)) {
-				$data['username_penanggungjawab']	= $penanggungjawab->username;
-				$data['nama_penanggungjawab']		= $penanggungjawab->nama;
-			}
-			
-			$data['google_url']					= $event->google_url;
-			$data['url']						= base_url('event?id='.$event->id);
-
-			$this->load_page('page/private/detail_event.php', $data);
-		} else {
-			$user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-
-			$ordered_event = $this->event_model->order_by('tanggal_event');
-			if($user->role == 'mahasiswa'){
-				$data['events'] = $ordered_event->get_many_by(array('status' => 'disetujui'));
-			} else if($user->role == 'staff'){
-				$data['events'] = $ordered_event->get_all();
-			}
-
-			$this->load_page('page/private/list_pengajuan_event.php', $data);
-		}
-    }
-
-    private function awal(){
-    	$this->load->library('google_calendar');
+        $this->load->library('google_calendar');
 
         $google_events = $this->google_calendar->get();
         $this->event_model->soft_delete = TRUE;
@@ -79,6 +27,85 @@ class Event extends Private_Controller {
         		$this->event_model->insert($data);
         	}
         }
+	}
+
+	function index(){
+
+	}
+
+    function lomba(){
+        $id_event = $this->input->get('id');
+
+        $this->load->model('user_model');
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+    	
+    	$data['role_user']	= $user->role;
+    	$data['jenis_user']	= $user->roled_data->jenis;
+
+    	if($this->uri->segment(3) == '') {
+
+    		if($id_event){
+			
+				$event 		= $this->event_model->get($id_event);
+				$pengaju 	= $this->user_model->get($event->pengaju_event);
+
+				if($event->penanggungjawab){
+					$this->load->model('staff_model');
+					$penanggungjawab = $this->staff_model->get_staff_dan_user_by_nip($event->penanggungjawab);
+				}
+
+				$data['id']					= $event->id;
+				$data['nama_event']			= $event->nama_event;
+				$data['tanggal']			= $event->tanggal_event;
+				$data['username_pengaju']	= $pengaju->username;
+				$data['nama_pengaju']		= $pengaju->nama;
+				$data['status']				= $event->status;
+
+				if (isset($penanggungjawab)) {
+					$data['username_penanggungjawab']	= $penanggungjawab->username;
+					$data['nama_penanggungjawab']		= $penanggungjawab->nama;
+				}
+				
+				$data['google_url']					= $event->google_url;
+				$data['url']						= base_url('event?id='.$event->id);
+
+				$this->load_page('page/private/detail_event', $data);
+			
+			} else {
+
+				$ordered_event = $this->event_model->order_by('tanggal_event');
+				$data['events'] = $ordered_event->get_many_by(array('status' => 'disetujui'));
+				$this->load_page('page/private/list_pengajuan_event', $data);
+			}
+
+		} else if($this->uri->segment(3) == 'pengajuan') {
+
+			$ordered_event = $this->event_model->order_by('tanggal_event');
+			if($user->role == 'mahasiswa' || $user->roled_data->jenis == 'staff_admin'){
+				$data['events'] = $ordered_event->get_many_by(array('pengaju_event' => $user->id));
+			} else if($user->role == 'staff'){
+				$data['events'] = $ordered_event->get_all();
+			}
+			$this->load_page('page/private/list_pengajuan_event', $data);
+
+		} else if($this->uri->segment(3) == 'tambah') {
+			$this->load_page('page/private/staff/tambah_event');
+
+		} else show_404();
+    }
+
+    function kegiatanhimpunan(){
+    	if($this->uri->segment(3) == '') {
+
+	    	$this->load->model('user_model');
+			$user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
+
+			$this->load->model('acara_himpunan_model');
+			$ordered_event = $this->acara_himpunan_model->order_by('tanggal_acara');
+			$data['events'] = $ordered_event->get_all();
+			$this->load_page('page/private/list_kegiatan_himpunan', $data);
+
+		} else show_404();
     }
 
     function do_tambah(){
@@ -141,7 +168,7 @@ class Event extends Private_Controller {
 			$data['google_url']			= $event->google_url;
 			$data['url']				= base_url('event?id='.$event->id);
 
-			$this->load_page('page/private/detail_event.php', $data);
+			$this->load_page('page/private/detail_event', $data);
 		} else {
 			redirect('event');
 		}
@@ -172,14 +199,48 @@ class Event extends Private_Controller {
 	}
 
 	function pengajuan() {
-		$this->load_page('page/private/pengajuan_event.php');
+		$this->load_page('page/private/mahasiswa/ajukan_event');
+	}
+
+	function do_pengajuan(){
+		$config['upload_path'] = './assets/upload/event_lomba';
+		$config['allowed_types'] = 'jpg|png';
+		$config['max_size']	= '100';
+		$config['max_width']  = '1824';
+		$config['max_height']  = '1068';
+		$this->load->library('upload', $config);
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+			var_dump($error);
+			}
+		else
+		{
+			$nama 		= $this->input->post('nama_event');
+    		$tanggal 	= $this->input->post('tanggal_event');
+    		$event = $this->google_calendar->insert($nama, $tanggal);
+			$datafile = array('upload_data' => $this->upload->data());
+			$user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+			// echo $datafile['upload_data']['file_name'];
+			// die(); 
+		        $data = array(
+		        	'id'					=> $event->id,
+		        	'pengaju_event'			=> $user->id,
+		            'nama_event'            => $this->input->post('nama_event'),
+		            'tanggal_event'         => $this->input->post('tanggal_event'),
+		            'bukti_event'			=> $datafile['upload_data']['file_name']
+		        );
+		    $id_upload_event = $this->event_model->insert($data);
+		}
+        $this->session->set_flashdata(array('status' => true));
+        redirect('event');
 	}
 
 	function tambah() {
-		$this->load_page('page/private/staff/tambah_event.php');
+		$this->load_page('page/private/staff/tambah_event');
 	}
 
 }
 
-/* End of file event.php */
-/* Location: ./application/controllers/event.php */
+/* End of file event */
+/* Location: ./application/controllers/event */	

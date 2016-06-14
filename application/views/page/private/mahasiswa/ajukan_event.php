@@ -24,21 +24,21 @@
           </div>
           <div class="box-body">
 
-            <form class="form-horizontal" method="post" action="<?php echo base_url() ?>event/do_tambah">
-
+            <form class="form-horizontal" method="post" action="<?php echo base_url() ?>event/do_pengajuan" enctype="multipart/form-data">
               <div class="form-group">
                 <label class="col-sm-3 control-label">Nama Event</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" name="nama"/>
+                  <input type="text" class="form-control" name="nama_event"/>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Tanggal</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" name="tanggal" id="input-tanggal-event">
+                  <input type="text" class="form-control" name="tanggal_event" id="input-tanggal-event">
                 </div>
               </div>
+
               <div class="form-group">
                 <label class="col-sm-3 control-label">Bukti Event</label>
                 <div class="col-sm-9">
