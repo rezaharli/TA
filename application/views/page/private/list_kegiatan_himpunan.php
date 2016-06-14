@@ -8,19 +8,7 @@
 <div class="content-wrapper">
 
 	<section class="content-header">
-	    <h1>
-	      	<?php
-	      	if ($this->uri->segment(1) == 'event') {
-		      	if ($this->uri->segment(2) == 'lomba') {
-		      		if ($this->uri->segment(3) == '') {
-		      			echo 'List Lomba';
-		      		} else if ($this->uri->segment(3) == 'pengajuan') {
-			      		echo 'List Pengajuan Lomba';
-			      	}
-		      	}
-	      	}
-	      	?>
-	    </h1>
+	    <h1>List Kegiatan Himpunan</h1>
 	    <?php echo $breadcrumb ?>
 	</section>
 
@@ -36,26 +24,17 @@
 		                    <thead>
 		                      	<tr>
 			                      <th>Nama Event</th>
-			                      <th width="90px">Tanggal Mulai</th>			                      
-			                      <th width="50px">Status</th>
+			                      <th width="90px">Tanggal Mulai</th>
 			                      <th width="60px" align="center">Aksi</th>
 			                    </tr>
 		                    </thead>
 		                    <tbody>
 		                    	<?php foreach ($events as $event) { ?> 
 			                      	<tr>
-				                      	<td><?php echo $event->nama_event ?></td>
-				                      	<td><?php echo $event->tanggal_event ?></td>
+				                      	<td><?php echo $event->nama_acara ?></td>
+				                      	<td><?php echo $event->tanggal_acara ?></td>
 				                      	<td>
-					                      	<?php if ($event->status == null) { ?>
-					                      		<span class="label label-warning">Pending</span></td>
-					                      	<?php } else if ($event->status == 'disetujui') { ?>
-					                      		<span class="label label-success">Disetujui</span></td>
-					                      	<?php } else if ($event->status == 'ditolak') { ?>
-					                      		<span class="label label-danger">Ditolak</span></td>
-					                      	<?php } ?>
-				                      	<td>
-											<a class="btn btn-primary pull-left btn-xs" style="margin-right: 1px;" href="<?php echo base_url('event/lomba?id='.$event->id); ?>"><i class="fa fa-calendar"></i> Lihat Detail</a>
+											<a class="btn btn-primary pull-left btn-xs" style="margin-right: 1px;" href="<?php echo base_url('event/kegiatanhimpunan?id='.$event->id); ?>"><i class="fa fa-calendar"></i> Lihat Detail</a>
 				                        </td>
 				                    </tr>
 		                    	<?php } ?>
