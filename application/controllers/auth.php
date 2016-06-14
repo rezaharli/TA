@@ -15,9 +15,6 @@ class Auth extends MY_Controller {
 			);
 
 		$this->lang->load('auth');
-
-		$this->ion_auth->register('asdfasdf', 'asdfasdf', 'asdfasdf', array('nama' => 'asdfasdf'));
-		die();
 	}
 
 	function index() {
