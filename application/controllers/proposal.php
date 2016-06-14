@@ -99,9 +99,9 @@ class Proposal extends Private_Controller {
                     //gawe nampilno status
                     $this->session->set_flashdata(array('status' => true));
                     $data['user'] = $user;
-                    
+                    $this->load_page('page/private/mahasiswa/upload_tim', $data);;
                 }
-                $this->load_page('page/private/mahasiswa/upload_tim', $data);;
+                
         }
 
     function upload_proposal_to_drive($upload_data){

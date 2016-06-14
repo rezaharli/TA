@@ -39,6 +39,13 @@
                   <input type="text" class="form-control" name="tanggal" id="input-tanggal-event">
                 </div>
               </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Bukti Event</label>
+                <div class="col-sm-9">
+                  <input type="file" class="form-control" id="bukti_event" name="userfile" required="true">
+                  *Poster/Screenshot web lomba maksimal 2 mb (.jpg/.png)
+                </div>
+              </div>
 
               <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
