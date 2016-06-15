@@ -24,12 +24,15 @@
             <div class="col-xs-12">
                 <div class="box">
                   <div class="box-header">
-                      <a href="<?php echo base_url('proposal/upload_proposal?id_pengajuan='.$this->input->get('id_pengajuan')) ?>">
-                        <?php if ($status == null || $status == 'y') { ?>
-                        <button type="button" class="btn btn-default" disabled>
-                          <span class="fa fa-plus"></span> Tambah Proposal 
-                        </button>
-                        <?php }?> 
+                    <?php if ($status == null || $status == 'y') { ?>
+                          <a href="<?php echo base_url('proposal/upload_proposal?id_pengajuan='.$this->input->get('id_pengajuan')) ?>"><button type="button" class="btn btn-default" disabled><span class="fa fa-plus"></span>&nbsp;Tambah Proposal </button>
+                          </a>
+                        <?php } else if ($status == 'n'){ ?> 
+                          <a href="<?php echo base_url('proposal/upload_proposal?id_pengajuan='.$this->input->get('id_pengajuan')) ?>"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span>&nbsp;Tambah Proposal </button>
+                          </a>
+                        <?php } ?>
+
+
                       </a>
                   </div>
                   <!-- /.box-header -->
