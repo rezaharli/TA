@@ -47,6 +47,15 @@ $(function() {
                         </div><!-- /.box-header -->
                         
                         <div class="box-body">
+                            <?php if (!empty(validation_errors())): ?>
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                    <ul>
+                                        <?php echo validation_errors('<li>', '</li>'); ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
                             <div class="form-group">
                                 <label>Event</label>
                                 <select class="form-control" name="event">
@@ -69,11 +78,28 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Tujuan Kompetisi</label>
-                                <input type="text" class="form-control" id="tujuan_kompetisi" placeholder="Tujuan Kompetisi" name="tujuan_kompetisi">
+                                <textarea type="text" class="form-control" id="tujuan_kompetisi" placeholder="Tujuan Kompetisi" name="tujuan_kompetisi"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Sasaran Kompetisi</label>
                                 <input type="text" class="form-control" id="sasaran_kompetisi" placeholder="Sasaran Kompetisi" name="sasaran_kompetisi">
+                            </div>
+                        </div><!-- /.box-body -->                   
+                    </div><!-- /.box -->
+                </div>
+
+
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"></h3>
+                        </div><!-- /.box-header -->
+                        
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Nama Tim</label>
+                                <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim">
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Kompetisi</label>
@@ -85,48 +111,11 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Anggaran Kompetisi</label>
-                                <input type="text" class="form-control" id="anggaran" placeholder="anggaran" name="anggaran_biaya">
+                                <input type="text" class="form-control" id="anggaran" placeholder="ex : 1000000" name="anggaran_biaya">
                             </div>
                             <div class="form-group">
                                 <label>Upload Pengajuan Proposal</label>
-                                <input type="file" class="form-control" id="file_pengajuan" name="file_pengajuan">
-                            </div>
-                        </div><!-- /.box-body -->                   
-                    </div><!-- /.box -->
-                </div>
-
-
-                <div class="col-md-6">
-                    <!-- general form elements -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Data Tim</h3>
-                        </div><!-- /.box-header -->
-                        
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label>Nama Tim</label>
-                                <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Ketua</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa" placeholder="Ketua" name="nim_anggota1">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa" placeholder="NIM Anggota 1" name="nim_anggota2">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa" placeholder="NIM Anggota 2" name="nim_anggota3">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa" placeholder="NIM Anggota 3" name="nim_anggota4">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nama_mahasiswa" placeholder="NIM Anggota 4" name="nim_anggota5">
+                                <input type="file" class="form-control" id="file_pengajuan" name="file_pengajuan" required>
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
@@ -141,14 +130,13 @@ $(function() {
 </div>
 
 <!-- alert sukses tidak -->
-<?php
-if($this->session->flashdata('status') !== null){
-    echo '<script type="text/javascript">';
-    if ($this->session->flashdata('status')) {
-        echo 'alert("Upload proposal berhasil")';
-    } else {
-        echo 'alert("Upload proposal gagal")';
+<!-- <?php
+    if(!empty($this->session->userdata('notif_upload'))){
+        if ($this->session->userdata('notif_upload')) {
+            echo 'alert("Upload proposal berhasil")';
+        } else {
+            echo 'alert("Upload proposal gagal")';
+        }
+        $this->session->unset_userdata('notif_upload');
     }
-    echo '</script>';
-}
-?>
+?> -->

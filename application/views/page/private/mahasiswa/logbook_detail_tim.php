@@ -9,12 +9,12 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Pengajuan Proposal Lomba
+            Detail Tim Proposal Lomba
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Pengajuan</a></li>
-            <li class="active">Logbook Pengajuan</li>
+            <li class="active">Detail Tim</li>
         </ol>
     </section>
 
@@ -29,18 +29,20 @@
                             <thead>
                               <tr>
                                 <th align="center" style="width: 10px">No</th>
+                                <th align="center" style="width: 150px">Nim Anggota</th>
                                 <th align="center">Nama Anggota</th>
                               </tr>
                             </thead>
                             <tbody>
+                              <?php $i=1; ?>
+                              <?php foreach ($tims as $tim) : ?>
                                 <tr>
-                                  <td>1</td>
-                                  <td>Lorem Ipsum</td>
+                                  <td><?php echo $i; ?></td>
+                                  <td><?php echo $tim->nim; ?></td>
+                                  <td><?php echo $tim->nama; ?></td>
                                 </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td>Dolor Quadro</td>
-                                </tr>
+                              <?php $i++; ?>
+                              <?php endforeach; ?> 
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->
