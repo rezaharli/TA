@@ -10,11 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <h1>
             Edit Data Himpunan
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Akun</a></li>
-            <li class="active">Edit Profil</li>
-        </ol>
+        <?php echo $breadcrumb ?>
     </section>
 
     <!-- Main content -->
@@ -22,9 +18,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url(); ?>himpunan/do_update">
+            <form role="form" method="post" action="<?php echo base_url(); ?>himpunan/do_edit?id= <?php echo $id_him ?>">
             
-            <div class="col-md-12">
+            <div class="col-md-7">
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -32,19 +28,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div><!-- /.box-header -->
                     
                     <div class="box-body">
+                        <?php if (!empty(validation_errors())): ?>
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                <ul>
+                                    <?php echo validation_errors('<li>', '</li>'); ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+
                         <div class="form-group">
                             <label>Nama Himpunan</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Nama Himpunan" value="<?= $himpunan->nama ?>" name="nama" disabled>
+                            <input type="text" class="form-control" id="nama" placeholder="Nama Himpunan" value="<?= $nama_him ?>" name="nama" disabled>
 
                         </div>
                         <div class="form-group">
                             <label>Program Studi</label>
-                            <input type="text" class="form-control" id="prodi" placeholder="Program Studi" value="<?= $himpunan->prodi ?>" name="prodi" disabled>
+                            <input type="text" class="form-control" id="prodi" placeholder="Program Studi" value="<?= $prodi_him ?>" name="prodi" disabled>
                         </div>
                         <div class="form-group">
                             <label>Penanggung Jawab</label>
-                            <select class="form-control select2" style="width: 100%;" name="penanggungjawab">
-                              
+                            <select class="select2 form-control" name="penanggungjawab">
+                                <option value="<?= $id_pj ?>"><?php echo $id_pj ?> - <?php echo $nama_mhs ?></option>>
                             </select>
                         </div>
                     </div><!-- /.box-body -->
@@ -59,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <!-- Select2 -->
-<script src="<?php echo base_url() ?>assets/adminlte/plugins/select2/select2.full.min.js"></script>
+<script src="<?php echo base_url() ?>assets/adminlte/plugins/select2/select2.min.js"></script>
 
 <!-- alert sukses tidak -->
 <?php
@@ -77,31 +83,31 @@ if($this->session->flashdata('status') !== null){
 <script>
       $(function () {
         $(".select2").select2({
-            minimumInputLength: 2,
-            tags: true,
-            tokenSeparators: [',', ' '],
+            minimumInputLength: 4,
+            placeholder: 'Pilih penanggungjawab',
+            allowClear: true,
             ajax: {
-                url: '<?php echo base_url('himpunan/asd') ?>',
+                url: '<?php echo base_url('himpunan/select2') ?>',
                 dataType: 'json',
                 type: 'GET',
                 data: function (term) {
                     return {
-                        term: term
+                        q: term
                     };
                 },
                 processResults: function (data) {
                     return {
-                        results: $.map(data, function (mahasiswas) {
-                            return {
-                                id: mahasiswas.nim,
-                                text:'blabalbal'
-                            }
-                        })
+                        results: data.mahasiswa
+                        // $.map(data.mahasiswa, function (mhs) {
+                        //     return {
+                        //         text: mhs.text,
+                        //         id: mhs.id
+                        //     }
+                        // })
                     };
                 },
-                cache: true
-            },
-
+                
+            }
         });
       });
 </script>

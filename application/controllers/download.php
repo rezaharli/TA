@@ -8,16 +8,15 @@ class Download extends Private_Controller {
 
 	function download(){
 		$this->load->library('google_drive');
-		$client = new Google_Client();
-        $client_email = 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
-        $private_key = file_get_contents(FCPATH.'/hmmmm-4c2bd9a777d8.p12');
-        $scopes = array('https://www.googleapis.com/auth/drive');
-        $credentials = new Google_Auth_AssertionCredentials(
-            $client_email,
-            $scopes,
-            $private_key
-        );
-        $client->setAssertionCredentials($credentials);
+
+        $client = $this->google_drive->getclient();
         $service = new Google_Service_Drive($client);
+
+        $fileId = '0B_mIc-chnSGMaTdkZjNYWjNUMTA';
+        $file = $this->google_drive->printFile($service, $fileId);
+        
+        echo "<br/><pre>";
+        print_r($file);
+        echo "</pre><hr/>";
 	}
 }

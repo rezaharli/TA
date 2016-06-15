@@ -77,7 +77,7 @@
 		            </form>
                   </div><!-- /.tab-pane -->
                   <div class="tab-pane" id="tab_2">
-                  	  <form method="post" action="<?php echo base_url() ?>mahasiswa/do_import_csv" enctype="multipart/form-data" class="form-horizontal">
+                  	  <form method="post" action="<?php echo base_url() ?>auth/do_import_csv" enctype="multipart/form-data" class="form-horizontal">
                   	  	<div class="form-group">
 			                <label class="col-sm-2">File</label>
 			                <div class="col-sm-10">

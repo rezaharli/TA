@@ -291,4 +291,111 @@ class Auth extends MY_Controller {
 		if ($returnhtml) return $view_html;
 	}
 
+	function do_add_staff(){
+		$this->load->model('user_model');
+		$this->load->model('staff_model');
+
+		$jenisstaff = $this->input->post('jenisstaff');
+		$nip        = $this->input->post('nip');
+		$nama       = $this->input->post('nama');
+		$email      = $this->input->post('email');
+        $role       = $this->input->post('role');
+
+        $id_user_baru = $this->ion_auth->register($nip, $nip, $email, array('nama' => $nama, 'role' => $role));
+
+        $this->staff_model->insert(
+            array(
+                'nip'       => $nip, 
+                'id_user'   => $id_user_baru['id'], 
+                'jenis'     => $jenisstaff), 
+            FALSE);
+
+        redirect('lists/staff');		
+	}
+
+	function do_add_mahasiswa(){
+        $nim    = $this->input->post('nim');
+        $nama   = $this->input->post('nama');
+        $prodi  = $this->input->post('prodi'); 
+        $kelas  = $this->input->post('kelas');
+        $email  = $this->input->post('email');
+
+        $id_user_baru = $this->ion_auth->register($nim, $nim, $email, array('nama' => $nama));
+
+        $this->mahasiswa_model->insert(
+            array(
+                'nim'       => $nim, 
+                'kelas'     => $kelas,
+                'prodi'     => $prodi,
+                'id_user'   => $id_user_baru['id']),
+            FALSE);
+
+        redirect('lists/mahasiswa');
+    }
+
+    function do_import_csv(){
+    	$this->load->model('user_model');
+		$this->load->model('mahasiswa_model');
+		$this->load->library('csvimport');
+
+    	$data['error'] = '';    //initialize image upload error array to empty
+
+    	$config['upload_path'] = './assets/upload/csv/';
+        $config['allowed_types'] = 'csv';
+        $config['max_size'] = '10000';
+
+        $this->load->library('upload', $config);
+
+        // If upload failed, display error
+        if (!$this->upload->do_upload()) {
+            $data['error'] = $this->upload->display_errors();
+
+            $this->load_page('page/private/staff/list_mahasiswa', $data);
+        } else {
+            $file_data = $this->upload->data();
+            $file_path =  './assets/upload/csv/'.$file_data['file_name'];
+            
+            if ($this->csvimport->get_array($file_path)) {
+                $csv_array = $this->csvimport->get_array($file_path);
+
+                foreach ($csv_array as $row) {
+                	$data_user = array(array(
+                		'nim'		=> $row['NIM'],
+                    	'nama'		=> $row['NAMA'],
+                    	'email'		=> $row['WEBMAIL']
+                	));
+
+                	foreach ($data_user as $d) {
+                		$nim 	= $d['nim'];
+                		$nama 	= $d['nama'];
+                		$email 	= $d['email'];
+
+                		$id_user_baru = $this->ion_auth->register($nim, $nim, $email, array('nama' => $nama));
+                	}
+
+                    $data_mahasiswa = array(array(
+                		'nim'		=> $row['NIM'],
+                    	'kelas'		=> $row['KELAS'],
+                    	'prodi'		=> $row['PROGRAM_STUDI'],
+                    	'id_user'	=> $id_user_baru['id']
+                	));
+                	
+                    $this->mahasiswa_model->insert_many($data_mahasiswa, FALSE);
+
+                }
+
+                $files = glob($file_path);
+                foreach ($files as $file) {
+                	if(is_file($file))
+                		unlink($file);
+                }
+
+                redirect('lists/mahasiswa');
+            } else 
+                $data['error'] = "Error occured";
+                $this->load_page('page/private/staff/list_mahasiswa', $data);
+            } 
+
+    }
+
 }
