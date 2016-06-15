@@ -8,19 +8,7 @@
 <div class="content-wrapper">
 
 	<section class="content-header">
-	    <h1>
-	      	<?php
-	      	if ($this->uri->segment(1) == 'event') {
-		      	if ($this->uri->segment(2) == 'lomba') {
-		      		if ($this->uri->segment(3) == '') {
-		      			echo 'List Lomba';
-		      		} else if ($this->uri->segment(3) == 'pengajuan') {
-			      		echo 'List Pengajuan Lomba';
-			      	}
-		      	}
-	      	}
-	      	?>
-	    </h1>
+	    <h1>List Kegiatan Himpunan</h1>
 	    <?php echo $breadcrumb ?>
 	</section>
 
