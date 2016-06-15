@@ -29,7 +29,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Nama Kompetisi</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" name="nama"/>
+                  <input type="text" class="form-control" name="nama" required placeholder="Nama Kompetisi" />
                 </div>
               </div>
 
@@ -47,14 +47,14 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Tanggal</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" name="tanggal" id="input-tanggal-event">
+                  <input type="text" class="form-control" name="tanggal" id="input-tanggal-event" placeholder="yyyy-mm-dd" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Keterangan</label>
                 <div class="col-sm-9">
-                  <textarea class="form-control" id="penutup" placeholder="Penutup" name="keterangan"></textarea> 
+                  <textarea class="form-control" id="penutup" placeholder="Penutup" name="keterangan" required placeholder="Jenis/Tema Kompetisi"></textarea> 
                 </div>
               </div>
 
