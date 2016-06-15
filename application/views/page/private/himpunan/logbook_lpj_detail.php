@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             
         </h1>
         <ol class="breadcrumb">
-            <li><a href="<?php echo base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="<?php echo base_url('proposal_himpunan/logbook_lpj'); ?>">Logbook LPJ</a></li>
             <li class="active">Detail LPJ <?php echo $judul_laporan ?></li>
         </ol>

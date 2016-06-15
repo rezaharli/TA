@@ -214,26 +214,41 @@ class Proposal_himpunan extends Private_Controller{
 
         $acara = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_pengajuan));
 
-        if ($acara != null){
-            $panitia = $this->panitia_model->get_many_by(array('id_acara' => $acara->id));
-            $data['all_panitia'] = $panitia;
+        $panitia = ($acara) ? $this->panitia_model->get_many_by(array('id_acara' => $acara->id)) : null;
+
+        if($panitia) {
+            foreach ($panitia as $p) {
+                $p->user = $this->mahasiswa_model->get_mahasiswa_dan_user_by_nim($p->nim);
+            }
         }
 
         $data['himpunan'] = $himpunan;
         $data['user'] = $user;
         $data['id_pengajuan'] = $id_pengajuan;
         $data['acara'] = $acara;
-        
+        $data['all_panitia'] = ($panitia) ? $panitia : null;
 
         $this->load_page('page/private/himpunan/tambah_acara_himpunan', $data);
     }
 
     function do_tambah_acara(){
+        die('1');
         $id_pengajuan = $this->input->get('id_pengajuan');
         $nama_input_file = 'poster_acara';
 
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $id_himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim))->id;
+
+        // rule
+        $this->form_validation->set_rules('judul', 'Judul Proposal', 'required');
+        $this->form_validation->set_rules('tema_kegiatan', 'Tema Kegiatan', 'required');
+        $this->form_validation->set_rules('tujuan_kegiatan', 'Tujuan Kegiatan', 'required');
+        $this->form_validation->set_rules('sasaran_kegiatan', 'Sasaran Kegiatan', 'required');
+        $this->form_validation->set_rules('tanggal_kegiatan', 'Tanggal Kegiatan', 'required');
+        $this->form_validation->set_rules('tempat_kegiatan', 'Tempat Kegiatan', 'required');
+        $this->form_validation->set_rules('bentuk_kegiatan', 'Bentuk Kegiatan', 'required');
+        $this->form_validation->set_rules('anggaran', 'Anggaran Biaya', 'required|integer|max_length[10]');
+        $this->form_validation->set_rules('penutup', 'Penutup', 'required');
 
         $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
         $ext        = end($tmp);
@@ -268,20 +283,12 @@ class Proposal_himpunan extends Private_Controller{
             $config['file_name']       = $filename;
 
             $this->load->library('upload' , $config);
-            // $this->upload->do_upload($nama_input_file);
+            if( ! $this->upload->do_upload($nama_input_file)){
+                die($this->upload->display_errors);
+            }
         }
 
-        // $this->session->set_flashdata(array('status' => true));
-
-        if ($this->upload->do_upload($nama_input_file)) {
-            $upload_data = $this->upload->data();
-            $upload_data['orig_name'] = $filename;
-            // $this->upload_proposal_to_drive($upload_data);
-            // unlink($upload_data['full_path']);
-            $this->session->set_userdata('notif_upload', true);
-        }else{
-            $this->session->set_userdata('notif_upload', false);    
-        }
+        $this->session->set_flashdata(array('status' => true));
 
         redirect('proposal_himpunan/tambah_acara?id_pengajuan='.$id_pengajuan); 
     }
@@ -289,28 +296,55 @@ class Proposal_himpunan extends Private_Controller{
     function tambah_panitia(){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
-
-        $data['himpunan'] = $himpunan;
-        $data['user'] = $user;
-        $data['id_pengajuan'] = $id_pengajuan;
+        $acara = $this->acara_himpunan_model->get_by(array('id_acara' => $id_pengajuan));
+        
+        $data['acara']          = $acara;
+        $data['himpunan']       = $himpunan;
+        $data['user']           = $user;
+        $data['id_pengajuan']   = $id_pengajuan;
         $this->load_page('page/private/himpunan/tambah_acara_himpunan', $data);
+    }
+
+    function ambil_data(){
+        $this->load->model('mahasiswa_model');
+        $mahasiswa = $this->mahasiswa_model
+            ->like('nim', $this->input->get('q')['term'])
+            ->get_all();
+
+        $data['mahasiswa'] = array();
+        if (count($mahasiswa) > 0) {
+            foreach ($mahasiswa as $mhs) {
+                $user = $this->user_model->get_by(array('id' => $mhs->id_user));
+
+                array_push($data['mahasiswa'], array(
+                    'id'    => $mhs->nim,
+                    'text'  => $mhs->nim.' - '.$user->nama
+                ));
+            }
+        }
+        
+        echo json_encode($data);
     }
 
     function do_tambah_panitia(){
         $this->load->model('panitia_model');
         $this->form_validation->set_rules('id_acara', 'ID Acara', 'required');
+
+        $id_acara = $this->input->get('id_acara');
+
         if ($this->form_validation->run() !== FALSE) {
             $arr_id = $this->input->post('id_panitia');
             $arr_nim = $this->input->post('nim');
-            $arr_nama = $this->input->post('nama');
+            // $arr_nama = $this->input->post('nama');
             $id_pengajuan = $this->input->post('id_pengajuan');
-            foreach ($arr_nim as $key => $nim) {
 
+            $data['arr_nim'] = array();
+            foreach ($arr_nim as $key => $nim) {
                 // IF id panitia exist then update, nor insert, either or delete
-                if ($arr_nim[$key] != "" && $arr_nama[$key] != "") {
+                if ($nim[$key] != "") {
                     $data = array(
                         "nim" => $nim,
-                        "nama" => $arr_nama[$key],
+                        // "nama" => $arr_nama[$key],
                         "id_acara" => $this->input->post('id_acara')
                     );
                     if (empty($arr_id[$key])) {
@@ -323,6 +357,11 @@ class Proposal_himpunan extends Private_Controller{
                 }
             }
         }
+
+        
+        // echo "<pre>";
+        // var_dump($this->input->post());
+        // die();
         redirect('proposal_himpunan/tambah_acara?id_pengajuan='.$id_pengajuan); 
     }
 

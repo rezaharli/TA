@@ -28,7 +28,7 @@ $(function() {
             <small><?php echo $this->session->flashdata('error'); ?></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('home'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="<?php echo base_url("proposal_himpunan/detail_pengajuan?id_pengajuan=".$id_pengajuan); ?>">Detail Logbook Pengajuan</a></li>
             <li class="active">Upload Proposal (Revisi)</li>
         </ol>

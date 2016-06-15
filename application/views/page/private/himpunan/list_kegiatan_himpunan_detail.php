@@ -14,12 +14,11 @@
             <small><?php echo $himpunan->nama ?></small>
       </h1>
       <ol class="breadcrumb">
-            <li><a href="<?php echo base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="<?php echo base_url('kegiatan_himpunan/list_kegiatan'); ?>">List Kegiatan Himpunan</a></li>
             <li class="active">Detail Kegiatan Himpunan <?php echo $nama_acara ?></li>
         </ol>
   </section>
-
 
   <section class="content">
         <div class="row">
@@ -31,7 +30,6 @@
                         <h3 class="box-title">Informasi Detail Kegiatan</h3>
                     </div><!-- /.box-header -->
                     
-                    <!-- <div class="box-body"> -->
                     <table class="table">
                       <tr>
                         <th>Nama Acara</th>
@@ -49,8 +47,7 @@
                         <th>Deskripsi Acara</th>
                         <td><?php echo $deskripsi_acara ?><td>
                       </tr>
-                  </table>
-                    <!-- </div><!-- /.box-body -->                   
+                  </table>               
                 </div><!-- /.box -->
 
                 <div class="box box-primary">
@@ -58,26 +55,35 @@
                         <h3 class="box-title">Daftar Panitia</h3>
                     </div><!-- /.box-header -->
                     
-                    <table class="table">
-                      <!-- <tr>
-                        <th>Nama Kegiatan</th>
-                        <td><?php echo $judul ?></td>
-                      </tr>
-                      <tr>
-                        <th>Tema Kegiatan</th>
-                        <td><?php echo $tema_kegiatan ?></td>
-                      </tr>
-                      <tr>
-                        <th>Tanggal Pelaksanaan</th>
-                        <td><?php echo $tanggal_kegiatan ?><td>
-                      </tr>
-                      <tr>
-                        <th>Tempat Pelaksanaan</th>
-                        <td><?php echo $tempat_kegiatan ?><td>
-                      </tr> -->
-                  </table>
+                    <div class="box-body">
+                      <table id="example2" class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>NIM</th>
+                            <th>Nama</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php $i=1; ?>
+                          <?php foreach ($panitias as $panitia) : ?>
+                            <tr>
+                              <td><?php echo $i; ?></td>
+                              <td><?php echo $panitia['nim']; ?></td>
+                              <td><?php echo $panitia['nama']; ?></td>
+                            </tr>
+                          <?php $i++; ?>
+                          <?php endforeach; ?> 
+                        </tbody>
+                      </table>
+                    </div>
                 </div>
             </div>
+
+            <!-- <div class="col-md-4">
+                general form elements
+                
+            </div> -->
 
             <div class="col-md-6">
                 <!-- general form elements -->
