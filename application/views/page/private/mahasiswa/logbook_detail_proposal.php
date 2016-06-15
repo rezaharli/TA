@@ -60,6 +60,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col-sm-12">
                                 <pre class="prettyprint"><?php echo $sasaran_kompetisi ?></pre>
                             </div>
+                            <div class="col-sm-12 box-header with-border">
+                                <class="box-title"># Tanggal Kompetisi
+                            </div><!-- /.box-header -->
+                            <div class="col-sm-12">
+                                <pre class="prettyprint"><?php echo $tanggal_kompetisi  ?></pre>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,12 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="box box-primary">
                     <div class="box-body">
                         <div class="table-responsive">
-                            <div class="col-sm-12 box-header with-border">
-                                <class="box-title"># Tanggal Kompetisi
-                            </div><!-- /.box-header -->
-                            <div class="col-sm-12">
-                                <pre class="prettyprint"><?php echo $tanggal_kompetisi  ?></pre>
-                            </div>
+                            
                             <div class="col-sm-12 box-header with-border">
                                 <class="box-title"># Tempat Kompetisi
                             </div><!-- /.box-header -->
@@ -89,6 +90,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                             <div class="col-sm-12 box-header with-border">
                                 <class="box-title"># Nama Tim
+                            </div><!-- /.box-header -->
+                            <div class="col-sm-12">
+                                <pre class="prettyprint"><?php echo $nama_tim ?></pre>
+                            </div>
+                            <div class="col-sm-12 box-header with-border">
+                                <class="box-title"># Pembimbing
                             </div><!-- /.box-header -->
                             <div class="col-sm-12">
                                 <pre class="prettyprint"><?php echo $nama_tim ?></pre>

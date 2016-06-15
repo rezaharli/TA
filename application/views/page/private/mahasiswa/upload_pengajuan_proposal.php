@@ -98,6 +98,10 @@ $(function() {
                                 <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim">
                             </div>
                             <div class="form-group">
+                                <label>Pembimbing</label>
+                                <input type="text" class="form-control" id="pembimbing" placeholder="Pembimbing Lomba" name="pembimbing">
+                            </div>
+                            <div class="form-group">
                                 <label>Tanggal Kompetisi</label>
                                 <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Kompetisi" name="tanggal_kompetisi">
                             </div>

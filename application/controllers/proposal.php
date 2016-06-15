@@ -71,6 +71,7 @@ class Proposal extends Private_Controller {
                         'tempat_kompetisi'      => $this->input->post('tempat_kompetisi'),
                         'anggaran_biaya'        => $this->input->post('anggaran_biaya'),
                         'nama_tim'              => $this->input->post('nama_tim'),
+                        'pembimbing'              => $this->input->post('pembimbing'),
                         'waktu_upload'          => date('Y-n-j h:i:s'),
                         'file'                  => $filename
                     );
@@ -296,7 +297,7 @@ class Proposal extends Private_Controller {
         $id_pengajuan_proposal_mahasiswa = $this->input->get('id_pengajuan');
         $id_event = $this->pengajuan_proposal_mahasiswa_model->get_by(array('id' => $id_pengajuan_proposal_mahasiswa));
         $event      = $this->event_model->get_by(array('id' => $id_event->id_event));
-        
+
 
         $data['id_pengajuan_proposal_mahasiswa']    = $proposal->id_pengajuan_proposal_mahasiswa;
         $data['id']                 = $proposal->id;
@@ -309,6 +310,7 @@ class Proposal extends Private_Controller {
         $data['anggaran_biaya']     = $proposal->anggaran_biaya;
         $data['nama_tim']           = $proposal->nama_tim;
         $data['sasaran_kompetisi']  = $proposal->sasaran_kompetisi;
+        $data['pembimbing']         = $proposal->pembimbing;
 
         $data['user']       = $user;
         $this->load_page('page/private/mahasiswa/logbook_detail_proposal', $data);
