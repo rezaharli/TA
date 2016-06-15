@@ -65,16 +65,8 @@ $(function() {
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Penyelenggara</label>
-                                <input type="text" class="form-control" id="penyelenggara" placeholder="Penyelenggara" name="penyelenggara">
-                            </div>
-                            <div class="form-group">
-                                <label>Tingkat Kompetisi</label>
-                                <input type="text" class="form-control" id="tingkat_kompetisi" placeholder="Tingkat Kompetisi" name="tingkat_kompetisi">
-                            </div>
-                            <div class="form-group">
-                                <label>Tema Kompetisi</label>
-                                <input type="text" class="form-control" id="tema_kompetisi" placeholder="Tema Kompetisi" name="tema_kompetisi">
+                                <label>Kategori Kompetisi</label>
+                                <input type="text" class="form-control" id="kategori_kompetisi" placeholder="Kategori Kompetisi" name="kategori_kompetisi">
                             </div>
                             <div class="form-group">
                                 <label>Tujuan Kompetisi</label>
@@ -83,6 +75,10 @@ $(function() {
                             <div class="form-group">
                                 <label>Sasaran Kompetisi</label>
                                 <input type="text" class="form-control" id="sasaran_kompetisi" placeholder="Sasaran Kompetisi" name="sasaran_kompetisi">
+                            </div>
+                            <div class="form-group">
+                                <label>Tempat Kompetisi</label>
+                                <input type="text" class="form-control" id="tempat_kompetisi" placeholder="Tempat Kompetisi" name="tempat_kompetisi">
                             </div>
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
@@ -104,10 +100,6 @@ $(function() {
                             <div class="form-group">
                                 <label>Tanggal Kompetisi</label>
                                 <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Kompetisi" name="tanggal_kompetisi">
-                            </div>
-                            <div class="form-group">
-                                <label>Tempat Kompetisi</label>
-                                <input type="text" class="form-control" id="tempat_kompetisi" placeholder="Tempat Kompetisi" name="tempat_kompetisi">
                             </div>
                             <div class="form-group">
                                 <label>Anggaran Kompetisi</label>

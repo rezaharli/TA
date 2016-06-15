@@ -39,9 +39,7 @@ class Proposal extends Private_Controller {
         $user           = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
             // rule
-        $this->form_validation->set_rules('penyelenggara', 'Penyelenggara Proposal', 'required');
-        $this->form_validation->set_rules('tingkat_kompetisi', 'Tingkat Kompetisi', 'required');
-        $this->form_validation->set_rules('tema_kompetisi', 'Tema Kompetisi', 'required');
+        $this->form_validation->set_rules('kategori_kompetisi', 'Kategori Kompetisi', 'required');
         $this->form_validation->set_rules('tujuan_kompetisi', 'Tujuan Kompetisi', 'required');
         $this->form_validation->set_rules('tanggal_kompetisi', 'Tanggal Kompetisi', 'required');
         $this->form_validation->set_rules('sasaran_kompetisi', 'Sasaran Kompetisi', 'required');
@@ -66,9 +64,7 @@ class Proposal extends Private_Controller {
                 if ($this->form_validation->run() !== FALSE) {
                     $data = array(
                         'id_pengajuan_proposal_mahasiswa' => $pengaju,
-                        'penyelenggara'         => $this->input->post('penyelenggara'),
-                        'tingkat_kompetisi'     => $this->input->post('tingkat_kompetisi'),
-                        'tema_kompetisi'        => $this->input->post('tema_kompetisi'),
+                        'kategori_kompetisi'    => $this->input->post('kategori_kompetisi'),
                         'tujuan_kompetisi'      => $this->input->post('tujuan_kompetisi'),
                         'sasaran_kompetisi'     => $this->input->post('sasaran_kompetisi'),
                         'tanggal_kompetisi'     => $this->input->post('tanggal_kompetisi'),
@@ -95,13 +91,10 @@ class Proposal extends Private_Controller {
                     } else {
                         $this->upload_pengajuan();
                     }
-                } else {
-                    //gawe nampilno status
-                    $this->session->set_flashdata(array('status' => true));
+                } 
+                $this->session->set_flashdata(array('status' => true));
                     $data['user'] = $user;
-                    $this->load_page('page/private/mahasiswa/upload_tim', $data);;
-                }
-                
+                $this->load_page('page/private/mahasiswa/upload_tim', $data); 
         }
 
     function upload_proposal_to_drive($upload_data){
@@ -299,11 +292,12 @@ class Proposal extends Private_Controller {
         $data['proposal']   = $id_proposal;
         $user               = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $proposal           = $this->proposal_lomba_model->get_by(array('id' => $id_proposal));
+        $event              = $this->event_model->get_by(array('id' => $id_event));
 
         $data['id_pengajuan_proposal_mahasiswa']    = $proposal->id_pengajuan_proposal_mahasiswa;
         $data['id']                 = $proposal->id;
-        $data['penyelenggara']      = $proposal->penyelenggara;
-        $data['tingkat_kompetisi']  = $proposal->tingkat_kompetisi;
+        $data['penyelenggara']      = $event->penyelenggara;
+        $data['tingkat_kompetisi']  = $event->tingkat_kompetisi;            
         $data['tema_kompetisi']     = $proposal->tema_kompetisi;
         $data['tujuan_kompetisi']   = $proposal->tujuan_kompetisi;
         $data['tanggal_kompetisi']  = $proposal->tanggal_kompetisi;
