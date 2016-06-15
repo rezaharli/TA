@@ -24,12 +24,23 @@
           </div>
           <div class="box-body">
 
-            <form class="form-horizontal" method="post" action="<?php echo base_url() ?>event/do_tambah">
+            <form class="form-horizontal" method="post" action="<?php echo base_url() ?>event/do_tambah" enctype="multipart/form-data">
 
               <div class="form-group">
-                <label class="col-sm-3 control-label">Nama Event</label>
+                <label class="col-sm-3 control-label">Nama Kompetisi</label>
                 <div class="col-sm-9">
                   <input type="text" class="form-control" name="nama"/>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Tingkat Kompetisi</label>
+                <div class="col-sm-9">
+                  <select class="form-control" name="tingkat_kompetisi" id="tingkat">                
+                    <option value="regional">Regional</option>
+                    <option value="nasional">Nasional</option>
+                    <option value="internasional">Internasional</option>
+                  </select>
                 </div>
               </div>
 
@@ -39,10 +50,18 @@
                   <input type="text" class="form-control" name="tanggal" id="input-tanggal-event">
                 </div>
               </div>
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Keterangan</label>
+                <div class="col-sm-9">
+                  <textarea class="form-control" id="penutup" placeholder="Penutup" name="keterangan"></textarea> 
+                </div>
+              </div>
+
               <div class="form-group">
                 <label class="col-sm-3 control-label">Bukti Event</label>
                 <div class="col-sm-9">
-                  <input type="file" id="bukti_event" name="userfile" required="true">
+                  <input type="file" class="form-control" id="bukti_event" name="userfile" required="true">
                   *Poster/Screenshot web lomba maksimal 2 mb (.jpg/.png)
                 </div>
               </div>
