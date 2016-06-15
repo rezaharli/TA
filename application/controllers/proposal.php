@@ -292,13 +292,17 @@ class Proposal extends Private_Controller {
         $data['proposal']   = $id_proposal;
         $user               = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $proposal           = $this->proposal_lomba_model->get_by(array('id' => $id_proposal));
-        $event              = $this->event_model->get_by(array('id' => $id_event));
+
+        $id_pengajuan_proposal_mahasiswa = $this->input->get('id_pengajuan');
+        $id_event = $this->pengajuan_proposal_mahasiswa_model->get_by(array('id' => $id_pengajuan_proposal_mahasiswa));
+        $event      = $this->event_model->get_by(array('id' => $id_event->id_event));
+        
 
         $data['id_pengajuan_proposal_mahasiswa']    = $proposal->id_pengajuan_proposal_mahasiswa;
         $data['id']                 = $proposal->id;
         $data['penyelenggara']      = $event->penyelenggara;
         $data['tingkat_kompetisi']  = $event->tingkat_kompetisi;            
-        $data['tema_kompetisi']     = $proposal->tema_kompetisi;
+        $data['kategori_kompetisi'] = $proposal->kategori_kompetisi;
         $data['tujuan_kompetisi']   = $proposal->tujuan_kompetisi;
         $data['tanggal_kompetisi']  = $proposal->tanggal_kompetisi;
         $data['tempat_kompetisi']   = $proposal->tempat_kompetisi;

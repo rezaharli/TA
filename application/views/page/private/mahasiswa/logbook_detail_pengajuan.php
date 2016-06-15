@@ -58,7 +58,7 @@
                                     <?php }?>
                                   </td>
                                   <td>
-                                    <a href="<?php echo base_url('proposal/detail_proposal?id_proposal='.$proposal['id_proposal']) ?>"> 
+                                    <a href="<?php echo base_url('proposal/detail_proposal?id_proposal='.$proposal['id_proposal'].'&id_pengajuan='.$id_pengajuan_proposal_mahasiswa) ?>"> 
                                       <button class="btn btn-info pull-leftt"></i> Detail Proposal</button>
                                     </a>
                                   </td>

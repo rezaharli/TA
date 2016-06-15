@@ -42,10 +42,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
 
                             <div class="col-sm-12 box-header with-border">
-                                <class="box-title"># Tema Kompetisi
+                                <class="box-title"># Kategori Kompetisi
                             </div><!-- /.box-header -->
                             <div class="col-sm-12">
-                                <pre class="prettyprint"><?php echo $tema_kompetisi ?></pre>
+                                <pre class="prettyprint"><?php echo $kategori_kompetisi ?></pre>
                             </div>
 
                             <div class="col-sm-12 box-header with-border">
