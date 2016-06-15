@@ -56,17 +56,10 @@ $(function() {
                                     </ul>
                                 </div>
                             <?php endif; ?>
+                            
                             <div class="form-group">
-                                <label>Penyelenggara</label>
-                                <input type="text" class="form-control" id="penyelenggara" placeholder="Penyelenggara" name="penyelenggara" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Tingkat Kompetisi</label>
-                                <input type="text" class="form-control" id="tingkat_kompetisi" placeholder="Tingkat Kompetisi" name="tingkat_kompetisi" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Tema Kompetisi</label>
-                                <input type="text" class="form-control" id="tema_kompetisi" placeholder="Tema Kompetisi" name="tema_kompetisi"  required>
+                                <label>Kategori Kompetisi</label>
+                                <input type="text" class="form-control" id="kategori_kompetisi" placeholder="Kategori Kompetisi" name="kategori_kompetisi" required>
                             </div>
                             <div class="form-group">
                                 <label>Tujuan Kompetisi</label>
@@ -75,6 +68,10 @@ $(function() {
                             <div class="form-group">
                                 <label>Sasaran Kompetisi</label>
                                 <input type="text" class="form-control" id="sasaran_kompetisi" placeholder="Sasaran Kompetisi" name="sasaran_kompetisi" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Tempat Kompetisi</label>
+                                <input type="text" class="form-control" id="tempat_kompetisi" placeholder="Tempat Kompetisi" name="tempat_kompetisi" required>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Kompetisi</label>
@@ -93,18 +90,18 @@ $(function() {
                         </div><!-- /.box-header -->
                         
                         <div class="box-body">
-                            
                             <div class="form-group">
-                                <label>Tempat Kompetisi</label>
-                                <input type="text" class="form-control" id="tempat_kompetisi" placeholder="Tempat Kompetisi" name="tempat_kompetisi" required>
+                                <label>Nama Tim</label>
+                                <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim" required>
                             </div>
+                            <div class="form-group">
+                                <label>Pembimbing</label>
+                                <input type="text" class="form-control" id="pembimbing" placeholder="Pembimbing Lomba" name="pembimbing" required>
+                            </div>
+                            
                             <div class="form-group">
                                 <label>Anggaran Kompetisi</label>
                                 <input type="text" class="form-control" id="anggaran" placeholder="ex : 1000000" name="anggaran_biaya" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Nama Tim</label>
-                                <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim"  required>
                             </div>
                             <div class="form-group">
                                 <label>Upload Pengajuan Proposal</label>
