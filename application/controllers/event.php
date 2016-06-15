@@ -139,29 +139,49 @@ class Event extends Private_Controller {
     }
 
     function do_tambah(){
-    	$nama 		= $this->input->post('nama');
-    	$tanggal 	= $this->input->post('tanggal');
+    	$config['upload_path'] = './assets/upload/event_lomba';
+		$config['allowed_types'] = 'jpg|png';
+		$config['max_size']	= '5000';
+		$config['max_width']  = '2000';
+		$config['max_height']  = '2000';
+		$this->load->library('upload', $config);
+		if ( ! $this->upload->do_upload())
+		{
+			$error = array('error' => $this->upload->display_errors());
+			var_dump($error);
+			}
+		else
+		{
+			$nama 				= $this->input->post('nama');
+			$tingkat_kompetisi	= $this->input->post('tingkat_kompetisi');
+    		$tanggal 			= $this->input->post('tanggal');
+    		$keterangan			= $this->input->post('keterangan');
+			$event 				= $this->google_calendar->insert($nama, $tanggal);
+			$datafile 			= array('upload_data' => $this->upload->data());
 
-    	$event = $this->google_calendar->insert($nama, $tanggal);
-    	
-    	if ($event) {
+			if ($event) {
 	        $this->load->model('user_model');
 	        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 	        $jenis_user = $user->roled_data->jenis;
-	    	
-	    	$data = array(
-	    		'id'				=> $event->id,
-				'nama_event' 		=> $nama,
-				'tanggal_event' 	=> $tanggal,
-				'pengaju_event'		=> $this->session->userdata('id'),
-				// karena pengaju adalah staff kemahasiswaan, maka langsung dianggap disetujui, tidak ada proses approval
-				'status'			=> 'disetujui',
-				'penanggungjawab'	=> ($jenis_user == 'kaur' || $jenis_user == 'staff_kemahasiswaan') ? $user->roled_data->nip : null,
-				'google_url'		=> $event->htmlLink
-				);
-	        $insert_id = $this->event_model->insert($data);
-	    }
-        redirect('event');
+			// echo $datafile['upload_data']['file_name'];
+			// die(); 
+		        $data = array(
+		        	'id'					=> $event->id,
+		        	'pengaju_event'			=> $user->id,
+		        	'tingkat_kompetisi'		=> $this->input->post('tingkat_kompetisi'),
+		        	'keterangan'			=> $this->input->post('keterangan'),
+		            'nama_event'            => $this->input->post('nama'),
+		            'tanggal_event'         => $this->input->post('tanggal'),
+		            'bukti_event'			=> $datafile['upload_data']['file_name'],
+		            'status'			=> 'disetujui',
+					'penanggungjawab'	=> ($jenis_user == 'kaur' || $jenis_user == 'staff_kemahasiswaan') ? $user->roled_data->nip : null,
+					'google_url'		=> $event->htmlLink
+		        );
+		    	$id_upload_event = $this->event_model->insert($data);
+			}
+		}	
+        $this->session->set_flashdata(array('status' => true));
+        redirect('home');
     }
 
     function do_edit($id, $nama, $tanggal){
@@ -255,9 +275,9 @@ class Event extends Private_Controller {
 	function do_pengajuan(){
 		$config['upload_path'] = './assets/upload/event_lomba';
 		$config['allowed_types'] = 'jpg|png';
-		$config['max_size']	= '100';
-		$config['max_width']  = '1824';
-		$config['max_height']  = '1068';
+		$config['max_size']	= '5000';
+		$config['max_width']  = '2000';
+		$config['max_height']  = '2000';
 		$this->load->library('upload', $config);
 		if ( ! $this->upload->do_upload())
 		{
