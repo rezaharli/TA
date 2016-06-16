@@ -16,6 +16,10 @@ class MY_Controller extends CI_Controller {
         return isset($user);
     }
 
+    function get_tanggal_formatted($tanggal){
+        return strftime('%e %B %Y', strtotime($tanggal));
+    }
+
 }
 
 class Public_Controller extends MY_Controller {
