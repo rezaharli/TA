@@ -18,8 +18,8 @@ class Guest extends Public_Controller {
         $where          = array('status' => 'disetujui');
         $total_event    = $this->event_model->count_by($where);
         
-        $where = array_merge($where, array('tanggal_event >=' => date('Y-n-j')));
-        $list_event                 = $this->event_model->order_by('tanggal_event')->limit(12, 0)->get_many_by($where);
+        $where = array_merge($where, array('tanggal_mulai >=' => date('Y-n-j')));
+        $list_event                 = $this->event_model->order_by('tanggal_mulai')->limit(12, 0)->get_many_by($where);
         $this->set_list_gabungan_event($list_event, 'lomba');
 
         $total_acara_himpunan   = $this->acara_himpunan_model->count_all();
@@ -60,11 +60,11 @@ class Guest extends Public_Controller {
 
             $where = array('status' => 'disetujui');
             if (isset($rentang) && $rentang != '') {
-                $where = array_merge($where, array('tanggal_event >=' => date('Y-n-j')));
-                $where = array_merge($where, array('tanggal_event <=' => date('Y-n-j', strtotime(date('Y-n-j') . ' +'.$rentang.' day'))));
+                $where = array_merge($where, array('tanggal_mulai >=' => date('Y-n-j')));
+                $where = array_merge($where, array('tanggal_mulai <=' => date('Y-n-j', strtotime(date('Y-n-j') . ' +'.$rentang.' day'))));
             }
 
-            $list_event = $event->order_by('tanggal_event')->get_many_by($where);
+            $list_event = $event->order_by('tanggal_mulai')->get_many_by($where);
             $this->set_list_gabungan_event($list_event, 'lomba');
         }
 
@@ -167,9 +167,9 @@ class Guest extends Public_Controller {
         return array(
             'id'                => $event->id,
             'nama'              => $event->nama_event,
-            'tanggal'           => $event->tanggal_event,
-            'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_event),
-            'gambar'            => ($event->bukti_event) ? 'assets/upload/event_lomba/'.$event->bukti_event : 'assets/universal/img/default-lomba.jpg',
+            'tanggal'           => $event->tanggal_mulai,
+            'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_mulai).(($event->tanggal_mulai != $event->tanggal_selesai) ? ' sampai '.$this->get_tanggal_formatted($event->tanggal_selesai) : ''),
+            'gambar'            => ($event->bukti_event) ? 'assets/upload/bukti_event/'.$event->bukti_event : 'assets/universal/img/default-lomba.jpg',
             'jenis'             => 'lomba'
             );
     }
@@ -186,10 +186,6 @@ class Guest extends Public_Controller {
             'jenis'             => 'kegiatan',
             'daftarable'        => $event->tanggal_acara >= date('Y-m-j')
             );
-    }
-
-    private function get_tanggal_formatted($tanggal){
-        return strftime('%A, %e %B %Y', strtotime($tanggal));
     }
 
 }

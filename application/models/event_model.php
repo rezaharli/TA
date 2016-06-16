@@ -12,6 +12,10 @@ class Event_model extends MY_Model {
         $this->db->order_by($field, $order);
         return $this;
     }
+
+    public function order_by_tanggal_mulai(){
+    	return $this->order_by('tanggal_mulai');
+    }
 }
 
 /* End of file event_model.php */

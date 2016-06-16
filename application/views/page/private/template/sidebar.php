@@ -21,7 +21,7 @@
                   </li>
                   <li><a href="<?php echo base_url('event/lomba/pengajuan') ?>"><i class="fa fa-circle-o"></i>List Pengajuan Anda</i></a>
                   </li>
-                  <li><a href="<?php echo base_url('event/lomba/tambah') ?>"><i class="fa fa-circle-o"></i>Tambah Lomba</a>
+                  <li><a href="<?php echo base_url('event/lomba/tambah') ?>"><i class="fa fa-circle-o"></i>Ajukan Event Lomba</a>
                   </li>
                 </ul>
 
@@ -45,9 +45,9 @@
                 <ul class="treeview-menu">
                   <li><a href="<?php echo base_url('event/lomba/') ?>"><i class="fa fa-circle-o"></i>List Lomba</a>
                   </li>
-                  <li><a href="<?php echo base_url('event/lomba/pengajuan') ?>"><i class="fa fa-circle-o"></i>List Pengajuan Lomba</i></a>
+                  <li><a href="<?php echo base_url('event/lomba/pengajuan') ?>"><i class="fa fa-circle-o"></i>List Pengajuan Event Lomba</i></a>
                   </li>
-                  <li><a href="<?php echo base_url('event/lomba/tambah') ?>"><i class="fa fa-circle-o"></i>Tambah Lomba</a>
+                  <li><a href="<?php echo base_url('event/lomba/tambah') ?>"><i class="fa fa-circle-o"></i>Tambah Event Lomba</a>
                   </li>
                 </ul>
 
@@ -91,9 +91,6 @@
           </li>
           
           <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-files-o"></i> <span>Beasiswa</span></a>
-          </li>
-          
-          <li><a href="<?php echo base_url('laporan') ?>"><i class="fa fa-map-o"></i> <span>Lihat Laporan</span></a>
           </li>
 
         <?php } ?>
@@ -155,9 +152,6 @@
                   </li>
                 </ul>
 
-            </li>
-
-            <li><a href="<?php echo base_url('laporan') ?>"><i class="fa fa-area-chart"></i> <span>Lihat Laporan</span></a>
             </li>
 
           <?php } else if ($jenis == 'staff_admin') { ?>

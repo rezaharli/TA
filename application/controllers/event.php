@@ -8,29 +8,11 @@ class Event extends Private_Controller {
         
         $this->load->library('google_calendar');
 
-        $google_events = $this->google_calendar->get();
-        $this->event_model->soft_delete = TRUE;
-        $this->event_model->delete_by(array('id !=' => ''));
-        $this->event_model->soft_delete = FALSE;
-        foreach ($google_events as $google_event) {
-        	$event = $this->event_model->get_by(array('id' => $google_event->id));
-    		$data = array(
-    			'nama_event'	=> $google_event->nama,
-    			'tanggal_event'	=> $google_event->tanggal,
-    			'google_url'	=> $google_event->google_url
-    			);
-
-        	if ($event) {
-        		$this->event_model->update($event->id, $data);
-        	} else {
-        		$data['id'] = $google_event->id;
-        		$this->event_model->insert($data);
-        	}
-        }
+        $this->sync_kalender();
 	}
 
 	function index(){
-
+		show_404();
 	}
 
     function lomba(){
@@ -46,47 +28,54 @@ class Event extends Private_Controller {
 
     		if($id_event){
 			
-				$event 		= $this->event_model->get($id_event);
-				$pengaju 	= $this->user_model->get($event->pengaju_event);
+				$event = $this->event_model->get($id_event);
+				if ( ! $event) {
+					show_404();
+				}
 
+				$event->tanggal_mulai_display 	= $this->get_tanggal_formatted($event->tanggal_mulai);
+				$event->tanggal_selesai_display = $this->get_tanggal_formatted($event->tanggal_selesai);
+				$data['event'] 		= $event;
+				$data['pengaju'] 	= $this->user_model->get($event->pengaju_event);
+				
 				if($event->penanggungjawab){
 					$this->load->model('staff_model');
-					$penanggungjawab = $this->staff_model->get_staff_dan_user_by_nip($event->penanggungjawab);
-				}
-
-				$data['id']					= $event->id;
-				$data['nama_event']			= $event->nama_event;
-				$data['tanggal']			= $event->tanggal_event;
-				$data['username_pengaju']	= $pengaju->username;
-				$data['nama_pengaju']		= $pengaju->nama;
-				$data['status']				= $event->status;
-
-				if (isset($penanggungjawab)) {
-					$data['username_penanggungjawab']	= $penanggungjawab->username;
-					$data['nama_penanggungjawab']		= $penanggungjawab->nama;
+					$data['penanggungjawab'] = $this->staff_model->get_staff_dan_user_by_nip($event->penanggungjawab);
 				}
 				
-				$data['google_url']					= $event->google_url;
-				$data['url']						= base_url('event?id='.$event->id);
+				$data['google_url']	= $event->google_url;
+				$data['url']		= base_url('event/lomba?id='.$event->id);
 
 				$this->load_page('page/private/detail_event', $data);
 			
 			} else {
 
-				$ordered_event = $this->event_model->order_by('tanggal_event');
-				$data['events'] = $ordered_event->get_many_by(array('status' => 'disetujui'));
-				$this->load_page('page/private/list_pengajuan_event', $data);
+				$ordered_event 	= $this->event_model->order_by_tanggal_mulai();
+				$events 		= $ordered_event->get_many_by(array('status' => 'disetujui'));
+
+				foreach ($events as $event) {
+					$event->tanggal_mulai_display 	= $this->get_tanggal_formatted($event->tanggal_mulai);
+					$event->tanggal_selesai_display = $this->get_tanggal_formatted($event->tanggal_selesai);
+				}
+				$data['events'] = $events;
+				$this->load_page('page/private/list_event', $data);
 			}
 
 		} else if($this->uri->segment(3) == 'pengajuan') {
 
-			$ordered_event = $this->event_model->order_by('tanggal_event');
+			$ordered_event = $this->event_model->order_by_tanggal_mulai();
 			if($user->role == 'mahasiswa' || $user->roled_data->jenis == 'staff_admin'){
-				$data['events'] = $ordered_event->get_many_by(array('pengaju_event' => $user->id));
+				$events = $ordered_event->get_many_by(array('pengaju_event' => $user->id));
 			} else if($user->role == 'staff'){
-				$data['events'] = $ordered_event->get_all();
+				$events = $ordered_event->get_all();
 			}
-			$this->load_page('page/private/list_pengajuan_event', $data);
+
+			foreach ($events as $event) {
+				$event->tanggal_mulai_display 	= $this->get_tanggal_formatted($event->tanggal_mulai);
+				$event->tanggal_selesai_display = $this->get_tanggal_formatted($event->tanggal_selesai);
+			}
+			$data['events'] = $events;
+			$this->load_page('page/private/list_event', $data);
 
 		} else if($this->uri->segment(3) == 'tambah') {
 			$this->load_page('page/private/staff/tambah_event');
@@ -95,121 +84,91 @@ class Event extends Private_Controller {
     }
 
     function kegiatanhimpunan(){
+    	$this->load->model('user_model');
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
-    	if($this->uri->segment(3) == '') {
+    	$data['role_user']	= $user->role;
+    	$data['jenis_user']	= $user->roled_data->jenis;
 
-	        $id_event = $this->input->get('id');
-
-	        $this->load->model('user_model');
-	        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-
-	    	$data['role_user']	= $user->role;
-	    	$data['jenis_user']	= $user->roled_data->jenis;
-
-			$this->load->model('acara_himpunan_model');
-    		
-    		if($id_event){
-    			$event = $this->acara_himpunan_model->get($id_event);
-
-    			if ($event) {
-    				$this->load->model('pengajuan_proposal_himpunan_model');
-    				$event->pengajuan = $this->pengajuan_proposal_himpunan_model->get($event->id_pengajuan_proposal);
-
-    				if($event->pengajuan) {
-    					$this->load->model('himpunan_model');
-    					$event->pengajuan->himpunan = $this->himpunan_model->get($event->pengajuan->pengaju_proposal);
-
-    					if ($event->pengajuan->himpunan) {
-							$this->load->model('mahasiswa_model');
-							$event->pengajuan->himpunan->penanggungjawab = $this->mahasiswa_model->get_by(array('nim' => $event->pengajuan->himpunan->id_penanggungjawab));
-    					}
-    				}
-    			}
-
-    			$data['isowner']	= ($this->session->userdata('id') == $event->pengajuan->himpunan->penanggungjawab->id_user);
-				$data['event'] 		= $event;
-				$this->load_page('page/private/detail_kegiatan_himpunan', $data);
-			} else {
-				$ordered_event = $this->acara_himpunan_model->order_by('tanggal_acara');
-				$data['events'] = $ordered_event->get_all();
-				$this->load_page('page/private/list_kegiatan_himpunan', $data);
-			}
-
-		} else show_404();
+		$this->load->model('acara_himpunan_model');
+		
+		$ordered_event = $this->acara_himpunan_model->order_by('tanggal_acara');
+		$data['events'] = $ordered_event->get_all();
+		$this->load_page('page/private/list_kegiatan_himpunan', $data);
     }
 
     function do_tambah(){
-    	$config['upload_path'] = './assets/upload/event_lomba';
-		$config['allowed_types'] = 'jpg|png';
-		$config['max_size']	= '5000';
-		$config['max_width']  = '2000';
-		$config['max_height']  = '2000';
-		$this->load->library('upload', $config);
-		if ( ! $this->upload->do_upload())
-		{
+        $this->load->library('upload', $this->get_upload_config($_FILES['bukti_event']));
+		if ( ! $this->upload->do_upload('bukti_event')) {
 			$error = array('error' => $this->upload->display_errors());
-			var_dump($error);
-			}
-		else
-		{
-			$nama 				= $this->input->post('nama');
-			$tingkat_kompetisi	= $this->input->post('tingkat_kompetisi');
-    		$tanggal 			= $this->input->post('tanggal');
-    		$keterangan			= $this->input->post('keterangan');
-			$event 				= $this->google_calendar->insert($nama, $tanggal);
-			$datafile 			= array('upload_data' => $this->upload->data());
+		} else {
+			$event 	= $this->google_calendar->insert(
+				$this->input->post('nama'), 
+				$this->input->post('tanggal_mulai'), 
+				$this->input->post('tanggal_selesai'),
+				5 //kuning, pending
+				);
 
 			if ($event) {
-	        $this->load->model('user_model');
-	        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-	        $jenis_user = $user->roled_data->jenis;
-			// echo $datafile['upload_data']['file_name'];
-			// die(); 
+				$upload_data = $this->upload->data();
+		        $this->load->model('user_model');
+		        $pengaju = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+		        $jenis_user = $user->roled_data->jenis;
+		        
 		        $data = array(
-		        	'id'					=> $event->id,
-		        	'pengaju_event'			=> $user->id,
-		        	'tingkat_kompetisi'		=> $this->input->post('tingkat_kompetisi'),
-		        	'keterangan'			=> $this->input->post('keterangan'),
-		            'nama_event'            => $this->input->post('nama'),
-		            'tanggal_event'         => $this->input->post('tanggal'),
-		            'bukti_event'			=> $datafile['upload_data']['file_name'],
-		            'status'			=> 'disetujui',
-					'penanggungjawab'	=> ($jenis_user == 'kaur' || $jenis_user == 'staff_kemahasiswaan') ? $user->roled_data->nip : null,
+		        	'id'				=> $event->id,
+		        	'nama_event'		=> $this->input->post('nama'),
+		        	'penyelenggara'		=> $this->input->post('penyelenggara'),
+		        	'tingkat_kompetisi'	=> $this->input->post('tingkat_kompetisi'),
+		            'tanggal_mulai'     => $this->input->post('tanggal_mulai'),
+		            'tanggal_selesai'   => $this->input->post('tanggal_selesai'),
+		            'keterangan' 		=> $this->input->post('keterangan'),
+		            'bukti_event'		=> $upload_data['file_name'],
+		        	'pengaju_event'		=> $pengaju->id,
+		            'status'			=> ($pengaju->roled_data->jenis == 'kaur' || $pengaju->roled_data->jenis == 'staff_kemahasiswaan') ? 'disetujui' : null,
+					'penanggungjawab'	=> ($pengaju->roled_data->jenis == 'kaur' || $pengaju->roled_data->jenis == 'staff_kemahasiswaan') ? $pengaju->roled_data->nip : null,
 					'google_url'		=> $event->htmlLink
 		        );
 		    	$id_upload_event = $this->event_model->insert($data);
+		        $this->session->set_flashdata(array('status' => true));
+		        redirect('event/lomba/pengajuan');
 			}
-		}	
-        $this->session->set_flashdata(array('status' => true));
-        redirect('home');
-    }
-
-    function do_edit($id, $nama, $tanggal){
-    	$event = $this->google_calendar->update($id, $nama, $tanggal);
-        redirect('event?id='.$id);
+		}
     }
 
     function do_edit_event($id){
-    	$nama 		= $this->input->post('nama-event');
-    	$tanggal 	= $this->input->post('tanggal-event');
-
-    	$this->do_edit($id, $nama, $tanggal);
-        redirect('event/lomba?id='.$id);
-    }
-
-    function do_edit_kegiatan($id){
+    	$config = $this->get_upload_config($_FILES['bukti_event']);
+        $this->load->library('upload', $config);
+    	
     	$data = array(
-	    	'nama_acara' 		=> $this->input->post('nama-acara'),
-	    	'tempat_acara' 		=> $this->input->post('tempat-acara'),
-	    	'tanggal_acara' 	=> $this->input->post('tanggal-acara'),
-	    	'deskripsi_acara' 	=> $this->input->post('deskripsi-acara')
-	    	);
+	    	'keterangan' 		=> $this->input->post('keterangan'),
+	    	'tingkat_kompetisi' => $this->input->post('tingkat_kompetisi'),
+	    	'penyelenggara' 	=> $this->input->post('penyelenggara'),
+    	);
+		
+		if ($this->upload->do_upload('bukti_event')) {
+	    	$event = $this->event_model->get($id);
+	    	$file = $config['upload_path'].'/'.$event->bukti_event;
+            
+            if (is_file($file)){
+                unlink($file);
+            }
 
-    	$this->load->model('acara_himpunan_model');
-    	$this->acara_himpunan_model->update($id, $data);
+			$upload_data = $this->upload->data();
+			$data['bukti_event'] = $upload_data['file_name'];
+		}
 
-    	// $this->do_edit($id);
-        redirect('event/kegiatanhimpunan?id='.$id);
+    	if($this->event_model->update($id, $data)){
+
+	    	if($this->google_calendar->update(
+	    		$id, 
+	    		$this->input->post('nama'), 
+	    		$this->input->post('tanggal_mulai'), 
+	    		$this->input->post('tanggal_selesai')
+	    		)){
+	        	redirect('event/lomba?id='.$id);
+	    	}
+	    }
     }
 
     function do_edit_status($id){
@@ -220,39 +179,53 @@ class Event extends Private_Controller {
     		$status = 'ditolak';
     	}
 
-    	$this->event_model->update($id, array('status' => $status));
-    	redirect('event?id='.$id);
-    }
-
-    function edit(){
-        $id_event = $this->input->get('id');
-
-        if($id_event){
-			$event = $this->event_model->get_by(array('id' => $id_event));
-			$data['id']					= $event->id;
-			$data['nama_event']			= $event->nama_event;
-			$data['tanggal']			= $event->tanggal_event;
-			$data['pengaju']			= $event->pengaju_event;
-			$data['status']				= $event->status;
-			$data['penanggungjawab']	= $event->penanggungjawab;
-			$data['google_url']			= $event->google_url;
-			$data['url']				= base_url('event?id='.$event->id);
-
-			$this->load_page('page/private/detail_event', $data);
-		} else {
-			redirect('event');
-		}
+    	$this->load->model('user_model');
+    	$user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+    	$this->event_model->update($id, array('status' => $status, 'penanggungjawab' => $user->roled_data->nip));
+    	redirect('event/lomba?id='.$id);
     }
 
 	function get_calendar() {
-		$events = $this->event_model->get_all();
+		$this->load->model('user_model');
+		$this->load->model('acara_himpunan_model');
+
 		$results = array();
-		foreach ($events as $event) {
+
+		$user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+
+		if($user->roled_data->jenis == 'kaur' || $user->roled_data->jenis == 'staff_kemahasiswaan'){
+			
+			$events = $this->event_model->get_all();
+			foreach ($events as $event) {
+				array_push($results, $this->get_fullcalendar_content($event));
+			}
+
+		} else {
+			
+			$events = $this->event_model->get_many_by(array('pengaju_event' => $user->id, 'status' => NULL));
+			foreach ($events as $event) {
+				array_push($results, $this->get_fullcalendar_content($event));
+			}
+			
+			$events = $this->event_model->get_many_by(array('pengaju_event' => $user->id, 'status' => 'ditolak'));
+			foreach ($events as $event) {
+				array_push($results, $this->get_fullcalendar_content($event));
+			}
+			
+			$events = $this->event_model->get_many_by(array('status' => 'disetujui'));
+			foreach ($events as $event) {
+				array_push($results, $this->get_fullcalendar_content($event));
+			}
+		}
+
+		$list_kegiatanhimpunan = $this->acara_himpunan_model->get_all();
+		foreach ($list_kegiatanhimpunan as $kegiatanhimpunan) {
 			$result = array(
-	 			'id'			=> $event->id,
-	 			'title'			=> $event->nama_event,
-	 			'start'			=> $event->tanggal_event,
-	 			'url'			=> base_url('event?id='.$event->id)
+	 			'id'			=> $kegiatanhimpunan->id,
+	 			'title'			=> $kegiatanhimpunan->nama_acara,
+	 			'start'			=> $kegiatanhimpunan->tanggal_acara,
+	 			'end'			=> ((new DateTime($kegiatanhimpunan->tanggal_acara))->modify('+1 day'))->format('Y-m-d'),
+	 			'url'			=> base_url('kegiatan_himpunan/detail_kegiatan?id_acara='.$kegiatanhimpunan->id),
  			);
 			array_push($results, $result);
 		}
@@ -261,53 +234,80 @@ class Event extends Private_Controller {
 
 	function hapus(){
 		$id = $this->input->get('id');
+		$event = $this->event_model->get($id);
+		$file = './assets/upload/bukti_event/'.$event->bukti_event;
+            
+        if (is_file($file)){
+            unlink($file);
+        }
+
 		$event = $this->google_calendar->delete($id);
 
 		$this->event_model->soft_delete = FALSE;
     	$this->event_model->delete($id);
-		redirect('event');
-	}
-
-	function pengajuan() {
-		$this->load_page('page/private/mahasiswa/ajukan_event');
-	}
-
-	function do_pengajuan(){
-		$config['upload_path'] = './assets/upload/event_lomba';
-		$config['allowed_types'] = 'jpg|png';
-		$config['max_size']	= '5000';
-		$config['max_width']  = '2000';
-		$config['max_height']  = '2000';
-		$this->load->library('upload', $config);
-		if ( ! $this->upload->do_upload())
-		{
-			$error = array('error' => $this->upload->display_errors());
-			var_dump($error);
-			}
-		else
-		{
-			$nama 		= $this->input->post('nama_event');
-    		$tanggal 	= $this->input->post('tanggal_event');
-    		$event = $this->google_calendar->insert($nama, $tanggal);
-			$datafile = array('upload_data' => $this->upload->data());
-			$user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-			// echo $datafile['upload_data']['file_name'];
-			// die(); 
-		        $data = array(
-		        	'id'					=> $event->id,
-		        	'pengaju_event'			=> $user->id,
-		            'nama_event'            => $this->input->post('nama_event'),
-		            'tanggal_event'         => $this->input->post('tanggal_event'),
-		            'bukti_event'			=> $datafile['upload_data']['file_name']
-		        );
-		    $id_upload_event = $this->event_model->insert($data);
-		}
-        $this->session->set_flashdata(array('status' => true));
-        redirect('event');
+		redirect('event/lomba/pengajuan');
 	}
 
 	function tambah() {
 		$this->load_page('page/private/staff/tambah_event');
+	}
+
+	private function get_fullcalendar_content($event){
+		return array(
+			'id'	=> $event->id,
+ 			'title'	=> $event->nama_event,
+ 			'start'	=> $event->tanggal_mulai,
+ 			'end'	=> ((new DateTime($event->tanggal_selesai))->modify('+1 day'))->format('Y-m-d'),
+ 			'url'	=> base_url('event/lomba?id='.$event->id),
+ 			'color'	=> ($event->status == 'disetujui') ? '#00a65a' : (($event->status == 'ditolak') ? '#dd4b39' : '#f39c12')
+ 			);
+	}
+
+    private function get_upload_config($files){
+    	$input_file_name = 'bukti_event';
+
+        $tmp        = explode(".", $files['name']);
+        $ext        = end($tmp);
+        $filename   = sha1($files['name']).'.'.$ext;
+
+        $config['upload_path'] 		= './assets/upload/bukti_event';
+		$config['allowed_types'] 	= 'jpg|png';
+		$config['max_size']			= '5000';
+		$config['max_width']  		= '2000';
+		$config['max_height']  		= '2000';
+        $config['file_name']        = $filename;
+
+        if ( ! file_exists($config['upload_path'])) {
+		   mkdir($config['upload_path'], 0777, true);
+		}
+
+		return $config;
+    }
+
+	private function sync_kalender(){
+        $this->event_model->soft_delete = TRUE;
+        $this->event_model->delete_by(array('id !=' => ''));
+        $this->event_model->soft_delete = FALSE;
+
+        $google_events = $this->google_calendar->get();
+        foreach ($google_events as $google_event) {
+        	$event = $this->event_model->get_by(array('id' => $google_event->id));
+    		$data = array(
+    			'nama_event'		=> $google_event->nama,
+    			'tanggal_mulai'		=> $google_event->tanggal_mulai,
+    			'tanggal_selesai'	=> $google_event->tanggal_selesai,
+    			'google_url'		=> $google_event->google_url,
+    			'deleted'			=> '0'
+    			);
+
+        	if ($event) {
+        		$this->event_model->update($event->id, $data);
+        	} else {
+        		$data['id'] = $google_event->id;
+        		$this->event_model->insert($data);
+        	}
+        }
+        $this->event_model->delete_by(array('deleted' => '1'));
 	}
 
 }
