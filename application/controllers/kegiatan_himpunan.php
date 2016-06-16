@@ -44,14 +44,14 @@ class Kegiatan_himpunan extends Private_Controller{
     }
 
     function detail_kegiatan(){
-        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-
-        $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
         $id_acara = $this->input->get('id_acara');
 
         //menampilkan detail acara
-        $acara = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_acara));
-        // die($this->db->last_query());
+        $acara = $this->acara_himpunan_model->get($id_acara);
+
+        $pengajuan = $this->pengajuan_proposal_himpunan_model->get($acara->id_pengajuan_proposal);
+
+        $himpunan = $this->himpunan_model->get($pengajuan->pengaju_proposal);
 
         $data['id']                     = $acara->id;
         $data['id_pengajuan_proposal']  = $acara->id_pengajuan_proposal;
