@@ -12,11 +12,7 @@
             Daftar Mahasiswa
             <small></small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Data tables</li>
-        </ol>
+        <?php echo $breadcrumb ?>
     </section>
 
     <!-- Main content -->
@@ -34,8 +30,8 @@
                                 <th style="width: 10px;">Kelas</th>
                                 <th style="width: 50px;">Username</th>
                                 <th >Nama</th>
-                                <th style="width: 200px;">Email</th>
-                                <th width="190px" style="text-align: center;">Aksi</th>
+                                <th style="width: 180px;">Email</th>
+                                <th width="100px" style="text-align: center;">Aksi</th>
                               </tr>
                             </thead>
                         </table>

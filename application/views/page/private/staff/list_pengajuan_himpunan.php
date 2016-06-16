@@ -12,11 +12,7 @@
             Daftar Pengajuan
             <small>Himpunan</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Data tables</li>
-        </ol>
+        <?php echo $breadcrumb ?>
     </section>
 
     <!-- Main content -->
@@ -37,7 +33,7 @@
                                 <th>Tanggal Pengajuan</th>
                                 <th>Status</th>
                                 <th>Penanggung Jawab</th>
-                                <th>Aksi</th>
+                                <th width="170px" style="text-align: center;">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -59,8 +55,15 @@
                                     <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
                                       <a href="<?php echo base_url('proposal_himpunan/detail_pengajuan?id_pengajuan='.$proposal['id']); ?>">
-                                        <button class="btn btn-info btn-sm pull-right"><i class="fa fa-list"></i> &nbsp;Lihat Detail</button>
+                                        <button class="btn btn-info btn-sm pull-left"><i class="fa fa-list"></i> &nbsp;Lihat Detail</button>
+                                      </a>&nbsp;
+
+                                      <?php if ($proposal['count'] == 0) { ?>
+                                        <button class="btn btn-info btn-sm disabled"><i class="fa fa-book"></i> &nbsp;Lihat LPJ</button>
+                                      <?php }else{ ?>
+                                      <a href="<?php echo base_url('proposal_himpunan/logbook_lpj?id_pengajuan='.$proposal['id']); ?>" class="btn btn-info btn-sm"><i class="fa fa-book"></i> &nbsp;Lihat LPJ
                                       </a>
+                                      <?php } ?>
                                     </td>
                                   </tr>
                                 <?php $i++; ?>

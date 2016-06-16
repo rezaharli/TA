@@ -93,4 +93,53 @@ class Google_Drive {
             print "An error occurred: " . $e->getMessage();
         }
     }
+
+    function getClient(){
+        $client = new Google_Client();
+        $client_email = 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
+        $private_key = file_get_contents(APPPATH.'libraries/hmmmm-4c2bd9a777d8.p12');
+        $scopes = array('https://www.googleapis.com/auth/drive');
+        $credentials = new Google_Auth_AssertionCredentials(
+            $client_email,
+            $scopes,
+            $private_key
+        );
+        $client->setAssertionCredentials($credentials);
+        return $client;
+    }
+
+    //print file metadata
+    function printFile($service, $fileId) {
+        try {
+            $file = $service->files->get($fileId);
+
+            print "Title: " . $file->getName();
+            print "Description: " . $file->getDescription();
+            print "MIME type: " . $file->getMimeType();
+            //print "Download URL: : " . $file->getDownloadUrl();
+
+            return $file;
+        } catch (Exception $e) {
+            print "An error occurred: " . $e->getMessage();
+        }
+    }
+
+    function downloadFile($service, $downloadUrl,$client) {
+        if ($downloadUrl) {
+              $request = new Google_Http_Request($downloadUrl, 'GET', null, null);
+
+              $SignhttpRequest = $client->getAuth()->sign($request);
+              $httpRequest = $client->getIo()->makeRequest($SignhttpRequest);
+
+              if ($httpRequest->getResponseHttpCode() == 200) {
+                return $httpRequest->getResponseBody();
+              } else {
+              // An error occurred.
+                return null;
+              }
+         } else {
+          // The file doesn't have any content stored on Drive.
+           return null;
+         }
+    }
 }

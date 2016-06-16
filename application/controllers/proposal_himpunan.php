@@ -302,6 +302,7 @@ class Proposal_himpunan extends Private_Controller{
 
         if ($user->role == 'staff') {
             $proposals  = $this->logbook_proposal_himpunan_model->get_all();
+
         }else if($user->role == 'mahasiswa') {
             $himpunan   = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
             $proposals  = $this->logbook_proposal_himpunan_model->get_many_by(array('pengaju' => $himpunan->id));
@@ -312,8 +313,10 @@ class Proposal_himpunan extends Private_Controller{
             $pengaju            = $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
             $get_id_staff       = $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
             $penanggungjawab    = ($get_id_staff == null) ? null : $this->user_model->get($get_id_staff->id_user);
-
+            $count              = $this->lpj_himpunan_model->count_by('id_pengajuan_proposal', $proposal->id);
+            
             array_push($data['proposals'], array(
+                'count'                     => $count,
                 'id'                        => $proposal->id,
                 'pengaju'                   => $pengaju->nama,
                 'tanggal_pengajuan'         => $proposal->tanggal_pengajuan,
@@ -325,7 +328,8 @@ class Proposal_himpunan extends Private_Controller{
         }
 
         if ($user->role == 'staff') {
-            $this->load_page('page/private/staff/logbook_proposal_himpunan', $data);
+            
+            $this->load_page('page/private/staff/list_pengajuan_himpunan', $data);
         }else if($user->role == 'mahasiswa'){
             $data['himpunan'] = $himpunan;
             $this->load_page('page/private/himpunan/logbook_proposal', $data);
@@ -337,6 +341,8 @@ class Proposal_himpunan extends Private_Controller{
 
         $user       = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $proposals  = $this->proposal_himpunan_model->get_many_by(array('id_pengajuan_proposal' => $id_pengajuan));
+
+        
 
         if ($user->role == 'mahasiswa') {
             $himpunan   = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
@@ -357,9 +363,10 @@ class Proposal_himpunan extends Private_Controller{
 
         $data['id_pengajuan']   = $id_pengajuan;
         $data['status_approve'] = $status_approve;
+        
 
         if ($user->role == 'staff') {
-            $this->load_page('page/private/staff/logbook_proposal_himpunan_detail', $data);
+            $this->load_page('page/private/staff/list_proposal_himpunan', $data);
         }else if($user->role == 'mahasiswa'){
             $data['himpunan'] = $himpunan;
             $this->load_page('page/private/himpunan/logbook_proposal_detail', $data);
@@ -427,7 +434,7 @@ class Proposal_himpunan extends Private_Controller{
 
         $this->proposal_himpunan_model->update($id, array('status_approve' => $status, 'penyetuju' => $penyetuju->nip));
 
-        redirect('proposal_himpunan/detail_proposal?id_proposal='.$id);
+        redirect('proposal_himpunan/detail_proposal?id='.$id);
     }
 
     function upload_lpj(){
@@ -521,25 +528,50 @@ class Proposal_himpunan extends Private_Controller{
     function logbook_lpj(){
         $id_pengajuan = $this->input->get('id_pengajuan');
 
-        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-        $himpunan   = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
-        $proposal  = $this->logbook_proposal_himpunan_model->get_by(array('pengaju' => $himpunan->id, 'status_approve' => 'y'));
-        
-        $pengaju    = $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
-        $lpjs       = $this->lpj_himpunan_model->get_all();
-        
-        $data['lpjs'] = array();
-        foreach ($lpjs as $lpj) { 
-            array_push($data['lpjs'], array(
-                'id'                => $lpj->id,
-                'pengaju'           => $pengaju->nama,
-                'judul_laporan'     => $lpj->judul_laporan,
-                'tanggal_upload'    => $lpj->waktu_upload
-                ));
-        }
+        $user      = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
-        $data['himpunan'] = $himpunan;
-        $this->load_page('page/private/himpunan/logbook_lpj', $data);
+        if ($user->role == 'mahasiswa') {
+            $himpunan  = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
+            $proposal  = $this->logbook_proposal_himpunan_model->get_by(array('pengaju' => $himpunan->id, 'status_approve' => 'y'));
+            $pengaju   = $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
+            $lpjs      = $this->lpj_himpunan_model->get_all();
+
+            $data['lpjs'] = array();
+            foreach ($lpjs as $lpj) { 
+
+                array_push($data['lpjs'], array(
+                    'id'                => $lpj->id,
+                    'pengaju'           => $pengaju->nama,
+                    'judul_laporan'     => $lpj->judul_laporan,
+                    'tanggal_upload'    => $lpj->waktu_upload
+                    ));
+            }
+
+            $data['himpunan'] = $himpunan;
+            $this->load_page('page/private/himpunan/logbook_lpj', $data);
+
+        }elseif ($user->role == 'staff') {
+            $lpjs      = $this->lpj_himpunan_model->get_many_by(array('id_pengajuan_proposal' => $id_pengajuan));
+            $proposal  = $this->logbook_proposal_himpunan_model->get_by(array('id' => $id_pengajuan));
+            $himpunan  = $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
+
+            $data['lpjs'] = array();
+            foreach ($lpjs as $lpj) { 
+                $proposal  = $this->logbook_proposal_himpunan_model->get_by(array('id' => $lpj->id_pengajuan_proposal));
+                $himpunan  = $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
+
+                array_push($data['lpjs'], array(
+                    'id'                => $lpj->id,
+                    'pengaju'           => $himpunan->nama,
+                    'judul_pengajuan'   => $proposal->judul,
+                    'judul_laporan'     => $lpj->judul_laporan,
+                    'tanggal'           => $lpj->waktu_upload
+                    ));
+            }
+
+            $data['count'] = $count;
+            $this->load_page('page/private/staff/list_lpj', $data);
+        }       
 
     }
 

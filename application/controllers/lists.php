@@ -26,15 +26,18 @@ class Lists extends Private_Controller {
         // var_dump($table);
         // die();
 	    for ($i = 0; $i < count($table['data']); $i++) {
+            $mhs = $this->user_model->get_by(array('username' => $table['data'][$i][3]));
+
         	array_push($table['data'][$i], 
-                '<a href="'.base_url('mahasiswa/detail/').'?nim='.$table['data'][$i][0].'">
-                    <button class="btn btn-info btn-sm pull-left">
-                        <i class="fa fa-list"></i> &nbsp;Lihat Detail
+                '<a href="'.base_url('profil').'/'.$table['data'][$i][3].'">
+                    <button class="btn btn-info btn-xs pull-left">
+                        <i class="fa fa-list"></i> &nbsp;Detail
                     </button>
-                </a> 
-                <a href="'.base_url('mahasiswa/do_reset_password/').'?nim='.$table['data'][$i][0].'">
-                    <button class="btn btn-warning btn-sm pull-right">
-                        <i class="fa fa-refresh"></i> &nbsp;Reset Password
+                </a> &nbsp;
+
+                <a href="'.base_url('mahasiswa/do_delete/'.$mhs->id.'/').'?nim='.$table['data'][$i][0].'">
+                    <button class="btn btn-danger btn-xs pull-right">
+                        <i class="fa fa-trash"></i> &nbsp;Hapus
                     </button>
                 </a>
                 ');

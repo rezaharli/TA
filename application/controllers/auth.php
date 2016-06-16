@@ -338,6 +338,7 @@ class Auth extends MY_Controller {
         redirect('lists/mahasiswa');
     }
 
+    //import data csv mahasiswa
     function do_import_csv(){
     	$this->load->model('user_model');
 		$this->load->model('mahasiswa_model');
@@ -402,5 +403,7 @@ class Auth extends MY_Controller {
             } 
 
     }
+
+    
 
 }

@@ -12,11 +12,7 @@
             Daftar Himpunan
             <small>FRI</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Data tables</li>
-        </ol>
+        <?php echo $breadcrumb ?>
     </section>
 
     <!-- Main content -->
@@ -32,7 +28,7 @@
                                 <th>Nama Himpunan</th>
                                 <th>Program Studi</th>
                                 <th>Penanggung Jawab</th>
-                                <th style="width: 100px;">Aksi</th>
+                                <th style="width: 112px; text-align: center;">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -50,6 +46,9 @@
                                     <td>
                                       <a href="<?php echo base_url('himpunan/edit?id='.$himpunan['id']); ?>">
                                         <button class="btn btn-info btn-sm pull-left"><i class="fa fa-edit"></i> &nbsp;Edit</button>
+                                      </a>&nbsp;
+                                      <a href="<?php echo base_url('himpunan/edit?id='.$himpunan['id']); ?>">
+                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> &nbsp;Hapus</button>
                                       </a>
                                     </td>
                                   </tr>

@@ -5,6 +5,8 @@ class Pesan extends Private_Controller {
 		parent::__construct();
 	    $this->load->model('user_model');
 	    $this->load->model('pesan_model');
+        $this->load->model('mahasiswa_model');
+        $this->load->model('himpunan_model');
 	}
 
 	//kirim pesan dari staff kemahasiswaan ke himpunan
@@ -30,8 +32,7 @@ class Pesan extends Private_Controller {
     }
 
     public function get() {
-    	$this->load->model('mahasiswa_model');
-    	$this->load->model('himpunan_model');
+    	$this->load->library('time_ago');
     	$user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
     	if($user->role == 'mahasiswa'){
@@ -43,15 +44,23 @@ class Pesan extends Private_Controller {
 
     		$data['pesan'] = array();
     		foreach ($pesan as $p) {
-        		echo '<li><a href="'.base_url('proposal_himpunan/detail_proposal?id='.$p->id_proposal).'"><i class="fa fa-users text-aqua">'.$p->asal.'</i> '.$p->pesan.'</a></li>';
+                $profil     = $this->user_model->get_by(array('id' => $p->asal));
+
+        		echo '<li><a data-toggle="modal" data-target="#tampilkanPesanModal" href="'.base_url('pesan/tampilkan_pesan').'">
+                        <div class="pull-left"><img src="'.base_url().'assets/img/foto-profil/'.$profil->foto_profil.'" class="img-circle" alt="User Image"> </div>
+                        <h5>'.$profil->nama.'<small class="pull-right"><i class="fa fa-clock-o"></i>&nbsp;'.$this->time_ago->timeAgo($p->waktu).'</small></h5>
+                        <p style="width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">'.$p->pesan.'</p></a></li>';
+                
         	}
     	}
 
     }
 
+    function isi_pesan(){
+        
+    }
+
     public function hitung() {
-    	$this->load->model('mahasiswa_model');
-    	$this->load->model('himpunan_model');
     	$user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
     	if($user->role == 'mahasiswa'){

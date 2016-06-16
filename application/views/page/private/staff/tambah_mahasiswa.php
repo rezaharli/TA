@@ -8,10 +8,7 @@
 	    <h1>
 	      	Tambah Mahasiswa
 	    </h1>
-	    <ol class="breadcrumb">
-	      	<li><a href="#">Event</a></li>
-	      	<li class="active"><?php //echo $nama_event ?></li>
-	    </ol>
+	    <?php echo $breadcrumb ?>
 	</section>
 
 	<section class="content">

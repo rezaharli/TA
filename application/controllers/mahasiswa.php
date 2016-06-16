@@ -10,13 +10,6 @@ class Mahasiswa extends Private_Controller {
 		$this->load->library('csvimport');
 	}
 
-    function do_reset_password($id){
-        $nim = $this->input->get('nim');
-
-        $this->user_model->update($id, array('password' => sha1($nim)));
-        redirect('lists/mahasiswa');
-    }
-
     function add(){
     	$this->load_page('page/private/staff/tambah_mahasiswa', null);
     }
@@ -72,6 +65,15 @@ class Mahasiswa extends Private_Controller {
         $this->himpunan_model->update($himpunan, array('id_penanggungjawab' => $nim));
 
         redirect('mahasiswa/detail?nim='.$nim);
+    }
+
+    function do_delete($id){
+        $nim    = $this->input->get('nim');
+
+        $this->mahasiswa_model->delete_by(array('nim' => $nim));
+        $this->user_model->delete($id);
+
+        redirect('lists/mahasiswa');
     }
 
 }

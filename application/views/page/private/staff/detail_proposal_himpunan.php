@@ -9,11 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Proposal 
             <small> Himpunan </small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Forms</a></li>
-            <li class="active">General Elements</li>
-        </ol>
+        <?php echo $breadcrumb ?>
     </section>
 
 <!-- Main content -->
@@ -37,93 +33,77 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       </h4>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <div class="box-group" id="accordion">
-                            <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                            <div class="panel box box-primary">
-                              <div class="box-header with-border">
-                                <h5 class="box-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                    Tema Kegiatan
-                                  </a>
-                                </h5>
-                              </div>
-                              <div id="collapse1" class="panel-collapse collapse in">
-                                <div class="box-body">
-                                  <pre class="prettyprint"><?php echo $tema_kegiatan ?></pre>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel box box-primary">
-                              <div class="box-header with-border">
-                                <h5 class="box-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                                    Tujuan Kegiatan
-                                  </a>
-                                </h5>
-                              </div>
-                              <div id="collapse2" class="panel-collapse collapse">
-                                <div class="box-body">
-                                  <pre class="prettyprint"><?php echo $tujuan_kegiatan ?> </pre>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel box box-primary">
-                              <div class="box-header with-border">
-                                <h5 class="box-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                    Sasaran Kegiatan
-                                  </a>
-                                </h5>
-                              </div>
-                              <div id="collapse3" class="panel-collapse collapse">
-                                <div class="box-body">
-                                  <pre class="prettyprint"><?php echo $sasaran_kegiatan ?></pre>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel box box-primary">
-                              <div class="box-header with-border">
-                                <h5 class="box-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-                                    Tanggal Kegiatan
-                                  </a>
-                                </h5>
-                              </div>
-                              <div id="collapse4" class="panel-collapse collapse">
-                                <div class="box-body">
-                                  <pre class="prettyprint"><?php echo $tanggal_kegiatan ?></pre>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel box box-primary">
-                              <div class="box-header with-border">
-                                <h5 class="box-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
-                                    Tempat Kegiatan
-                                  </a>
-                                </h5>
-                              </div>
-                              <div id="collapse5" class="panel-collapse collapse">
-                                <div class="box-body">
-                                  <pre class="prettyprint"><?php echo $tempat_kegiatan ?></pre>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel box box-primary">
-                              <div class="box-header with-border">
-                                <h5 class="box-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
-                                    Total Anggaran
-                                  </a>
-                                </h5>
-                              </div>
-                              <div id="collapse6" class="panel-collapse collapse">
-                                <div class="box-body">
-                                  <pre class="prettyprint">Rp. <?php echo $anggaran ?></pre>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
+                        <div class="box box-solid">
+                          <div class="box-header bg-light-blue-gradient">
+                            <h4 class="box-title">
+                              <button class="btn btn-primary btn-xs" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                              &nbsp;Tema Kegiatan
+                            </h4>
+                          </div>
+                          <div class="box-body">
+                            <pre class="prettyprint"><?php echo $tema_kegiatan ?></pre>
+                          </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+
+                        <div class="box box-solid collapsed-box">
+                          <div class="box-header bg-light-blue-gradient">
+                            <h4 class="box-title">
+                              <button class="btn btn-primary btn-xs" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                              &nbsp;Tujuan Kegiatan
+                            </h4>
+                          </div>
+                          <div class="box-body">
+                            <pre class="prettyprint"><?php echo $tujuan_kegiatan ?></pre>
+                          </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+
+                        <div class="box box-solid collapsed-box">
+                          <div class="box-header bg-light-blue-gradient">
+                            <h4 class="box-title">
+                              <button class="btn btn-primary btn-xs" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                              &nbsp;Sasaran Kegiatan
+                            </h4>
+                          </div>
+                          <div class="box-body">
+                            <pre class="prettyprint"><?php echo $sasaran_kegiatan ?></pre>
+                          </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+
+                        <div class="box box-solid collapsed-box">
+                          <div class="box-header bg-light-blue-gradient">
+                            <h4 class="box-title">
+                              <button class="btn btn-primary btn-xs" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                              &nbsp;Tanggal Kegiatan
+                            </h4>
+                          </div>
+                          <div class="box-body">
+                            <pre class="prettyprint"><?php echo $tanggal_kegiatan ?></pre>
+                          </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+
+                        <div class="box box-solid collapsed-box">
+                          <div class="box-header bg-light-blue-gradient">
+                            <h4 class="box-title">
+                              <button class="btn btn-primary btn-xs" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                              &nbsp;Tempat Kegiatan
+                            </h4>
+                          </div>
+                          <div class="box-body">
+                            <pre class="prettyprint"><?php echo $tempat_kegiatan ?></pre>
+                          </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+
+                        <div class="box box-solid collapsed-box">
+                          <div class="box-header bg-light-blue-gradient">
+                            <h4 class="box-title">
+                              <button class="btn btn-primary btn-xs" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                              &nbsp;Total Anggaran
+                            </h4>
+                          </div>
+                          <div class="box-body">
+                            <pre class="prettyprint">Rp. <?php echo $anggaran ?></pre>
+                          </div><!-- /.box-body -->
+                        </div><!-- /.box -->
                     </div>
                     <div class="box-footer">
                             <?php if ($status == NULL) { ?>
@@ -131,7 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 &nbsp;
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#tolakModal"><i class="fa fa-close"></i> &nbsp;Tolak</button>
                             <?php }elseif ($status == 'n') { ?>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#pesanModal"><i class="fa fa-envelope"></i> &nbsp;Kirim Pesan</button>
+                                <button class="btn btn-info" data-toggle="modal" data-target="#pesanModal"><i class="fa fa-envelope"></i> &nbsp;Kirim Pesan</button>
                             <?php } ?>
                             
                             
@@ -152,7 +132,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             Apakah anda ingin <b>menyetujui</b> proposal ini?
                           </div>
                           <div class="modal-footer">
-                            <a href="do_edit_status/<?php echo $id ?>?s=t" class="btn btn-success"><i class="fa fa-check"></i> Setuju</a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> &nbsp;
+                            <a href="do_edit_status/<?php echo $id ?>?s=t" class="btn btn-success pull-right"><i class="fa fa-check"></i> Setuju</a>
                           </div>
                         </div>
                       </div>
@@ -169,7 +150,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             Apakah anda ingin <b>menolak</b> proposal ini?
                           </div>
                           <div class="modal-footer">
-                            <a href="do_edit_status/<?php echo $id ?>?s=f" class="btn btn-danger" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> &nbsp;
+                            <a href="do_edit_status/<?php echo $id ?>?s=f" class="btn btn-danger pull-right" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
                           </div>
                         </div>
                       </div>
