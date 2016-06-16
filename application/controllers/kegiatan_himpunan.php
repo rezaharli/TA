@@ -114,20 +114,23 @@ class Kegiatan_himpunan extends Private_Controller{
     function do_cetak_sertifikat($id_acara){
         $this->load->library('phpword');
 
-        $pesertas = $this->peserta_model->get_many_by(array('id_acara'=>$id_acara));
+        $pesertas = $this->peserta_model->get_many_by(array('id_acara' => $id_acara));
+        // var_dump($this->db->last_query()); die();
         $acara = $this->acara_himpunan_model->get_by('id', $id_acara);
 
         $files = array();
 
         foreach ($pesertas as $peserta) {
             $data = array(
-                'nama'          => $peserta->nama,
-                'nama_acara'    => $acara->nama_acara,
-                'id_acara'      => $acara->id,
+                'nama' => $peserta->nama,
+                'nama_acara' => $acara->nama_acara,
+                'id_acara' => $acara->id,
                 'tanggal_acara' => $acara->tanggal_acara
             );
             $files[] = $this->phpword->generateSertifikat('assets/doc_template/sertifikat.docx', $data);
         }
+        // echo "<pre>";
+        // var_dump($data['peserta']); die();
 
         // create zip file
         $zipname = $acara->nama_acara."_".$acara->id.'.zip';
@@ -143,5 +146,6 @@ class Kegiatan_himpunan extends Private_Controller{
         header('Content-disposition: attachment; filename='.$zipname);
         header('Content-Length: ' . filesize($zipname));
         readfile($zipname);
+
     }
 }
