@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <small><?php echo $himpunan->nama ?></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="<?php echo base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Edit Profil Himpunan</li>
         </ol>
     </section>

@@ -31,7 +31,7 @@ class Himpunan extends Private_Controller {
 		$this->form_validation->set_rules('prodi', 'Program Studi', 'required');
 
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
-			if ($this->form_validation->run() !== FALSE) {
+			if ($this->form_validation->run() != FALSE) {
 				$data = array(
 					'nama' 	=> $this->input->post('nama'),
 					'prodi' => $this->input->post('prodi')
