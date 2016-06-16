@@ -1,6 +1,3 @@
-<!-- fullCalendar 2.7.0-->
-<link href='<?php echo base_url() ?>assets/fullcalendar-2.7.0/fullcalendar.css' rel='stylesheet' />
-<link href='<?php echo base_url() ?>assets/fullcalendar-2.7.0/fullcalendar.print.css' rel='stylesheet' media='print' />
 <!-- datepicker -->
 <link rel="stylesheet" href="<?php echo base_url('assets/adminlte/plugins/datepicker/datepicker3.css'); ?>">
 
@@ -11,19 +8,16 @@
 	    <h1>
 	      	Event
 	    </h1>
-	    <ol class="breadcrumb">
-	      	<li><a href="#">Event</a></li>
-	      	<li class="active"><?php echo $nama_event ?></li>
-	    </ol>
+	    <?php $this->load->view('page/private/template/breadcrumb') ?>
 	</section>
 
 	<section class="content">
 	  	<div class="row">
-	    	<div class="col-xs-8">
+	    	<div class="col-md-8">
         		<div class="nav-tabs-custom">
           			<ul class="nav nav-tabs">
               			<li class="active"><a href="#event" data-toggle="tab">Event</a></li>
-              			<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur' || (($jenis_user != 'staff_kemahasiswaan' || $jenis_user != 'kaur') && $status != 'disetujui')) { ?>
+              			<?php if (($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur') && $event->status == 'disetujui') { ?>
               				<li><a href="#edit" data-toggle="tab">Edit</a></li>
               			<?php } ?>
           			</ul>
@@ -32,34 +26,46 @@
           					<div class="table-responsive">
 				                <table class="table">
 				                  	<tr>
-					                    <th style="width:20%">Nama Event:</th>
-					                    <td><?php echo $nama_event ?></td>
+					                    <th style="width:20%">Nama Kompetisi</th>
+					                    <td><?php echo $event->nama_event ?></td>
 				                  	</tr>
 				                  	<tr>
-					                    <th>Tanggal Event:</th>
-					                    <td><?php echo $tanggal ?></td>
+					                    <th style="width:20%">Deskripsi</th>
+					                    <td><?php echo $event->keterangan ?></td>
 				                  	</tr>
 				                  	<tr>
-					                    <th>Pengaju:</th>
-					                    <td><a href="profil/<?php echo $username_pengaju ?>"><?php echo $nama_pengaju ?></a></td>
+					                    <th style="width:20%">Tingkat Kompetisi</th>
+					                    <td><?php echo $event->tingkat_kompetisi ?></td>
 				                  	</tr>
 				                  	<tr>
-				                  		<th>Status:</th>
+					                    <th style="width:20%">Penyelenggara</th>
+					                    <td><?php echo $event->penyelenggara ?></td>
+				                  	</tr>
+				                  	<tr>
+					                    <th>Waktu Event</th>
+					                    <td><?php echo $event->tanggal_mulai_display.((date_diff(date_create($event->tanggal_mulai), date_create($event->tanggal_selesai))->format('%d') >= '1') ? ' sampai '.$event->tanggal_selesai_display : '') ?></td>
+				                  	</tr>
+				                  	<tr>
+					                    <th>Pengaju</th>
+					                    <td><a href="<?php echo base_url('profil/'.$pengaju->username) ?>"><?php echo ($pengaju != null) ? $pengaju->nama : '-' ?></a></td>
+				                  	</tr>
+				                  	<tr>
+				                  		<th>Status</th>
 				                  		<td>
-					                      	<?php if ($status == null) { ?>
+					                      	<?php if ($event->status == null) { ?>
 					                      		<span class="label label-warning">Pending</span>
-					                      	<?php } else if ($status == 'disetujui') { ?>
+					                      	<?php } else if ($event->status == 'disetujui') { ?>
 					                      		<span class="label label-success">Disetujui</span>
-					                      	<?php } else if ($status == 'ditolak') { ?>
+					                      	<?php } else if ($event->status == 'ditolak') { ?>
 					                      		<span class="label label-danger">Ditolak</span>
 					                      	<?php } ?>
 				                      	<td>
 				                  	</tr>
 				                  	<tr>
-					                    <th>Penanggungjawab:</th>
+					                    <th>Penanggungjawab</th>
 					                    <td>
-					                    	<?php if (isset($username_penanggungjawab) && isset($nama_penanggungjawab)) { ?>
-					                    		<a href="profil/<?php echo $username_penanggungjawab ?>"><?php echo $nama_penanggungjawab ?></a>
+					                    	<?php if (isset($penanggungjawab) && $event->status == 'disetujui') { ?>
+					                    		<a href="<?php echo base_url('profil/'.$penanggungjawab->username) ?>"><?php echo $penanggungjawab->nama ?></a>
 					                    	<?php } else { ?>
 					                    		Belum ada penyetuju event.
 					                    	<?php } ?>
@@ -70,47 +76,72 @@
 			              	<div class="row no-print">
 								<div class="col-xs-12">
 									<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur') { ?>
-										<?php if ($status != 'disetujui') { ?>
-											<a href="event/do_edit_status/<?php echo $id ?>?s=t" class="btn btn-success pull-left"><i class="fa fa-check"></i> Setuju</button>
-										<?php } ?>
-										<?php if ($status != null) { ?>
-											<a href="event/do_edit_status/<?php echo $id ?>?s=p" class="btn btn-warning pull-left" style="margin-left: 5px;"><i class="fa fa-refresh"></i> Tunda</a>
-										<?php } ?>
-										<?php if ($status != 'ditolak') { ?>
-											<a href="event/do_edit_status/<?php echo $id ?>?s=f" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
+										<?php if ($event->status == null) { ?>
+											<a href="do_edit_status/<?php echo $event->id ?>?s=t" class="btn btn-success pull-left"><i class="fa fa-check"></i> Setuju</button>
+											<a href="do_edit_status/<?php echo $event->id ?>?s=f" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
 										<?php } ?>
 									
-										<a href="event/hapus?id=<?php echo $id ?>" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Hapus</a>
+										<a href="<?php echo base_url('event/hapus?id='.$event->id) ?>" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Hapus</a>
 									<?php } ?>
-									<a href="<?php echo $google_url ?>" target="_blank" class="btn btn-default pull-right" style="margin-right: 5px;">Lihat di google calendar</a>
+									<a href="<?php echo $event->google_url ?>" target="_blank" class="btn btn-default pull-right" style="margin-right: 5px;">Lihat di google calendar</a>
 								</div>
 			          		</div>
               			</div><!-- /.tab-pane -->
 
 
-              			<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur' || (($jenis_user != 'staff_kemahasiswaan' || $jenis_user != 'kaur') && $status != 'disetujui')) { ?>
+              			<?php if (($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur') && $event->status == 'disetujui') { ?>
 	              			<div class="tab-pane" id="edit">
-				                <form class="form-horizontal" method="post" action="<?php echo base_url() ?>event/do_edit_event/<?php echo $id ?>">
+				                <form class="form-horizontal" method="post" action="<?php echo base_url() ?>event/do_edit_event/<?php echo $event->id ?>" enctype="multipart/form-data">
 				                  	<div class="form-group">
-					                    <label class="col-sm-2 control-label">Nama Event</label>
-					                    <div class="col-sm-10">
-					                      	<input type="text" class="form-control" name="nama-event" value="<?php echo $nama_event ?>">
+					                    <label class="col-sm-3 control-label">Nama Kompetisi</label>
+					                    <div class="col-sm-9">
+					                      	<input type="text" required class="form-control" name="nama" value="<?php echo $event->nama_event ?>">
 					                    </div>
 				                  	</div>
 				                  	<div class="form-group">
-					                    <label class="col-sm-2 control-label">Tanggal Event</label>
-					                    <div class="col-sm-10">
-					                      	<input type="text" class="form-control" name="tanggal-event" value="<?php echo $tanggal ?>" id="input-tanggal-event">
+					                    <label class="col-sm-3 control-label">Deskripsi</label>
+					                    <div class="col-sm-9">
+					                      	<input type="text" required class="form-control" name="keterangan" value="<?php echo $event->keterangan ?>">
 					                    </div>
 				                  	</div>
 				                  	<div class="form-group">
-					                    <label class="col-sm-2 control-label">Pengaju Event</label>
-					                    <div class="col-sm-10">
-					                      	<input type="text" class="form-control" value="<?php echo $nama_pengaju ?>" disabled>
+						                <label class="col-sm-3 control-label">Tingkat Kompetisi</label>
+						                <div class="col-sm-9">
+						                  	<select class="form-control" name="tingkat_kompetisi" id="tingkat" required>
+							                    <option value="regional" <?php echo ($event->tingkat_kompetisi == 'Regional') ? 'selected' : '' ?>>Regional</option>
+							                    <option value="nasional" <?php echo ($event->tingkat_kompetisi == 'Nasional') ? 'selected' : '' ?>>Nasional</option>
+							                    <option value="internasional" <?php echo ($event->tingkat_kompetisi == 'Internasional') ? 'selected' : '' ?>>Internasional</option>
+						                  	</select>
+						                </div>
+						             </div>
+				                  	<div class="form-group">
+					                    <label class="col-sm-3 control-label">Penyelenggara</label>
+					                    <div class="col-sm-9">
+					                      	<input type="text" required class="form-control" name="penyelenggara" value="<?php echo $event->penyelenggara ?>">
 					                    </div>
 				                  	</div>
 				                  	<div class="form-group">
-				                    	<div class="col-sm-offset-2 col-sm-10">
+					                    <label class="col-sm-3 control-label">Tanggal Mulai</label>
+					                    <div class="col-sm-9">
+					                      	<input type="text" required class="form-control" name="tanggal_mulai" value="<?php echo $event->tanggal_mulai ?>" id="input-tanggal-mulai">
+					                    </div>
+				                  	</div>
+				                  	<div class="form-group">
+					                    <label class="col-sm-3 control-label">Tanggal Selesai</label>
+					                    <div class="col-sm-9">
+					                      	<input type="text" class="form-control" name="tanggal_selesai" value="<?php echo $event->tanggal_selesai ?>" id="input-tanggal-selesai">
+					                      	*tidak wajib diisi
+					                    </div>
+				                  	</div>
+				                  	<div class="form-group">
+						                <label class="col-sm-3 control-label">Bukti lomba</label>
+						                <div class="col-sm-9">
+						                  	<input type="file" id="bukti_event" name="bukti_event">
+						                  	*Poster/Screenshot web lomba maksimal 2 mb (.jpg/.png)
+						                </div>
+						             </div>
+				                  	<div class="form-group">
+				                    	<div class="col-sm-offset-3 col-sm-10">
 				                      		<button type="submit" class="btn btn-primary">Submit</button>
 				                    	</div>
 				                  	</div>
@@ -120,14 +151,16 @@
           			</div><!-- /.tab-content -->
         		</div><!-- /.nav-tabs-custom -->
       		</div><!-- /.col -->
-	    	<div class="col-md-4">
-	      		<div class="box box-primary">
-	        		<div class="box-body no-padding">
-	          			<!-- THE CALENDAR -->
-	          			<div id="calendar"></div>
-	        		</div><!-- /.box-body -->
-	      		</div><!-- /. box -->
-	    	</div><!-- /.col -->
+      		<div class="col-md-4">
+              <div class="box box-warning">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Bukti lomba</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <img width="100%" class="img-responsive pad" src="<?php echo base_url('assets/upload/bukti_event/'.$event->bukti_event);?>" alt="Tidak ada foto">
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
 	  	</div><!-- /.row -->
 	  	<div class="row">
 	  		
@@ -137,38 +170,34 @@
 </div>
 <!-- /.content-wrapper -->
 
-<script src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/lib/moment.min.js'></script>
-<script src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/lib/jquery.min.js'></script>
-<script src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/fullcalendar.min.js'></script>
-<script type='text/javascript' src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/gcal.js'></script>
-
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url('assets/adminlte/plugins/datepicker/bootstrap-datepicker.js'); ?>"></script>
 <script>
 
 	$(document).ready(function() {
 
-		$('#calendar').fullCalendar({
-			header: {
-				left: 'today',
-				center: 'title',
-				right: 'prev,next'
-			},
-			height: 'auto',
-			editable: false,
-			eventLimit: 2, // allow "more" link when too many events
-			events: '<?php echo base_url('event/get_calendar'); ?>',
-			defaultDate: '<?php echo $tanggal ?>'
-		});
+		$('#input-tanggal-mulai').datepicker({
+	      	format: 'yyyy-mm-dd'
+	    });
+
+	    $('#input-tanggal-selesai').datepicker({
+	    	startDate: new Date($('#input-tanggal-mulai').val()),
+	      	format: 'yyyy-mm-dd'
+	    });
 		
 	});
 
+  	$('#input-tanggal-mulai').change(function () {
 
-  $(function () {
-    //Date range picker
-    $('#input-tanggal-event').datepicker({
-      format: 'yyyy-mm-dd'
-    });
-  });
+  		if($('#input-tanggal-mulai').val() > $('#input-tanggal-selesai').val()){
+  			$('#input-tanggal-selesai').val($('#input-tanggal-mulai').val());
+  		}
+
+  		$("#input-tanggal-selesai").datepicker("remove");
+  		$('#input-tanggal-selesai').datepicker({
+	    	startDate: new Date($('#input-tanggal-mulai').val()),
+	      	format: 'yyyy-mm-dd'
+	    });
+  	});
 
 </script>

@@ -1,6 +1,3 @@
-<!-- fullCalendar 2.7.0-->
-<link href='<?php echo base_url() ?>assets/fullcalendar-2.7.0/fullcalendar.css' rel='stylesheet' />
-<link href='<?php echo base_url() ?>assets/fullcalendar-2.7.0/fullcalendar.print.css' rel='stylesheet' media='print' />
 <!-- DataTables -->
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/plugins/datatables/dataTables.bootstrap.css">
 
@@ -26,17 +23,15 @@
 
 	<section class="content">
 	  	<div class="row">
-	    	<div class="col-xs-8">
+	    	<div class="col-md-8">
               	<div class="box">
-	                <div class="box-header">
-	                  	<h3 class="box-title">Hover Data Table</h3>
-	                </div><!-- /.box-header -->
 	                <div class="box-body">
 	                  	<table id="tabel_event" class="table table-bordered table-hover">
 		                    <thead>
 		                      	<tr>
 			                      <th>Nama Event</th>
-			                      <th width="90px">Tanggal Mulai</th>			                      
+			                      <th>Penyelenggara</th>
+			                      <th width="110px">Waktu</th>			                      
 			                      <th width="50px">Status</th>
 			                      <th width="60px" align="center">Aksi</th>
 			                    </tr>
@@ -45,14 +40,15 @@
 		                    	<?php foreach ($events as $event) { ?> 
 			                      	<tr>
 				                      	<td><?php echo $event->nama_event ?></td>
-				                      	<td><?php echo $event->tanggal_event ?></td>
+				                      	<td><?php echo $event->penyelenggara ?></td>
+				                      	<td><?php echo $event->tanggal_mulai_display.((date_diff(date_create($event->tanggal_mulai), date_create($event->tanggal_selesai))->format('%d') >= '1') ? ' sampai '.$event->tanggal_selesai_display : '') ?></td>
 				                      	<td>
 					                      	<?php if ($event->status == null) { ?>
-					                      		<span class="label label-warning">Pending</span></td>
+					                      		<span class="label label-warning">Pending</span>
 					                      	<?php } else if ($event->status == 'disetujui') { ?>
-					                      		<span class="label label-success">Disetujui</span></td>
+					                      		<span class="label label-success">Disetujui</span>
 					                      	<?php } else if ($event->status == 'ditolak') { ?>
-					                      		<span class="label label-danger">Ditolak</span></td>
+					                      		<span class="label label-danger">Ditolak</span>
 					                      	<?php } ?>
 				                      	<td>
 											<a class="btn btn-primary pull-left btn-xs" style="margin-right: 1px;" href="<?php echo base_url('event/lomba?id='.$event->id); ?>"><i class="fa fa-calendar"></i> Lihat Detail</a>
@@ -65,40 +61,17 @@
 	            </div><!-- /.box -->
             </div>
 	    	<div class="col-md-4">
-	      		<div class="box box-primary">
-	        		<div class="box-body no-padding">
-	          			<!-- THE CALENDAR -->
-	          			<div id="calendar"></div>
-	        		</div><!-- /.box-body -->
-	      		</div><!-- /. box -->
+	      		<?php $this->load->view('page/private/template/calendar') ?>
 	    	</div><!-- /.col -->
 	  	</div><!-- /.row -->
 	</section><!-- /.content -->
 	
 </div>
 <!-- /.content-wrapper -->
-
-<script src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/lib/moment.min.js'></script>
-<script src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/lib/jquery.min.js'></script>
-<script src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/fullcalendar.min.js'></script>
-<script type='text/javascript' src='<?php echo base_url() ?>assets/fullcalendar-2.7.0/gcal.js'></script>
 <!-- DataTables -->
 <script src="<?php echo base_url() ?>assets/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url() ?>assets/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script>
-	$(document).ready(function() {
-		$('#calendar').fullCalendar({
-			header: {
-				left: 'today',
-				center: 'title',
-				right: 'prev,next'
-			},
-			height: 'auto',
-			editable: false,
-			eventLimit: 2, // allow "more" link when too many events
-			events: '<?php echo base_url('event/get_calendar'); ?>'
-		});
-	});
 	$(function () {
         $('#tabel_event').DataTable({
           	"paging": true,
