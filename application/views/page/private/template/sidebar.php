@@ -79,14 +79,11 @@
 
         <?php if($role == 'mahasiswa') { ?>
 
-          <li><a href="#"><i class="fa fa-clipboard"></i> <span>Pengajuan Lomba</span><i class="fa fa-angle-left pull-right"></i></a>
+          <li class="treeview"><a href="#"><i class="fa fa-clipboard"></i> <span>Pengajuan Lomba</span><i class="fa fa-angle-left pull-right"></i></a>
 
             <ul class="treeview-menu">
               <li><a href="<?php echo base_url('proposal/upload_pengajuan') ?>"><i class="fa fa-file-o"></i>Upload Proposal</a>
               </li>
-            </ul>
-
-            <ul class="treeview-menu">
               <li><a href="<?php echo base_url('proposal/logbook_pengajuan_proposal_lomba') ?>"><i class="fa fa-table"></i>Logbook Pengajuan</a>
               </li>
             </ul>
@@ -143,14 +140,8 @@
               <ul class="treeview-menu">
                 <li><a href="<?php echo base_url('proposal_himpunan/upload_pengajuan') ?>"><i class="fa fa-file-o"></i>Upload Proposal</a>
                 </li>
-              </ul>
-              
-              <ul class="treeview-menu">
                 <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan') ?>"><i class="fa fa-calendar-check-o"></i>Logbook Pengajuan</a>
                 </li>
-              </ul>
-              
-              <ul class="treeview-menu">
                 <li><a href="<?php echo base_url('proposal_himpunan/logbook_lpj') ?>"><i class="fa  fa-list-ol"></i>Logbook LPJ</a>
                 </li>
               </ul>
