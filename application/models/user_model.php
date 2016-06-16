@@ -24,7 +24,7 @@ class User_model extends MY_Model {
 	    }
     }
 
-    public function get_roled_data_by_id_user($role, $id){
+    private function get_roled_data_by_id_user($role, $id){
 		$model = $role.'_model';
 
 	    $this->load->model($model);

@@ -46,6 +46,12 @@
 
     <link href="<?php echo base_url() ?>assets/universal/css/owl.carousel.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/universal/css/owl.theme.css" rel="stylesheet">
+
+    <script src="<?php echo base_url() ?>assets/universal/js/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="<?php echo base_url() ?>assets/universal/js/jquery-1.11.0.min.js"><\/script>')
+    </script>
+    <script src="<?php echo base_url() ?>assets/universal/js/bootstrap.min.js"></script>
 </head>
 
 <body>
