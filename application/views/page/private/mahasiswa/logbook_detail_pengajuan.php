@@ -1,4 +1,4 @@
-<!-- DataTables -->
+  <!-- DataTables -->
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/plugins/datatables/dataTables.bootstrap.css">
 
 <!-- DataTables -->
@@ -24,10 +24,15 @@
             <div class="col-xs-12">
                 <div class="box">
                   <div class="box-header">
-                      <a href="<?php echo base_url('proposal/upload_proposal?id_pengajuan='.$this->input->get('id_pengajuan')) ?>">
-                        <button type="button" class="btn btn-default">
-                          <span class="fa fa-plus"></span> Tambah Proposal 
-                        </button>
+                    <?php if ($status == null || $status == 'y') { ?>
+                          <a href="<?php echo base_url('proposal/upload_proposal?id_pengajuan='.$this->input->get('id_pengajuan')) ?>"><button type="button" class="btn btn-default" disabled><span class="fa fa-plus"></span>&nbsp;Tambah Proposal </button>
+                          </a>
+                        <?php } else if ($status == 'n'){ ?> 
+                          <a href="<?php echo base_url('proposal/upload_proposal?id_pengajuan='.$this->input->get('id_pengajuan')) ?>"><button type="button" class="btn btn-default"><span class="fa fa-plus"></span>&nbsp;Tambah Proposal </button>
+                          </a>
+                        <?php } ?>
+
+
                       </a>
                   </div>
                   <!-- /.box-header -->
@@ -58,7 +63,7 @@
                                     <?php }?>
                                   </td>
                                   <td>
-                                    <a href="<?php echo base_url('proposal/detail_proposal?id_proposal='.$proposal['id_proposal']) ?>"> 
+                                    <a href="<?php echo base_url('proposal/detail_proposal?id_proposal='.$proposal['id_proposal'].'&id_pengajuan='.$id_pengajuan_proposal_mahasiswa) ?>"> 
                                       <button class="btn btn-info pull-leftt"></i> Detail Proposal</button>
                                     </a>
                                   </td>
