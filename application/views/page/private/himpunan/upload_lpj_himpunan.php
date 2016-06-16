@@ -28,8 +28,8 @@ $(function() {
             <small><?php echo $this->session->flashdata('error'); ?></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Pengajuan</a></li>
+            <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan'); ?>">Logbook Pengajuan</a></li>
             <li class="active">Upload LPJ</li>
         </ol>
     </section>
@@ -49,32 +49,42 @@ $(function() {
                         </div><!-- /.box-header -->
                         
                         <div class="box-body">
+                            <?php if (!empty(validation_errors())): ?>
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                    <ul>
+                                        <?php echo validation_errors('<li>', '</li>'); ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
+
                             <div class="form-group">
-                                <label>Judul Laporan</label>
+                                <label>Judul Laporan *</label>
                                 <input type="text" class="form-control" id="judul_laporan" placeholder="Judul Laporan" name="judul_laporan">
                             </div>
                             <div class="form-group">
-                                <label>Deskripsi Laporan</label>
+                                <label>Deskripsi Laporan *</label>
                                 <textarea class="form-control" id="deskripsi_laporan" placeholder="Deskripsi Laporan" name="deskripsi_laporan"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Ketercapaian Tujuan</label>
+                                <label>Ketercapaian Tujuan *</label>
                                 <textarea class="form-control" id="ketercapaian_tujuan" placeholder="Ketercapaian Tujuan" name="ketercapaian_tujuan"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Realisasi Sasaran Kegiatan</label>
+                                <label>Realisasi Sasaran Kegiatan *</label>
                                 <textarea class="form-control" id="realisasi_sasaran_kegiatan" placeholder="Realisasi Sasaran Kegiatan" name="realisasi_sasaran_kegiatan"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Tanggal Pelaksanaan</label>
+                                <label>Tanggal Pelaksanaan *</label>
                                 <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Pelaksanaan" name="tanggal_pelaksanaan">
                             </div>
                             <div class="form-group">
-                                <label>Tempat Pelaksanaan</label>
+                                <label>Tempat Pelaksanaan *</label>
                                 <input type="text" class="form-control" id="tempat_pelaksanaan" placeholder="Tempat Pelaksanaan" name="tempat_pelaksanaan">
                             </div>
                             <div class="form-group">
-                                <label>Realisasi Kegiatan</label>
+                                <label>Realisasi Kegiatan *</label>
                                 <textarea class="form-control" id="realisasi_kegiatan" placeholder="Realisasi Kegiatan" name="realisasi_kegiatan"></textarea>
                             </div>   
                         </div><!-- /.box-body -->                   
@@ -91,29 +101,29 @@ $(function() {
                         
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Realisasi Anggaran Biaya Total</label>
+                                <label>Realisasi Anggaran Biaya Total *</label>
                                 <input type="text" class="form-control" id="realisasi_total_anggaran" placeholder="ex:1000000" name="realisasi_total_anggaran">
                             </div>
                             <div class="form-group">
-                                <label>Evaluasi Kegiatan</label>
+                                <label>Evaluasi Kegiatan *</label>
                                 <textarea class="form-control" id="evaluasi_kegiatan" placeholder="Evaluasi Kegiatan" name="evaluasi_kegiatan"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Rekomendasi</label>
+                                <label>Rekomendasi *</label>
                                 <textarea class="form-control" id="rekomendasi" placeholder="Rekomendasi" name="rekomendasi"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Penutup</label>
+                                <label>Penutup *</label>
                                 <textarea class="form-control" id="penutup" placeholder="Penutup" name="penutup"></textarea>
                             </div>
                         
                             <div class="form-group">
-                                <label>Upload LPJ</label>
-                                <input type="file" class="form-control" id="file" name="file_lpj">
+                                <label>Upload LPJ (pdf, doc, docx) *</label>
+                                <input type="file" class="form-control" id="file" name="file_lpj" required>
                             </div><!-- /.box-body -->
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit &nbsp;<i class="fa fa-cloud-upload"></i></button> 
                         </div>
                     </div>
                 </div>

@@ -17,6 +17,7 @@ class Kegiatan_himpunan extends Private_Controller{
         $this->load->model('pengajuan_proposal_himpunan_model');
         $this->load->model('acara_himpunan_model');
         $this->load->model('peserta_model');
+        $this->load->model('panitia_model');
     }
 
     function list_kegiatan(){
@@ -52,7 +53,7 @@ class Kegiatan_himpunan extends Private_Controller{
         $acara = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_acara));
         // die($this->db->last_query());
 
-        $data['id']                     = $acara->id;    
+        $data['id']                     = $acara->id;
         $data['id_pengajuan_proposal']  = $acara->id_pengajuan_proposal;
         $data['nama_acara']             = $acara->nama_acara;
         $data['tempat_acara']           = $acara->tempat_acara;
@@ -71,31 +72,16 @@ class Kegiatan_himpunan extends Private_Controller{
                 'nama' => $peserta->nama
             ));
         }
-        
-        $data['himpunan'] = $himpunan;
 
-        $this->load_page('page/private/himpunan/list_kegiatan_himpunan_detail', $data);
-    }
-
-    function detail_peserta(){
-        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-
-        $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
-        $id_acara = $this->input->get('id_acara');
-
-        $pesertas = $this->peserta_model->get_many_by(array('id_acara' => $id_acara));
-        
-        $proposal = $this->proposal_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_acara));
-
-        $data['pesertas'] = array();
-        foreach ($pesertas as $peserta) {
-
-            array_push($data['pesertas'], array(
-                'nama' => $peserta->nama
+        $panitias = $this->panitia_model->get_panitia_with_user($data['id']);
+        $data['panitias'] = array();
+        foreach ($panitias as $panitia) {
+            array_push($data['panitias'], array(
+                'nim'   => $panitia->nim,
+                'nama'  => $panitia->nama
             ));
         }
 
-        $data['judul']    = $proposal->judul;
         $data['himpunan'] = $himpunan;
 
         $this->load_page('page/private/himpunan/list_kegiatan_himpunan_detail', $data);
