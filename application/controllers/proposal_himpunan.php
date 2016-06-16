@@ -232,7 +232,7 @@ class Proposal_himpunan extends Private_Controller{
     }
 
     function do_tambah_acara(){
-        die('1');
+        // die('1');
         $id_pengajuan = $this->input->get('id_pengajuan');
         $nama_input_file = 'poster_acara';
 
@@ -255,6 +255,7 @@ class Proposal_himpunan extends Private_Controller{
         $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
 
         $data = array(
+            'id'                    => $id_pengajuan,
             'id_pengajuan_proposal' => $id_pengajuan,
             'nama_acara'            => $this->input->post('nama_acara'),
             'tempat_acara'          => $this->input->post('tempat_acara'),
@@ -296,6 +297,7 @@ class Proposal_himpunan extends Private_Controller{
     function tambah_panitia(){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
+        $id_pengajuan = $this->input->get('id_pengajuan');
         $acara = $this->acara_himpunan_model->get_by(array('id_acara' => $id_pengajuan));
         
         $data['acara']          = $acara;
@@ -357,45 +359,9 @@ class Proposal_himpunan extends Private_Controller{
                 }
             }
         }
-
         
-        // echo "<pre>";
-        // var_dump($this->input->post());
-        // die();
         redirect('proposal_himpunan/tambah_acara?id_pengajuan='.$id_pengajuan); 
     }
-
-    // function get_google_client(){
-    //     $this->load->library('google_drive');
-    //     $google_token = $this->session->userdata('google_token');
-    //     $upload_data = $this->session->userdata('upload_data');
-
-    //     if (empty($google_token)) {
-    //         if (empty($this->input->get('code'))) {
-    //             $this->google_drive->getAuthCode();
-    //         }
-    //         $authCode = $this->input->get('code');
-    //         $client = $this->google_drive->getClient($authCode);
-    //     }else{
-    //         $client = new Google_Client();
-    //         $google_token = json_encode($google_token);
-    //         $client->setAccessToken($google_token);
-    //     }
-
-    //     $service = new Google_Service_Drive($client);
-
-    //     $file = new Google_Service_Drive_DriveFile();
-    //     $file->name = $upload_data['raw_name'];
-    //     $data = file_get_contents($upload_data['full_path']);
-    //     $createdFile = $service->files->create($file, array(
-    //         'data' => $data,
-    //         'mimeType' => $upload_data['file_type'],
-    //         'uploadType' => 'media'
-    //     ));
-
-    //     $this->session->set_flashdata(array('status' => true));
-    //     redirect('proposal_himpunan/logbook_pengajuan');
-    // }
     
     function logbook_pengajuan(){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
