@@ -28,7 +28,7 @@ $(function() {
             <small><?php echo $this->session->flashdata('error'); ?></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="<?php echo base_url() ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Upload Proposal Pengajuan</li>
         </ol>
     </section>
@@ -56,7 +56,7 @@ $(function() {
                                         <?php echo validation_errors('<li>', '</li>'); ?>
                                     </ul>
                                 </div>
-                            <?php endif; ?>
+                            <?php endif; ?> 
 
                             <div class="form-group">
                                 <label>Judul Proposal *</label>
@@ -109,12 +109,12 @@ $(function() {
                             </div>
                         
                             <div class="form-group">
-                                <label>Upload Pengajuan Proposal *</label>
-                                <input type="file" class="form-control" id="file" name="file_pengajuan">
+                                <label>Upload Pengajuan Proposal (pdf, doc, docx) *</label>
+                                <input type="file" class="form-control" id="file" name="file_pengajuan" required>
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit &nbsp;<i class="fa fa-cloud-upload"></i></button>
                         </div>
                     </div>
                 </div>
