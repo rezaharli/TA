@@ -15,8 +15,6 @@ class Auth extends MY_Controller {
 			);
 
 		$this->lang->load('auth');
-
-		$this->clear_cache();
 	}
 
 	function index() {
@@ -144,6 +142,8 @@ class Auth extends MY_Controller {
 
 	function logout() {
 		$this->data['title'] = "Logout";
+
+		$this->clear_cache();
 
 		$logout = $this->ion_auth->logout();
 
