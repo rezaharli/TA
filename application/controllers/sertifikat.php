@@ -7,7 +7,7 @@ class Sertifikat extends Private_Controller {
         $this->load->model('bukti_lomba_model');
         $this->load->model('user_model');
 
-        $this->config_upload['upload_path']     = './assets/upload/proposal_lomba';
+        $this->config_upload['upload_path']     = './assets/upload/sertifikat';
         $this->config_upload['allowed_types']   = 'rar|zip';
         $this->config_upload['max_size']        = '100000';
     }
@@ -34,10 +34,12 @@ class Sertifikat extends Private_Controller {
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
         $data = array(
-            'pengupload'             => $user->username,
-            'nama_lomba'             => $this->input->post('tema'),
-            'penyelenggara_lomba'    => $this->input->post('penyelenggara_lomba'),
-            'waktu_lomba'            => $this->input->post('tanggal_sertifikat')
+            'pengupload'            => $user->username,
+            'nama_lomba'            => $this->input->post('nama_lomba'),
+            'kategori_lomba'        => $this->input->post('kategori_lomba'),
+            'tingkat_kompetisi'     => $this->input->post('tingkat_kompetisi'),
+            'penyelenggara_lomba'   => $this->input->post('penyelenggara_lomba'),
+            'waktu_lomba'           => $this->input->post('tanggal_sertifikat')
         );
 
         $tmp        = explode(".", $_FILES['sertifikat1']['name']);
@@ -92,9 +94,5 @@ class Sertifikat extends Private_Controller {
         ));
 
         $this->session->set_userdata('notif_upload', true);
-    }
-
-    function lihat_proposal(){
-
     }
 }
