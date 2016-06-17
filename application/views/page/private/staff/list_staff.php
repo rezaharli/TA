@@ -20,8 +20,8 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <div class="box-header">
-                         <a href="<?php echo base_url() ?>staff/add"><button type="button" class="btn btn-primary"><span class="fa fa-plus"></span> Tambah Staff </button></a>
+                    <!-- <div class="box-header">
+                         <a href="<?php //echo base_url() ?>staff/add"><button type="button" class="btn btn-primary"><span class="fa fa-plus"></span> Tambah Staff </button></a>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -34,7 +34,7 @@
                                 <th>Email</th>
                                 <th>Alamat</th>
                                 <th>Telp</th>
-                                <th style="width: 170px;">Aksi</th>
+                                <th style="width: 130px; text-align: center;">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -49,9 +49,10 @@
                                     <td><?php echo $staff['alamat']; ?></td>
                                     <td><?php echo $staff['telp']; ?></td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm pull-left" data-toggle="modal" data-target="#resetModal"><i class="fa fa-refresh"></i> &nbsp;Reset Password</button>
+                                        <a href="<?php echo base_url('profil/'.$staff['username']); ?>" class="btn btn-info btn-xs"><i class="fa fa-list"></i> &nbsp;Lihat Detail
+                                      </a>
                                       
-                                        <button class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#hapusModal"><i class="fa fa-trash-o"></i> &nbsp;Hapus</button>
+                                        <button class="btn btn-danger btn-xs pull-right" data-toggle="modal" data-target="#hapusModal"><i class="fa fa-trash-o"></i> &nbsp;Hapus</button>
                                       
                                     </td>
                                   </tr>

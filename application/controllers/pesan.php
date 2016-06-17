@@ -44,20 +44,50 @@ class Pesan extends Private_Controller {
 
     		$data['pesan'] = array();
     		foreach ($pesan as $p) {
-                $profil     = $this->user_model->get_by(array('id' => $p->asal));
+                $profil = $this->user_model->get_by(array('id' => $p->asal));
+                ?>
 
-        		echo '<li><a data-toggle="modal" data-target="#tampilkanPesanModal" href="'.base_url('pesan/tampilkan_pesan').'">
-                        <div class="pull-left"><img src="'.base_url().'assets/img/foto-profil/'.$profil->foto_profil.'" class="img-circle" alt="User Image"> </div>
-                        <h5>'.$profil->nama.'<small class="pull-right"><i class="fa fa-clock-o"></i>&nbsp;'.$this->time_ago->timeAgo($p->waktu).'</small></h5>
-                        <p style="width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">'.$p->pesan.'</p></a></li>';
-                
+                <li class="pesan" id="<?php echo $p->id ?>">
+                    <a data-toggle="modal" href="#" data-target="#tampilkanPesanModal<?php echo $p->id ?>">
+                        <div class="pull-left">
+                            <img src="<?php echo base_url('assets/img/foto-profil/'.$profil->foto_profil)?>" class="img-circle" alt="User Image">
+                        </div>
+                        <h5>
+                            <?php echo $profil->nama ?>
+                            <small class="pull-right"><i class="fa fa-clock-o"></i>&nbsp;<?php echo $this->time_ago->timeAgo($p->waktu) ?>
+                            </small>
+                        </h5>
+                        <p style="width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                            <?php echo $p->pesan ?>
+                        </p>
+                    </a>
+                </li>
+
+                <?php
         	}
     	}
 
     }
 
-    function isi_pesan(){
-        
+    public function get_modal() {
+        $this->load->library('time_ago');
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+
+        if($user->role == 'mahasiswa'){
+            $mahasiswa  = $this->mahasiswa_model->get_by(array('id_user' => $user->id));
+            $himpunan   = $this->himpunan_model->get_by(array('id_penanggungjawab' => $mahasiswa->nim));
+            $pesan      = $this->pesan_model->get_many_by(array('tujuan' => $himpunan->id));
+
+            $data['himpunan'] = $mahasiswa->jenis;
+
+            $data['pesan'] = array();
+            foreach ($pesan as $p) {
+                $profil = $this->user_model->get_by(array('id' => $p->asal));
+
+                $this->load->view('page/private/template/message', array('pesan' => $p, 'profil' => $profil));
+            }
+        }
+
     }
 
     public function hitung() {
@@ -66,7 +96,7 @@ class Pesan extends Private_Controller {
     	if($user->role == 'mahasiswa'){
     		$mahasiswa 	= $this->mahasiswa_model->get_by(array('id_user' => $user->id));
     		$himpunan 	= $this->himpunan_model->get_by(array('id_penanggungjawab' => $mahasiswa->nim));
-    		$pesan 		= $this->pesan_model->get_many_by(array('tujuan' => $himpunan->id));
+    		$pesan 		= $this->pesan_model->get_many_by(array('tujuan' => $himpunan->id, 'terbaca' => 'n'));
 
     		echo $this->pesan_model->count_by(array('tujuan' => $himpunan->id));
     	}

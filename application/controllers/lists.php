@@ -31,7 +31,7 @@ class Lists extends Private_Controller {
         	array_push($table['data'][$i], 
                 '<a href="'.base_url('profil').'/'.$table['data'][$i][3].'">
                     <button class="btn btn-info btn-xs pull-left">
-                        <i class="fa fa-list"></i> &nbsp;Detail
+                        <i class="fa fa-list"></i> &nbsp;Lihat Detail
                     </button>
                 </a> &nbsp;
 

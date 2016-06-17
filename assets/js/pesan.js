@@ -3,6 +3,14 @@ $(document).ready(function(){
     $("#tombol-pesan").click(function(){
         tampilkanpesan();
     });
+
+    $.ajax({
+        url: window.location.origin + "/hmmmm/pesan/get_modal",
+        cache: false,
+        success: function(msg){
+            $("#modal-message").html(msg);
+        }
+    });
 });
 
 function cekpesan(){
