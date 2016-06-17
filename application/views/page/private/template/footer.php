@@ -8,6 +8,8 @@
 
     <!-- notifikasi -->
     <script src="<?php echo base_url() ?>assets/js/notifikasi.js"></script>
+    <!-- pesan -->
+    <script src="<?php echo base_url() ?>assets/js/pesan.js"></script>
     <!-- Slimscroll -->
     <script src="<?php echo base_url() ?>assets/adminlte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->

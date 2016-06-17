@@ -9,8 +9,8 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Himpunan
-            <small>FRI</small>
+            Daftar Proposal
+            <small></small>
         </h1>
         <?php echo $breadcrumb ?>
     </section>
@@ -20,40 +20,46 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
+                    <div class="box-header">
+                         
+                    </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                               <tr>
-                                <th width="10px">No</th>
-                                <th>Nama Himpunan</th>
-                                <th>Program Studi</th>
-                                <th>Penanggung Jawab</th>
-                                <th style="width: 112px; text-align: center;">Aksi</th>
+                                <th>No</th>
+                                <th>Judul Proposal</th>
+                                <th>Tanggal Upload</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($himpunans as $himpunan) : ?>
+                                <?php foreach ($proposals as $proposal) { ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $himpunan['nama_himpunan']; ?></td>
-                                    <td><?php echo $himpunan['prodi']; ?></td>
+                                    <td><?php echo $proposal['judul']; ?></td>
+                                    <td><?php echo $proposal['tanggal_upload']; ?></td>  
                                     <td>
-                                      <a href="<?php echo base_url('profil/'.$himpunan['username']); ?>">
-                                        <?php echo $himpunan['nim_pj'] ?>
+                                        <?php if ($proposal['status_approve'] == null || $proposal['status_approve'] == '-') { ?>
+                                          <span class="label label-warning">Pending</span></td>
+                                        <?php } else if ($proposal['status_approve'] == 'y') { ?>
+                                          <span class="label label-success">Disetujui</span></td>
+                                        <?php } else if ($proposal['status_approve'] == 'n') { ?>
+                                          <span class="label label-danger">Ditolak</span></td>
+                                        <?php } ?> 
+                                    <td style="width: 185px;">
+                                      <a href="<?php echo base_url('download/download'); ?>">
+                                        <button class="btn btn-info btn-sm pull-left"><i class="fa fa-download"></i>&nbsp;Download</button>
                                       </a>
-                                    </td>  
-                                    <td>
-                                      <a href="<?php echo base_url('himpunan/edit?id='.$himpunan['id']); ?>">
-                                        <button class="btn btn-info btn-xs pull-left"><i class="fa fa-edit"></i> &nbsp;Edit</button>
-                                      </a>&nbsp;
-                                      <a href="<?php echo base_url('himpunan/edit?id='.$himpunan['id']); ?>">
-                                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> &nbsp;Hapus</button>
+                                      <a href="<?php echo base_url('proposal_himpunan/detail_proposal?id_proposal='.$proposal['id']); ?>">
+                                        <button class="btn btn-info btn-sm pull-right"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
                                       </a>
                                     </td>
                                   </tr>
                                 <?php $i++; ?>
-                                <?php endforeach; ?> 
+                                <?php } ?> 
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->

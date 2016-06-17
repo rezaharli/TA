@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Edit Data Himpunan
+            Tambah Himpunan
         </h1>
         <?php echo $breadcrumb ?>
     </section>
@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url(); ?>himpunan/do_edit?id= <?php echo $id_him ?>">
+            <form role="form" method="post" action="<?php echo base_url(); ?>himpunan/do_add">
             
             <div class="col-md-7">
                 <!-- general form elements -->
@@ -40,18 +40,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                         <div class="form-group">
                             <label>Nama Himpunan</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Nama Himpunan" value="<?= $nama_him ?>" name="nama" disabled>
+                            <input type="text" class="form-control" id="nama" placeholder="Nama Himpunan" name="nama">
 
                         </div>
                         <div class="form-group">
                             <label>Program Studi</label>
-                            <input type="text" class="form-control" id="prodi" placeholder="Program Studi" value="<?= $prodi_him ?>" name="prodi" disabled>
+                            <input type="text" class="form-control" id="prodi" placeholder="Program Studi" name="prodi">
                         </div>
                         <div class="form-group">
                             <label>Penanggung Jawab</label>
-                            <select class="select2 form-control" name="penanggungjawab">
-                                <option value="<?= $id_pj ?>"><?php echo $id_pj ?> - <?php echo $nama_mhs ?></option>>
-                            </select>
+                            <select class="select2 form-control" name="penanggungjawab"></select>
                         </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
@@ -70,7 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <h4 class="modal-title" id="myModalLabel">Konfirmasi</h4>
                           </div>
                           <div class="modal-body">
-                            Apakah anda ingin <b>mengupdate</b> data ini?
+                            Apakah anda ingin <b>menambahkan</b> data ini?
                           </div>
                           <div class="modal-footer">
                             <button type="submit" class="btn btn-primary pull-right">Submit</button>
@@ -118,6 +116,12 @@ if($this->session->flashdata('status') !== null){
                 processResults: function (data) {
                     return {
                         results: data.mahasiswa
+                        // $.map(data.mahasiswa, function (mhs) {
+                        //     return {
+                        //         text: mhs.text,
+                        //         id: mhs.id
+                        //     }
+                        // })
                     };
                 },
                 

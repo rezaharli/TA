@@ -80,8 +80,13 @@ $(function() {
                                 <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Kegiatan" name="tanggal_kegiatan">
                             </div>
                             <div class="form-group">
+<<<<<<< HEAD
+                                <label>Tempat Kegiatan</label>
+                                <textarea class="form-control" id="tempat_kegiatan" placeholder="Tempat Kegiatan" name="tempat_kegiatan"></textarea>
+=======
                                 <label>Tempat Kegiatan *</label>
                                 <input type="text" class="form-control" id="tempat_kegiatan" placeholder="Tempat Kegiatan" name="tempat_kegiatan">
+>>>>>>> refs/remotes/rezaharli/master
                             </div>
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
