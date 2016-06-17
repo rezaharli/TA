@@ -44,14 +44,14 @@ class Kegiatan_himpunan extends Private_Controller{
     }
 
     function detail_kegiatan(){
-        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-
-        $himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
         $id_acara = $this->input->get('id_acara');
 
         //menampilkan detail acara
-        $acara = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_acara));
-        // die($this->db->last_query());
+        $acara = $this->acara_himpunan_model->get($id_acara);
+
+        $pengajuan = $this->pengajuan_proposal_himpunan_model->get($acara->id_pengajuan_proposal);
+
+        $himpunan = $this->himpunan_model->get($pengajuan->pengaju_proposal);
 
         $data['id']                     = $acara->id;
         $data['id_pengajuan_proposal']  = $acara->id_pengajuan_proposal;
@@ -114,34 +114,25 @@ class Kegiatan_himpunan extends Private_Controller{
     function do_cetak_sertifikat($id_acara){
         $this->load->library('phpword');
 
-        $pesertas = $this->peserta_model->get_many_by(array('id_acara'=>$id_acara));
+        $pesertas = $this->peserta_model->get_many_by(array('id_acara' => $id_acara));
+
         $acara = $this->acara_himpunan_model->get_by('id', $id_acara);
 
         $files = array();
 
         foreach ($pesertas as $peserta) {
             $data = array(
-                'nama'          => $peserta->nama,
-                'nama_acara'    => $acara->nama_acara,
-                'id_acara'      => $acara->id,
+                'nama' => $peserta->nama,
+                'nama_acara' => $acara->nama_acara,
+                'id_acara' => $acara->id,
                 'tanggal_acara' => $acara->tanggal_acara
             );
             $files[] = $this->phpword->generateSertifikat('assets/doc_template/sertifikat.docx', $data);
         }
 
-        // create zip file
-        $zipname = $acara->nama_acara."_".$acara->id.'.zip';
-        $zip = new ZipArchive;
-        $zip->open($zipname, ZipArchive::CREATE);
-        foreach ($files as $file) {
-            $zip->addFile($file);
-        }
-        $zip->close();
+        $this->load->library('zip');
+        $this->zip->read_dir('assets/sertifikat/'.$acara->nama_acara."_".$acara->id, FALSE); 
+        $this->zip->download($acara->nama_acara."_".$acara->id);
 
-        // Stream zip
-        header('Content-Type: application/zip');
-        header('Content-disposition: attachment; filename='.$zipname);
-        header('Content-Length: ' . filesize($zipname));
-        readfile($zipname);
     }
 }
