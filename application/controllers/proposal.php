@@ -28,7 +28,7 @@ class Proposal extends Private_Controller {
         // $this->load_page('page/private/'.$user_data->role.'/pengajuan_proposal', null);
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
-        $data['events'] = $this->event_model->order_by('tanggal_event')->get_many_by(array('status' => 'disetujui'));
+        $data['events'] = $this->event_model->order_by('tanggal_mulai')->get_many_by(array('status' => 'disetujui'));
 
         $this->load_page('page/private/mahasiswa/upload_pengajuan_proposal', $data);
     }
@@ -78,7 +78,6 @@ class Proposal extends Private_Controller {
 
                     $id_upload_proposal = $this->proposal_lomba_model->insert($data);
                     $this->session->set_userdata('id_proposal', $id_upload_proposal);
-
                     
                         if ($this->upload->do_upload($nama_input_file)) {
                             $upload_data = $this->upload->data();
@@ -89,13 +88,16 @@ class Proposal extends Private_Controller {
                         }else{
                             $this->session->set_userdata('notif_upload', false);    
                         }
+                            $this->load_page('page/private/mahasiswa/upload_tim', $data); 
                     } else {
                         $this->upload_pengajuan();
                     }
-                } 
-                $this->session->set_flashdata(array('status' => true));
+                    $this->session->set_flashdata(array('status' => true));
+                    
+                } else{
                     $data['user'] = $user;
-                $this->load_page('page/private/mahasiswa/upload_tim', $data); 
+                    $this->load_page('page/private/mahasiswa/upload_tim', $data); 
+                }
         }
 
     function upload_proposal_to_drive($upload_data){
@@ -126,6 +128,7 @@ class Proposal extends Private_Controller {
         $this->session->set_userdata('notif_upload', true);
     }
 
+    
 
     function upload_proposal (){
         $id_pengajuan           = $this->input->get('id_pengajuan');
@@ -158,7 +161,7 @@ class Proposal extends Private_Controller {
             'anggaran_biaya'                    => $this->input->post('anggaran_biaya'),
             'nama_tim'                          => $this->input->post('nama_tim'),
             'waktu_upload'                      => date('Y-n-j h:i:s'),
-            'file'                  => $filename
+            'file'                              => $filename
         );
         $this->session->set_userdata('id_pengajuan', $id_pengajuan);
         $data['file'] = $filename;

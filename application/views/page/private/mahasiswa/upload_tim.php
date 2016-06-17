@@ -73,7 +73,7 @@ $(function() {
                                 <input type="text" class="form-control" id="nim_anggota6" placeholder="Nim Anggota" name="nim_anggota6">
                             </div>
                             <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
