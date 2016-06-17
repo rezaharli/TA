@@ -117,7 +117,8 @@
                             <div class="product">
                                 <div class="image">
                                     <a href="<?php echo base_url('guest/'.$event['jenis'].'/'.$event['id']) ?>">
-                                        <img src="<?php echo base_url() . $event['gambar']; ?>" alt="" class="img-responsive image1">
+                                        <?php $gambar = base_url($event['gambar']) ?>
+                                        <img src="" alt="" class="img-responsive image1" style="width: auto; height: 200px; background-image: url('<?php echo $gambar ?>'); background-size: cover; background-repeat: no-repeat; background-position: 50% 50%;">
                                     </a>
                                 </div>
                                 <div class="text">
