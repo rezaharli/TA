@@ -192,22 +192,6 @@ class Proposal extends Private_Controller {
         
     }
 
-    function upload_tim(){ 
-        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-            for($i=1; $i <= 6; $i++){
-                    if ($this->input->post('nim_anggota'.$i) == "") {
-                        continue;
-                    }else{
-                        $data = array(
-                            'id_proposal_lomba'         => $this->session->userdata('id_proposal'),
-                            'nim_anggota'               => $this->input->post('nim_anggota'.$i)
-                        ); 
-                        $id_detail_tim = $this->detail_tim_model->insert($data);
-                    }            
-            }
-        redirect('proposal/logbook_pengajuan_proposal_lomba');
-    }
-
 
     function logbook_pengajuan_proposal_lomba(){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
@@ -315,6 +299,48 @@ class Proposal extends Private_Controller {
         $data['tims']       = $this->logbook_detail_tim_model->get_many_by(array('id' => $id_proposal));
         
         $this->load_page('page/private/mahasiswa/logbook_detail_tim', $data);
+    }
+
+
+
+    function upload_tim(){ 
+        $arr_nim = $this->input->post('nim');
+        $data['arr_nim'] = array();
+            foreach ($arr_nim as $key => $nim) {
+                // IF id panitia exist then update, nor insert, either or delete
+                if ($nim[$key] != "") {
+                    $data = array(
+                        "nim" => $nim,
+                    );
+                }
+                 $data = array(
+                            'id_proposal_lomba'         => $this->session->userdata('id_proposal'),
+                            'nim_anggota'               => $data['nim']
+                        ); 
+                  $id_detail_tim = $this->detail_tim_model->insert($data);
+                 echo $data['nim_anggota'];
+            }
+            redirect('proposal/logbook_pengajuan_proposal_lomba');
+    }
+
+    function ambil_data(){
+        $this->load->model('mahasiswa_model');
+        $mahasiswa = $this->mahasiswa_model
+            ->like('nim', $this->input->get('q')['term'])
+            ->get_all();
+
+        $data['mahasiswa'] = array();
+        if (count($mahasiswa) > 0) {
+            foreach ($mahasiswa as $mhs) {
+                $user = $this->user_model->get_by(array('id' => $mhs->id_user));
+
+                array_push($data['mahasiswa'], array(
+                    'id'    => $mhs->nim,
+                    'text'  => $mhs->nim.' - '.$user->nama
+                ));
+            }
+        }
+        echo json_encode($data);
     }
 }
 
