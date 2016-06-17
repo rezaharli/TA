@@ -20,7 +20,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xs-7">
+            <div class="col-xs-12">
                 <div class="box">
                   <!-- /.box-header -->
                     <div class="box-body">
@@ -29,7 +29,9 @@
                               <tr>
                                 <th align="center" style="width: 10px">No</th>
                                 <th align="center">Nama Lomba</th>
+                                <th align="center">Kategori Lomba</th>
                                 <th align="center">Penyelenggara</th>
+                                <th align="center">Tingkat Kompetisi</th>
                                 <th align="center" style="width: 100px">Waktu Lomba</th>
                               </tr>
                             </thead>
@@ -39,7 +41,9 @@
                                 <tr>
                                   <td><?php echo $i; ?></td>
                                   <td><?php echo $baris->nama_lomba; ?></td>
+                                  <td><?php echo $baris->kategori_lomba; ?></td>
                                   <td><?php echo $baris->penyelenggara_lomba; ?></td>
+                                  <td><?php echo $baris->tingkat_kompetisi; ?></td>
                                   <td><?php echo $baris->waktu_lomba; ?></td>
                                 </tr>
                                 <?php $i++; ?>
@@ -47,12 +51,12 @@
                             </tbody>
                         </table>
                         <div class="box-footer">
-                            <div class="col-sm-8">
+                            <div class="col-sm-10">
                               <div class="dataTables_info" id="example2_info" role="status" aria-live="polite" >*Silahkan upload sertifikat untuk pengajuan beasiswa prestasi
                               </div>
                             </div>
-                            <div class="col-sm-4">
-                              <a href="<?php echo base_url('sertifikat/add') ?>"<button type="button" class="btn btn-default"><span class="fa fa-plus" ></span> Upload Sertifikat </button></a>
+                            <div class="col-sm-2">
+                              <a href="<?php echo base_url('sertifikat/add') ?>"<button class="btn btn-sm btn-info"><i class="fa fa-upload"></i>&nbsp;Upload Sertifikat</button></a>
                             </div>
                         </div>
                     </div><!-- /.box-body -->
