@@ -115,7 +115,7 @@ class Kegiatan_himpunan extends Private_Controller{
         $this->load->library('phpword');
 
         $pesertas = $this->peserta_model->get_many_by(array('id_acara' => $id_acara));
-        // var_dump($this->db->last_query()); die();
+
         $acara = $this->acara_himpunan_model->get_by('id', $id_acara);
 
         $files = array();
@@ -129,23 +129,10 @@ class Kegiatan_himpunan extends Private_Controller{
             );
             $files[] = $this->phpword->generateSertifikat('assets/doc_template/sertifikat.docx', $data);
         }
-        // echo "<pre>";
-        // var_dump($data['peserta']); die();
 
-        // create zip file
-        $zipname = $acara->nama_acara."_".$acara->id.'.zip';
-        $zip = new ZipArchive;
-        $zip->open($zipname, ZipArchive::CREATE);
-        foreach ($files as $file) {
-            $zip->addFile($file);
-        }
-        $zip->close();
-
-        // Stream zip
-        header('Content-Type: application/zip');
-        header('Content-disposition: attachment; filename='.$zipname);
-        header('Content-Length: ' . filesize($zipname));
-        readfile($zipname);
+        $this->load->library('zip');
+        $this->zip->read_dir('assets/sertifikat/'.$acara->nama_acara."_".$acara->id, FALSE); 
+        $this->zip->download($acara->nama_acara."_".$acara->id);
 
     }
 }
