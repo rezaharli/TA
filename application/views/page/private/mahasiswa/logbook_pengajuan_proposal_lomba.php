@@ -30,12 +30,12 @@
                               <tr>
                                 <th align="center" style="width: 10px">No</th>
                                 <th align="center">Nama Event</th>
+                                <th align="center" style="width: 100px">Tanggal Kompetisi</th>
                                 <th align="center" style="width: 100px">Waktu Pengajuan</th>
                                 <th align="center" style="width: 100px">Tanggal Upload</th>
                                 <th align="center" >Nama Tim</th>
-                                <th align="center" style="width: 30px">Status</th>
-                                <th align="center" style="width: 30px">Penanggung Jawab</th>
-                                <th align="center" style="width: 198px">Aksi</th>
+                                <th align="center" style="width: 25px">Status</th>
+                                <th align="center" style="width: 100px">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -43,26 +43,32 @@
                               <?php foreach ($proposals as $proposal) : ?>
                                 <tr>
                                   <td><?php echo $i; ?></td>
-                                  <td><?php echo $proposal['nama_event']; ?></td>
-                                  <td><?php echo $proposal['tanggal_pengajuan']; ?></td>                                  
-                                  <td><?php echo $proposal['tanggal_proposal_terakhir']; ?></td>
-                                  <td><?php echo $proposal['nama_tim']; ?></td>
+                                  <td><?php echo $proposal->nama_event; ?></td>
+                                  <td><?php echo $proposal->tanggal_kompetisi; ?></td>  
+                                  <td><?php echo $proposal->tanggal_pengajuan; ?></td>                                  
+                                  <td><?php echo $proposal->tanggal_proposal_terakhir; ?></td>
+                                  <td><?php echo $proposal->nama_tim; ?></td>
 
                                   <td>
-                                    <?php if ($proposal['status'] == 'y') { ?>
+                                    <?php if ($proposal->status == 'y') { ?>
                                           <span class="label label-success">Disetujui</span></td>
-                                    <?php } else if ($proposal['status'] == 'n') { ?>
+                                    <?php } else if ($proposal->status == 'n') { ?>
                                           <span class="label label-danger">Ditolak</span></td>
                                         <?php } else { ?>
                                           <span class="label label-warning">Pending</span></td>
                                     <?php }?>
                                   </td>
-                                  <td><?php echo $proposal['penanggungjawab']; ?></td>
 
                                   <td>
-                                    <a href="<?php echo base_url('proposal/detail_pengajuan?id_pengajuan='.$proposal['id_pengajuan']) ?>"> 
-                                      <button class="btn btn-info pull-leftt"></i> Detail Pengajuan</button>
-                                    </a>
+                                    <?php if ($user->role == 'mahasiswa') { ?>
+                                      <a href="<?php echo base_url('proposal/detail_pengajuan?id_pengajuan='.$proposal->id_pengajuan) ?>"> 
+                                        <button class="btn btn-primary pull-left btn-xs"><i class="fa fa-info"></i> Detail Pengajuan</button>
+                                      </a>
+                                    <?php } else if ($user->roled_data->jenis == 'staff_admin') { ?>
+                                      <a href="<?php echo base_url('proposal/cetak?id_pengajuan='.$proposal->id_pengajuan) ?>"> 
+                                        <button class="btn btn-primary pull-left btn-xs"><i class="fa fa-print"></i> Cetak Surat Tugas</button>
+                                      </a>
+                                    <?php } ?>
                                   </td>
                                 </tr>
                               <?php $i++; ?>
