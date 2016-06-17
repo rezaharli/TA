@@ -29,6 +29,7 @@
     <script src="<?php echo base_url() ?>assets/adminlte/bootstrap/js/bootstrap.min.js"></script>
 
   </head>
+
   <body class="hold-transition skin-blue sidebar-mini fixed">
     <div class="wrapper">
 
@@ -63,6 +64,23 @@
                   <li class="footer"><a href="#">View all</a></li>
                 </ul>
               </li>
+              <!-- Messages: style can be found in dropdown.less -->
+              <?php if ($jenis == 'himpunan') { ?>
+              <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="tombol-pesan">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="label label-warning" id="jumlah-pesan"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li class="header">Pesan</li>
+                  <li>
+                    <!-- inner menu: contains the actual data -->
+                    <ul class="menu" id="konten-pesan"></ul>
+                  </li>
+                  <li class="footer"><a href="#">View all</a></li>
+                </ul>
+              </li>
+              <?php } ?>
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -101,10 +119,12 @@
                   </li>
                 </ul>
               </li>
-              <li class="dropdown">
-                
-              </li>
+              
+              <li class="dropdown"></li>
+
             </ul>
           </div>
         </nav>
       </header>
+
+      <div id="modal-message"></div>

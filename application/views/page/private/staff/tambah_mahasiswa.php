@@ -8,10 +8,7 @@
 	    <h1>
 	      	Tambah Mahasiswa
 	    </h1>
-	    <ol class="breadcrumb">
-	      	<li><a href="#">Event</a></li>
-	      	<li class="active"><?php //echo $nama_event ?></li>
-	    </ol>
+	    <?php echo $breadcrumb ?>
 	</section>
 
 	<section class="content">
@@ -77,7 +74,7 @@
 		            </form>
                   </div><!-- /.tab-pane -->
                   <div class="tab-pane" id="tab_2">
-                  	  <form method="post" action="<?php echo base_url() ?>mahasiswa/do_import_csv" enctype="multipart/form-data" class="form-horizontal">
+                  	  <form method="post" action="<?php echo base_url() ?>auth/do_import_csv" enctype="multipart/form-data" class="form-horizontal">
                   	  	<div class="form-group">
 			                <label class="col-sm-2">File</label>
 			                <div class="col-sm-10">

@@ -71,7 +71,11 @@
         <li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Proposal</span><i class="fa fa-angle-left pull-right"></i></a>
           
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('proposal_himpunan/update_himpunan') ?>"><i class="fa fa-circle-o"></i>Himpunan</a>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Mahasiswa</a>
+            </li>
+          </ul>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url('proposal_himpunan') ?>"><i class="fa fa-circle-o"></i>Himpunan</a>
             </li>
           </ul>
         </li>
@@ -99,23 +103,34 @@
           <li class="header">Menu Khusus</li>
           
           <?php if ($jenis == 'kaur') { ?>
-            <li><a href="#"><i class="fa fa-users"></i> <span>Staff</span></a>
+            <li><a href="#"><i class="fa fa-users"></i> <span> Data Staff</span></a>
               
               <ul class="treeview-menu">
-                <li><a href="<?php echo base_url('staff/add') ?>"><i class="fa fa-circle-o"></i>Tambah Staff</a>
+                <li><a href="<?php echo base_url('lists/staff') ?>"><i class="fa fa-circle-o"></i>List Staff</a>
                 </li>
-                <li><a href="<?php echo base_url('staff/list') ?>"><i class="fa fa-circle-o"></i>Daftar Staff</a>
+                <li><a href="<?php echo base_url('staff/add') ?>"><i class="fa fa-circle-o"></i>Tambah Staff</a>
                 </li>
               </ul>
 
             </li>
 
-            <li><a href="#"><i class="fa fa-users"></i> <span>Mahasiswa</span></a>
+            <li><a href="#"><i class="fa fa-users"></i> <span>Data Mahasiswa</span></a>
               
               <ul class="treeview-menu">
+                <li><a href="<?php echo base_url('lists/mahasiswa') ?>"><i class="fa fa-circle-o"></i>List Mahasiswa</a>
+                </li>
                 <li><a href="<?php echo base_url('mahasiswa/add') ?>"><i class="fa fa-circle-o"></i>Tambah Mahasiswa</a>
                 </li>
-                <li><a href="<?php echo base_url('lists/mahasiswa') ?>"><i class="fa fa-circle-o"></i>Daftar Mahasiswa</a>
+              </ul>
+
+            </li>
+
+            <li><a href="#"><i class="fa fa-users"></i> <span>Data Himpunan</span></a>
+              
+              <ul class="treeview-menu">
+                <li><a href="<?php echo base_url('lists/himpunan') ?>"><i class="fa fa-circle-o"></i>List Himpunan</a>
+                </li>
+                <li><a href="<?php echo base_url('himpunan/add') ?>"><i class="fa fa-circle-o"></i>Tambah Himpunan</a>
                 </li>
               </ul>
 

@@ -12,11 +12,7 @@
             Daftar Himpunan
             <small>FRI</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Data tables</li>
-        </ol>
+        <?php echo $breadcrumb ?>
     </section>
 
     <!-- Main content -->
@@ -28,16 +24,16 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                               <tr>
-                                <th>No</th>
+                                <th width="10px">No</th>
                                 <th>Nama Himpunan</th>
                                 <th>Program Studi</th>
                                 <th>Penanggung Jawab</th>
-                                <th style="width: 100px;">Aksi</th>
+                                <th style="width: 112px; text-align: center;">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($himpunans as $himpunan) { ?>
+                                <?php foreach ($himpunans as $himpunan) : ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $himpunan['nama_himpunan']; ?></td>
@@ -49,12 +45,15 @@
                                     </td>  
                                     <td>
                                       <a href="<?php echo base_url('himpunan/edit?id='.$himpunan['id']); ?>">
-                                        <button class="btn btn-info btn-sm pull-left"><i class="fa fa-edit"></i> &nbsp;Edit</button>
+                                        <button class="btn btn-info btn-xs pull-left"><i class="fa fa-edit"></i> &nbsp;Edit</button>
+                                      </a>&nbsp;
+                                      <a href="<?php echo base_url('himpunan/edit?id='.$himpunan['id']); ?>">
+                                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> &nbsp;Hapus</button>
                                       </a>
                                     </td>
                                   </tr>
                                 <?php $i++; ?>
-                                <?php } ?> 
+                                <?php endforeach; ?> 
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->
