@@ -37,7 +37,6 @@ class Proposal extends Private_Controller {
         $nama_input_file = 'file_pengajuan';
         //user yg login
         $user           = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-
             // rule
         $this->form_validation->set_rules('kategori_kompetisi', 'Kategori Kompetisi', 'required');
         $this->form_validation->set_rules('tujuan_kompetisi', 'Tujuan Kompetisi', 'required');
@@ -51,9 +50,9 @@ class Proposal extends Private_Controller {
                 'id_event'          => $this->input->post('event'),
                 'pengaju_proposal'  => $user->roled_data->nim
                 );
-            
+            if ($data['id_event']!=null){
             $pengaju = $this->pengajuan_proposal_mahasiswa_model->insert($data);
-            $this->session->set_userdata('id_pengajuan', $pengaju);
+                 $this->session->set_userdata('id_pengajuan', $pengaju);
             
             $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
             $ext        = end($tmp);
@@ -75,7 +74,7 @@ class Proposal extends Private_Controller {
                         'waktu_upload'          => date('Y-n-j h:i:s'),
                         'file'                  => $filename
                     );
-
+                    
                     $id_upload_proposal = $this->proposal_lomba_model->insert($data);
                     $this->session->set_userdata('id_proposal', $id_upload_proposal);
                     
@@ -96,8 +95,10 @@ class Proposal extends Private_Controller {
                     
                 } else{
                     $data['user'] = $user;
-                    $this->load_page('page/private/mahasiswa/upload_tim', $data); 
                 }
+            } else {
+               $this->load_page('page/private/mahasiswa/upload_tim');
+            }
         }
 
     function upload_proposal_to_drive($upload_data){
@@ -183,7 +184,7 @@ class Proposal extends Private_Controller {
         $this->load_page('page/private/mahasiswa/upload_tim', $data);
     }
 
-    function upload_tim(){
+    function upload_tim(){ 
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
             for($i=1; $i <= 6; $i++){
                     if ($this->input->post('nim_anggota'.$i) == "") {
