@@ -493,6 +493,7 @@ temporary rendered events).
 --------------------------------------------------------------------------------------------------*/
 
 .fc-scroller {
+	overflow-y: hidden !important;
 	-webkit-overflow-scrolling: touch;
 }
 
