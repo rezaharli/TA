@@ -61,31 +61,31 @@ $(function() {
 
                             <div class="form-group">
                                 <label>Judul Laporan *</label>
-                                <input type="text" class="form-control" id="judul_laporan" placeholder="Judul Laporan" name="judul_laporan">
+                                <input type="text" class="form-control" id="judul_laporan" placeholder="Judul Laporan" name="judul_laporan" value="<?= set_value('judul_laporan') ?>">
                             </div>
                             <div class="form-group">
                                 <label>Deskripsi Laporan *</label>
-                                <textarea class="form-control" id="deskripsi_laporan" placeholder="Deskripsi Laporan" name="deskripsi_laporan"></textarea>
+                                <textarea class="form-control" id="deskripsi_laporan" placeholder="Deskripsi Laporan" name="deskripsi_laporan"><?php echo set_value('deskripsi_laporan') ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Ketercapaian Tujuan *</label>
-                                <textarea class="form-control" id="ketercapaian_tujuan" placeholder="Ketercapaian Tujuan" name="ketercapaian_tujuan"></textarea>
+                                <textarea class="form-control" id="ketercapaian_tujuan" placeholder="Ketercapaian Tujuan" name="ketercapaian_tujuan"><?php echo set_value('ketercapaian_tujuan') ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Realisasi Sasaran Kegiatan *</label>
-                                <textarea class="form-control" id="realisasi_sasaran_kegiatan" placeholder="Realisasi Sasaran Kegiatan" name="realisasi_sasaran_kegiatan"></textarea>
+                                <textarea class="form-control" id="realisasi_sasaran_kegiatan" placeholder="Realisasi Sasaran Kegiatan" name="realisasi_sasaran_kegiatan"><?php echo set_value('realisasi_sasaran_kegiatan') ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Pelaksanaan *</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Pelaksanaan" name="tanggal_pelaksanaan">
+                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Pelaksanaan" name="tanggal_pelaksanaan" value="<?= set_value('tanggal_pelaksanaan') ?>">
                             </div>
                             <div class="form-group">
                                 <label>Tempat Pelaksanaan *</label>
-                                <input type="text" class="form-control" id="tempat_pelaksanaan" placeholder="Tempat Pelaksanaan" name="tempat_pelaksanaan">
+                                <input type="text" class="form-control" id="tempat_pelaksanaan" placeholder="Tempat Pelaksanaan" name="tempat_pelaksanaan" value="<?= set_value('tempat_pelaksanaan') ?>">
                             </div>
                             <div class="form-group">
                                 <label>Realisasi Kegiatan *</label>
-                                <textarea class="form-control" id="realisasi_kegiatan" placeholder="Realisasi Kegiatan" name="realisasi_kegiatan"></textarea>
+                                <textarea class="form-control" id="realisasi_kegiatan" placeholder="Realisasi Kegiatan" name="realisasi_kegiatan"><?php echo set_value('realisasi_kegiatan') ?></textarea>
                             </div>   
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
@@ -102,19 +102,19 @@ $(function() {
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Realisasi Anggaran Biaya Total *</label>
-                                <input type="text" class="form-control" id="realisasi_total_anggaran" placeholder="ex:1000000" name="realisasi_total_anggaran">
+                                <input type="text" class="form-control" id="realisasi_total_anggaran" placeholder="ex:1000000" name="realisasi_total_anggaran" value="<?= set_value('realisasi_total_anggaran') ?>">
                             </div>
                             <div class="form-group">
                                 <label>Evaluasi Kegiatan *</label>
-                                <textarea class="form-control" id="evaluasi_kegiatan" placeholder="Evaluasi Kegiatan" name="evaluasi_kegiatan"></textarea>
+                                <textarea class="form-control" id="evaluasi_kegiatan" placeholder="Evaluasi Kegiatan" name="evaluasi_kegiatan"><?php echo set_value('evaluasi_kegiatan') ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Rekomendasi *</label>
-                                <textarea class="form-control" id="rekomendasi" placeholder="Rekomendasi" name="rekomendasi"></textarea>
+                                <textarea class="form-control" id="rekomendasi" placeholder="Rekomendasi" name="rekomendasi"><?php echo set_value('rekomendasi') ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Penutup *</label>
-                                <textarea class="form-control" id="penutup" placeholder="Penutup" name="penutup"></textarea>
+                                <textarea class="form-control" id="penutup" placeholder="Penutup" name="penutup"><?php echo set_value('penutup') ?></textarea>
                             </div>
                         
                             <div class="form-group">

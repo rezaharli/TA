@@ -60,11 +60,7 @@
                                           <span class="label label-warning">Pending</span></td>
                                         <?php }?> 
                                     <td>
-<<<<<<< HEAD
-                                      <a href="<?php echo base_url('proposal_himpunan/detail_proposal?id='.$proposal['id']); ?>">
-=======
                                       <a href="<?php echo base_url('proposal_himpunan/detail_proposal?id_proposal='.$proposal['id_proposal']."&id_pengajuan=".$id_pengajuan); ?> ">
->>>>>>> refs/remotes/rezaharli/master
                                         <button class="btn btn-info btn-sm pull-leftht"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
                                       </a>
                                     </td>

@@ -60,7 +60,7 @@ class Proposal_himpunan extends Private_Controller{
         // $this->form_validation->set_rules('file_pengajuan', 'File Pengajuan Proposal', 'required');
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if ($this->form_validation->run() !== FALSE) {
+            if ($this->form_validation->run() != FALSE) {
                 $last_id_pengajuan_proposal = $this->pengajuan_proposal_himpunan_model->insert(array('pengaju_proposal' => $id_himpunan));
 
                 $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
@@ -85,6 +85,10 @@ class Proposal_himpunan extends Private_Controller{
                 $id_proposal = $this->proposal_himpunan_model->insert($data);
                 $this->load->library('upload', $this->config_upload);
 
+                if ( ! file_exists($this->config_upload['upload_path'])) {
+                   mkdir($this->config_upload['upload_path'], 0777, true);
+                }
+
                 if ($this->upload->do_upload($nama_input_file)) {
                     $upload_data = $this->upload->data();
                     $upload_data['orig_name'] = $filename;
@@ -93,7 +97,7 @@ class Proposal_himpunan extends Private_Controller{
                     $this->session->set_userdata("notif_upload", true);
                 }else{
                     $this->session->set_userdata("notif_upload", false);
-                }               
+                }
                 redirect('proposal_himpunan/logbook_pengajuan');
             } else {
                 $this->upload_pengajuan();
@@ -136,7 +140,7 @@ class Proposal_himpunan extends Private_Controller{
         $this->form_validation->set_rules('penutup', 'Penutup', 'required');      
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($this->form_validation->run() !== FALSE) {
+            if ($this->form_validation->run() != FALSE) {
                 $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
                 $ext        = end($tmp);
                 $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
@@ -240,58 +244,55 @@ class Proposal_himpunan extends Private_Controller{
         $id_himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim))->id;
 
         // rule
-        $this->form_validation->set_rules('judul', 'Judul Proposal', 'required');
-        $this->form_validation->set_rules('tema_kegiatan', 'Tema Kegiatan', 'required');
-        $this->form_validation->set_rules('tujuan_kegiatan', 'Tujuan Kegiatan', 'required');
-        $this->form_validation->set_rules('sasaran_kegiatan', 'Sasaran Kegiatan', 'required');
-        $this->form_validation->set_rules('tanggal_kegiatan', 'Tanggal Kegiatan', 'required');
-        $this->form_validation->set_rules('tempat_kegiatan', 'Tempat Kegiatan', 'required');
-        $this->form_validation->set_rules('bentuk_kegiatan', 'Bentuk Kegiatan', 'required');
-        $this->form_validation->set_rules('anggaran', 'Anggaran Biaya', 'required|integer|max_length[10]');
-        $this->form_validation->set_rules('penutup', 'Penutup', 'required');
+        $this->form_validation->set_rules('nama_acara', 'Nama Acara', 'required');
+        $this->form_validation->set_rules('tempat_acara', 'Tempat Acara', 'required');
+        $this->form_validation->set_rules('tanggal_acara', 'Tanggal Acara', 'required');
+        $this->form_validation->set_rules('deskripsi_acara', 'Deskripsi Acara', 'required');
 
-        $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
-        $ext        = end($tmp);
-        $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
-
-        $data = array(
-            'id'                    => $id_pengajuan,
-            'id_pengajuan_proposal' => $id_pengajuan,
-            'nama_acara'            => $this->input->post('nama_acara'),
-            'tempat_acara'          => $this->input->post('tempat_acara'),
-            'tanggal_acara'         => $this->input->post('tanggal_acara'),
-            'deskripsi_acara'       => $this->input->post('deskripsi_acara'),
-            'waktu_upload'          => date('Y-n-j h:i:s'),
-            'poster_acara'          => $filename
-        );
-
-        $acara = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_pengajuan));
-
-        if (!empty($acara)) {
-            $this->acara_himpunan_model->update($acara->id, $data);
-            $id_acara = $acara->id;
-        } else {
-            $id_acara = $this->acara_himpunan_model->insert($data);
-        }
-
-        if($_FILES[$nama_input_file]["name"] != ""){
-            $folder_name = "acara_".$id_acara;
-            rmdir('./assets/upload/acara/'.$folder_name);
-            mkdir('./assets/upload/acara/'.$folder_name);
-            $config['upload_path']     = './assets/upload/acara/'.$folder_name."/";
-            $config['allowed_types']   = 'jpg|png';
-            $config['max_size']        = '1000000';
-            $config['file_name']       = $filename;
-
-            $this->load->library('upload' , $config);
-            if( ! $this->upload->do_upload($nama_input_file)){
-                die($this->upload->display_errors);
+        if ($this->form_validation->run() != FALSE) {
+            $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
+            $ext        = end($tmp);
+            $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
+    
+            $data = array(
+                'id'                    => $id_pengajuan,
+                'id_pengajuan_proposal' => $id_pengajuan,
+                'nama_acara'            => $this->input->post('nama_acara'),
+                'tempat_acara'          => $this->input->post('tempat_acara'),
+                'tanggal_acara'         => $this->input->post('tanggal_acara'),
+                'deskripsi_acara'       => $this->input->post('deskripsi_acara'),
+                'waktu_upload'          => date('Y-n-j h:i:s'),
+                'poster_acara'          => $filename
+            );
+    
+            $acara = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_pengajuan));
+    
+            if (!empty($acara)) {
+                $this->acara_himpunan_model->update($acara->id, $data);
+                $id_acara = $acara->id;
+            } else {
+                $id_acara = $this->acara_himpunan_model->insert($data);
             }
-        }
-
-        $this->session->set_flashdata(array('status' => true));
-
-        redirect('proposal_himpunan/tambah_acara?id_pengajuan='.$id_pengajuan); 
+    
+            if($_FILES[$nama_input_file]["name"] != ""){
+                $folder_name = "acara_".$id_acara;
+                rmdir('./assets/upload/acara/'.$folder_name);
+                mkdir('./assets/upload/acara/'.$folder_name);
+                $config['upload_path']     = './assets/upload/acara/'.$folder_name."/";
+                $config['allowed_types']   = 'jpg|png';
+                $config['max_size']        = '1000000';
+                $config['file_name']       = $filename;
+    
+                $this->load->library('upload' , $config);
+                if( ! $this->upload->do_upload($nama_input_file)){
+                    die($this->upload->display_errors);
+                }
+            }
+            $this->session->set_flashdata(array('status' => true));
+            redirect('proposal_himpunan/tambah_acara?id_pengajuan='.$id_pengajuan);
+        } else {
+            $this->tambah_acara();
+        } 
     }
 
     function tambah_panitia(){
@@ -300,7 +301,7 @@ class Proposal_himpunan extends Private_Controller{
         $id_pengajuan = $this->input->get('id_pengajuan');
         $acara = $this->acara_himpunan_model->get_by(array('id_acara' => $id_pengajuan));
         
-        $data['acara']          = $acara;
+        $data['acara']          = $acara ? $acara : null;
         $data['himpunan']       = $himpunan;
         $data['user']           = $user;
         $data['id_pengajuan']   = $id_pengajuan;
@@ -334,7 +335,7 @@ class Proposal_himpunan extends Private_Controller{
 
         $id_acara = $this->input->get('id_acara');
 
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run() != FALSE) {
             $arr_id = $this->input->post('id_panitia');
             $arr_nim = $this->input->post('nim');
             // $arr_nama = $this->input->post('nama');
@@ -408,10 +409,7 @@ class Proposal_himpunan extends Private_Controller{
 
         $user       = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $proposals  = $this->proposal_himpunan_model->get_many_by(array('id_pengajuan_proposal' => $id_pengajuan));
-
-        
-
-        if ($user->role == 'mahasiswa') {
+       if ($user->role == 'mahasiswa') {
             $himpunan   = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
         }
 
@@ -420,7 +418,7 @@ class Proposal_himpunan extends Private_Controller{
         foreach ($proposals as $proposal) {
 
             array_push($data['proposals'], array(
-                'id'                => $proposal->id,
+                'id_proposal'       => $proposal->id,
                 'judul'             => $proposal->judul,
                 'tanggal_upload'    => $proposal->waktu_upload,
                 'status_approve'    => ($proposal->status_approve == null) ? '-' :$proposal->status_approve
@@ -544,7 +542,7 @@ class Proposal_himpunan extends Private_Controller{
 
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($this->form_validation->run() !== FALSE) {
+            if ($this->form_validation->run() != FALSE) {
                 $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
                 $ext        = end($tmp);
                 $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
