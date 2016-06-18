@@ -60,6 +60,16 @@ $(function() {
                         </div><!-- /.box-header -->
 
                         <div class="box-body">
+                            <?php if (!empty(validation_errors())): ?>
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                    <ul>
+                                        <?php echo validation_errors('<li>', '</li>'); ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
+
                             <div class="form-group">
                                 <label>Nama Acara *</label>
                                 <input type="text" class="form-control" id="nama_acara" placeholder="Nama Acara" name="nama_acara" value="<?php echo (!empty($acara->nama_acara)) ? $acara->nama_acara : ""; ?>">
@@ -283,13 +293,13 @@ $(function () {
     // <!-- alert sukses tidak -->
     <?php
     if($this->session->flashdata('status') !== null){
-        echo '<script type="text/javascript">';
+        // echo '<script type="text/javascript">';
         if ($this->session->flashdata('status')) {
             echo 'alert("Buat acara himpunan berhasil")';
         } else {
             echo 'alert("Buat acara himpunan gagal")';
         }
-        echo '</script>';
+        // echo '</script>';
     }
     ?>
 }); 
