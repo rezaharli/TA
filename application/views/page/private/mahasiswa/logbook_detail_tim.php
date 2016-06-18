@@ -12,8 +12,8 @@
             Detail Tim Proposal Lomba
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Pengajuan</a></li>
+            <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('proposal/logbook_pengajuan_proposal_lomba') ?>">Pengajuan Proposal</a></li>
             <li class="active">Detail Tim</li>
         </ol>
     </section>

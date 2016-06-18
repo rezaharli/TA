@@ -94,7 +94,7 @@
 
           </li>
           
-          <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-files-o"></i> <span>Beasiswa</span></a>
+          <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-flag-checkered"></i> <span>Beasiswa</span></a>
           </li>
 
         <?php } ?>

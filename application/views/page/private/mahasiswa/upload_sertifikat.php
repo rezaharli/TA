@@ -27,9 +27,9 @@ $(function() {
       <small><?php echo $nama ?></small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-files-o"></i> Home</a></li>
-      <li><a href="#">Sertifikat</a></li>
-      <li><a href="#">Upload</a></li>
+      <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="<?php echo base_url('sertifikat') ?>">Ajukan Lomba</a></li>
+      <li>Upload Bukti Lomba</li>
     </ol>
   </section>
 
