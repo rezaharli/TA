@@ -64,7 +64,7 @@
                                         <button class="btn btn-primary pull-left btn-xs"><i class="fa fa-info"></i> Detail Pengajuan</button>
                                       </a>
                                     <?php } else if ($user->roled_data->jenis == 'staff_admin') { ?>
-                                      <a href="<?php echo base_url('proposal/cetak?id_pengajuan='.$proposal->id_pengajuan) ?>"> 
+                                      <a href="<?php echo base_url('proposal/cetak?id='.$proposal->id_pengajuan) ?>"> 
                                         <button class="btn btn-primary pull-left btn-xs"><i class="fa fa-print"></i> Cetak Surat Tugas</button>
                                       </a>
                                     <?php } ?>

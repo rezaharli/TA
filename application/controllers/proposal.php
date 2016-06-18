@@ -22,6 +22,40 @@ class Proposal extends Private_Controller {
         $this->load->library('form_validation');
     }
 
+    function cetak() {
+        $this->load_page('page/private/staff/surattugas_detail_cetak', $this->get_cetak_data());
+    }
+
+    function do_cetak(){
+        $this->load->view('page/private/staff/surattugas_cetak', $this->get_cetak_data());
+    }
+
+    private function get_cetak_data(){
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+
+        if($user->roled_data->jenis != 'staff_admin' || null == $this->input->get('id')) show_404();
+
+        $id_pengajuan = $this->input->get('id');
+
+        $this->load->model('logbook_proposal_mhs_model');
+        $proposal                   = $this->logbook_proposal_mhs_model->get_by(array('id_pengajuan' => $id_pengajuan));
+        $proposal->lengkap          = $this->proposal_lomba_model->get($proposal->id_proposal);
+        $proposal->detail_pengaju   = $this->mahasiswa_model->get_mahasiswa_dan_user_by_nim($proposal->pengaju);
+        $proposal->tim              = $this->detail_tim_model->get_many_by(array('id_proposal_lomba' => $proposal->id_proposal));
+        foreach ($proposal->tim as $t) {
+            $t->mahasiswa = $this->mahasiswa_model->get_mahasiswa_dan_user_by_nim($t->nim_anggota);
+        }
+        $proposal->pengajuan        = $this->pengajuan_proposal_mahasiswa_model->get($proposal->id_pengajuan);
+        $proposal->pengajuan->event = $this->event_model->get($proposal->pengajuan->id_event);
+
+        $proposal->tanggal_kompetisi_display = $this->get_tanggal_formatted($proposal->tanggal_kompetisi);
+
+        $data['proposal']           = $proposal;
+        $data['tanggal_display']    = $this->get_tanggal_formatted(date('Y-m-d'));
+
+        return $data;
+    }
+
     function upload_pengajuan (){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
