@@ -171,7 +171,7 @@
 
           <?php } else if ($jenis == 'staff_admin') { ?>
 
-            <li><a href="<?php echo base_url('proposal') ?>"><i class="fa fa-print"></i> <span>Cetak Surat Tugas</span></a>
+            <li><a href="<?php echo base_url('proposal/logbook_pengajuan_proposal_lomba') ?>"><i class="fa fa-print"></i> <span>Cetak Surat Tugas</span></a>
             </li>
             <li><a href="#"><i class="fa fa-dashboard"></i> <span>Beasiswa</span></a>
 
