@@ -125,7 +125,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     });
 
     // <!-- alert sukses tidak -->
-    <?php
+    <?php 
         if(!empty($this->session->userdata('notif_upload'))){
           if ($this->session->userdata('notif_upload')) {
               echo 'alert("Upload pengajuan proposal berhasil")';
