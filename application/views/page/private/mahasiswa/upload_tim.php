@@ -39,10 +39,10 @@ $(function() {
       <small><?php echo $nama ?></small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-files-o"></i> Home</a></li>
-      <li><a href="#">Sertifikat</a></li>
-      <li><a href="#">Upload</a></li>
-    </ol>
+            <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('proposal/logbook_pengajuan_proposal_lomba') ?>">Proposal</a></li>
+            <li class="active">Ajukan Tim</li>
+        </ol>
   </section>
 
   <!-- Main content -->
