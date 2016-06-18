@@ -68,8 +68,8 @@ class Himpunan extends Private_Controller {
 		
 		$himpunan = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
 		// rule
-		$this->form_validation->set_rules('nama', 'Nama Himpunan', 'required');
-		$this->form_validation->set_rules('prodi', 'Program Studi', 'required');
+		$this->form_validation->set_rules('nama', 'Nama Himpunan', 'required|alpha');
+		$this->form_validation->set_rules('prodi', 'Program Studi', 'required|alpha');
 		if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			if ($this->form_validation->run() != FALSE) {
 				$data = array(
