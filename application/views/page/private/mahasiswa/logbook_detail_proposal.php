@@ -12,10 +12,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Detail Pengajuan Proposal</a></li>
-            <li class="active"></li>
-        </ol>
+            <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('proposal/logbook_pengajuan_proposal_lomba') ?>">Pengajuan Proposal</a></li>
+            <li class="active">Detail Proposal</li>
         </ol>
     </section>
 
@@ -98,7 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <class="box-title"># Pembimbing
                             </div><!-- /.box-header -->
                             <div class="col-sm-12">
-                                <pre class="prettyprint"><?php echo $nama_tim ?></pre>
+                                <pre class="prettyprint"><?php echo $pembimbing ?></pre>
                             </div>
                             <div class="col-sm-12">
                                 <a href="<?php echo base_url('proposal/detail_tim?id_proposal='.$proposal); ?>">
