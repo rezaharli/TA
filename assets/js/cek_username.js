@@ -3,7 +3,7 @@ $("#input-username").on('focus change keyup', function(event){
 
      var segment = window.location.href.split("/");
      
-     var url = window.location.origin + "/hmmmm/profil/do_username_check";
+     var url = window.location.origin + "/fairship/profil/do_username_check";
 
      // jika berada di halaman profil berarti aksi pasti edit selain itu bukan edit
      if(segment[4] == 'profil') var aksi = 'edit';
@@ -53,7 +53,7 @@ $("#input-nip").on('focus change keyup', function(event){
 
      var segment = window.location.href.split("/");
      
-     var url = window.location.origin + "/hmmmm/staff/do_nip_check";
+     var url = window.location.origin + "/fairship/staff/do_nip_check";
 
      // jika berada di halaman profil berarti aksi pasti edit selain itu bukan edit
      if(segment[4] == 'staff') var aksi = 'tambah';
@@ -103,7 +103,7 @@ $("#input-nim").on('focus change keyup', function(event){
 
      var segment = window.location.href.split("/");
      
-     var url = window.location.origin + "/hmmmm/mahasiswa/do_nim_check";
+     var url = window.location.origin + "/fairship/mahasiswa/do_nim_check";
 
      // jika berada di halaman profil berarti aksi pasti edit selain itu bukan edit
      if(segment[4] == 'mahasiswa') var aksi = 'tambah';
