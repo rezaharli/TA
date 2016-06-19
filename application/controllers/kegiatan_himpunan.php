@@ -122,9 +122,9 @@ class Kegiatan_himpunan extends Private_Controller{
 
         foreach ($pesertas as $peserta) {
             $data = array(
-                'nama' => $peserta->nama,
-                'nama_acara' => $acara->nama_acara,
-                'id_acara' => $acara->id,
+                'nama'          => $peserta->nama,
+                'nama_acara'    => $acara->nama_acara,
+                'id_acara'      => $acara->id,
                 'tanggal_acara' => $acara->tanggal_acara
             );
             $files[] = $this->phpword->generateSertifikat('assets/doc_template/sertifikat.docx', $data);
