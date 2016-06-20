@@ -123,8 +123,8 @@ $config['email_config'] = array(
 	'protocol' => 'smtp',
     'smtp_host' => 'ssl://smtp.googlemail.com',
     'smtp_port' => 465,
-    'smtp_user' => 'reza.harli@gmail.com',
-    'smtp_pass' => 'raradariwawaradiriwawari',
+    'smtp_user' => 'kelompokg2012@gmail.com',
+    'smtp_pass' => 'ayamgoreng2012',
     'mailtype'  => 'html', 
     'charset'   => 'iso-8859-1'
 );
