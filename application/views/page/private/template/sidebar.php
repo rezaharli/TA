@@ -176,8 +176,10 @@
             <li><a href="#"><i class="fa fa-dashboard"></i> <span>Beasiswa</span></a>
 
               <ul class="treeview-menu">
-                <li><a href="<?php echo base_url('beasiswa/kirim_rekomendasi') ?>"><i class="fa fa-calendar"></i>Kirim email rekomendasi</a>
+
+                <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-flag-checkered"></i> <span>Kirim Email Rekomendasi</span></a>
                 </li>
+
               </ul>
 
             </li>
