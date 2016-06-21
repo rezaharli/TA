@@ -31,7 +31,7 @@
                                 <th style="width: 50px;">Username</th>
                                 <th >Nama</th>
                                 <th style="width: 180px;">Email</th>
-                                <th width="100px" style="text-align: center;">Aksi</th>
+                                <th width="130px" style="text-align: center;">Aksi</th>
                               </tr>
                             </thead>
                         </table>

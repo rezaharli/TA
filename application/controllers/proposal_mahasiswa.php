@@ -87,6 +87,7 @@ class Proposal_mahasiswa extends Private_Controller{
         $pengajuan = $this->pengajuan_proposal_mahasiswa_model->get($proposal->id_pengajuan_proposal_mahasiswa);
         $event 	   = $this->event_model->get($pengajuan->id_event);
 
+        $data['id']                = $proposal->id;
         $data['event']			   = $event->nama_event;
         $data['tujuan_kompetisi']  = $proposal->tujuan_kompetisi;
         $data['sasaran_kompetisi'] = $proposal->sasaran_kompetisi;
@@ -97,5 +98,22 @@ class Proposal_mahasiswa extends Private_Controller{
         if ($user->role == 'staff') {
             $this->load_page('page/private/staff/detail_proposal_mahasiswa', $data);
         }
+    }
+
+    //edit status pengajuan proposal untuk kaur
+    function do_edit_status($id){
+        $user       = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $penyetuju  = $this->staff_model->get_by(array('id_user' => $user->id));
+
+        $status = null;
+        if ($this->input->get('s') == 't') {
+            $status = 'y';
+        } else if ($this->input->get('s') == 'f') {
+            $status = 'n';
+        }
+
+        $this->proposal_lomba_model->update($id, array('status' => $status, 'penyetuju' => $penyetuju->nip));
+
+        redirect('proposal_mahasiswa/detail_proposal?id_proposal='.$id);
     }
 }

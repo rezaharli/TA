@@ -119,12 +119,12 @@ $("#input-nim").on('focus change keyup', function(event){
                if(response != ''){
                     if(response == '1'){ //jika username sudah digunakan
                          $("#status-nim").html('Sudah digunakan');
-                         $("#form-group-nip").removeClass("has-success");
-                         $("#form-group-nip").addClass("has-error");
+                         $("#form-group-nim").removeClass("has-success");
+                         $("#form-group-nim").addClass("has-error");
                     } else { //jika username sama dengan sebelumnya
                          $("#status-nim").html('');
-                         $("#form-group-nip").removeClass("has-success");
-                         $("#form-group-nip").removeClass("has-error");
+                         $("#form-group-nim").removeClass("has-success");
+                         $("#form-group-nim").removeClass("has-error");
                     }
                     $("#button-nim-submit").prop("disabled", true);
                     $("#status-nim").removeClass("text-green");
@@ -134,8 +134,8 @@ $("#input-nim").on('focus change keyup', function(event){
                     $("#status-nim").removeClass("text-red");
                     $("#status-nim").addClass("text-green");
                     $("#button-nim-submit").prop("disabled", false);
-                    $("#form-group-nip").removeClass("has-error");
-                    $("#form-group-nip").addClass("has-success");
+                    $("#form-group-nim").removeClass("has-error");
+                    $("#form-group-nim").addClass("has-success");
                }
          });
      } else { // jika input tidak diisi

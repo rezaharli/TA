@@ -42,7 +42,11 @@
                                   <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $proposal['tanggal_kompetisi']; ?></td>
-                                    <td><?php echo $proposal['nama_tim']; ?></td>  
+                                    <td>
+                                    <a href="<?php echo base_url('proposal/detail_tim?id_proposal='.$proposal['id']); ?>">
+                                      <?php echo $proposal['nama_tim']; ?>
+                                    </a>
+                                    </td>  
                                     <td><?php echo $proposal['pembimbing']; ?></td>
                                     <td><?php echo $proposal['waktu_upload']; ?></td>
                                     <td>

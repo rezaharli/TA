@@ -109,7 +109,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> &nbsp;
-                            <a href="do_edit_status/<?php echo $id ?>?s=t" class="btn btn-success pull-right"><i class="fa fa-check"></i> Setuju</a>
+                            <a href="proposal_mahasiswa/do_edit_status/<?php echo $id ?>?s=t" class="btn btn-success pull-right"><i class="fa fa-check"></i> Setuju</a>
                           </div>
                         </div>
                       </div>
@@ -127,7 +127,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> &nbsp;
-                            <a href="do_edit_status/<?php echo $id ?>?s=f" class="btn btn-danger pull-right" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
+                            <a href="proposal_mahasiswa/do_edit_status/<?php echo $id ?>?s=f" class="btn btn-danger pull-right" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
                           </div>
                         </div>
                       </div>
