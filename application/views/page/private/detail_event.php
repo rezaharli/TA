@@ -47,7 +47,7 @@
 				                  	</tr>
 				                  	<tr>
 					                    <th>Pengaju</th>
-					                    <td><a href="<?php echo base_url('profil/'.$pengaju->username) ?>"><?php echo ($pengaju != null) ? $pengaju->nama : '-' ?></a></td>
+					                    <td><?php echo ($pengaju != null) ? '<a href="'.base_url('profil/'.$pengaju->username).'">'.$pengaju->nama : '-' ?></a></td>
 				                  	</tr>
 				                  	<tr>
 				                  		<th>Status</th>
