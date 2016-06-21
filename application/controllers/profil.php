@@ -117,7 +117,7 @@ class Profil extends Private_Controller {
 
         $this->user_model->update($this->session->userdata('id'), array('email' => $email, 'alamat' => $alamat, 'telp' => $telp ));
 
-        redirect('user');
+        redirect('profil/'.$user->username);
     }
 
     function show_profile($username){
