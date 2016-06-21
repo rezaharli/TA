@@ -26,8 +26,8 @@ $(function() {
             Upload Proposal Lomba
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Event</a></li>
+            <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('proposal/logbook_pengajuan_proposal_lomba') ?>">Proposal</a></li>
             <li class="active">Upload Proposal Lomba</li>
         </ol>
     </section>

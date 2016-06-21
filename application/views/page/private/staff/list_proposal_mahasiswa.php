@@ -12,11 +12,7 @@
             Daftar Proposal
             <small></small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Data tables</li>
-        </ol>
+        <?php echo $breadcrumb ?>
     </section>
 
     <!-- Main content -->
@@ -32,10 +28,12 @@
                             <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Judul Proposal</th>
+                                <th>Tanggal Kompetisi</th>
+                                <th>Nama Tim</th>
+                                <th>Pembimbing</th>
                                 <th>Tanggal Upload</th>
                                 <th>Status</th>
-                                <th>Aksi</th>
+                                <th style="text-align: center;">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -43,8 +41,14 @@
                                 <?php foreach ($proposals as $proposal) { ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $proposal['judul']; ?></td>
-                                    <td><?php echo $proposal['tanggal_upload']; ?></td>  
+                                    <td><?php echo $proposal['tanggal_kompetisi']; ?></td>
+                                    <td>
+                                    <a href="<?php echo base_url('proposal/detail_tim?id_proposal='.$proposal['id']); ?>">
+                                      <?php echo $proposal['nama_tim']; ?>
+                                    </a>
+                                    </td>  
+                                    <td><?php echo $proposal['pembimbing']; ?></td>
+                                    <td><?php echo $proposal['waktu_upload']; ?></td>
                                     <td>
                                         <?php if ($proposal['status_approve'] == null || $proposal['status_approve'] == '-') { ?>
                                           <span class="label label-warning">Pending</span></td>
@@ -54,11 +58,11 @@
                                           <span class="label label-danger">Ditolak</span></td>
                                         <?php } ?> 
                                     <td style="width: 185px;">
-                                      <a href="#">
-                                        <button class="btn btn-info btn-sm pull-left"><i class="fa fa-download"></i>&nbsp;Download</button>
+                                      <a href="<?php echo base_url('download/download'); ?>">
+                                        <button class="btn btn-info btn-xs"><i class="fa fa-download"></i>&nbsp;Download</button>
                                       </a>
-                                      <a href="<?php echo base_url('proposal_himpunan/detail_proposal?id_proposal='.$proposal['id_proposal']); ?>">
-                                        <button class="btn btn-info btn-sm pull-right"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
+                                      <a href="<?php echo base_url('proposal_mahasiswa/detail_proposal?id_proposal='.$proposal['id']); ?>">
+                                        <button class="btn btn-info btn-xs pull-right"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
                                       </a>
                                     </td>
                                   </tr>

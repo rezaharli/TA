@@ -9,6 +9,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/adminlte/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/adminlte/plugins/datepicker/locales/bootstrap-datepicker.id.js"></script>
 
+<!-- DataTables -->
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/plugins/datatables/dataTables.bootstrap.css">
+
+<!-- DataTables -->
+<script src="<?php echo base_url() ?>assets/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url() ?>assets/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<!-- Select2 -->
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/plugins/select2/select2.min.css">
+<!-- Select2 -->
+<script src="<?php echo base_url() ?>assets/adminlte/plugins/select2/select2.min.js"></script>
+
 <!-- SCRIPT -->
 <script>
 $(function() {
@@ -27,10 +39,10 @@ $(function() {
       <small><?php echo $nama ?></small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-files-o"></i> Home</a></li>
-      <li><a href="#">Sertifikat</a></li>
-      <li><a href="#">Upload</a></li>
-    </ol>
+            <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo base_url('proposal/logbook_pengajuan_proposal_lomba') ?>">Proposal</a></li>
+            <li class="active">Ajukan Tim</li>
+        </ol>
   </section>
 
   <!-- Main content -->
@@ -38,7 +50,6 @@ $(function() {
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url("proposal/upload_tim"); ?>" enctype="multipart/form-data">
             
                 <div class="col-md-6">
                     <!-- general form elements -->
@@ -48,38 +59,154 @@ $(function() {
                         </div><!-- /.box-header -->
                         
                         <div class="box-body">
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nim_anggota1" placeholder="Nim Anggota" name="nim_anggota1">
+                            <form role="form" method="post" action="<?php echo base_url("proposal/upload_tim"); ?>" enctype="multipart/form-data">
+                                <table class="table table-bordered table-hover" id="tab_logic">
+                                    <thead>
+                                        <tr >
+                                            <th class="text-center">
+                                                #
+                                            </th>
+                                            <th class="text-center" width="80%">
+                                                NIM - Nama
+                                            </th>
+                                            <!-- <th class="text-center">
+                                                Aksi
+                                            </th> -->
+                                            <th class="text-center" width="10%">
+                                                Aksi
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="row-container">
+                                        <script>
+                                        function select2_panitia(){
+                                            return {
+                                                minimumInputLength: 4,
+                                                placeholder: 'NIM - Nama',
+                                                allowClear: true,
+                                                ajax: {
+                                                    url: '<?php echo base_url('proposal/ambil_data') ?>',
+                                                    dataType: 'json',
+                                                    type: 'GET',
+                                                    data: function (term) {
+                                                        return {
+                                                            q: term
+                                                        };
+                                                    },
+                                                    processResults: function (data) {
+                                                        return {
+                                                            results: data.mahasiswa
+                                                        };
+                                                    },
+                                                }
+                                            }
+                                        }
+                                        </script>
+
+                                        <?php $i = 1; ?>
+
+
+                                        <tr class="row-cloned">
+                                            <td class="no"><?php echo ($i); ?></td>
+                                                <?php $i++ ?>
+
+                                            <td>
+                                                <select id="select2_<?php echo ($i); ?>" class="select2 form-control" name="nim[]" value=""></select>
+                                            </td>
+                                            <td>
+                                                <a href="#" title="Hapus" class="btn btn-danger btn-delete"><i class="fa fa-minus-circle"></i></a>
+                                            </td>
+                                        </tr>
+
+                                        <script>
+                                            $("#select2_<?php echo ($i); ?>").select2(select2_panitia());
+                                        </script>
+
+                                    </tbody>
+                                </table>
+                                <div class="box-footer">
+                                <div class="pull-right">
+                                    <a href="javascript:void(0)" class="btn btn-success" id="btn-add"><i class="fa fa-plus"></i>&nbsp; Tambah</a>
+                                    <button type="submit" class="btn btn-primary">Submit &nbsp;<i class="fa fa-arrow-right"></i></button>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nim_anggota2" placeholder="Nim Anggota" name="nim_anggota2">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nim_anggota3" placeholder="Nim Anggota" name="nim_anggota3">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nim_anggota4" placeholder="Nim Anggota" name="nim_anggota4">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nim_anggota5" placeholder="Nim Anggota" name="nim_anggota5">
-                            </div>
-                            <div class="form-group">
-                                <label>Nim Anggota</label>
-                                <input type="text" class="form-control" id="nim_anggota6" placeholder="Nim Anggota" name="nim_anggota6">
-                            </div>
-                            <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+                            </form>
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
                 </div>
-            </form>
         </div>
     </section>
 </div>
 
+<!-- page script -->
+<script>
+$(function () {
+    $("#example1").DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true
+    });
+
+    $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false
+    });
+
+    $('#btn-add').click(function(event) {
+        var no = parseInt($('.row-cloned:last > .no').html());
+        var new_row = $('.row-container').append('<tr class="row-cloned"><td class="no">'+(++no)+'</td><td><select id="select2_'+no+'" class="select2 form-control" name="nim[]" value=""></select></td><td><a href="#" title="Hapus" class="btn btn-danger btn-delete"><i class="fa fa-minus-circle"></i></a></td></tr>');
+        new_row.find('.select2').select2(select2_panitia());
+    });
+
+    $(document).on('click', '.btn-delete', function(event) {
+        var $clonedRow = $('.row-cloned');
+        if ($clonedRow.length > 1) {
+            $(this).parent().parent().remove();
+        }
+        reloadNomor();
+    });
+
+    var reloadNomor = function(){
+        var $clonedRow = $('.row-cloned');
+        $.each($clonedRow, function(key, value){
+            $(this).find('.no').html(++key);
+        });
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#poster_preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#poster").change(function(){
+        readURL(this);
+    });
+
+    // <!-- alert sukses tidak -->
+    <?php
+    if($this->session->flashdata('status') !== null){
+        echo '<script type="text/javascript">';
+        if ($this->session->flashdata('status')) {
+            echo 'alert("Buat acara himpunan berhasil")';
+        } else {
+            echo 'alert("Buat acara himpunan gagal")';
+        }
+        echo '</script>';
+    }
+    ?>
+}); 
+</script>
+    

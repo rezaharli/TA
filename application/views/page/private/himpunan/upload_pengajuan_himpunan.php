@@ -64,23 +64,23 @@ $(function() {
                             </div>
                             <div class="form-group">
                                 <label>Tema Kegiatan *</label>
-                                <textarea class="form-control" id="tema_kegiatan" placeholder="Tema Kegiatan" name="tema_kegiatan"></textarea> 
+                                <textarea class="form-control" id="tema_kegiatan" placeholder="Tema Kegiatan" name="tema_kegiatan"><?php echo set_value('tema_kegiatan') ?></textarea> 
                             </div>
                             <div class="form-group">
                                 <label>Tujuan Kegiatan *</label>
-                                <textarea class="form-control" id="tujuan_kegiatan" placeholder="Tujuan Kegiatan" name="tujuan_kegiatan"></textarea> 
+                                <textarea class="form-control" id="tujuan_kegiatan" placeholder="Tujuan Kegiatan" name="tujuan_kegiatan"><?php echo set_value('tujuan_kegiatan') ?></textarea> 
                             </div>
                             <div class="form-group">
                                 <label>Sasaran Kegiatan *</label>
-                                <textarea class="form-control" id="sasaran_kegiatan" placeholder="Sasaran Kegiatan" name="sasaran_kegiatan"></textarea> 
+                                <textarea class="form-control" id="sasaran_kegiatan" placeholder="Sasaran Kegiatan" name="sasaran_kegiatan"><?php echo set_value('sasaran_kegiatan') ?></textarea> 
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Kegiatan *</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="ex:yyyy-mm-dd" name="tanggal_kegiatan">
+                                <input type="text" class="form-control" id="datepicker" placeholder="ex:yyyy-mm-dd" name="tanggal_kegiatan" value="<?= set_value('tanggal_kegiatan') ?>">
                             </div>
                             <div class="form-group">
                                 <label>Tempat Kegiatan *</label>
-                                <input type="text" class="form-control" id="tempat_kegiatan" placeholder="Tempat Kegiatan" name="tempat_kegiatan">
+                                <input type="text" class="form-control" id="tempat_kegiatan" placeholder="Tempat Kegiatan" name="tempat_kegiatan" value="<?= set_value('tempat_kegiatan') ?>">
                             </div>
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
@@ -97,15 +97,15 @@ $(function() {
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Bentuk Kegiatan *</label>
-                                <textarea class="form-control" id="bentuk_kegiatan" placeholder="Bentuk Kegiatan" name="bentuk_kegiatan"></textarea> 
+                                <textarea class="form-control" id="bentuk_kegiatan" placeholder="Bentuk Kegiatan" name="bentuk_kegiatan"><?php echo set_value('bentuk_kegiatan') ?></textarea> 
                             </div>
                             <div class="form-group">
                                 <label>Anggaran Biaya (Total) *</label>
-                                <input type="text" class="form-control" id="anggaran" placeholder="ex:1xxxxxxx" name="anggaran">
+                                <input type="text" class="form-control" id="anggaran" placeholder="ex:1xxxxxxx" name="anggaran" value="<?= set_value('anggaran') ?>">
                             </div>
                             <div class="form-group">
                                 <label>Penutup *</label>
-                                <textarea class="form-control" id="penutup" placeholder="Penutup" name="penutup"></textarea> 
+                                <textarea class="form-control" id="penutup" placeholder="Penutup" name="penutup"><?php echo set_value('penutup') ?></textarea> 
                             </div>
                         
                             <div class="form-group">

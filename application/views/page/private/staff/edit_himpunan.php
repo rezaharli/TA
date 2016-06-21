@@ -10,11 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <h1>
             Edit Data Himpunan
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Akun</a></li>
-            <li class="active">Edit Profil</li>
-        </ol>
+        <?php echo $breadcrumb ?>
     </section>
 
     <!-- Main content -->
@@ -22,9 +18,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
             <!-- left column -->
             <!-- form start -->
-            <form role="form" method="post" action="<?php echo base_url(); ?>himpunan/do_update">
+            <form role="form" method="post" action="<?php echo base_url(); ?>himpunan/do_edit?id= <?php echo $id_him ?>">
             
-            <div class="col-md-12">
+            <div class="col-md-7">
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -32,36 +28,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div><!-- /.box-header -->
                     
                     <div class="box-body">
+                        <?php if (!empty(validation_errors())): ?>
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                <ul>
+                                    <?php echo validation_errors('<li>', '</li>'); ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+
                         <div class="form-group">
                             <label>Nama Himpunan</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Nama Himpunan" value="<?= $himpunan->nama ?>" name="nama" disabled>
+                            <input type="text" class="form-control" id="nama" placeholder="Nama Himpunan" value="<?= $nama_him ?>" name="nama" disabled>
 
                         </div>
                         <div class="form-group">
                             <label>Program Studi</label>
-                            <input type="text" class="form-control" id="prodi" placeholder="Program Studi" value="<?= $himpunan->prodi ?>" name="prodi" disabled>
+                            <input type="text" class="form-control" id="prodi" placeholder="Program Studi" value="<?= $prodi_him ?>" name="prodi" disabled>
                         </div>
                         <div class="form-group">
                             <label>Penanggung Jawab</label>
-                            <select class="form-control select2" style="width: 100%;" name="penanggungjawab">
-                              <?php foreach ($mahasiswas as $mahasiswa) { ?>
-                                <option value=""> </option>
-                              <?php } ?>
+                            <select class="select2 form-control" name="penanggungjawab">
+                                <option value="<?= $id_pj ?>"><?php echo $id_pj ?> - <?php echo $nama_mhs ?></option>>
                             </select>
                         </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a data-toggle="modal" href="#" data-target="#submitModal" class="btn btn-primary">Submit</a>
                     </div>               
                 </div><!-- /.box -->
             </div>
+
+            <!-- modal column -->
+            <!-- Submit Modal -->
+                    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog center" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Konfirmasi</h4>
+                          </div>
+                          <div class="modal-body">
+                            Apakah anda ingin <b>mengupdate</b> data ini?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> &nbsp;
+                          </div>
+                        </div>
+                      </div>
+                    </div> <!-- /modal -->
             </form>
         </div>
     </section>
 </div>
 
 <!-- Select2 -->
-<script src="<?php echo base_url() ?>assets/adminlte/plugins/select2/select2.full.min.js"></script>
+<script src="<?php echo base_url() ?>assets/adminlte/plugins/select2/select2.min.js"></script>
 
 <!-- alert sukses tidak -->
 <?php
@@ -79,31 +103,25 @@ if($this->session->flashdata('status') !== null){
 <script>
       $(function () {
         $(".select2").select2({
-            minimumInputLength: 2,
-            tags: true,
-            tokenSeparators: [',', ' '],
+            minimumInputLength: 4,
+            placeholder: 'Masukkan NIM penanggungjawab',
+            allowClear: true,
             ajax: {
-                url: '<?php echo base_url('himpunan/asd') ?>',
+                url: '<?php echo base_url('himpunan/select2') ?>',
                 dataType: 'json',
                 type: 'GET',
                 data: function (term) {
                     return {
-                        term: term
+                        q: term
                     };
                 },
                 processResults: function (data) {
                     return {
-                        results: $.map(data, function (mahasiswas) {
-                            return {
-                                text: mahasiswas.nim,
-                                id: mahasiswas.nim
-                            }
-                        })
+                        results: data.mahasiswa
                     };
                 },
-                cache: true
-            },
-
+                
+            }
         });
       });
 </script>

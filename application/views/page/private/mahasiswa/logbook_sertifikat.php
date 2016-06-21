@@ -12,16 +12,19 @@
             Sertifikat Lomba
         </h1>
         <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-files-o"></i> Home</a></li>
-          <li><a href="#">sertifikat</a></li>
+          <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="#">Bukti Lomba</a></li>
         </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xs-7">
+            <div class="col-xs-12">
                 <div class="box">
+                  <div class="box-header">
+                      <a href="<?php echo base_url('sertifikat/add') ?>"<button type="button" class="btn btn-default"><span class="fa fa-plus"></span>&nbsp;Ajukan Beasiswa </button></a>
+                  </div>
                   <!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -29,7 +32,9 @@
                               <tr>
                                 <th align="center" style="width: 10px">No</th>
                                 <th align="center">Nama Lomba</th>
+                                <th align="center">Kategori Lomba</th>
                                 <th align="center">Penyelenggara</th>
+                                <th align="center">Tingkat Kompetisi</th>
                                 <th align="center" style="width: 100px">Waktu Lomba</th>
                               </tr>
                             </thead>
@@ -39,22 +44,15 @@
                                 <tr>
                                   <td><?php echo $i; ?></td>
                                   <td><?php echo $baris->nama_lomba; ?></td>
+                                  <td><?php echo $baris->kategori_lomba; ?></td>
                                   <td><?php echo $baris->penyelenggara_lomba; ?></td>
+                                  <td><?php echo $baris->tingkat_kompetisi; ?></td>
                                   <td><?php echo $baris->waktu_lomba; ?></td>
                                 </tr>
                                 <?php $i++; ?>
                                 <?php } ?>
                             </tbody>
                         </table>
-                        <div class="box-footer">
-                            <div class="col-sm-8">
-                              <div class="dataTables_info" id="example2_info" role="status" aria-live="polite" >*Silahkan upload sertifikat untuk pengajuan beasiswa prestasi
-                              </div>
-                            </div>
-                            <div class="col-sm-4">
-                              <a href="<?php echo base_url('sertifikat/add') ?>"<button type="button" class="btn btn-default"><span class="fa fa-plus" ></span> Upload Sertifikat </button></a>
-                            </div>
-                        </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div><!-- /.col -->

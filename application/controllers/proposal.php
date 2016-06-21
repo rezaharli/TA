@@ -22,13 +22,44 @@ class Proposal extends Private_Controller {
         $this->load->library('form_validation');
     }
 
-    function upload_pengajuan (){
-        // $this->load->model('user_model');
-        // $user_data = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
-        // $this->load_page('page/private/'.$user_data->role.'/pengajuan_proposal', null);
+    function cetak() {
+        $this->load_page('page/private/staff/surattugas_detail_cetak', $this->get_cetak_data());
+    }
+
+    function do_cetak(){
+        $this->load->view('page/private/staff/surattugas_cetak', $this->get_cetak_data());
+    }
+
+    private function get_cetak_data(){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
-        $data['events'] = $this->event_model->order_by('tanggal_event')->get_many_by(array('status' => 'disetujui'));
+        if($user->roled_data->jenis != 'staff_admin' || null == $this->input->get('id')) show_404();
+
+        $id_pengajuan = $this->input->get('id');
+
+        $this->load->model('logbook_proposal_mhs_model');
+        $proposal                   = $this->logbook_proposal_mhs_model->get_by(array('id_pengajuan' => $id_pengajuan));
+        $proposal->lengkap          = $this->proposal_lomba_model->get($proposal->id_proposal);
+        $proposal->detail_pengaju   = $this->mahasiswa_model->get_mahasiswa_dan_user_by_nim($proposal->pengaju);
+        $proposal->tim              = $this->detail_tim_model->get_many_by(array('id_proposal_lomba' => $proposal->id_proposal));
+        foreach ($proposal->tim as $t) {
+            $t->mahasiswa = $this->mahasiswa_model->get_mahasiswa_dan_user_by_nim($t->nim_anggota);
+        }
+        $proposal->pengajuan        = $this->pengajuan_proposal_mahasiswa_model->get($proposal->id_pengajuan);
+        $proposal->pengajuan->event = $this->event_model->get($proposal->pengajuan->id_event);
+
+        $proposal->tanggal_kompetisi_display = $this->get_tanggal_formatted($proposal->tanggal_kompetisi);
+
+        $data['proposal']           = $proposal;
+        $data['tanggal_display']    = $this->get_tanggal_formatted(date('Y-m-d'));
+
+        return $data;
+    }
+
+    function upload_pengajuan (){
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+
+        $data['events'] = $this->event_model->order_by('tanggal_mulai')->get_many_by(array('status' => 'disetujui'));
 
         $this->load_page('page/private/mahasiswa/upload_pengajuan_proposal', $data);
     }
@@ -37,7 +68,6 @@ class Proposal extends Private_Controller {
         $nama_input_file = 'file_pengajuan';
         //user yg login
         $user           = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-
             // rule
         $this->form_validation->set_rules('kategori_kompetisi', 'Kategori Kompetisi', 'required');
         $this->form_validation->set_rules('tujuan_kompetisi', 'Tujuan Kompetisi', 'required');
@@ -47,11 +77,12 @@ class Proposal extends Private_Controller {
         $this->form_validation->set_rules('tempat_kompetisi', 'Tempat Kompetisi', 'required');
         $this->form_validation->set_rules('nama_tim', 'Nama Tim', 'required');
 
-            $data = array(
-                'id_event'          => $this->input->post('event'),
-                'pengaju_proposal'  => $user->roled_data->nim
-                );
-            
+        $data = array(
+            'id_event'          => $this->input->post('event'),
+            'pengaju_proposal'  => $user->roled_data->nim
+            );
+
+        if ($data['id_event']!=null){
             $pengaju = $this->pengajuan_proposal_mahasiswa_model->insert($data);
             $this->session->set_userdata('id_pengajuan', $pengaju);
             
@@ -71,32 +102,37 @@ class Proposal extends Private_Controller {
                         'tempat_kompetisi'      => $this->input->post('tempat_kompetisi'),
                         'anggaran_biaya'        => $this->input->post('anggaran_biaya'),
                         'nama_tim'              => $this->input->post('nama_tim'),
-                        'pembimbing'              => $this->input->post('pembimbing'),
+                        'pembimbing'            => $this->input->post('pembimbing'),
                         'waktu_upload'          => date('Y-n-j h:i:s'),
                         'file'                  => $filename
                     );
-
+                    
                     $id_upload_proposal = $this->proposal_lomba_model->insert($data);
                     $this->session->set_userdata('id_proposal', $id_upload_proposal);
-
                     
-                        if ($this->upload->do_upload($nama_input_file)) {
-                            $upload_data = $this->upload->data();
-                            $upload_data['orig_name'] = $filename;
-                            $this->upload_proposal_to_drive($upload_data);
-                            unlink($upload_data['full_path']);
-                            $this->session->set_userdata('notif_upload', true);
-                        }else{
-                            $this->session->set_userdata('notif_upload', false);    
-                        }
-                    } else {
-                        $this->upload_pengajuan();
+                    if ($this->upload->do_upload($nama_input_file)) {
+                        $upload_data = $this->upload->data();
+                        $upload_data['orig_name'] = $filename;
+                        $this->upload_proposal_to_drive($upload_data);
+                        unlink($upload_data['full_path']);
+                        $this->session->set_userdata('notif_upload', true);
+                    }else{
+                        $this->session->set_userdata('notif_upload', false);    
                     }
-                } 
+                    
+                    $this->load_page('page/private/mahasiswa/upload_tim', $data); 
+                } else {
+                    $this->upload_pengajuan();
+                }
                 $this->session->set_flashdata(array('status' => true));
-                    $data['user'] = $user;
-                $this->load_page('page/private/mahasiswa/upload_tim', $data); 
+                
+            } else{
+                $data['user'] = $user;
+            }
+        } else {
+           $this->load_page('page/private/mahasiswa/upload_tim');
         }
+    }
 
     function upload_proposal_to_drive($upload_data){
         $this->load->library('google_drive');
@@ -126,7 +162,6 @@ class Proposal extends Private_Controller {
         $this->session->set_userdata('notif_upload', true);
     }
 
-
     function upload_proposal (){
         $id_pengajuan           = $this->input->get('id_pengajuan');
         $user                   = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
@@ -135,21 +170,18 @@ class Proposal extends Private_Controller {
         $this->load_page('page/private/mahasiswa/upload_proposal',  $data);
     }
 
-
     function do_upload_proposal(){
         $nama_input_file = 'file_pengajuan';
 
         $id_pengajuan = $this->input->get('id_pengajuan');
         $user         = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
-        $tmp        = explode(".", $_FILES['file_pengajuan']['name']);
-        $ext        = end($tmp);
-        $filename   = sha1($_FILES['file_pengajuan']['name']).'.'.$ext;
+        
         
         $this->load->library('upload', $this->config_upload);
         $data = array(
             'id_pengajuan_proposal_mahasiswa'   => $this->session->userdata('id_pengajuan'),
-            'kategori_kompetisi'                    => $this->input->post('kategori_kompetisi'),
+            'kategori_kompetisi'                => $this->input->post('kategori_kompetisi'),
             'pembimbing'                        => $this->input->post('pembimbing'),
             'tujuan_kompetisi'                  => $this->input->post('tujuan_kompetisi'),
             'sasaran_kompetisi'                 => $this->input->post('sasaran_kompetisi'),
@@ -158,44 +190,38 @@ class Proposal extends Private_Controller {
             'anggaran_biaya'                    => $this->input->post('anggaran_biaya'),
             'nama_tim'                          => $this->input->post('nama_tim'),
             'waktu_upload'                      => date('Y-n-j h:i:s'),
-            'file'                  => $filename
         );
-        $this->session->set_userdata('id_pengajuan', $id_pengajuan);
-        $data['file'] = $filename;
-        $id_upload_proposal = $this->proposal_lomba_model->insert($data);
-        $this->session->set_userdata('id_proposal', $id_upload_proposal);
 
-        if ($this->upload->do_upload($nama_input_file)) {
-            $upload_data = $this->upload->data();
-            $upload_data['orig_name'] = $filename;
-            $this->upload_proposal_to_drive($upload_data);
-            unlink($upload_data['full_path']);
-            $this->session->set_userdata('notif_upload', true);
-        } else{
-            $this->session->set_userdata('notif_upload', false);    
-        }
+        if($data['kategori_kompetisi'] != null){
+            $tmp        = explode(".", $_FILES['file_pengajuan']['name']);
+            $ext        = end($tmp);
+            $filename   = sha1($_FILES['file_pengajuan']['name']).'.'.$ext; 
 
-        //gawe nampilno status
-        $this->session->set_flashdata(array('status' => true));
-        $this->load_page('page/private/mahasiswa/upload_tim', $data);
-    }
+            $data['file'] = $filename;
 
-    function upload_tim(){
-        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-            for($i=1; $i <= 6; $i++){
-                    if ($this->input->post('nim_anggota'.$i) == "") {
-                        continue;
-                    }else{
-                        $data = array(
-                            'id_proposal_lomba'         => $this->session->userdata('id_proposal'),
-                            'nim_anggota'               => $this->input->post('nim_anggota'.$i)
-                        ); 
-                        $id_detail_tim = $this->detail_tim_model->insert($data);
-                    }            
+            $this->session->set_userdata('id_pengajuan', $id_pengajuan);
+            $data['file'] = $filename;
+            $id_upload_proposal = $this->proposal_lomba_model->insert($data);
+            $this->session->set_userdata('id_proposal', $id_upload_proposal);
+
+            if ($this->upload->do_upload($nama_input_file)) {
+                $upload_data = $this->upload->data();
+                $upload_data['orig_name'] = $filename;
+                $this->upload_proposal_to_drive($upload_data);
+                unlink($upload_data['full_path']);
+                $this->session->set_userdata('notif_upload', true);
+            } else{
+                $this->session->set_userdata('notif_upload', false);    
             }
-        redirect('proposal/logbook_pengajuan_proposal_lomba');
-    }
 
+            //gawe nampilno status
+            $this->session->set_flashdata(array('status' => true));
+            $this->load_page('page/private/mahasiswa/upload_tim', $data);  
+        } else {
+            $this->load_page('page/private/mahasiswa/upload_tim');
+        }
+        
+    }
 
     function logbook_pengajuan_proposal_lomba(){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
@@ -203,40 +229,23 @@ class Proposal extends Private_Controller {
         $this->load->model('logbook_proposal_mhs_model');
 
         if ($user->role == 'staff') {
-            $proposals  = $this->logbook_proposal_mhs_model->get_all();
+            $proposals  = $this->logbook_proposal_mhs_model->get_many_by(array('status' => 'y', 'tanggal_kompetisi >=' => date('Y-m-d')));
         }else if($user->role == 'mahasiswa') {
             $proposals  = $this->logbook_proposal_mhs_model->get_many_by(array('pengaju' => $user->roled_data->nim));
         }
 
-        $data['proposals'] = array();
+        $data['user']       = $user;
+        $data['proposals']  = array();
         foreach ($proposals as $proposal) {
             $pengaju            = $this->mahasiswa_model->get_by(array('nim' => $proposal->pengaju));
             $staff              = $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
             $penanggungjawab    = ($staff == null) ? null : $this->user_model->get($staff->id_user);
 
-            array_push($data['proposals'], array(
-                'id_pengajuan'              => $proposal->id_pengajuan,
-                'nama_event'                => $proposal->nama_event,
-                'tanggal_pengajuan'         => $proposal->tanggal_pengajuan,
-                'tanggal_proposal_terakhir' => $proposal->tanggal_proposal_terakhir,
-                'status'                    => $proposal->status,
-                'nama_tim'                  => $proposal->nama_tim,
-                'penanggungjawab'           => ($penanggungjawab == null) ? '-' : $penanggungjawab->nama
-                ));
+            array_push($data['proposals'], $proposal);
         }
 
-       
-        if ($user->role == 'staff') {
-            $this->load_page('page/private/staff/logbook_proposal_himpunan', $data);
-        }else if($user->role == 'mahasiswa'){
-            $data['user'] = $user;
-            $this->load_page('page/private/mahasiswa/logbook_pengajuan_proposal_lomba', $data);
-        }
-
-        
+        $this->load_page('page/private/mahasiswa/logbook_pengajuan_proposal_lomba', $data);
     }
-
-    
 
     function detail_pengajuan(){
         $id_pengajuan = $this->input->get('id_pengajuan');
@@ -304,7 +313,50 @@ class Proposal extends Private_Controller {
         
         $this->load_page('page/private/mahasiswa/logbook_detail_tim', $data);
     }
+
+
+
+    function upload_tim(){ 
+        $arr_nim = $this->input->post('nim');
+        $data['arr_nim'] = array();
+
+        foreach ($arr_nim as $key => $nim) {
+            // IF id panitia exist then update, nor insert, either or delete
+            if ($nim[$key] != "") {
+                $data = array(
+                    "nim" => $nim,
+                );
+            }
+             $data = array(
+                        'id_proposal_lomba'         => $this->session->userdata('id_proposal'),
+                        'nim_anggota'               => $data['nim']
+                    ); 
+              $id_detail_tim = $this->detail_tim_model->insert($data);
+             echo $data['nim_anggota'];
+        }
+        redirect('proposal/logbook_pengajuan_proposal_lomba');
+    }
+
+    function ambil_data(){
+        $this->load->model('mahasiswa_model');
+        $mahasiswa = $this->mahasiswa_model
+            ->like('nim', $this->input->get('q')['term'])
+            ->get_all();
+
+        $data['mahasiswa'] = array();
+        if (count($mahasiswa) > 0) {
+            foreach ($mahasiswa as $mhs) {
+                $user = $this->user_model->get_by(array('id' => $mhs->id_user));
+
+                array_push($data['mahasiswa'], array(
+                    'id'    => $mhs->nim,
+                    'text'  => $mhs->nim.' - '.$user->nama
+                ));
+            }
+        }
+        echo json_encode($data);
+    }
 }
 
 /* End of file proposal.php */
-/* Location: ./application/controllers/proposal.php */
+/* Location: ./application/controllers/proposal.php */ 
