@@ -9,7 +9,7 @@
         <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Daftar Pengajuan
+            Daftar Pengajuan Proposal Lomba
             <small>Mahasiswa</small>
         </h1>
         <?php echo $breadcrumb ?>
@@ -28,8 +28,8 @@
                             <thead>
                               <tr>
                                 <th>No</th>
+                                <th>Nama Lomba</th>
                                 <th>Pengaju</th>
-                                <th>Judul Proposal</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Status</th>
                                 <th>Penanggung Jawab</th>
@@ -41,8 +41,16 @@
                                 <?php foreach ($proposals as $proposal) : ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $proposal['pengaju']; ?></td>
-                                    <td><?php echo $proposal['judul']; ?></td>  
+                                    <td>
+                                      <a href="<?php echo base_url('event/lomba?id='.$proposal['id_event']); ?>">
+                                        <?php echo $proposal['event']; ?>
+                                      </a>
+                                    </td> 
+                                    <td>
+                                      <a href="<?php echo base_url('profil/'.$proposal['username']); ?>">
+                                        <?php echo $proposal['pengaju']; ?>
+                                      </a>
+                                    </td> 
                                     <td><?php echo $proposal['tanggal_pengajuan']; ?></td>
                                     <td>
                                         <?php if ($proposal['status_approve'] == null) { ?>
@@ -54,16 +62,9 @@
                                         <?php } ?>
                                     <td><?php echo $proposal['penanggungjawab']; ?></td>
                                     <td>
-                                      <a href="<?php echo base_url('proposal_mahasiswa/detail_pengajuan?id_pengajuan='.$proposal['id']); ?>">
-                                        <button class="btn btn-info btn-sm pull-left"><i class="fa fa-list"></i> &nbsp;Lihat Detail</button>
+                                      <a href="<?php echo base_url('proposal_mahasiswa/logbook_proposal?id_pengajuan='.$proposal['id']); ?>">
+                                        <button class="btn btn-info btn-xs pull-left"><i class="fa fa-list"></i> &nbsp;Lihat Detail</button>
                                       </a>&nbsp;
-
-                                      <?php if ($proposal['count'] == 0) { ?>
-                                        <button class="btn btn-info btn-sm disabled"><i class="fa fa-book"></i> &nbsp;Lihat LPJ</button>
-                                      <?php }else{ ?>
-                                      <a href="<?php echo base_url('proposal_mahasiswa/logbook_lpj?id_pengajuan='.$proposal['id']); ?>" class="btn btn-info btn-sm"><i class="fa fa-book"></i> &nbsp;Lihat LPJ
-                                      </a>
-                                      <?php } ?>
                                     </td>
                                   </tr>
                                 <?php $i++; ?>
