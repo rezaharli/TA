@@ -53,7 +53,7 @@
                                       <a href="<?php echo base_url('download/download'); ?>">
                                         <button class="btn btn-info btn-sm pull-left"><i class="fa fa-download"></i>&nbsp;Download</button>
                                       </a>
-                                      <a href="<?php echo base_url('proposal_himpunan/detail_proposal?id_proposal='.$proposal['id']); ?>">
+                                      <a href="<?php echo base_url('proposal_himpunan/detail_proposal?id_proposal='.$proposal['id_proposal']); ?>">
                                         <button class="btn btn-info btn-sm pull-right"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
                                       </a>
                                     </td>

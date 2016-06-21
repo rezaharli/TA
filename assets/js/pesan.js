@@ -1,4 +1,5 @@
-$(document).ready(function(){
+$(document).ready(
+function(){
     cekpesan();
     $("#tombol-pesan").click(function(){
         tampilkanpesan();
@@ -34,3 +35,4 @@ function tampilkanpesan(){
         }
     });
 }
+
