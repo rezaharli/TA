@@ -64,18 +64,21 @@ class Profil extends Private_Controller {
 
         $this->load->library('upload', $config);
         
+        $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
         if ( ! $this->upload->do_upload($input_file_name)) {
             $this->session->set_flashdata('error', $this->upload->display_errors());
         } else {
-            $user = $this->user_model->get_by(array('id' => $this->session->userdata('id')));
             $file = "./assets/img/foto-profil/".$user->foto_profil;
             if(is_file($file)){
-                if(unlink($file)){
-                    $this->user_model->update($this->session->userdata('id'), array('foto_profil' => $this->upload->data()['file_name']));
-                }
+                unlink($file);
+            }
+            if( ! $this->user_model->update(
+                $this->session->userdata('id'), 
+                array('foto_profil' => $this->upload->data()['file_name']))) {
+                    $this->session->set_flashdata('error', 'Ubah foto profil gagal');
             }
         }
-        redirect('user');
+        redirect('profil/'.$user->username);
     }
 
 	function do_username_check(){

@@ -5,7 +5,7 @@ $(document).ready(function(){
     });
 
     $.ajax({
-        url: window.location.origin + "/hmmmm/pesan/get_modal",
+        url: window.location.origin + "/fairship/pesan/get_modal",
         cache: false,
         success: function(msg){
             $("#modal-message").html(msg);
@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 function cekpesan(){
     $.ajax({
-        url: window.location.origin + "/hmmmm/pesan/hitung",
+        url: window.location.origin + "/fairship/pesan/hitung",
         cache: false,
         success: function(msg){
             $("#jumlah-pesan").html(msg);
@@ -26,7 +26,7 @@ function cekpesan(){
 
 function tampilkanpesan(){
     $.ajax({
-        url: window.location.origin + "/hmmmm/pesan/get",
+        url: window.location.origin + "/fairship/pesan/get",
         cache: false,
         success: function(msg){
             // $("#loading").hide();
