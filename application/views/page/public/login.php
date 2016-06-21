@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html >
 	<head>
 	    <meta charset="UTF-8">
-	    <title>Hmmm</title>
+	    <title><?php echo APP_NAME ?></title>
 	    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/login.css">
 	</head>
 

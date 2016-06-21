@@ -114,6 +114,6 @@ class Proposal_mahasiswa extends Private_Controller{
 
         $this->proposal_lomba_model->update($id, array('status' => $status, 'penyetuju' => $penyetuju->nip));
 
-        redirect('proposal_mahasiswa/detail_proposal?id_proposal='.$id);
+        redirect(base_url('proposal_mahasiswa/detail_proposal?id_proposal='.$id));
     }
 }
