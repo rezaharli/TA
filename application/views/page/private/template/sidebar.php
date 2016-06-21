@@ -71,7 +71,7 @@
         <li class="treeview"><a href="#"><i class="fa fa-book"></i> <span>Proposal</span><i class="fa fa-angle-left pull-right"></i></a>
           
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>Mahasiswa</a>
+            <li><a href="<?php echo base_url('proposal_mahasiswa') ?>"><i class="fa fa-circle-o"></i>Mahasiswa</a>
             </li>
           </ul>
           <ul class="treeview-menu">
@@ -80,6 +80,18 @@
           </ul>
         </li>
         <?php } ?>
+
+
+        <li><a href="#"><i class="fa fa-dashboard"></i> <span>Beasiswa</span> <i class="fa fa-angle-left pull-right"></i></a>
+
+          <ul class="treeview-menu">
+
+            <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-flag-checkered"></i> <span>Kirim Email Rekomendasi</span></a>
+            </li>
+
+          </ul>
+
+        </li>
 
         <?php if($role == 'mahasiswa') { ?>
 
@@ -173,14 +185,7 @@
 
             <li><a href="<?php echo base_url('proposal/logbook_pengajuan_proposal_lomba') ?>"><i class="fa fa-print"></i> <span>Cetak Surat Tugas</span></a>
             </li>
-            <li><a href="#"><i class="fa fa-dashboard"></i> <span>Beasiswa</span></a>
 
-              <ul class="treeview-menu">
-                <li><a href="<?php echo base_url('beasiswa/kirim_rekomendasi') ?>"><i class="fa fa-calendar"></i>Kirim email rekomendasi</a>
-                </li>
-              </ul>
-
-            </li>
           <?php } ?>
         <?php } ?>
 

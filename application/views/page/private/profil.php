@@ -78,14 +78,14 @@
       <div class="col-md-9">
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs">
-            <li class="active"><a href="#timeline" data-toggle="tab">Timeline</a></li>
+            <!-- <li class="active"><a href="#timeline" data-toggle="tab">Timeline</a></li> -->
             <?php if ($this->session->userdata('id') == $id_user) { ?>
-              <li><a href="#ubah-username-password" data-toggle="tab">Kelola Akun</a></li>
+              <li class="active"><a href="#ubah-username-password" data-toggle="tab">Kelola Akun</a></li>
               <li><a href="#ubah-data-diri" data-toggle="tab">Ubah Data Diri</a></li>
             <?php } ?>
           </ul>
           <div class="tab-content">
-            <div class="active tab-pane" id="timeline">
+            <div class="tab-pane" id="timeline">
               <!-- The timeline -->
               <ul class="timeline timeline-inverse">
                 <!-- timeline time label -->
@@ -169,7 +169,7 @@
             </div><!-- /.tab-pane -->
 
             <?php if ($this->session->userdata('id') == $id_user) { ?>
-              <div class="tab-pane" id="ubah-username-password">
+              <div class="active tab-pane" id="ubah-username-password">
 
                 <form class="form-horizontal" autocomplete="off" method="post" enctype="multipart/form-data" action="<?php echo base_url() ?>profil/do_foto_profil_edit">
                   <div class="form-group">
