@@ -123,6 +123,21 @@ class Proposal_himpunan extends Private_Controller{
         $data['himpunan'] = $himpunan;
         $data['user'] = $user;
         $data['id_pengajuan'] = $id_pengajuan;
+        $proposal   = $this->proposal_himpunan_model->limit(1,0)->order_by('id', 'desc')->get_by(array('id_pengajuan_proposal' => $id_pengajuan));
+        // echo $this->db->last_query(); die();
+
+        $data['id']                 = $proposal->id;
+        $data['judul']              = $proposal->judul;
+        $data['tema_kegiatan']      = $proposal->tema_kegiatan;
+        $data['tujuan_kegiatan']    = $proposal->tujuan_kegiatan;
+        $data['sasaran_kegiatan']   = $proposal->sasaran_kegiatan;
+        $data['tanggal_kegiatan']   = $proposal->tanggal_kegiatan;
+        $data['tempat_kegiatan']    = $proposal->tempat_kegiatan;
+        $data['bentuk_kegiatan']    = $proposal->bentuk_kegiatan;
+        $data['anggaran']           = $proposal->anggaran;
+        $data['penutup']            = $proposal->penutup;
+        $data['status']             = $proposal->status_approve;
+
 
         $this->load_page('page/private/himpunan/upload_prop_himpunan', $data);
     }
@@ -423,16 +438,21 @@ class Proposal_himpunan extends Private_Controller{
 
         $data['proposals'] = array();
         $status_approve;
-        foreach ($proposals as $proposal) {
+        $data['total_count'] = count($proposals);
+        $data['proposals'] = array();
+        if (count($proposals) > 0) {
+            foreach ($proposals as $proposal) {
 
-            array_push($data['proposals'], array(
-                'id_proposal'       => $proposal->id,
-                'judul'             => $proposal->judul,
-                'tanggal_upload'    => $proposal->waktu_upload,
-                'status_approve'    => ($proposal->status_approve == null) ? '-' :$proposal->status_approve,
-                'drive_id'          => $proposal->drive_id
-            ));
-            $status_approve = $proposal->status_approve;
+                array_push($data['proposals'], array(
+                    'id_proposal'       => $proposal->id,
+                    'judul'             => $proposal->judul,
+                    'tanggal_upload'    => $proposal->waktu_upload,
+                    'status_approve'    => ($proposal->status_approve == null) ? '-' :$proposal->status_approve,
+                    'file'              => $proposal->file,
+                    'drive_id'          => $proposal->drive_id
+                ));
+                $status_approve = $proposal->status_approve;
+            }
         }
 
         $data['id_pengajuan']   = $id_pengajuan;
