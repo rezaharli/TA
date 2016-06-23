@@ -57,7 +57,7 @@ class Proposal extends Private_Controller {
     }
 
     function upload_pengajuan (){
-        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id')); 
 
         $data['events'] = $this->event_model->order_by('tanggal_mulai')->get_many_by(array('status' => 'disetujui'));
 
