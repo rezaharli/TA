@@ -162,11 +162,11 @@
             <li><a href="#"><i class="fa fa-book"></i> <span>Pengajuan</span><i class="fa fa-angle-left pull-right"></i></a>
               
               <ul class="treeview-menu">
-                <li><a href="<?php echo base_url('proposal_himpunan/upload_pengajuan') ?>"><i class="fa fa-file-o"></i>Upload Proposal</a>
+                <li><a href="<?php echo base_url('proposal_himpunan/upload_pengajuan') ?>"><i class="fa fa-file-o"></i>Unggah Proposal</a>
                 </li>
-                <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan') ?>"><i class="fa fa-calendar-check-o"></i>Logbook Pengajuan</a>
+                <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan') ?>"><i class="fa fa-calendar-check-o"></i>Daftar Pengajuan</a>
                 </li>
-                <li><a href="<?php echo base_url('proposal_himpunan/logbook_lpj') ?>"><i class="fa  fa-list-ol"></i>Logbook LPJ</a>
+                <li><a href="<?php echo base_url('proposal_himpunan/logbook_lpj') ?>"><i class="fa  fa-list-ol"></i>Daftar LPJ</a>
                 </li>
               </ul>
 

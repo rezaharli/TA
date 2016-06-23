@@ -96,7 +96,7 @@ $(function() {
                             </div><!-- /.box-body -->
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit &nbsp;<i class="fa fa-arrow-right"></i></button>
+                            <button type="submit" class="btn btn-primary">Simpan &nbsp;<i class="fa fa-arrow-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@ $(function() {
                     </div>
                     <div class="box-body">
                         <div class="col-md-12 column">
-                            <form action="<?php echo base_url("proposal_himpunan/do_tambah_panitia?id_acara=".$acara->id); ?>" method="POST">
+                            <form action="<?php echo base_url("proposal_himpunan/do_tambah_panitia?id_acara="); ?><?php echo (!empty($acara)) ? $acara->id : ""; ?>" method="POST">
                                 <input type="hidden" name="id_acara" value="<?php echo (!empty($acara->id)) ? $acara->id : "";  ?>">
                                 <input type="hidden" name="id_pengajuan" value="<?php echo (!empty($id_pengajuan)) ? $id_pengajuan : "";  ?>">
 
@@ -221,7 +221,7 @@ $(function() {
                             <div class="box-footer">
                                 <div class="pull-right">
                                     <a href="javascript:void(0)" class="btn btn-success" id="btn-add"><i class="fa fa-plus"></i>&nbsp; Tambah Panitia</a>
-                                    <button type="submit" class="btn btn-primary">Submit &nbsp;<i class="fa fa-arrow-right"></i></button>
+                                    <button type="submit" class="btn btn-primary">Simpan &nbsp;<i class="fa fa-arrow-right"></i></button>
                                 </div>
                             </div>
                         </form>
