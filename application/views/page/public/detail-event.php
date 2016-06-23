@@ -6,9 +6,9 @@
             </div>
             <div class="col-md-5">
                 <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a>
+                    <li><a href="<?php echo base_url() ?>">Home</a>
                     </li>
-                    <li><a href="shop-category.html">
+                    <li>
                         <?php echo ($this->uri->segment(2) == 'lomba') ? 'Lomba' : (($this->uri->segment(2) == 'lomba') ? 'Lomba' : ''); ?>
                         </a>
                     </li>
