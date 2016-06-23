@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Google_serviceendar {
+class Google_calendar {
 
 	const CALENDAR_ID 	= APP_EMAIL;
 	const TIMEZONE 		= 'Asia/Jakarta';
