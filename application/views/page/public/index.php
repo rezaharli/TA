@@ -11,32 +11,31 @@
                         <div class="item">
                             <div class="row">
                                 <div class="col-sm-5 right">
-                                    <p>
-                                        <img src="<?php echo base_url() ?>assets/universal/img/logo.png" alt="">
-                                    </p>
-                                    <h1>Bla bla bla</h1>
-                                    <p>Bla. Bla. Bla.
-                                        <br />Bla. Bla. Bla.</p>
+                                    <h1>Fairship</h1>
+                                    <ul class="list-style-none">
+                                        <li>Aplikasi Kemahasiswaan Fakultas Rekayasa Industri</li>
+                                    </ul>
                                 </div>
-                                <div class="col-sm-7">
-                                    <img class="img-responsive" src="<?php echo base_url() ?>assets/universal/img/template-homepage.png" alt="">
+
+                                <div class="col-sm-7 text-center">
+                                    <img class="img-responsive" src="<?php echo base_url() ?>assets/universal/img/fairship-dashboard.png" alt="">
                                 </div>
+
+                                
+
                             </div>
                         </div>
                         <div class="item">
                             <div class="row">
 
                                 <div class="col-sm-7 text-center">
-                                    <img class="img-responsive" src="<?php echo base_url() ?>assets/universal/img/template-mac.png" alt="">
+                                    <img class="img-responsive" src="<?php echo base_url() ?>assets/universal/img/lomba-dashboard.png" alt="">
                                 </div>
 
                                 <div class="col-sm-5">
-                                    <h2>Bla bla bla bla bla bla</h2>
+                                    <h2>Pengajuan Lomba</h2>
                                     <ul class="list-style-none">
-                                        <li>Bla bla bla</li>
-                                        <li>Bla bla bla</li>
-                                        <li>Bla bla, bla, bla, bla bla bla bla bla</li>
-                                        <li>Bla bla bla bla bla bla bla</li>
+                                        <li>silahkan melakukan pengajuan proposal untuk mendapatkan surat tugas dan dana</li>
                                     </ul>
                                 </div>
 
@@ -45,29 +44,25 @@
                         <div class="item">
                             <div class="row">
                                 <div class="col-sm-5 right">
-                                    <h1>Bla</h1>
+                                    <h1>Event</h1>
                                     <ul class="list-style-none">
-                                        <li>Bla bla bla bla</li>
-                                        <li>Bla bla bla bla bla</li>
-                                        <li>Bla bla bla bla bla bla bla</li>
-                                        <li>Bla bla bla bla</li>
+                                        <li>tersedia berbagai macam event yang diselenggarakan oleh himpunan Fakultas Rekayasa Industri</li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-7">
-                                    <img class="img-responsive" src="<?php echo base_url() ?>assets/universal/img/template-easy-customize.png" alt="">
+                                    <img class="img-responsive" src="<?php echo base_url() ?>assets/universal/img/event-dashboard-02.png" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="item">
                             <div class="row">
                                 <div class="col-sm-7">
-                                    <img class="img-responsive" src="<?php echo base_url() ?>assets/universal/img/template-easy-code.png" alt="">
+                                    <img class="img-responsive" src="<?php echo base_url() ?>assets/universal/img/beasiswa-dashboard.png" alt="">
                                 </div>
                                 <div class="col-sm-5">
-                                    <h1>Bla bla bla</h1>
+                                    <h1>Beasiswa Prestasi</h1>
                                     <ul class="list-style-none">
-                                        <li>Bla bla bla bla.</li>
-                                        <li>Bla bla bla bla</li>
+                                        <li>Unggah Sertifikat menang lombamu disini untuk mendapatkan beasiswa Prestasi</li>
                                     </ul>
                                 </div>
                             </div>
