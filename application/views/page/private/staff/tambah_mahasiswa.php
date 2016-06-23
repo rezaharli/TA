@@ -32,14 +32,14 @@
                           <div class="col-sm-offset-2 col-sm-10"><h5 id="status-nim" class="text-left"></h5></div>
                       </div>
 
-		              <div class="form-group">
+		              <div class="form-group" id="form-group-nama">
 		                <label class="col-sm-2">Nama</label>
 		                <div class="col-sm-10">
-		                  <input type="text" class="form-control" name="nama" id="nama">
+		                  <input type="text" class="form-control" name="nama" id="input-nama1">
 		                </div>
 		              </div>
 
-		              <div class="form-group">
+		              <div class="form-group" id="form-group-prodi">
 		                <label class="col-sm-2">Prodi</label>
 		                <div class="col-sm-10">
 		                  <select class="form-control select2" style="width: 100%;" name="prodi">
@@ -49,17 +49,17 @@
 		                </div>
 		              </div>
 
-		              <div class="form-group">
+		              <div class="form-group" id="form-group-kelas">
 		                <label class="col-sm-2">Kelas</label>
 		                <div class="col-sm-10">
-		                  <input type="text" class="form-control" name="kelas" id="kelas">
+		                  <input type="text" class="form-control" name="kelas" id="input-kelas">
 		                </div>
 		              </div>
 
-		              <div class="form-group">
+		              <div class="form-group" id="form-group-email">
 		                <label class="col-sm-2">Email</label>
 		                <div class="col-sm-10">
-		                  <input type="text" class="form-control" name="email" id="email">
+		                  <input type="text" class="form-control" name="email" id="input-email1">
 		                </div>
 		              </div>
 
@@ -67,7 +67,7 @@
 
 		              <div class="form-group">
 		                <div class="col-sm-offset-2 col-sm-10">
-		                  <input type="submit" name="submit" value="Submit" class="btn btn-primary pull-left" id="button-nim-submit">
+		                  <input type="submit" name="submit" value="Submit" class="btn btn-primary pull-left" id="button-nim-submit" disabled>
 		                </div>
 		              </div>
 
