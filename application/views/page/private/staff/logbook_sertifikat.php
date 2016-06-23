@@ -33,7 +33,7 @@
                                 <th align="center">Penyelenggara</th>
                                 <th align="center">Tingkat Kompetisi</th>
                                 <th align="center" style="width: 100px">Waktu Lomba</th>
-                                <th align="center" style="width: 120px">Link Google Drive</th>
+                                <th align="center" style="width: 120px">Unduh Berkas</th>
                                 <th align="center" style="width: 100px">Aksi</th>
                               </tr>
                             </thead>
@@ -48,7 +48,7 @@
                                   <td><?php echo $r->tingkat_kompetisi; ?></td>
                                   <td><?php echo $r->waktu_lomba; ?></td>
                                   <td>
-                                    <a href="#">
+                                    <a href="<?php echo base_url('sertifikat/download/'.$r->drive_id) ?>">
                                         <button class="btn btn-info btn-xs pull-left">
                                             <i class="fa fa-list"></i> &nbsp;Unduh
                                         </button>

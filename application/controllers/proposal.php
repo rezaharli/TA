@@ -90,36 +90,44 @@ class Proposal extends Private_Controller {
             $ext        = end($tmp);
             $filename   = $pengaju.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
 
+            if ( ! file_exists($this->config_upload['upload_path'])) {
+               mkdir($this->config_upload['upload_path'], 0777, true);
+            }
+
             $this->load->library('upload', $this->config_upload);
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($this->form_validation->run() !== FALSE) {
-                    $data = array(
-                        'id_pengajuan_proposal_mahasiswa' => $pengaju,
-                        'kategori_kompetisi'    => $this->input->post('kategori_kompetisi'),
-                        'tujuan_kompetisi'      => $this->input->post('tujuan_kompetisi'),
-                        'sasaran_kompetisi'     => $this->input->post('sasaran_kompetisi'),
-                        'tanggal_kompetisi'     => $this->input->post('tanggal_kompetisi'),
-                        'tempat_kompetisi'      => $this->input->post('tempat_kompetisi'),
-                        'anggaran_biaya'        => $this->input->post('anggaran_biaya'),
-                        'nama_tim'              => $this->input->post('nama_tim'),
-                        'pembimbing'            => $this->input->post('pembimbing'),
-                        'waktu_upload'          => date('Y-n-j h:i:s'),
-                        'file'                  => $filename
-                    );
-                    
-                    $id_upload_proposal = $this->proposal_lomba_model->insert($data);
-                    $this->session->set_userdata('id_proposal', $id_upload_proposal);
-                    
+                                        
                     if ($this->upload->do_upload($nama_input_file)) {
                         $upload_data = $this->upload->data();
                         $upload_data['orig_name'] = $filename;
-                        $this->upload_proposal_to_drive($upload_data);
+
+                        $created_file = $this->upload_proposal_to_drive($upload_data);
                         unlink($upload_data['full_path']);
+                        
+                        $data = array(
+                            'id_pengajuan_proposal_mahasiswa' => $pengaju,
+                            'kategori_kompetisi'    => $this->input->post('kategori_kompetisi'),
+                            'tujuan_kompetisi'      => $this->input->post('tujuan_kompetisi'),
+                            'sasaran_kompetisi'     => $this->input->post('sasaran_kompetisi'),
+                            'tanggal_kompetisi'     => $this->input->post('tanggal_kompetisi'),
+                            'tempat_kompetisi'      => $this->input->post('tempat_kompetisi'),
+                            'anggaran_biaya'        => $this->input->post('anggaran_biaya'),
+                            'nama_tim'              => $this->input->post('nama_tim'),
+                            'pembimbing'            => $this->input->post('pembimbing'),
+                            'waktu_upload'          => date('Y-n-j h:i:s'),
+                            'file'                  => $filename,
+                            'drive_id'              => $created_file->id
+                        );
+                    
+                        $id_upload_proposal = $this->proposal_lomba_model->insert($data);
+                        $this->session->set_userdata('id_proposal', $id_upload_proposal);
+
                         $this->session->set_userdata('notif_upload', true);
                     }else{
+                        echo $this->upload->display_errors();
                         $this->session->set_userdata('notif_upload', false);    
                     }
-                    
                     $this->load_page('page/private/mahasiswa/upload_tim', $data); 
                 } else {
                     $this->upload_pengajuan();
@@ -136,28 +144,14 @@ class Proposal extends Private_Controller {
 
     function upload_proposal_to_drive($upload_data){
         $this->load->library('google_drive');
-        $client = new Google_Client();
-        $client_email = 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
-        $private_key = file_get_contents(APPPATH.'libraries/hmmmm-4c2bd9a777d8.p12');
-        $scopes = array('https://www.googleapis.com/auth/drive');
-        $credentials = new Google_Auth_AssertionCredentials(
-            $client_email,
-            $scopes,
-            $private_key
-        );
-        $client->setAssertionCredentials($credentials);
-        $service = new Google_Service_Drive($client);
+        $this->config->load('google_drive');
 
-        $file = new Google_Service_Drive_DriveFile();
-        $folderId = '0B38ZX0d3LMfBTHhYczEwR0RBU2M';
-        $file->name = $upload_data['orig_name'];
-        $file->parents = array($folderId);
-        $data = file_get_contents($upload_data['full_path']);
-        $createdFile = $service->files->create($file, array(
-            'data' => $data,
-            'mimeType' => $upload_data['file_type'],
-            'uploadType' => 'media'
-        ));
+        return $this->google_drive->insertFile(
+            $upload_data['orig_name'], 
+            $upload_data['file_type'], 
+            $this->config->item('proposal_lomba_folder_id'), 
+            $upload_data['full_path']
+            );
 
         $this->session->set_userdata('notif_upload', true);
     }
@@ -175,8 +169,6 @@ class Proposal extends Private_Controller {
 
         $id_pengajuan = $this->input->get('id_pengajuan');
         $user         = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-
-        
         
         $this->load->library('upload', $this->config_upload);
         $data = array(
@@ -189,7 +181,7 @@ class Proposal extends Private_Controller {
             'tempat_kompetisi'                  => $this->input->post('tempat_kompetisi'),
             'anggaran_biaya'                    => $this->input->post('anggaran_biaya'),
             'nama_tim'                          => $this->input->post('nama_tim'),
-            'waktu_upload'                      => date('Y-n-j h:i:s'),
+            'waktu_upload'                      => date('Y-n-j h:i:s')
         );
 
         if($data['kategori_kompetisi'] != null){
@@ -197,28 +189,36 @@ class Proposal extends Private_Controller {
             $ext        = end($tmp);
             $filename   = sha1($_FILES['file_pengajuan']['name']).'.'.$ext; 
 
+            if ( ! file_exists($this->config_upload['upload_path'])) {
+               mkdir($this->config_upload['upload_path'], 0777, true);
+            }
+
             $data['file'] = $filename;
 
             $this->session->set_userdata('id_pengajuan', $id_pengajuan);
             $data['file'] = $filename;
-            $id_upload_proposal = $this->proposal_lomba_model->insert($data);
-            $this->session->set_userdata('id_proposal', $id_upload_proposal);
 
             if ($this->upload->do_upload($nama_input_file)) {
                 $upload_data = $this->upload->data();
                 $upload_data['orig_name'] = $filename;
-                $this->upload_proposal_to_drive($upload_data);
+
+                $created_file = $this->upload_proposal_to_drive($upload_data);
                 unlink($upload_data['full_path']);
+
+                $data['drive_id'] = $created_file->id;
+                $id_upload_proposal = $this->proposal_lomba_model->insert($data);
+                $this->session->set_userdata('id_proposal', $id_upload_proposal);
+
                 $this->session->set_userdata('notif_upload', true);
             } else{
-                $this->session->set_userdata('notif_upload', false);    
+                die($this->upload->display_errors()); 
             }
 
             //gawe nampilno status
             $this->session->set_flashdata(array('status' => true));
             $this->load_page('page/private/mahasiswa/upload_tim', $data);  
         } else {
-            $this->load_page('page/private/mahasiswa/upload_tim');
+            $this->load_page('page/private/mahasiswa/upload_tim', $data); 
         }
         
     }
