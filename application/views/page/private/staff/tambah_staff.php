@@ -24,19 +24,19 @@
                     
                     <div class="box-body">
                         <div id="form-group-nip" class="form-group">
-                          <label>NIP</label>            
+                          <label>NIP*</label>            
                           <input type="text" class="form-control" id="input-nip" name="nip">
                           <h5 id="status-nip" class="text-left"></h5>
                         </div>
-                        <div class="form-group">
-                            <label>Nama</label>
-                            <div>
-                                <input type="text" class="form-control" placeholder="Nama" name="nama">
-                            </div>
+                        <div class="form-group" id="form-group-nama">
+                            <label>Nama*</label>
+                            <input type="text" class="form-control" placeholder="Nama" onblur="cekinput()" id="input-nama" name="nama">
+                            <h5 id="status-nama" class="text-left"></h5>
                         </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="text" class="form-control" placeholder="Email" name="email">
+                        <div class="form-group " id="form-group-email">
+                            <label>Email*</label>
+                            <input type="text" class="form-control" placeholder="Email" id="input-email" name="email">
+                            <h5 id="status-email" class="text-left"></h5>
                         </div>
                         <div class="form-group">
                             <input type="hidden" class="form-control" placeholder="role" name="role" value="staff">
@@ -55,19 +55,19 @@
                     </div><!-- /.box-header -->
                     
                     <div class="box-body">
-                        <div class="form-group">
-                            <label>Jenis Staff</label>
-                            <select class="form-control select2" style="width: 100%;" name="jenisstaff">
+                        <div class="form-group" id="form-group-staff">
+                            <label>Jenis Staff*</label>
+                            <select class="form-control select2" style="width: 100%;" name="jenisstaff" id="input-staff">
                                 <option selected="selected" disabled="">Jenis Staff</option>
                                 <option value="staff_admin">Staff Admin</option>
                                 <option value="staff_kemahasiswaan">Staff Kemahasiswaan</option>
                             </select>
                         </div>
-                        
+                        <b><small>*harus diisi</small></b>
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
-                        <input type="submit" value="Submit" class="btn btn-primary" id="button-nip-submit" disabled>
+                        <input type="submit" value="Submit" class="btn btn-primary button-submit" id="button-submit" disabled>
                     </div>
                 </div>
             </div>
@@ -79,3 +79,5 @@
 
 <!-- cek nip -->
 <script src="<?php echo base_url() ?>assets/js/cek_username.js"></script>
+<!-- cek input kosong -->
+<script src="<?php echo base_url() ?>assets/js/cek_kosong.js"></script>

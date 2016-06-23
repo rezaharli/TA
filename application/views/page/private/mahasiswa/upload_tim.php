@@ -35,7 +35,7 @@ $(function() {
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Sertifikat Lomba
+      Ajukan Tim
       <small><?php echo $nama ?></small>
     </h1>
     <ol class="breadcrumb">

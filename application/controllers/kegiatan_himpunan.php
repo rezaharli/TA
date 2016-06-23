@@ -129,11 +129,9 @@ class Kegiatan_himpunan extends Private_Controller{
             );
             
         }
-
         $files[] = $this->phpword->generateSertifikat('assets/doc_template/'.$template_name, $data);
-
         $this->load->library('zip');
-        $this->zip->read_dir('assets/sertifikat/PESERTA/'.$acara->nama_acara."_".$acara->id, FALSE);
+        $this->zip->read_dir('assets/sertifikat/'.$acara->nama_acara."_".$acara->id, FALSE);
         $this->zip->download($acara->nama_acara."_".$acara->id);
 
     }
@@ -164,7 +162,7 @@ class Kegiatan_himpunan extends Private_Controller{
         $files[] = $this->phpword->generateSertifikat('assets/doc_template/'.$template_name, $data);
 
         $this->load->library('zip');
-        $this->zip->read_dir('assets/sertifikat/PANITIA/'.$acara->nama_acara."_".$acara->id, FALSE);
+        $this->zip->read_dir('assets/sertifikat/'.$acara->nama_acara."_".$acara->id, FALSE);
         $this->zip->download($acara->nama_acara."_".$acara->id);
     }
 }

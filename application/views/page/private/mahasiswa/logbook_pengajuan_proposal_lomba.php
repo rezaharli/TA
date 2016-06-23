@@ -30,8 +30,8 @@
                                 <th align="center" style="width: 10px">No</th>
                                 <th align="center">Nama Event</th>
                                 <th align="center" style="width: 100px">Tanggal Kompetisi</th>
-                                <th align="center" style="width: 100px">Waktu Pengajuan</th>
                                 <th align="center" style="width: 100px">Tanggal Upload</th>
+                                <th align="center" style="width: 100px">Waktu Pengajuan</th>
                                 <th align="center" >Nama Tim</th>
                                 <th align="center" style="width: 25px">Status</th>
                                 <th align="center" style="width: 100px">Aksi</th>

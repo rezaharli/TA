@@ -120,4 +120,8 @@ class Profil extends Private_Controller {
         redirect('profil/'.$user->username);
     }
 
+    function show_profile($username){
+        $this->load_page('');
+    }
+
 }
