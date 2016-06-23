@@ -7,11 +7,7 @@
     <h1>
       Tambah event
     </h1>
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="#">Forms</a></li>
-      <li class="active">General Elements</li>
-    </ol>
+    <?php echo $breadcrumb ?>
   </section>
 
   <!-- Main content -->
@@ -26,7 +22,7 @@
               <div class="form-group">
                 <label class="col-sm-3 control-label">Nama Kompetisi</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" name="nama" required placeholder="Nama Kompetisi" />
+                  <input type="text" class="form-control" name="nama" placeholder="Nama Kompetisi" required title="Harus Diisi" />
                 </div>
               </div>
 
