@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Logbook Pengajuan</li>
+            <li class="active">Daftar Pengajuan</li>
         </ol>
     </section>
 
@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <th align="center">Pengaju</th>
                                 <th align="center" style="width: 125px">Judul Proposal</th>
                                 <th align="center" style="width: 35px">Tanggal Pengajuan</th>
-                                <th align="center" style="width: 35px">Tanggal Upload Terakhir</th>
+                                <th align="center" style="width: 35px">Tanggal Unggah Terakhir</th>
                                 <th align="center">Status</th>
                                 <th align="center">Penanggung Jawab</th>
                                 <th align="center">Aksi</th>
@@ -82,12 +82,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <?php if ($proposal['status_approve'] == 'n' || $proposal['status_approve'] == null) { ?>
                                       &nbsp;
                                       <a href="<?php echo base_url('proposal_himpunan/upload_lpj?id_pengajuan='.$proposal['id']); ?>">
-                                        <button class="btn btn-sm btn-info" disabled><i class="fa fa-upload"></i>&nbsp;Upload LPJ</button>
+                                        <button class="btn btn-sm btn-info" disabled><i class="fa fa-upload"></i>&nbsp;Unggah LPJ</button>
                                       </a>
                                     <?php } else { ?>
                                       &nbsp;
                                       <a href="<?php echo base_url('proposal_himpunan/upload_lpj?id_pengajuan='.$proposal['id']); ?>">
-                                        <button class="btn btn-sm btn-info"><i class="fa fa-upload"></i>&nbsp;Upload LPJ</button>
+                                        <button class="btn btn-sm btn-info"><i class="fa fa-upload"></i>&nbsp;Unggah LPJ</button>
                                       </a>
                                     <?php } ?>
                                     </td>
@@ -128,9 +128,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php 
         if(!empty($this->session->userdata('notif_upload'))){
           if ($this->session->userdata('notif_upload')) {
-              echo 'alert("Upload pengajuan proposal berhasil")';
+              echo 'alert("Unggah pengajuan proposal berhasil")';
           } else {
-              echo 'alert("Upload pengajuan proposal gagal")';
+              echo 'alert("Unggah pengajuan proposal gagal")';
           }
           $this->session->unset_userdata('notif_upload');
         }

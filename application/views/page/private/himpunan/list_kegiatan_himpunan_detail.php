@@ -15,7 +15,7 @@
       </h1>
       <ol class="breadcrumb">
             <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="<?php echo base_url('kegiatan_himpunan/list_kegiatan'); ?>">List Kegiatan Himpunan</a></li>
+            <li><a href="<?php echo base_url('kegiatan_himpunan/list_kegiatan'); ?>">Daftar Kegiatan Himpunan</a></li>
             <li class="active">Detail Kegiatan Himpunan <?php echo $nama_acara ?></li>
         </ol>
   </section>
@@ -98,6 +98,7 @@
                           <tr>
                             <th>No</th>
                             <th>Nama Peserta</th>
+                            <th>Email</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -106,6 +107,7 @@
                             <tr>
                               <td><?php echo $i; ?></td>
                               <td><?php echo $peserta['nama']; ?></td>
+                              <td><?php echo $peserta['email']; ?></td>
                             </tr>
                           <?php $i++; ?>
                           <?php endforeach; ?> 
