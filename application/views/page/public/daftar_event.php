@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-5">
                 <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a>
+                    <li><a href="<?php echo base_url() ?>">Home</a>
                     </li>
                     <li>Daftar - <?php echo $event['nama'] ?></li>
                 </ul>

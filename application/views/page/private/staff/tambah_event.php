@@ -71,7 +71,7 @@
                 <label class="col-sm-3 control-label">Bukti Event</label>
                 <div class="col-sm-9">
                   <input type="file" id="bukti_event" name="bukti_event" required="true">
-                  *Poster/Screenshot web lomba maksimal 2 mb (.jpg/.png)
+                  *Poster/Screenshot web lomba(.jpg/.png)
                 </div>
               </div>
 
