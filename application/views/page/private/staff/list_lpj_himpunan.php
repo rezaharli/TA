@@ -46,7 +46,7 @@
                                       <a href="<?php echo base_url('proposal_himpunan/detail_lpj?id_lpj='.$lpj['id']); ?>">
                                         <button class="btn btn-sm btn-info"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
                                       </a>
-                                      <a href="#">
+                                      <a href="<?php echo base_url('proposal_himpunan/download/'.$lpj['drive_id']) ?>">
                                         <button class="btn btn-sm btn-info pull-right"><i class="fa fa-download"></i>&nbsp;Download</button>
                                       </a>
                                     </td>

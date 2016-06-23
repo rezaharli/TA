@@ -58,7 +58,7 @@
                                           <span class="label label-danger">Ditolak</span></td>
                                         <?php } ?> 
                                     <td style="width: 185px;">
-                                      <a href="<?php echo base_url('download/download'); ?>">
+                                      <a href="<?php echo base_url('proposal_mahasiswa/download/'.$proposal['drive_id']); ?>">
                                         <button class="btn btn-info btn-xs"><i class="fa fa-download"></i>&nbsp;Download</button>
                                       </a>
                                       <a href="<?php echo base_url('proposal_mahasiswa/detail_proposal?id_proposal='.$proposal['id']); ?>">
