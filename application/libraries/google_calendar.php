@@ -11,7 +11,7 @@ class Google_calendar {
 
     	$client_email 	= 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
         $private_key 	= file_get_contents(APPPATH.'libraries/hmmmm-e411eec713f8.p12');
-        $scopes 		= array('https://www.googleapis.com/auth/serviceendar');
+        $scopes 		= array('https://www.googleapis.com/auth/calendar');
 
         $config = new Google_Config();
 		$config->setClassConfig('Google_Cache_File', array('directory' => '../../tmp/google/cache'));
@@ -49,7 +49,7 @@ class Google_calendar {
 
 		$events = $this->service->events->listEvents(self::CALENDAR_ID, $params); 
 
-		$serviceendar_datas = array();
+		$calendar_datas = array();
 
 		foreach ($events->getItems() as $event) {
 
@@ -74,10 +74,10 @@ class Google_calendar {
 	 		$result->google_url			= $event->htmlLink;
 	 		$result->url				= base_url('event?id='.$event->id);
 
- 		 	array_push($serviceendar_datas, $result);
+ 		 	array_push($calendar_datas, $result);
 
 	    }
-	    return $serviceendar_datas;
+	    return $calendar_datas;
 	}
 
 	function update($id, $summary, $start, $end = null, $col_id = null){
