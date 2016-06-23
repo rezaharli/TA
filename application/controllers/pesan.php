@@ -85,7 +85,7 @@ class Pesan extends Private_Controller {
                 $profil = $this->user_model->get_by(array('id' => $p->asal));
 
                 $this->load->view('page/private/template/message', array('pesan' => $p, 'profil' => $profil));
-            }
+            } 
         }
 
     }
