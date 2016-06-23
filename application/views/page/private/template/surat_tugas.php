@@ -87,17 +87,19 @@
                 <td>Kategori Lomba</td>
               </tr>
               <tr>
-                <td rowspan="<?php echo count($proposal->tim) ?>"><?php echo $proposal->nama_tim ?></td>
-                <td><?php echo $proposal->tim[0]->mahasiswa->nama ?></td>
-                <td><?php echo $proposal->tim[0]->nim_anggota ?></td>
-                <td rowspan="<?php echo count($proposal->tim) ?>"><?php echo $proposal->lengkap->pembimbing ?></td>
-                <td rowspan="<?php echo count($proposal->tim) ?>"><?php echo $proposal->nama_event ?></td>
-                <td rowspan="<?php echo count($proposal->tim) ?>"><?php echo $proposal->kategori_kompetisi ?></td>
-                <?php for ($i=1; $i < count($proposal->tim); $i++) { ?>
-                  <tr>
-                    <td><?php echo $proposal->tim[$i]->mahasiswa->nama ?></td>
-                    <td><?php echo $proposal->tim[$i]->nim_anggota ?></td>
-                  </tr>
+                <?php if (count($proposal->tim) > 0 ) { ?>
+                  <td rowspan="<?php echo count($proposal->tim) ?>"><?php echo $proposal->nama_tim ?></td>
+                  <td><?php echo $proposal->tim[0]->mahasiswa->nama ?></td>
+                  <td><?php echo $proposal->tim[0]->nim_anggota ?></td>
+                  <td rowspan="<?php echo count($proposal->tim) ?>"><?php echo $proposal->lengkap->pembimbing ?></td>
+                  <td rowspan="<?php echo count($proposal->tim) ?>"><?php echo $proposal->nama_event ?></td>
+                  <td rowspan="<?php echo count($proposal->tim) ?>"><?php echo $proposal->kategori_kompetisi ?></td>
+                  <?php for ($i=1; $i < count($proposal->tim); $i++) { ?>
+                    <tr>
+                      <td><?php echo $proposal->tim[$i]->mahasiswa->nama ?></td>
+                      <td><?php echo $proposal->tim[$i]->nim_anggota ?></td>
+                    </tr>
+                  <?php } ?>
                 <?php } ?>
               </tr>
             </tbody>
