@@ -14,8 +14,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan'); ?>">Logbook Pengajuan</a></li>
-            <li class="active">Detail Logbook Pengajuan</li>
+            <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan'); ?>">Daftar Pengajuan</a></li>
+            <li class="active">Detail Daftar Pengajuan</li>
         </ol>
     </section>
     <!-- Main content -->
@@ -39,8 +39,8 @@
                               <tr>
                                 <th>No</th>
                                 <th>Judul Proposal</th>
-                                <th>Tanggal Upload</th>
-                                <th>Status Approve</th>
+                                <th>Tanggal Unggah</th>
+                                <th>Status</th>
                                 <th align="center">Aksi</th>
                               </tr>
                             </thead>

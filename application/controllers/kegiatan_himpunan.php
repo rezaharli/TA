@@ -12,6 +12,7 @@ class Kegiatan_himpunan extends Private_Controller{
         // load models
         $this->load->model('user_model');
         $this->load->model('himpunan_model');
+        $this->load->model('mahasiswa_model');
         $this->load->model('kegiatan_himpunan_model');
         $this->load->model('proposal_himpunan_model');
         $this->load->model('pengajuan_proposal_himpunan_model');
@@ -69,7 +70,8 @@ class Kegiatan_himpunan extends Private_Controller{
         $data['pesertas'] = array();
         foreach ($pesertas as $peserta) {
             array_push($data['pesertas'], array(
-                'nama' => $peserta->nama
+                'nama'  => $peserta->nama,
+                'email' => $peserta->email
             ));
         }
 
@@ -111,28 +113,61 @@ class Kegiatan_himpunan extends Private_Controller{
         $this->load_page('page/private/himpunan/cetak_sertifikat_himpunan', $data);
     }
 
-    function do_cetak_sertifikat($id_acara){
+    function do_cetak_sertifikat_peserta($id_acara){
         $this->load->library('phpword');
 
         $pesertas = $this->peserta_model->get_many_by(array('id_acara' => $id_acara));
 
-        $acara = $this->acara_himpunan_model->get_by('id', $id_acara);
+        $acara = $this->acara_himpunan_model->get_acara_with_pengaju($id_acara);
 
         $files = array();
-
+        $template_name = strtolower($acara->nama).".docx";
         foreach ($pesertas as $peserta) {
             $data = array(
-                'nama'          => $peserta->nama,
-                'nama_acara'    => $acara->nama_acara,
-                'id_acara'      => $acara->id,
-                'tanggal_acara' => $acara->tanggal_acara
+                'nama' => $peserta->nama,
+                'nama_acara' => $acara->nama_acara,
+                'id_acara' => $acara->id,
+                'tanggal_acara' => $acara->tanggal_acara,
+                'sebagai' => 'PESERTA'
             );
-            $files[] = $this->phpword->generateSertifikat('assets/doc_template/sertifikat.docx', $data);
+            
         }
-
+        $files[] = $this->phpword->generateSertifikat('assets/doc_template/'.$template_name, $data);
         $this->load->library('zip');
-        $this->zip->read_dir('assets/sertifikat/'.$acara->nama_acara."_".$acara->id, FALSE); 
+        $this->zip->read_dir('assets/sertifikat/'.$acara->nama_acara."_".$acara->id, FALSE);
         $this->zip->download($acara->nama_acara."_".$acara->id);
 
+    }
+
+    function do_cetak_sertifikat_panitia($id_acara){
+        $this->load->library('phpword');
+
+        $panitias = $this->panitia_model->get_many_by(array('id_acara' => $id_acara));
+
+        $acara = $this->acara_himpunan_model->get_acara_with_pengaju($id_acara);
+
+        $files = array();
+        $template_name = strtolower($acara->nama).".docx";
+        foreach ($panitias as $panitia) {
+            $mahasiswa = $this->mahasiswa_model->get_by(array('nim' => $panitia->nim));
+            $user = $this->user_model->get_by(array('id' => $mahasiswa->id_user));
+
+            $data = array(
+                'nama'          => $user->nama,
+                'nama_acara'    => $acara->nama_acara,
+                'id_acara'      => $acara->id,
+                'tanggal_acara' => $acara->tanggal_acara,
+                'sebagai'       => 'PANITIA'
+            );
+
+
+            
+        }
+        echo print_r($data); die();
+        
+        $files[] = $this->phpword->generateSertifikat('assets/doc_template/'.$template_name, $data);
+        $this->load->library('zip');
+        $this->zip->read_dir('assets/sertifikat/'.$acara->nama_acara."_".$acara->id, FALSE);
+        $this->zip->download($acara->nama_acara."_".$acara->id);
     }
 }

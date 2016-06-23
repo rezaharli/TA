@@ -29,7 +29,7 @@ $(function() {
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Upload Proposal Pengajuan</li>
+            <li class="active">Unggah Proposal Pengajuan</li>
         </ol>
     </section>
 
@@ -109,12 +109,12 @@ $(function() {
                             </div>
                         
                             <div class="form-group">
-                                <label>Upload Pengajuan Proposal (pdf, doc, docx) *</label>
+                                <label>File Pengajuan Proposal (pdf, doc, docx) *</label>
                                 <input type="file" class="form-control" id="file" name="file_pengajuan" required>
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit &nbsp;<i class="fa fa-cloud-upload"></i></button>
+                            <button type="submit" class="btn btn-primary">Unggah &nbsp;<i class="fa fa-cloud-upload"></i></button>
                         </div>
                     </div>
                 </div>
@@ -128,9 +128,9 @@ $(function() {
 <?php
     if(!empty($this->session->userdata('notif_upload'))){
         if ($this->session->userdata('notif_upload')) {
-            echo 'alert("Upload LPJ berhasil")';
+            echo 'alert("Unggah LPJ berhasil")';
         } else {
-            echo 'alert("Upload LPJ gagal")';
+            echo 'alert("Unggah LPJ gagal")';
         }
         $this->session->unset_userdata('notif_upload');
     }
