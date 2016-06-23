@@ -12,7 +12,7 @@
             Daftar Kegiatan Himpunan
             <small><?php echo $himpunan->nama ?></small>
             <small><?php echo $this->session->flashdata('error'); ?></small>
-            
+
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -42,18 +42,19 @@
                                   <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $kegiatan['nama_kegiatan']; ?></td>
-                                    <td><?php echo $kegiatan['tanggal_pelaksanaan']; ?></td>  
+                                    <td><?php echo $kegiatan['tanggal_pelaksanaan']; ?></td>
                                     <td><?php echo $kegiatan['tempat_kegiatan']; ?></td>
                                     <td>
                                       <a href="<?php echo base_url('kegiatan_himpunan/detail_kegiatan?id_acara='.$kegiatan['id_pengajuan_proposal']); ?>">
                                         <button class="btn btn-sm btn-info pull-left"><i class="fa fa-list"></i>&nbsp; Lihat Detail</button>
                                       </a>
                                       &nbsp;
-                                      <a class="btn btn-sm btn-info" href="<?php echo base_url('kegiatan_himpunan/do_cetak_sertifikat')."/".$kegiatan['id_pengajuan_proposal']; ?>"><i class="fa fa-print"></i>&nbsp; Cetak Sertifikat</a>
+                                      <a class="btn btn-sm btn-info" href="<?php echo base_url('kegiatan_himpunan/do_cetak_sertifikat_peserta')."/".$kegiatan['id_pengajuan_proposal']; ?>"><i class="fa fa-users"></i>&nbsp; Cetak Sertifikat Peserta</a>
+                                      <a class="btn btn-sm btn-info" href="<?php echo base_url('kegiatan_himpunan/do_cetak_sertifikat_panitia')."/".$kegiatan['id_pengajuan_proposal']; ?>"><i class="fa fa-user"></i>&nbsp; Cetak Sertifikat Panitia</a>
                                     </td>
                                   </tr>
                                 <?php $i++; ?>
-                                <?php endforeach; ?> 
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div><!-- /.box-body -->

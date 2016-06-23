@@ -29,8 +29,8 @@ $(function() {
         </h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url('home') ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan'); ?>">Logbook Pengajuan</a></li>
-            <li class="active">Upload LPJ</li>
+            <li><a href="<?php echo base_url('proposal_himpunan/logbook_pengajuan'); ?>">Daftar Pengajuan</a></li>
+            <li class="active">Unggah LPJ</li>
         </ol>
     </section>
 
@@ -118,12 +118,12 @@ $(function() {
                             </div>
                         
                             <div class="form-group">
-                                <label>Upload LPJ (pdf, doc, docx) *</label>
+                                <label>File LPJ (pdf, doc, docx) *</label>
                                 <input type="file" class="form-control" id="file" name="file_lpj" required>
                             </div><!-- /.box-body -->
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit &nbsp;<i class="fa fa-cloud-upload"></i></button> 
+                            <button type="submit" class="btn btn-primary">Unggah &nbsp;<i class="fa fa-cloud-upload"></i></button> 
                         </div>
                     </div>
                 </div>
@@ -137,9 +137,9 @@ $(function() {
 <?php
     if(!empty($this->session->userdata('notif_upload'))){
         if ($this->session->userdata('notif_upload')) {
-            echo 'alert("Upload LPJ berhasil")';
+            echo 'alert("Unggah LPJ berhasil")';
         } else {
-            echo 'alert("Upload LPJ gagal")';
+            echo 'alert("Unggah LPJ gagal")';
         }
         $this->session->unset_userdata('notif_upload');
     }

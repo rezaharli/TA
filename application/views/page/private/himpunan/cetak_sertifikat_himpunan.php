@@ -17,7 +17,7 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Kegiatan</a></li>
-            <li class="active">List Kegiatan</li>
+            <li class="active">Daftar Kegiatan</li>
         </ol>
     </section>
 

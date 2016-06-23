@@ -30,7 +30,7 @@ $(function() {
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url('home'); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="<?php echo base_url("proposal_himpunan/detail_pengajuan?id_pengajuan=".$id_pengajuan); ?>">Detail Logbook Pengajuan</a></li>
-            <li class="active">Upload Proposal (Revisi)</li>
+            <li class="active">Unggah Proposal (Revisi)</li>
         </ol>
     </section>
 
@@ -110,12 +110,12 @@ $(function() {
                             </div>
                         
                             <div class="form-group">
-                                <label>Upload Proposal (pdf, doc, docx) *</label>
+                                <label>File Proposal (pdf, doc, docx) *</label>
                                 <input type="file" class="form-control" id="file" name="file_proposal" required>
                             </div><!-- /.box-body -->
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit &nbsp;<i class="fa fa-cloud-upload"></i></button>
+                            <button type="submit" class="btn btn-primary">Unggah &nbsp;<i class="fa fa-cloud-upload"></i></button>
                         </div>
                     </div>
                 </div>
