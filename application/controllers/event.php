@@ -101,6 +101,7 @@ class Event extends Private_Controller {
         $this->load->library('upload', $this->get_upload_config($_FILES['bukti_event']));
 		if ( ! $this->upload->do_upload('bukti_event')) {
 			$error = array('error' => $this->upload->display_errors());
+			var_dump($error);
 		} else {
 			$event 	= $this->google_calendar->insert(
 				$this->input->post('nama'), 
@@ -272,9 +273,7 @@ class Event extends Private_Controller {
 
         $config['upload_path'] 		= './assets/upload/bukti_event';
 		$config['allowed_types'] 	= 'jpg|png';
-		$config['max_size']			= '5000';
-		$config['max_width']  		= '2000';
-		$config['max_height']  		= '2000';
+		$config['max_size']			= '2000';
         $config['file_name']        = $filename;
 
         if ( ! file_exists($config['upload_path'])) {
