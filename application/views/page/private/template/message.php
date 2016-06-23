@@ -16,19 +16,29 @@
             <tr>
               <th style="width:25%">Dari</th>
               <td>
-                <b><?php //echo $kepada; ?></b>
+                <b><?php echo $profil->nama ?></b>
               </td>
             </tr>
             <tr>
               <th>Pesan</th>
               <td>
-                <pre><?php echo $pesan->pesan ?></pre>>
+                <pre><?php echo $pesan->pesan ?></pre>
               </td>
             </tr>
           </table>
 
         </div>
       </div>
+      <div class="modal-footer">
+          <a href="<?php echo base_url('proposal_himpunan/detail_proposal?id_proposal='.$pesan->id_proposal); ?>" class="btn btn-info pull-right" style="margin-left: 5px;"><i class="fa fa-book"></i> Lihat Proposal</a>
+      </div>
     </div>
   </div>
 </div> <!-- /modal -->
+
+<script type="text/javascript">
+    function cekstatus() {
+          var id_pesan = '<?php echo $pesan->id ?>';
+          window.location.href = "<?php base_url(); ?>pesan/cek_status?id_pesan=" + id_pesan;
+    }
+</script> 

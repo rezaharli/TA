@@ -15,10 +15,20 @@ class Sertifikat extends Private_Controller {
     function index (){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
-        $result = $this->bukti_lomba_model->get_many_by(array('pengupload' => $user->username));
+        if($user->role == 'staff') {
+            $sertifikat = $this->bukti_lomba_model->get_many_by(array('rekomendasi' => '0'));
 
-        $data['result']=$result;
-        $this->load_page('page/private/mahasiswa/logbook_sertifikat', $data);
+            $this->load->model('mahasiswa_model');
+            foreach ($sertifikat as $s) {
+                if($s != null) 
+                    $s->pengupload = $this->mahasiswa_model->get_mahasiswa_dan_user_by_nim($s->pengupload);
+            }
+            $data['result'] = $sertifikat;
+            $this->load_page('page/private/staff/logbook_sertifikat', $data);
+        } else {
+            $data['result'] = $this->bukti_lomba_model->get_many_by(array('pengupload' => $user->roled_data->nim));
+            $this->load_page('page/private/mahasiswa/logbook_sertifikat', $data);
+        }
     }
 
     function add (){
@@ -34,7 +44,7 @@ class Sertifikat extends Private_Controller {
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
         $data = array(
-            'pengupload'            => $user->username,
+            'pengupload'            => $user->roled_data->nim,
             'nama_lomba'            => $this->input->post('nama_lomba'),
             'kategori_lomba'        => $this->input->post('kategori_lomba'),
             'tingkat_kompetisi'     => $this->input->post('tingkat_kompetisi'),

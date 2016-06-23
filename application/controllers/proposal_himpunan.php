@@ -503,7 +503,7 @@ class Proposal_himpunan extends Private_Controller{
 
         $this->proposal_himpunan_model->update($id, array('status_approve' => $status, 'penyetuju' => $penyetuju->nip));
 
-        redirect('proposal_himpunan/detail_proposal?id='.$id);
+        redirect('proposal_himpunan/detail_proposal?id_proposal='.$id);
     }
 
     function upload_lpj(){

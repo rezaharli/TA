@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	
 class Pesan extends Private_Controller {
+
 	function __construct() {
 		parent::__construct();
 	    $this->load->model('user_model');
@@ -33,44 +34,42 @@ class Pesan extends Private_Controller {
 
     public function get() {
     	$this->load->library('time_ago');
-    	$user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-
-    	if($user->role == 'mahasiswa'){
-    		$mahasiswa 	= $this->mahasiswa_model->get_by(array('id_user' => $user->id));
-    		$himpunan 	= $this->himpunan_model->get_by(array('id_penanggungjawab' => $mahasiswa->nim));
-    		$pesan 		= $this->pesan_model->get_many_by(array('tujuan' => $himpunan->id));
-
-    		$data['himpunan'] = $mahasiswa->jenis;
-
-    		$data['pesan'] = array();
-    		foreach ($pesan as $p) {
+        $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
+        if($user->role == 'mahasiswa'){
+            $mahasiswa  = $this->mahasiswa_model->get_by(array('id_user' => $user->id));
+            $himpunan   = $this->himpunan_model->get_by(array('id_penanggungjawab' => $mahasiswa->nim));
+            $pesan      = $this->pesan_model->get_many_by(array('tujuan' => $himpunan->id));
+            $data['himpunan'] = $mahasiswa->jenis;
+            $data['pesan'] = array();
+            foreach ($pesan as $p) {
                 $profil = $this->user_model->get_by(array('id' => $p->asal));
-                ?>
-
-                <li class="pesan" id="<?php echo $p->id ?>">
-                    <a data-toggle="modal" href="#" data-target="#tampilkanPesanModal<?php echo $p->id ?>">
-                        <div class="pull-left">
-                            <img src="<?php echo base_url('assets/img/foto-profil/'.$profil->foto_profil)?>" class="img-circle" alt="User Image">
-                        </div>
-                        <h5>
-                            <?php echo $profil->nama ?>
-                            <small class="pull-right"><i class="fa fa-clock-o"></i>&nbsp;<?php echo $this->time_ago->timeAgo($p->waktu) ?>
-                            </small>
-                        </h5>
-                        <p style="width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
-                            <?php echo $p->pesan ?>
-                        </p>
-                    </a>
-                </li>
-
+                
+                if ($p->terbaca == 'n') {
+                    ?>
+                    <li class="pesan" id="<?php echo $p->id ?>" style="background-color: #E9E9E9;">
+                    <?php }else{ ?>
+                    <li class="pesan" id="<?php echo $p->id ?>">
+                    <?php } ?>
+                        <a data-toggle="modal" href="#" data-target="#tampilkanPesanModal<?php echo $p->id ?>" id="cek-status">
+                            <div class="pull-left">
+                                <img src="<?php echo base_url('assets/img/foto-profil/'.$profil->foto_profil)?>" class="img-circle" alt="User Image">
+                            </div>
+                            <h5>
+                                <?php echo $profil->nama ?>
+                                <small class="pull-right"><i class="fa fa-clock-o"></i>&nbsp;<?php echo $this->time_ago->timeAgo($p->waktu) ?>
+                                </small>
+                            </h5>
+                            <p style="width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                                <?php echo $p->pesan ?>
+                            </p>
+                        </a>
+                    </li>     
                 <?php
-        	}
-    	}
-
+            }        
+        }
     }
 
     public function get_modal() {
-        $this->load->library('time_ago');
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
 
         if($user->role == 'mahasiswa'){
@@ -82,6 +81,7 @@ class Pesan extends Private_Controller {
 
             $data['pesan'] = array();
             foreach ($pesan as $p) {
+                $data['profil'] = array();
                 $profil = $this->user_model->get_by(array('id' => $p->asal));
 
                 $this->load->view('page/private/template/message', array('pesan' => $p, 'profil' => $profil));
@@ -96,10 +96,19 @@ class Pesan extends Private_Controller {
     	if($user->role == 'mahasiswa'){
     		$mahasiswa 	= $this->mahasiswa_model->get_by(array('id_user' => $user->id));
     		$himpunan 	= $this->himpunan_model->get_by(array('id_penanggungjawab' => $mahasiswa->nim));
-    		$pesan 		= $this->pesan_model->get_many_by(array('tujuan' => $himpunan->id, 'terbaca' => 'n'));
+    		$pesan 		= $this->pesan_model->get_many_by(array('tujuan' => $himpunan->id));
 
-    		echo $this->pesan_model->count_by(array('tujuan' => $himpunan->id));
+    		echo $this->pesan_model->count_by(array('tujuan' => $himpunan->id, 'terbaca' => 'n'));
     	}
         
+    }
+
+    public function cek_status(){
+        $id_pesan = $this->input->get('id_pesan');
+        $pesan = $this->pesan_model->get($id_pesan);
+
+        if ($pesan->terbaca == 'n') {
+            $this->pesan_model->update($id_pesan, array('terbaca' => 'y'));
+        }
     }
 }
