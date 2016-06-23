@@ -104,7 +104,7 @@ $(function() {
                                 <input type="text" class="form-control" id="anggaran" placeholder="ex : 1000000" name="anggaran_biaya" required>
                             </div>
                             <div class="form-group">
-                                <label>Upload Pengajuan Proposal</label>
+                                <label>Upload Pengajuan Proposal (.pdf/.doc/.docx)</label>
                                 <input type="file" class="form-control" id="file_pengajuan" name="file_pengajuan" required>
                             </div>
                         </div><!-- /.box-body -->

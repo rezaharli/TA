@@ -67,7 +67,7 @@ _________________________________________________________ -->
                     <div class="row">
                         <div class="col-xs-5 contact">
                             <p class="hidden-sm hidden-xs">Kontak kami ke <?php echo APP_EMAIL ?></p>
-                            <p class="hidden-md hidden-lg"><a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                            <p class="hidden-md hidden-lg">Kontak kami ke <?php echo APP_EMAIL ?>
                             </p>
                         </div>
                         <div class="col-xs-7">
@@ -105,8 +105,8 @@ _________________________________________________________ -->
                         <div class="navbar-header">
 
                             <a class="navbar-brand home" href="<?php echo base_url() ?>">
-                                <img src="<?php echo base_url() ?>assets/universal/img/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
-                                <img src="<?php echo base_url() ?>assets/universal/img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
+                                <img src="<?php echo base_url() ?>assets/universal/img/logo-dashboard.png" alt="" class="hidden-xs hidden-sm">
+                                <img src="<?php echo base_url() ?>assets/universal/img/logo-dashboard-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
                             </a>
                             <div class="navbar-buttons">
                                 <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
