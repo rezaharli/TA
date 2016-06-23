@@ -64,7 +64,7 @@
 				                  	<tr>
 					                    <th>Penanggungjawab</th>
 					                    <td>
-					                    	<?php if (isset($penanggungjawab) && $event->status == 'disetujui') { ?>
+					                    	<?php if (isset($penanggungjawab)) { ?>
 					                    		<a href="<?php echo base_url('profil/'.$penanggungjawab->username) ?>"><?php echo $penanggungjawab->nama ?></a>
 					                    	<?php } else { ?>
 					                    		Belum ada penyetuju event.

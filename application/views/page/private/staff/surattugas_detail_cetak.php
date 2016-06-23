@@ -14,7 +14,7 @@
       <div class="row no-print">
         <div class="col-xs-12">
           <a href="<?php echo base_url('proposal/do_cetak?id='.$this->input->get('id')) ?>" target="_blank" class="btn btn-primary">
-            <i class="fa fa-print"></i> Print
+            <i class="fa fa-print"></i> Cetak
           </a>
         </div>
       </div>
