@@ -4,21 +4,21 @@ class Google_calendar {
 	const CALENDAR_ID 	= APP_EMAIL;
 	const TIMEZONE 		= 'Asia/Jakarta';
 
-	private $cal;
+	private $service;
 
     public function __construct() {
         require_once APPPATH.'third_party/Google/google.php';
 
     	$client_email 	= 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
         $private_key 	= file_get_contents(APPPATH.'libraries/hmmmm-e411eec713f8.p12');
-        $scopes 		= array('https://www.googleapis.com/auth/calendar');
+        $scopes 		= array('https://www.googleapis.com/auth/serviceendar');
 
         $config = new Google_Config();
 		$config->setClassConfig('Google_Cache_File', array('directory' => '../../tmp/google/cache'));
 
 		$client = new Google_Client($config);
 
-        $this->cal = new Google_Service_Calendar($client);
+        $this->service = new Google_Service_Calendar($client);
 
         $credentials = new Google_Auth_AssertionCredentials(
             $client_email,
@@ -33,12 +33,12 @@ class Google_calendar {
     }
 
     function delete($id){
-    	$this->cal->events->delete(self::CALENDAR_ID, $id);
+    	$this->service->events->delete(self::CALENDAR_ID, $id);
     }
 
     function insert($summary, $start, $end = null, $col_id){
     	$data = $this->make_data($summary, $start, $end, $col_id);
-		return $this->cal->events->insert(self::CALENDAR_ID, $data);
+		return $this->service->events->insert(self::CALENDAR_ID, $data);
     }
 
 	function get() {
@@ -47,9 +47,9 @@ class Google_calendar {
     		'orderBy' => 'startTime'
 			);
 
-		$events = $this->cal->events->listEvents(self::CALENDAR_ID, $params); 
+		$events = $this->service->events->listEvents(self::CALENDAR_ID, $params); 
 
-		$calendar_datas = array();
+		$serviceendar_datas = array();
 
 		foreach ($events->getItems() as $event) {
 
@@ -74,17 +74,17 @@ class Google_calendar {
 	 		$result->google_url			= $event->htmlLink;
 	 		$result->url				= base_url('event?id='.$event->id);
 
- 		 	array_push($calendar_datas, $result);
+ 		 	array_push($serviceendar_datas, $result);
 
 	    }
-	    return $calendar_datas;
+	    return $serviceendar_datas;
 	}
 
 	function update($id, $summary, $start, $end = null, $col_id = null){
-		$event = $this->cal->events->get(self::CALENDAR_ID, $id);
+		$event = $this->service->events->get(self::CALENDAR_ID, $id);
 
     	$data = $this->make_data($summary, $start, $end);
-		return $this->cal->events->update(self::CALENDAR_ID, $event->getId(), $data);
+		return $this->service->events->update(self::CALENDAR_ID, $event->getId(), $data);
 	}
 
 	private function make_data($summary, $start, $end = null, $col_id = null){

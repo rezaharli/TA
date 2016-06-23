@@ -34,8 +34,6 @@ class Proposal_mahasiswa extends Private_Controller{
             $pengaju 			= $this->user_model->get_by(array('id' => $get_id_mhs->id_user));
             $get_id_staff       = $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
             $penanggungjawab    = ($get_id_staff == null) ? null : $this->user_model->get($get_id_staff->id_user);
-
-            //$count              = $this->lpj_himpunan_model->count_by('id_pengajuan_proposal', $proposal->id);
             
             array_push($data['proposals'], array(
                 'id'                        => $proposal->id_pengajuan,
@@ -70,13 +68,23 @@ class Proposal_mahasiswa extends Private_Controller{
                 'tanggal_kompetisi' => $proposal->tanggal_kompetisi,
                 'nama_tim'			=> $proposal->nama_tim,
                 'pembimbing'		=> $proposal->pembimbing,
-                'status_approve'    => ($proposal->status == null) ? '-' :$proposal->status
+                'status_approve'    => ($proposal->status == null) ? '-' :$proposal->status,
+                'drive_id'          => $proposal->drive_id
             ));
         }        
 
         if ($user->role == 'staff') {
             $this->load_page('page/private/staff/list_proposal_mahasiswa', $data);
         }
+    }
+
+    function download($drive_id){
+
+        $this->load->library('google_drive');
+        $this->config->load('google_drive');
+        $this->load->helper('download');
+
+        $this->google_drive->downloadFile($drive_id);
     }
 
     function detail_proposal(){

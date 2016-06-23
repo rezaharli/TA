@@ -61,9 +61,6 @@ class Kegiatan_himpunan extends Private_Controller{
         $data['tanggal_acara']          = $acara->tanggal_acara;
         $data['deskripsi_acara']        = $acara->deskripsi_acara;
 
-        // var_dump($data);
-        // die;
-
         //menampilkan daftar peserta
         $pesertas = $this->peserta_model->get_many_by(array('id_acara' => $data['id']));
 
@@ -132,11 +129,9 @@ class Kegiatan_himpunan extends Private_Controller{
             );
             
         }
-
         $files[] = $this->phpword->generateSertifikat('assets/doc_template/'.$template_name, $data);
-
         $this->load->library('zip');
-        $this->zip->read_dir('assets/sertifikat/PESERTA/'.$acara->nama_acara."_".$acara->id, FALSE);
+        $this->zip->read_dir('assets/sertifikat/'.$acara->nama_acara."_".$acara->id, FALSE);
         $this->zip->download($acara->nama_acara."_".$acara->id);
 
     }
@@ -161,15 +156,13 @@ class Kegiatan_himpunan extends Private_Controller{
                 'tanggal_acara' => $acara->tanggal_acara,
                 'sebagai'       => 'PANITIA'
             );
-
-
             
         }
-        // echo print_r($data); die();
         
         $files[] = $this->phpword->generateSertifikat('assets/doc_template/'.$template_name, $data);
+
         $this->load->library('zip');
-        $this->zip->read_dir('assets/sertifikat/PANITIA/'.$acara->nama_acara."_".$acara->id, FALSE);
+        $this->zip->read_dir('assets/sertifikat/'.$acara->nama_acara."_".$acara->id, FALSE);
         $this->zip->download($acara->nama_acara."_".$acara->id);
     }
 }

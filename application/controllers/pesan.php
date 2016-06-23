@@ -75,19 +75,17 @@ class Pesan extends Private_Controller {
         if($user->role == 'mahasiswa'){
             $mahasiswa  = $this->mahasiswa_model->get_by(array('id_user' => $user->id));
             $himpunan   = $this->himpunan_model->get_by(array('id_penanggungjawab' => $mahasiswa->nim));
-            if($himpunan){
-                $pesan      = $this->pesan_model->get_many_by(array('tujuan' => $himpunan->id));
+            $pesan      = $this->pesan_model->get_many_by(array('tujuan' => $himpunan->id));
 
-                $data['himpunan'] = $mahasiswa->jenis;
+            $data['himpunan'] = $mahasiswa->jenis;
 
-                $data['pesan'] = array();
-                foreach ($pesan as $p) {
-                    $data['profil'] = array();
-                    $profil = $this->user_model->get_by(array('id' => $p->asal));
+            $data['pesan'] = array();
+            foreach ($pesan as $p) {
+                $data['profil'] = array();
+                $profil = $this->user_model->get_by(array('id' => $p->asal));
 
-                    $this->load->view('page/private/template/message', array('pesan' => $p, 'profil' => $profil));
-                }
-            }
+                $this->load->view('page/private/template/message', array('pesan' => $p, 'profil' => $profil));
+            } 
         }
 
     }
