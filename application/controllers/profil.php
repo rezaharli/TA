@@ -121,7 +121,7 @@ class Profil extends Private_Controller {
     }
 
     function show_profile($username){
-    	$this->load_page('');
+        $this->load_page('');
     }
 
 }
