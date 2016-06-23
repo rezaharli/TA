@@ -66,23 +66,10 @@ class Proposal_himpunan extends Private_Controller{
                 $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
                 $ext        = end($tmp);
                 $filename   = $last_id_pengajuan_proposal.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
-        
-                $data = array(
-                    'id_pengajuan_proposal' => $last_id_pengajuan_proposal,
-                    'judul'                 => $this->input->post('judul'),
-                    'tema_kegiatan'         => $this->input->post('tema_kegiatan'),
-                    'tujuan_kegiatan'       => $this->input->post('tujuan_kegiatan'),
-                    'sasaran_kegiatan'      => $this->input->post('sasaran_kegiatan'),
-                    'tanggal_kegiatan'      => $this->input->post('tanggal_kegiatan'),
-                    'tempat_kegiatan'       => $this->input->post('tempat_kegiatan'),
-                    'bentuk_kegiatan'       => $this->input->post('bentuk_kegiatan'),
-                    'anggaran'              => $this->input->post('anggaran'),
-                    'penutup'               => $this->input->post('penutup'),
-                    'waktu_upload'          => date('Y-n-j h:i:s'),
-                    'file'                  => $filename
-                );
-        
-                $id_proposal = $this->proposal_himpunan_model->insert($data);
+
+                if ( ! file_exists($this->config_upload['upload_path'])) {
+                   mkdir($this->config_upload['upload_path'], 0777, true);
+                }
                 $this->load->library('upload', $this->config_upload);
 
                 if ( ! file_exists($this->config_upload['upload_path'])) {
@@ -92,10 +79,30 @@ class Proposal_himpunan extends Private_Controller{
                 if ($this->upload->do_upload($nama_input_file)) {
                     $upload_data = $this->upload->data();
                     $upload_data['orig_name'] = $filename;
-                    $this->upload_proposal_to_drive($upload_data);
+                    $created_file = $this->upload_proposal_to_drive($upload_data);
                     unlink($upload_data['full_path']);
+        
+                    $data = array(
+                        'id_pengajuan_proposal' => $last_id_pengajuan_proposal,
+                        'judul'                 => $this->input->post('judul'),
+                        'tema_kegiatan'         => $this->input->post('tema_kegiatan'),
+                        'tujuan_kegiatan'       => $this->input->post('tujuan_kegiatan'),
+                        'sasaran_kegiatan'      => $this->input->post('sasaran_kegiatan'),
+                        'tanggal_kegiatan'      => $this->input->post('tanggal_kegiatan'),
+                        'tempat_kegiatan'       => $this->input->post('tempat_kegiatan'),
+                        'bentuk_kegiatan'       => $this->input->post('bentuk_kegiatan'),
+                        'anggaran'              => $this->input->post('anggaran'),
+                        'penutup'               => $this->input->post('penutup'),
+                        'waktu_upload'          => date('Y-n-j h:i:s'),
+                        'file'                  => $filename,
+                        'drive_id'              => $created_file->id
+                    );
+            
+                    $id_proposal = $this->proposal_himpunan_model->insert($data);
+
                     $this->session->set_userdata("notif_upload", true);
                 }else{
+                    // die($this->upload->display_errors());
                     $this->session->set_userdata("notif_upload", false);
                 }
                 redirect('proposal_himpunan/logbook_pengajuan');
@@ -144,31 +151,38 @@ class Proposal_himpunan extends Private_Controller{
                 $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
                 $ext        = end($tmp);
                 $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
-        
-                $data = array(
-                    'id_pengajuan_proposal' => $id_pengajuan,
-                    'judul'                 => $this->input->post('judul'),
-                    'tema_kegiatan'         => $this->input->post('tema_kegiatan'),
-                    'tujuan_kegiatan'       => $this->input->post('tujuan_kegiatan'),
-                    'sasaran_kegiatan'      => $this->input->post('sasaran_kegiatan'),
-                    'tanggal_kegiatan'      => $this->input->post('tanggal_kegiatan'),
-                    'tempat_kegiatan'       => $this->input->post('tempat_kegiatan'),
-                    'bentuk_kegiatan'       => $this->input->post('bentuk_kegiatan'),
-                    'anggaran'              => $this->input->post('anggaran'),
-                    'penutup'               => $this->input->post('penutup'),
-                    'waktu_upload'          => date('Y-n-j h:i:s'),
-                    'file'                  => $filename
-                );
-            
-                $id_proposal = $this->proposal_himpunan_model->insert($data);
+
+                if ( ! file_exists($this->config_upload['upload_path'])) {
+                   mkdir($this->config_upload['upload_path'], 0777, true);
+                }
                 
                 $this->load->library('upload', $this->config_upload);
     
                 if ($this->upload->do_upload($nama_input_file)) {
                     $upload_data = $this->upload->data();
                     $upload_data['orig_name'] = $filename;
-                    $this->upload_proposal_to_drive($upload_data);
+
+                    $created_file = $this->upload_proposal_to_drive($upload_data);
                     unlink($upload_data['full_path']);
+        
+                    $data = array(
+                        'id_pengajuan_proposal' => $id_pengajuan,
+                        'judul'                 => $this->input->post('judul'),
+                        'tema_kegiatan'         => $this->input->post('tema_kegiatan'),
+                        'tujuan_kegiatan'       => $this->input->post('tujuan_kegiatan'),
+                        'sasaran_kegiatan'      => $this->input->post('sasaran_kegiatan'),
+                        'tanggal_kegiatan'      => $this->input->post('tanggal_kegiatan'),
+                        'tempat_kegiatan'       => $this->input->post('tempat_kegiatan'),
+                        'bentuk_kegiatan'       => $this->input->post('bentuk_kegiatan'),
+                        'anggaran'              => $this->input->post('anggaran'),
+                        'penutup'               => $this->input->post('penutup'),
+                        'waktu_upload'          => date('Y-n-j h:i:s'),
+                        'file'                  => $filename,
+                        'drive_id'              => $created_file->id
+                    );
+                
+                    $id_proposal = $this->proposal_himpunan_model->insert($data);
+
                     $this->session->set_userdata('notif_upload', true);
                 }else{
                     $this->session->set_userdata('notif_upload', false);    
@@ -183,31 +197,25 @@ class Proposal_himpunan extends Private_Controller{
     }
 
     function upload_proposal_to_drive($upload_data){
+
         $this->load->library('google_drive');
-        $client = new Google_Client();
-        $client_email = 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
-        $private_key = file_get_contents(APPPATH.'libraries/hmmmm-4c2bd9a777d8.p12');
-        $scopes = array('https://www.googleapis.com/auth/drive');
-        $credentials = new Google_Auth_AssertionCredentials(
-            $client_email,
-            $scopes,
-            $private_key
-        );
-        $client->setAssertionCredentials($credentials);
-        $service = new Google_Service_Drive($client);
+        $this->config->load('google_drive');
 
-        $file = new Google_Service_Drive_DriveFile();
-        $folderId = '0B38ZX0d3LMfBVHgydlRQanRCWXM';
-        $file->name = $upload_data['orig_name'];
-        $file->parents = array($folderId);
-        $data = file_get_contents($upload_data['full_path']);
-        $createdFile = $service->files->create($file, array(
-            'data' => $data,
-            'mimeType' => $upload_data['file_type'],
-            'uploadType' => 'media'
-        ));
+        return $this->google_drive->insertFile(
+            $upload_data['orig_name'], 
+            $upload_data['file_type'], 
+            $this->config->item('proposal_himpunan_folder_id'), 
+            $upload_data['full_path']
+            );
+    }
 
-        $this->session->set_userdata('notif_upload', true);
+    function download($drive_id){
+
+        $this->load->library('google_drive');
+        $this->config->load('google_drive');
+        $this->load->helper('download');
+
+        $this->google_drive->downloadFile($drive_id);
     }
 
     function tambah_acara(){
@@ -421,7 +429,8 @@ class Proposal_himpunan extends Private_Controller{
                 'id_proposal'       => $proposal->id,
                 'judul'             => $proposal->judul,
                 'tanggal_upload'    => $proposal->waktu_upload,
-                'status_approve'    => ($proposal->status_approve == null) ? '-' :$proposal->status_approve
+                'status_approve'    => ($proposal->status_approve == null) ? '-' :$proposal->status_approve,
+                'drive_id'          => $proposal->drive_id
             ));
             $status_approve = $proposal->status_approve;
         }
@@ -546,34 +555,40 @@ class Proposal_himpunan extends Private_Controller{
                 $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
                 $ext        = end($tmp);
                 $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
-    
-            
-                $data = array(
-                    'id_pengajuan_proposal'      => $id_pengajuan,
-                    'judul_laporan'              => $this->input->post('judul_laporan'),
-                    'deskripsi_laporan'          => $this->input->post('deskripsi_laporan'),
-                    'ketercapaian_tujuan'        => $this->input->post('ketercapaian_tujuan'),
-                    'realisasi_sasaran_kegiatan' => $this->input->post('realisasi_sasaran_kegiatan'),
-                    'tanggal_pelaksanaan'        => $this->input->post('tanggal_pelaksanaan'),
-                    'tempat_pelaksanaan'         => $this->input->post('tempat_pelaksanaan'),
-                    'realisasi_kegiatan'         => $this->input->post('realisasi_kegiatan'),
-                    'realisasi_total_anggaran'   => $this->input->post('realisasi_total_anggaran'),
-                    'evaluasi_kegiatan'          => $this->input->post('evaluasi_kegiatan'),
-                    'rekomendasi'                => $this->input->post('rekomendasi'),
-                    'penutup'                    => $this->input->post('penutup'),
-                    'waktu_upload'               => date('Y-n-j h:i:s'),
-                    'file'                       => $filename
-                );
-    
-                $id_lpj = $this->lpj_himpunan_model->insert($data);
+
+                if ( ! file_exists($this->config_upload['upload_path'])) {
+                   mkdir($this->config_upload['upload_path'], 0777, true);
+                }
             
                 $this->load->library('upload', $this->config_upload);
 
                 if ($this->upload->do_upload($nama_input_file)) {
                     $upload_data = $this->upload->data();
                     $upload_data['orig_name'] = $filename;
-                    $this->upload_lpj_to_drive($upload_data);
+
+                    $created_file = $this->upload_lpj_to_drive($upload_data);
                     unlink($upload_data['full_path']);
+            
+                    $data = array(
+                        'id_pengajuan_proposal'      => $id_pengajuan,
+                        'judul_laporan'              => $this->input->post('judul_laporan'),
+                        'deskripsi_laporan'          => $this->input->post('deskripsi_laporan'),
+                        'ketercapaian_tujuan'        => $this->input->post('ketercapaian_tujuan'),
+                        'realisasi_sasaran_kegiatan' => $this->input->post('realisasi_sasaran_kegiatan'),
+                        'tanggal_pelaksanaan'        => $this->input->post('tanggal_pelaksanaan'),
+                        'tempat_pelaksanaan'         => $this->input->post('tempat_pelaksanaan'),
+                        'realisasi_kegiatan'         => $this->input->post('realisasi_kegiatan'),
+                        'realisasi_total_anggaran'   => $this->input->post('realisasi_total_anggaran'),
+                        'evaluasi_kegiatan'          => $this->input->post('evaluasi_kegiatan'),
+                        'rekomendasi'                => $this->input->post('rekomendasi'),
+                        'penutup'                    => $this->input->post('penutup'),
+                        'waktu_upload'               => date('Y-n-j h:i:s'),
+                        'file'                       => $filename,
+                        'drive_id'                   => $created_file->id
+                    );
+        
+                    $id_lpj = $this->lpj_himpunan_model->insert($data);
+                    
                     $this->session->set_userdata('notif_upload', true);
                 }else{
                     $this->session->set_userdata('notif_upload', false);
@@ -589,28 +604,14 @@ class Proposal_himpunan extends Private_Controller{
 
     function upload_lpj_to_drive($upload_data){
         $this->load->library('google_drive');
-        $client = new Google_Client();
-        $client_email = 'hmmmm-359@noted-fact-127906.iam.gserviceaccount.com';
-        $private_key = file_get_contents(APPPATH.'libraries/hmmmm-4c2bd9a777d8.p12');
-        $scopes = array('https://www.googleapis.com/auth/drive');
-        $credentials = new Google_Auth_AssertionCredentials(
-            $client_email,
-            $scopes,
-            $private_key
-        );
-        $client->setAssertionCredentials($credentials);
-        $service = new Google_Service_Drive($client);
+        $this->config->load('google_drive');
 
-        $file = new Google_Service_Drive_DriveFile();
-        $folderId = '0B38ZX0d3LMfBU0pnSXFuZTIzQTg';
-        $file->name = $upload_data['orig_name'];
-        $file->parents = array($folderId);
-        $data = file_get_contents($upload_data['full_path']);
-        $createdFile = $service->files->create($file, array(
-            'data' => $data,
-            'mimeType' => $upload_data['file_type'],
-            'uploadType' => 'media'
-        ));
+        return $this->google_drive->insertFile(
+            $upload_data['orig_name'], 
+            $upload_data['file_type'], 
+            $this->config->item('lpj_folder_id'), 
+            $upload_data['full_path']
+            );
 
         $this->session->set_userdata('notif_upload', true);
     }
@@ -633,7 +634,8 @@ class Proposal_himpunan extends Private_Controller{
                     'id'                => $lpj->id,
                     'pengaju'           => $pengaju->nama,
                     'judul_laporan'     => $lpj->judul_laporan,
-                    'tanggal_upload'    => $lpj->waktu_upload
+                    'tanggal_upload'    => $lpj->waktu_upload,
+                    'drive_id'          => $lpj->drive_id
                     ));
             }
 
@@ -655,7 +657,8 @@ class Proposal_himpunan extends Private_Controller{
                     'pengaju'           => $himpunan->nama,
                     'judul_pengajuan'   => $proposal->judul,
                     'judul_laporan'     => $lpj->judul_laporan,
-                    'tanggal'           => $lpj->waktu_upload
+                    'tanggal'           => $lpj->waktu_upload,
+                    'drive_id'          => $lpj->drive_id
                     ));
             }
 
