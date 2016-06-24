@@ -40,6 +40,7 @@
                                 <th>No</th>
                                 <th>Judul Proposal</th>
                                 <th>Tanggal Unggah</th>
+                                <th>File</th>
                                 <th>Status</th>
                                 <th align="center">Aksi</th>
                               </tr>
@@ -51,6 +52,7 @@
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $proposal['judul']; ?></td>
                                     <td><?php echo $proposal['tanggal_upload']; ?></td>  
+                                    <td><?php echo $proposal['file']; ?></td>
                                     <td>
                                         <?php if ($proposal['status_approve'] == 'y') { ?>
                                           <span class="label label-success">Disetujui</span></td>
