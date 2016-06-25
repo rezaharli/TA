@@ -79,7 +79,7 @@ $(function() {
                             <div class="form-group">
                                 <label>Upload Sertifikat dan Kegiatan lomba</label>
                                 <input type="file" class="form-control" id="bukti_lomba" name="sertifikat1" required="true">
-                                *upload sertifikat dan foto kegiatan minimal 5 foto (.zip/.rar)
+                                *upload sertifikat dan foto kegiatan (.zip/.rar)
                             </div>
 
                             <div class="box-footer">

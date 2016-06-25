@@ -297,22 +297,21 @@ class Auth extends MY_Controller {
 		$this->load->model('user_model');
 		$this->load->model('staff_model');
 
-		$jenisstaff = $this->input->post('jenisstaff');
-		$nip        = $this->input->post('nip');
-		$nama       = $this->input->post('nama');
-		$email      = $this->input->post('email');
-        $role       = $this->input->post('role');
+			$jenisstaff = $this->input->post('jenisstaff');
+			$nip        = $this->input->post('nip');
+			$nama       = $this->input->post('nama');
+			$email      = $this->input->post('email');
+		    $role       = $this->input->post('role');
 
-        $id_user_baru = $this->ion_auth->register($nip, $nip, $email, array('nama' => $nama, 'role' => $role));
+		    $id_user_baru = $this->ion_auth->register($nip, $nip, $email, array('nama' => $nama, 'role' => $role));
 
-        $this->staff_model->insert(
-            array(
-                'nip'       => $nip, 
-                'id_user'   => $id_user_baru['id'], 
-                'jenis'     => $jenisstaff), 
-            FALSE);
-
-        redirect('lists/staff');		
+		    $this->staff_model->insert(
+		        array(
+		            'nip'       => $nip, 
+		            'id_user'   => $id_user_baru['id'], 
+		            'jenis'     => $jenisstaff), 
+		        FALSE);
+		    redirect('lists/staff');	
 	}
 
 	function do_add_mahasiswa(){
