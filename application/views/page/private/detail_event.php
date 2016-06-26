@@ -77,11 +77,67 @@
 								<div class="col-xs-12">
 									<?php if ($jenis_user == 'staff_kemahasiswaan' || $jenis_user == 'kaur') { ?>
 										<?php if ($event->status == null) { ?>
-											<a href="do_edit_status/<?php echo $event->id ?>?s=t" class="btn btn-success pull-left"><i class="fa fa-check"></i> Setuju</button>
-											<a href="do_edit_status/<?php echo $event->id ?>?s=f" class="btn btn-danger pull-left" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
+											<button class="btn btn-success pull-left" data-toggle="modal" data-target="#setujuModal"><i class="fa fa-check"></i> Setuju</button>
+											<button class="btn btn-danger pull-left" style="margin-left: 5px;" data-toggle="modal" data-target="#tolakModal"><i class="fa fa-close"></i> Tolak</button>
+											<!-- modal column -->
+
+									  		 <!-- Setuju Modal -->
+								            <div class="modal fade" id="setujuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								              <div class="modal-dialog center" role="document">
+								                <div class="modal-content">
+								                  <div class="modal-header">
+								                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								                    <h4 class="modal-title" id="myModalLabel">Konfirmasi</h4>
+								                  </div>
+								                  <div class="modal-body">
+								                    Apakah anda ingin <b>menyetujui</b> event ini?
+								                  </div>
+								                  <div class="modal-footer">
+								                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> &nbsp;
+								                    <a href="do_edit_status/<?php echo $event->id ?>?s=t" class="btn btn-success pull-right"><i class="fa fa-check"></i> Setuju</a>
+								                  </div>
+								                </div>
+								              </div>
+								            </div> <!-- /modal -->
+								    <!-- Tolak Modal -->
+								            <div class="modal fade" id="tolakModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								              <div class="modal-dialog center" role="document">
+								                <div class="modal-content">
+								                  <div class="modal-header">
+								                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								                    <h4 class="modal-title" id="myModalLabel">Konfirmasi</h4>
+								                  </div>
+								                  <div class="modal-body">
+								                    Apakah anda ingin <b>menolak</b> event ini?
+								                  </div>
+								                  <div class="modal-footer">
+								                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> &nbsp;
+								                    <a href="do_edit_status/<?php echo $event->id ?>?s=f" class="btn btn-danger pull-right" style="margin-left: 5px;"><i class="fa fa-close"></i> Tolak</a>
+								                  </div>
+								                </div>
+								              </div>
+								            </div> <!-- /modal -->
 										<?php } ?>
-									
-										<a href="<?php echo base_url('event/hapus?id='.$event->id) ?>" class="btn btn-danger pull-right"><i class="fa fa-trash-o"></i> Hapus</a>
+										<?php if ($event->status != 'disetujui') { ?>
+											<button class="btn btn-danger pull-right" data-toggle="modal" data-target="#hapusModal"><i class="fa fa-trash-o"></i> Hapus</button>
+											<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								              <div class="modal-dialog center" role="document">
+								                <div class="modal-content">
+								                  <div class="modal-header">
+								                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								                    <h4 class="modal-title" id="myModalLabel">Konfirmasi</h4>
+								                  </div>
+								                  <div class="modal-body">
+								                    Apakah anda ingin <b>menghapus</b> event ini?
+								                  </div>
+								                  <div class="modal-footer">
+								                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> &nbsp;
+								                    <a href="<?php echo base_url('event/hapus?id='.$event->id) ?>" class="btn btn-danger pull-right" style="margin-left: 5px;"><i class="fa fa-trash-o"></i> Hapus</a>
+								                  </div>
+								                </div>
+								              </div>
+								            </div> <!-- /modal -->
+										<?php } ?>
 									<?php } ?>
 									<a href="<?php echo $event->google_url ?>" target="_blank" class="btn btn-default pull-right" style="margin-right: 5px;">Lihat di google calendar</a>
 								</div>
@@ -163,12 +219,13 @@
             </div><!-- /.col -->
 	  	</div><!-- /.row -->
 	  	<div class="row">
-	  		
 	  	</div>
 	</section><!-- /.content -->
 	
 </div>
 <!-- /.content-wrapper -->
+
+
 
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url('assets/adminlte/plugins/datepicker/bootstrap-datepicker.js'); ?>"></script>

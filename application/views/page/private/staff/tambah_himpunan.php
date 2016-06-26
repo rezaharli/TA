@@ -13,6 +13,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php echo $breadcrumb ?>
     </section>
 
+    <style type="text/css">
+        input:invalid{
+            outline: 1px solid red;
+        }
+        input:focus{
+            color: green;
+        }
+        input[type=text]:valid {
+            outline: 1px solid green;
+        }
+    </style>
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -28,28 +39,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div><!-- /.box-header -->
                     
                     <div class="box-body">
-                        <?php if (!empty(validation_errors())): ?>
-                            <div class="alert alert-danger alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                <h4><i class="icon fa fa-ban"></i> Error!</h4>
-                                <ul>
-                                    <?php echo validation_errors('<li>', '</li>'); ?>
-                                </ul>
-                            </div>
-                        <?php endif; ?>
 
                         <div class="form-group">
                             <label>Nama Himpunan</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Nama Himpunan" name="nama">
+                            <input type="text" class="form-control" id="nama" placeholder="Nama Himpunan" name="nama" required>
 
                         </div>
                         <div class="form-group">
                             <label>Program Studi</label>
-                            <input type="text" class="form-control" id="prodi" placeholder="Program Studi" name="prodi">
+                            <input type="text" class="form-control" id="prodi" placeholder="Program Studi" name="prodi" required>
                         </div>
                         <div class="form-group">
                             <label>Penanggung Jawab</label>
-                            <select class="select2 form-control" name="penanggungjawab"></select>
+                            <select class="select2 form-control" name="penanggungjawab" required></select>
                         </div>
                     </div><!-- /.box-body -->
                     <div class="box-footer">

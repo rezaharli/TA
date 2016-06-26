@@ -11,6 +11,18 @@
 	    <?php echo $breadcrumb ?>
 	</section>
 
+	<style type="text/css">
+        input:invalid{
+            outline: 1px solid red;
+        }
+        input:focus{
+            color: green;
+        }
+        input[type=text]:valid {
+            outline: 1px solid green;
+        }
+    </style>
+
 	<section class="content">
 	  	<div class="row">
 	  		<div class="col-md-8">
@@ -35,14 +47,14 @@
 		              <div class="form-group" id="form-group-nama">
 		                <label class="col-sm-2">Nama</label>
 		                <div class="col-sm-10">
-		                  <input type="text" class="form-control" name="nama" id="input-nama1">
+		                  <input type="text" class="form-control" name="nama" id="input-nama1" required>
 		                </div>
 		              </div>
 
 		              <div class="form-group" id="form-group-prodi">
 		                <label class="col-sm-2">Prodi</label>
 		                <div class="col-sm-10">
-		                  <select class="form-control select2" style="width: 100%;" name="prodi">
+		                  <select class="form-control select2" style="width: 100%;" name="prodi" required>
 		                      <option selected="selected" value="S1 Sistem Informasi">S1 Sistem Informasi</option>
 		                      <option value="S1 Teknik Industri">S1 Teknik Industri</option>
 		                    </select>
@@ -52,14 +64,14 @@
 		              <div class="form-group" id="form-group-kelas">
 		                <label class="col-sm-2">Kelas</label>
 		                <div class="col-sm-10">
-		                  <input type="text" class="form-control" name="kelas" id="input-kelas">
+		                  <input type="text" class="form-control" name="kelas" id="input-kelas" required>
 		                </div>
 		              </div>
 
 		              <div class="form-group" id="form-group-email">
 		                <label class="col-sm-2">Email</label>
 		                <div class="col-sm-10">
-		                  <input type="text" class="form-control" name="email" id="input-email1">
+		                  <input type="text" class="form-control" name="email" id="input-email1"  required>
 		                </div>
 		              </div>
 
