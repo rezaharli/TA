@@ -28,6 +28,10 @@ $(function() {
         language : 'id',
         format : 'yyyy-mm-dd'
     });
+    $( "#datepicker1" ).datepicker({
+        language : 'id',
+        format : 'yyyy-mm-dd'
+    });
 });
 </script>
 
@@ -83,8 +87,16 @@ $(function() {
                                 <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Acara" name="tanggal_acara"  value="<?php echo (!empty($acara->nama_acara)) ? $acara->tanggal_acara : ""; ?>">
                             </div>
                             <div class="form-group">
+                                <label>Tanggal Selesai Pendaftaran *</label>
+                                <input type="text" class="form-control" id="datepicker1" placeholder="Tanggal Selesai Pendaftaran" name="tanggal_selesai_pendaftaran"  value="<?php echo (!empty($acara->nama_acara)) ? $acara->tanggal_selesai_pendaftaran : ""; ?>">
+                            </div>
+                            <div class="form-group">
                                 <label>Deskripsi Acara *</label>
                                 <textarea class="form-control" id="deskripsi_acara" placeholder="Deskripsi Acara" name="deskripsi_acara"><?php echo (!empty($acara->nama_acara)) ? $acara->deskripsi_acara : ""; ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Kuota Peserta *</label>
+                                <input type="text" class="form-control" id="kuota_peserta" placeholder="Kuota Peserta" name="kuota_peserta" value="<?php echo (!empty($acara->nama_acara)) ? $acara->kuota_peserta : ""; ?>">
                             </div>
                             <div class="form-group">
                                 <label>Upload Poster Acara (jpg/png) *</label>

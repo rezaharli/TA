@@ -270,7 +270,9 @@ class Proposal_himpunan extends Private_Controller{
         $this->form_validation->set_rules('nama_acara', 'Nama Acara', 'required');
         $this->form_validation->set_rules('tempat_acara', 'Tempat Acara', 'required');
         $this->form_validation->set_rules('tanggal_acara', 'Tanggal Acara', 'required');
+        $this->form_validation->set_rules('tanggal_selesai_pendaftaran', 'Tanggal Selesai Pendaftaran', 'required');
         $this->form_validation->set_rules('deskripsi_acara', 'Deskripsi Acara', 'required');
+        $this->form_validation->set_rules('kuota_peserta', 'Kuota Peserta', 'required|integer');
 
         if ($this->form_validation->run() != FALSE) {
             $tmp        = explode(".", $_FILES[$nama_input_file]['name']);
@@ -278,14 +280,16 @@ class Proposal_himpunan extends Private_Controller{
             $filename   = $id_pengajuan.'_'.sha1($_FILES[$nama_input_file]['name']).'.'.$ext;
     
             $data = array(
-                'id'                    => $id_pengajuan,
-                'id_pengajuan_proposal' => $id_pengajuan,
-                'nama_acara'            => $this->input->post('nama_acara'),
-                'tempat_acara'          => $this->input->post('tempat_acara'),
-                'tanggal_acara'         => $this->input->post('tanggal_acara'),
-                'deskripsi_acara'       => $this->input->post('deskripsi_acara'),
-                'waktu_upload'          => date('Y-n-j h:i:s'),
-                'poster_acara'          => $filename
+                'id'                            => $id_pengajuan,
+                'id_pengajuan_proposal'         => $id_pengajuan,
+                'nama_acara'                    => $this->input->post('nama_acara'),        
+                'tempat_acara'                  => $this->input->post('tempat_acara'),      
+                'tanggal_acara'                 => $this->input->post('tanggal_acara'),
+                'tanggal_selesai_pendaftaran'   => $this->input->post('tanggal_selesai_pendaftaran'),
+                'deskripsi_acara'               => $this->input->post('deskripsi_acara'),       
+                'kuota_peserta'                 => $this->input->post('kuota_peserta'),       
+                'waktu_upload'                  => date('Y-n-j h:i:s'),
+                'poster_acara'                  => $filename
             );
     
             $acara = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $id_pengajuan));
@@ -405,7 +409,9 @@ class Proposal_himpunan extends Private_Controller{
             $get_id_staff       = $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
             $penanggungjawab    = ($get_id_staff == null) ? null : $this->user_model->get($get_id_staff->id_user);
             $count              = $this->lpj_himpunan_model->count_by('id_pengajuan_proposal', $proposal->id);
-            
+            $tanggal_acara      = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $proposal->id));
+            // echo print_r($tanggal_acara); die();
+
             array_push($data['proposals'], array(
                 'count'                     => $count,
                 'id'                        => $proposal->id,
