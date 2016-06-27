@@ -393,39 +393,46 @@ class Proposal_himpunan extends Private_Controller{
     
     function logbook_pengajuan(){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
-        
 
         if ($user->role == 'staff') {
-            $proposals  = $this->logbook_proposal_himpunan_model->get_all();
-
+            $logbook  = $this->logbook_proposal_himpunan_model->get_all();
         }else if($user->role == 'mahasiswa') {
             $himpunan   = $this->himpunan_model->get_by(array('id_penanggungjawab' => $user->roled_data->nim));
-            $proposals  = $this->logbook_proposal_himpunan_model->get_many_by(array('pengaju' => $himpunan->id));
+            $logbook  = $this->logbook_proposal_himpunan_model->get_many_by(array('pengaju' => $himpunan->id));
         }
         
-        $data['proposals'] = array();
-        foreach ($proposals as $proposal) {
-            $pengaju            = $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
-            $get_id_staff       = $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
-            $penanggungjawab    = ($get_id_staff == null) ? null : $this->user_model->get($get_id_staff->id_user);
-            $count              = $this->lpj_himpunan_model->count_by('id_pengajuan_proposal', $proposal->id);
-            $tanggal_acara      = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $proposal->id));
-            // echo print_r($tanggal_acara); die();
+        $data['logbook'] = array();
+        foreach ($logbook as $proposal) {
+            $proposal->pengaju          = $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
+            $get_id_staff               = $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
+            $penanggungjawab            = ($get_id_staff == null) ? null : $this->user_model->get($get_id_staff->id_user);
+            $count                      = $this->lpj_himpunan_model->count_by('id_pengajuan_proposal', $proposal->id_pengajuan);
+            $proposal->acara_himpunan   = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $proposal->id_pengajuan));
 
-            array_push($data['proposals'], array(
-                'count'                     => $count,
-                'id'                        => $proposal->id,
-                'pengaju'                   => $pengaju->nama,
-                'tanggal_pengajuan'         => $proposal->tanggal_pengajuan,
-                'judul'                     => $proposal->judul,
-                'tanggal_proposal_terakhir' => $proposal->tanggal_proposal_terakhir,
-                'status_approve'            => $proposal->status_approve,
-                'penanggungjawab'           => ($penanggungjawab == null) ? '-' : $penanggungjawab->nama
-                ));
+            if ($proposal->acara_himpunan) {
+                $proposal->tanggal_batas_upload   = ((new DateTime($proposal->acara_himpunan->tanggal_acara))->modify('+7 day'))->format('Y-m-d');
+            }
+
+            // array_push($data['logbook'], array(
+            //     'count'                     => $count,
+            //     'id'                        => $proposal->id_pengajuan,
+            //     'pengaju'                   => $pengaju->nama,
+            //     'tanggal_pengajuan'         => $proposal->tanggal_pengajuan,
+            //     'judul'                     => $proposal->judul,
+            //     'tanggal_proposal_terakhir' => $proposal->tanggal_proposal_terakhir,
+            //     'status_approve'            => $proposal->status_approve,
+            //     'penanggungjawab'           => ($penanggungjawab == null) ? '-' : $penanggungjawab->nama,
+            //     'tanggal_acara'             => $tanggal_acara,
+            //     'tanggal_batas_upload'      => $tanggal_batas_upload
+            //     ));
         }
 
-        if ($user->role == 'staff') {
-            
+        // echo "<pre>";
+        // var_dump($logbook);
+        // die();
+
+        $data['logbook'] = $logbook;
+        if ($user->role == 'staff') {  
             $this->load_page('page/private/staff/list_pengajuan_himpunan', $data);
         }else if($user->role == 'mahasiswa'){
             $data['himpunan'] = $himpunan;
