@@ -161,6 +161,19 @@ class Proposal extends Private_Controller {
         $user                   = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $data['user']           = $user;
         $data['id_pengajuan']   = $id_pengajuan;
+
+        $proposal   = $this->proposal_lomba_model->limit(1,0)->order_by('id', 'desc')->get_by(array('id_pengajuan_proposal_mahasiswa' => $id_pengajuan));
+
+        $data['id']                     = $proposal->id;
+        $data['kategori_kompetisi']     = $proposal->kategori_kompetisi;
+        $data['pembimbing']             = $proposal->pembimbing;
+        $data['tujuan_kompetisi']       = $proposal->tujuan_kompetisi;
+        $data['sasaran_kompetisi']      = $proposal->sasaran_kompetisi;
+        $data['tanggal_kompetisi']      = $proposal->tanggal_kompetisi;
+        $data['tempat_kompetisi']       = $proposal->tempat_kompetisi;
+        $data['anggaran_biaya']         = $proposal->anggaran_biaya;
+        $data['nama_tim']               = $proposal->nama_tim;
+
         $this->load_page('page/private/mahasiswa/upload_proposal',  $data);
     }
 

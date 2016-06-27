@@ -59,23 +59,23 @@ $(function() {
                             
                             <div class="form-group">
                                 <label>Kategori Kompetisi</label>
-                                <input type="text" class="form-control" id="kategori_kompetisi" placeholder="Kategori Kompetisi" name="kategori_kompetisi" required>
+                                <input type="text" class="form-control" id="kategori" placeholder="kategori" name="kategori" value="<?php echo $kategori_kompetisi ?>">
                             </div>
                             <div class="form-group">
                                 <label>Tujuan Kompetisi</label>
-                                <textarea type="text" class="form-control" id="tujuan_kompetisi" placeholder="Tujuan Kompetisi" name="tujuan_kompetisi" required></textarea>
+                                <textarea class="form-control" id="tujuan" placeholder="Tujuan" name="Tujuan"><?php echo $tujuan_kompetisi ?></textarea> 
                             </div>
                             <div class="form-group">
                                 <label>Sasaran Kompetisi</label>
-                                <input type="text" class="form-control" id="sasaran_kompetisi" placeholder="Sasaran Kompetisi" name="sasaran_kompetisi" required>
+                                <input type="text" class="form-control" id="Sasaran" placeholder="sasaran" name="sasaran" value="<?php echo $sasaran_kompetisi ?>">
                             </div>
                             <div class="form-group">
                                 <label>Tempat Kompetisi</label>
-                                <input type="text" class="form-control" id="tempat_kompetisi" placeholder="Tempat Kompetisi" name="tempat_kompetisi" required>
+                                <input type="text" class="form-control" id="tempat_kompetisi" placeholder="Tempat Kompetisi" name="tempat_kompetisi" value="<?php echo $tempat_kompetisi ?>">
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Kompetisi</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Kompetisi" name="tanggal_kompetisi" required>
+                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Kompetisi" name="tanggal_kompetisi" value="<?php echo $tanggal_kompetisi ?>">
                             </div>
                         </div><!-- /.box-body -->                   
                     </div><!-- /.box -->
@@ -92,16 +92,16 @@ $(function() {
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Nama Tim</label>
-                                <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim" required>
+                                <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim" value="<?php echo $nama_tim ?>">
                             </div>
                             <div class="form-group">
                                 <label>Pembimbing</label>
-                                <input type="text" class="form-control" id="pembimbing" placeholder="Pembimbing Lomba" name="pembimbing" required>
+                                <input type="text" class="form-control" id="pembimbing" placeholder="Pembimbing Lomba" name="pembimbing" value="<?php echo $pembimbing ?>">
                             </div>
                             
                             <div class="form-group">
                                 <label>Anggaran Kompetisi</label>
-                                <input type="number" class="form-control" id="anggaran" placeholder="ex : 1000000" name="anggaran_biaya" required>
+                                <input type="number" class="form-control" id="anggaran" placeholder="ex : 1000000" name="anggaran_biaya" value="<?php echo $anggaran_biaya ?>">
                             </div>
                             <div class="form-group">
                                 <label>Upload Pengajuan Proposal (.pdf/.doc/.docx)</label>
