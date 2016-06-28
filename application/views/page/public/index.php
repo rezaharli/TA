@@ -20,11 +20,26 @@
                                 <div class="col-sm-7 text-center">
                                     <img class="img-responsive" src="<?php echo base_url() ?>assets/universal/img/fairship-dashboard.png" alt="">
                                 </div>
-
-                                
-
                             </div>
                         </div>
+
+                        <?php if (isset($event_mendatang[0])) { ?>
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-sm-5 right">
+                                        <h1><?php echo $event_mendatang[0]['nama'] ?></h1>
+                                        <ul class="list-style-none">
+                                            <li><?php echo $event_mendatang[0]['keterangan'] ?></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-sm-7 text-center">
+                                        <img class="img-responsive" src="<?php echo base_url($event_mendatang[0]['gambar']) ?>" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+
                         <div class="item">
                             <div class="row">
 
@@ -41,6 +56,24 @@
 
                             </div>
                         </div>
+
+                        <?php if (isset($event_mendatang[1])) { ?>
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-sm-5 right">
+                                        <h1><?php echo $event_mendatang[1]['nama'] ?></h1>
+                                        <ul class="list-style-none">
+                                            <li><?php echo $event_mendatang[1]['keterangan'] ?></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-sm-7 text-center">
+                                        <img class="img-responsive" src="<?php echo base_url($event_mendatang[1]['gambar']) ?>" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+
                         <div class="item">
                             <div class="row">
                                 <div class="col-sm-5 right">
@@ -54,6 +87,23 @@
                                 </div>
                             </div>
                         </div>
+
+                        <?php if (isset($event_mendatang[2])) { ?>
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-sm-5 right">
+                                        <h1><?php echo $event_mendatang[2]['nama'] ?></h1>
+                                        <ul class="list-style-none">
+                                            <li><?php echo $event_mendatang[2]['keterangan'] ?></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-sm-7 text-center">
+                                        <img class="img-responsive" src="<?php echo base_url($event_mendatang[2]['gambar']) ?>" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
                         <div class="item">
                             <div class="row">
                                 <div class="col-sm-7">

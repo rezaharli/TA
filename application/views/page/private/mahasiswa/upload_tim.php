@@ -160,9 +160,12 @@ $(function () {
     });
 
     $('#btn-add').click(function(event) {
-        var no = parseInt($('.row-cloned:last > .no').html());
-        var new_row = $('.row-container').append('<tr class="row-cloned"><td class="no">'+(++no)+'</td><td><select id="select2_'+no+'" class="select2 form-control" name="nim[]" value=""></select></td><td><a href="#" title="Hapus" class="btn btn-danger btn-delete"><i class="fa fa-minus-circle"></i></a></td></tr>');
-        new_row.find('.select2').select2(select2_panitia());
+        var $clonedRow = $('.row-cloned');
+        if ($clonedRow.length < <?php echo $event->maksimal_anggota ?>) {
+            var no = parseInt($('.row-cloned:last > .no').html());
+            var new_row = $('.row-container').append('<tr class="row-cloned"><td class="no">'+(++no)+'</td><td><select id="select2_'+no+'" class="select2 form-control" name="nim[]" value=""></select></td><td><a href="#" title="Hapus" class="btn btn-danger btn-delete"><i class="fa fa-minus-circle"></i></a></td></tr>');
+            new_row.find('.select2').select2(select2_panitia());
+        }
     });
 
     $(document).on('click', '.btn-delete', function(event) {

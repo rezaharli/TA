@@ -108,7 +108,7 @@
 
           </li>
           
-          <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-flag-checkered"></i> <span>Beasiswa</span></a>
+          <li><a href="<?php echo base_url('sertifikat') ?>"><i class="fa fa-flag-checkered"></i> <span>Bukti Lomba</span></a>
           </li>
 
         <?php } ?>
