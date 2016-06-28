@@ -51,6 +51,24 @@
                   <input type="text" class="form-control" name="penyelenggara" required placeholder="Penyelenggara" />
                 </div>
               </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Sasaran Kompetisi</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" name="sasaran_kompetisi" required placeholder="Sasaran Kompetisi" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Maksimal Anggota</label>
+                <div class="col-sm-9">
+                  <input type="number" min="1" class="form-control" name="maksimal_anggota" required placeholder="Maksimal Anggota" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Tempat Kompetisi</label>
+                <div class="col-sm-9">
+                  <input type="text"  class="form-control" name="tempat_kompetisi" required placeholder="Tempat Kompetisi" />
+                </div>
+              </div>
 
               <div class="form-group">
                 <label class="col-sm-3 control-label">Tanggal Mulai</label>
