@@ -29,7 +29,7 @@ class Pesan extends Private_Controller {
                 'tujuan'                => $kepada),
         FALSE);
 
-        redirect('proposal_himpunan/detail_proposal?id='.$id_proposal);
+        redirect('proposal_himpunan/detail_proposal?id_proposal='.$id_proposal);
     }
 
     public function get() {
