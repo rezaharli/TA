@@ -95,6 +95,12 @@
           </li>
         <?php } ?>
 
+        <?php if ($jenis == 'kaur' || $jenis == 'staff_kemahasiswaan') { ?>
+        <li class="treeview"><a href="<?php echo base_url('laporan/hitung') ?>"><i class="fa fa-book"></i> <span>Laporan</span></a>
+          
+        </li>
+        <?php } ?>
+
         <?php if($role == 'mahasiswa') { ?>
 
           <li class="treeview"><a href="#"><i class="fa fa-clipboard"></i> <span>Pengajuan Lomba</span><i class="fa fa-angle-left pull-right"></i></a>

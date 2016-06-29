@@ -401,13 +401,15 @@ class Proposal_himpunan extends Private_Controller{
             $logbook  = $this->logbook_proposal_himpunan_model->get_many_by(array('pengaju' => $himpunan->id));
         }
         
+        
+        $count = 0;
         $data['logbook'] = array();
         foreach ($logbook as $proposal) {
             $proposal->pengaju          = $this->himpunan_model->get_by(array('id' => $proposal->pengaju));
             $get_id_staff               = $this->staff_model->get_by(array('nip' => $proposal->penanggungjawab));
             $penanggungjawab            = ($get_id_staff == null) ? null : $this->user_model->get($get_id_staff->id_user);
-            $count                      = $this->lpj_himpunan_model->count_by('id_pengajuan_proposal', $proposal->id_pengajuan);
-            $proposal->acara_himpunan   = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $proposal->id_pengajuan));
+            $count                      = $this->lpj_himpunan_model->count_by('id_pengajuan_proposal', $proposal->id);
+            $proposal->acara_himpunan   = $this->acara_himpunan_model->get_by(array('id_pengajuan_proposal' => $proposal->id));
 
             if ($proposal->acara_himpunan) {
                 $proposal->tanggal_batas_upload   = ((new DateTime($proposal->acara_himpunan->tanggal_acara))->modify('+7 day'))->format('Y-m-d');
@@ -430,7 +432,7 @@ class Proposal_himpunan extends Private_Controller{
         // echo "<pre>";
         // var_dump($logbook);
         // die();
-
+        $data['count'] = $count;
         $data['logbook'] = $logbook;
         if ($user->role == 'staff') {  
             $this->load_page('page/private/staff/list_pengajuan_himpunan', $data);
