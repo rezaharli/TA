@@ -176,6 +176,7 @@ class Guest extends Public_Controller {
             'id'                => $event->id,
             'nama'              => $event->nama_event,
             'tanggal'           => $event->tanggal_mulai,
+            'keterangan'        => $event->keterangan,
             'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_mulai).(($event->tanggal_mulai != $event->tanggal_selesai) ? ' sampai '.$this->get_tanggal_formatted($event->tanggal_selesai) : ''),
             'gambar'            => ($event->bukti_event) ? 'assets/upload/bukti_event/'.$event->bukti_event : 'assets/universal/img/default-lomba.jpg',
             'jenis'             => 'lomba'

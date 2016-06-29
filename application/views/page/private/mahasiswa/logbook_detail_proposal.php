@@ -60,39 +60,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-header bg-light-blue-gradient">
                         <h4 class="box-title">
                           <button class="btn btn-primary btn-xs" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                              &nbsp;Tujuan Kompetisi
-                        </h4>
-                    </div>
-                    <div class="box-body">
-                        <pre class="prettyprint"><?php echo $tujuan_kompetisi ?></pre>
-                  </div><!-- /.box-body -->
-                </div>
-                <div class="box box-solid collapsed-box">
-                    <div class="box-header bg-light-blue-gradient">
-                        <h4 class="box-title">
-                          <button class="btn btn-primary btn-xs" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                              &nbsp;Sasaran Kompetisi
-                        </h4>
-                    </div>
-                    <div class="box-body">
-                        <pre class="prettyprint"><?php echo $sasaran_kompetisi ?></pre>
-                  </div><!-- /.box-body -->
-                </div>
-                <div class="box box-solid collapsed-box">
-                    <div class="box-header bg-light-blue-gradient">
-                        <h4 class="box-title">
-                          <button class="btn btn-primary btn-xs" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                              &nbsp;Tanggal Kompetisi
-                        </h4>
-                    </div>
-                    <div class="box-body">
-                        <pre class="prettyprint"><?php echo $tanggal_kompetisi ?></pre>
-                  </div><!-- /.box-body -->
-                </div>
-                <div class="box box-solid collapsed-box">
-                    <div class="box-header bg-light-blue-gradient">
-                        <h4 class="box-title">
-                          <button class="btn btn-primary btn-xs" data-widget="collapse"><i class="fa fa-plus"></i></button>
                               &nbsp;Tempat Kompetisi
                         </h4>
                     </div>
@@ -100,6 +67,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <pre class="prettyprint"><?php echo $tempat_kompetisi ?></pre>
                   </div><!-- /.box-body -->
                 </div>
+                
+                
+                
                 <div class="box box-solid collapsed-box">
                     <div class="box-header bg-light-blue-gradient">
                         <h4 class="box-title">
