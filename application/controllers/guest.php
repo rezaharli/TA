@@ -26,7 +26,7 @@ class Guest extends Public_Controller {
         $list_acara_himpunan    = $this->acara_himpunan_model
                                         ->order_by('tanggal_acara')
                                         ->limit(12, 0)
-                                        ->get_many_by(array('tanggal_acara >= ' => date('Y-n-j')));
+                                        ->get_many_by(array('tanggal_selesai_pendaftaran > ' => date('Y-n-j')));
         $this->set_list_gabungan_event($list_acara_himpunan, 'kegiatan');
 
         $total_peserta = $this->detail_tim_model->count_all() + $this->peserta_model->count_all();
@@ -133,17 +133,25 @@ class Guest extends Public_Controller {
         $email  = $this->input->post('email');
 
         $peserta = $this->peserta_model->get_by(array('email' => $email));
+        $list_peserta = $this->peserta_model->get_many_by(array('id_acara' => $acara->id));
+        $jumlah_peserta = count($list_peserta);
+        echo print_r($jumlah_peserta);
 
-        if( ! $peserta) {
+        if ($jumlah_peserta <= $acara->kuota_peserta) {
+            if( ! $peserta) {
             $last_inserted_id_peserta = $this->peserta_model->insert(array('nama' => $nama, 'email' => $email, 'id_acara' => $acara->id));
-            if ( ! $last_inserted_id_peserta) {
-                $this->session->set_flashdata('message', 'Pendaftaran gagal');
+                if ( ! $last_inserted_id_peserta) {
+                    $this->session->set_flashdata('message', 'Pendaftaran gagal');
+                } else {
+                    $this->session->set_flashdata('message', 'Pendaftaran berhasil');
+                }
             } else {
-                $this->session->set_flashdata('message', 'Pendaftaran berhasil');
+                $this->session->set_flashdata('message', 'Pendaftaran gagal, email telah terdaftar.');
             }
         } else {
-            $this->session->set_flashdata('message', 'Pendaftaran gagal, email telah terdaftar.');
+            $this->session->set_flashdata('message', 'Maaf, kuota pendaftaran sudah penuh');
         }
+        
         redirect('guest/kegiatan/'.$acara->id.'/daftar');
     }
 
@@ -168,6 +176,7 @@ class Guest extends Public_Controller {
             'id'                => $event->id,
             'nama'              => $event->nama_event,
             'tanggal'           => $event->tanggal_mulai,
+            'keterangan'        => $event->keterangan,
             'tanggal_display'   => $this->get_tanggal_formatted($event->tanggal_mulai).(($event->tanggal_mulai != $event->tanggal_selesai) ? ' sampai '.$this->get_tanggal_formatted($event->tanggal_selesai) : ''),
             'gambar'            => ($event->bukti_event) ? 'assets/upload/bukti_event/'.$event->bukti_event : 'assets/universal/img/default-lomba.jpg',
             'jenis'             => 'lomba'

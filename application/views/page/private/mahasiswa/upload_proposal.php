@@ -39,7 +39,7 @@ $(function() {
             <!-- form start -->
             <form role="form" method="post" action="<?php echo base_url("proposal/do_upload_proposal?id_pengajuan=".$this->input->get('id_pengajuan')); ?>" enctype="multipart/form-data">
             
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -59,49 +59,22 @@ $(function() {
                             
                             <div class="form-group">
                                 <label>Kategori Kompetisi</label>
-                                <input type="text" class="form-control" id="kategori_kompetisi" placeholder="Kategori Kompetisi" name="kategori_kompetisi" required>
+                                <input type="text" class="form-control" id="kategori" placeholder="kategori" name="kategori_kompetisi" value="<?php echo $kategori_kompetisi ?>">
                             </div>
-                            <div class="form-group">
-                                <label>Tujuan Kompetisi</label>
-                                <textarea type="text" class="form-control" id="tujuan_kompetisi" placeholder="Tujuan Kompetisi" name="tujuan_kompetisi" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Sasaran Kompetisi</label>
-                                <input type="text" class="form-control" id="sasaran_kompetisi" placeholder="Sasaran Kompetisi" name="sasaran_kompetisi" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Tempat Kompetisi</label>
-                                <input type="text" class="form-control" id="tempat_kompetisi" placeholder="Tempat Kompetisi" name="tempat_kompetisi" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Tanggal Kompetisi</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="Tanggal Kompetisi" name="tanggal_kompetisi" required>
-                            </div>
-                        </div><!-- /.box-body -->                   
-                    </div><!-- /.box -->
-                </div>
-
-
-                <div class="col-md-6">
-                    <!-- general form elements -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"></h3>
-                        </div><!-- /.box-header -->
-                        
-                        <div class="box-body">
+                            
+                            <div class="box-body">
                             <div class="form-group">
                                 <label>Nama Tim</label>
-                                <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim" required>
+                                <input type="text" class="form-control" id="nama_tim" placeholder="nama tim" name="nama_tim" value="<?php echo $nama_tim ?>">
                             </div>
                             <div class="form-group">
                                 <label>Pembimbing</label>
-                                <input type="text" class="form-control" id="pembimbing" placeholder="Pembimbing Lomba" name="pembimbing" required>
+                                <input type="text" class="form-control" id="pembimbing" placeholder="Pembimbing Lomba" name="pembimbing" value="<?php echo $pembimbing ?>">
                             </div>
                             
                             <div class="form-group">
                                 <label>Anggaran Kompetisi</label>
-                                <input type="number" class="form-control" id="anggaran" placeholder="ex : 1000000" name="anggaran_biaya" required>
+                                <input type="number" class="form-control" id="anggaran" placeholder="ex : 1000000" name="anggaran_biaya" value="<?php echo $anggaran_biaya ?>">
                             </div>
                             <div class="form-group">
                                 <label>Upload Pengajuan Proposal (.pdf/.doc/.docx)</label>
@@ -111,9 +84,12 @@ $(function() {
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary"> Submit </button>
                         </div>
-                    </div>
+                        </div><!-- /.box-body -->                   
+                    </div><!-- /.box -->
                 </div>
-
+                <div class="col-md-4">
+                    <?php $this->load->view('page/private/template/calendar') ?>
+                 </div><!-- /.col -->
             </form>
         </div>
     </section>

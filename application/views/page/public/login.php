@@ -25,6 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<p><label><?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>Ingat saya</label></p>
 					<button type="submit">Login</button>
 					<p><a href="" id="link-forgot-password"><?php echo lang('login_forgot_password');?></a></p>
+					<p>&nbsp;</p>
+					<p>Jika anda user baru:</p>
+					<p>Masukkan NIM atau NIP anda sebagai username dan password anda</p>
 				
 				</form>
 
@@ -47,6 +50,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       				<?php echo form_input(array('name' => 'new_confirm', 'id' => 'new_confirm', 'type' => 'password', 'placeholder'	=> lang('change_password_validation_new_password_confirm_label')));?>
 					
 					<button type="submit"><?php echo lang('forgot_password_submit_btn') ?></button>
+
+				</form>
+
+				<form id="form-newuser" class="form" style="display: none;">
+
+					<div>Masukkan NIM atau NIP anda sebagai username dan password anda</div>
+      				
+					<p><a href="" class="link-login">Kembali ke login</a></p>
 
 				</form>
 

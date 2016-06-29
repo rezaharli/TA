@@ -59,7 +59,7 @@ class Proposal extends Private_Controller {
     function upload_pengajuan (){
         $user = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id')); 
 
-        $data['events'] = $this->event_model->order_by('tanggal_mulai')->get_many_by(array('status' => 'disetujui'));
+        $data['events'] = $this->event_model->order_by('tanggal_mulai')->get_many_by(array('status' => 'disetujui', 'tanggal_mulai >=' => date('Y-m-d')));
 
         $this->load_page('page/private/mahasiswa/upload_pengajuan_proposal', $data);
     }
@@ -70,11 +70,7 @@ class Proposal extends Private_Controller {
         $user           = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
             // rule
         $this->form_validation->set_rules('kategori_kompetisi', 'Kategori Kompetisi', 'required');
-        $this->form_validation->set_rules('tujuan_kompetisi', 'Tujuan Kompetisi', 'required');
-        $this->form_validation->set_rules('tanggal_kompetisi', 'Tanggal Kompetisi', 'required');
-        $this->form_validation->set_rules('sasaran_kompetisi', 'Sasaran Kompetisi', 'required');
         $this->form_validation->set_rules('anggaran_biaya', 'Anggaran Biaya', 'required|integer|max_length[11]');
-        $this->form_validation->set_rules('tempat_kompetisi', 'Tempat Kompetisi', 'required');
         $this->form_validation->set_rules('nama_tim', 'Nama Tim', 'required');
 
         $data = array(
@@ -83,6 +79,7 @@ class Proposal extends Private_Controller {
             );
 
         if ($data['id_event']!=null){
+            $event = $this->event_model->get($data['id_event']);
             $pengaju = $this->pengajuan_proposal_mahasiswa_model->insert($data);
             $this->session->set_userdata('id_pengajuan', $pengaju);
             
@@ -108,10 +105,6 @@ class Proposal extends Private_Controller {
                         $data = array(
                             'id_pengajuan_proposal_mahasiswa' => $pengaju,
                             'kategori_kompetisi'    => $this->input->post('kategori_kompetisi'),
-                            'tujuan_kompetisi'      => $this->input->post('tujuan_kompetisi'),
-                            'sasaran_kompetisi'     => $this->input->post('sasaran_kompetisi'),
-                            'tanggal_kompetisi'     => $this->input->post('tanggal_kompetisi'),
-                            'tempat_kompetisi'      => $this->input->post('tempat_kompetisi'),
                             'anggaran_biaya'        => $this->input->post('anggaran_biaya'),
                             'nama_tim'              => $this->input->post('nama_tim'),
                             'pembimbing'            => $this->input->post('pembimbing'),
@@ -128,6 +121,7 @@ class Proposal extends Private_Controller {
                         echo $this->upload->display_errors();
                         $this->session->set_userdata('notif_upload', false);    
                     }
+                    $data['event'] = $event;
                     $this->load_page('page/private/mahasiswa/upload_tim', $data); 
                 } else {
                     $this->upload_pengajuan();
@@ -161,6 +155,15 @@ class Proposal extends Private_Controller {
         $user                   = $this->user_model->get_user_dan_role_by_id($this->session->userdata('id'));
         $data['user']           = $user;
         $data['id_pengajuan']   = $id_pengajuan;
+
+        $proposal   = $this->proposal_lomba_model->limit(1,0)->order_by('id', 'desc')->get_by(array('id_pengajuan_proposal_mahasiswa' => $id_pengajuan));
+
+        $data['id']                     = $proposal->id;
+        $data['kategori_kompetisi']     = $proposal->kategori_kompetisi;
+        $data['pembimbing']             = $proposal->pembimbing;
+        $data['anggaran_biaya']         = $proposal->anggaran_biaya;
+        $data['nama_tim']               = $proposal->nama_tim;
+
         $this->load_page('page/private/mahasiswa/upload_proposal',  $data);
     }
 
@@ -175,10 +178,6 @@ class Proposal extends Private_Controller {
             'id_pengajuan_proposal_mahasiswa'   => $this->session->userdata('id_pengajuan'),
             'kategori_kompetisi'                => $this->input->post('kategori_kompetisi'),
             'pembimbing'                        => $this->input->post('pembimbing'),
-            'tujuan_kompetisi'                  => $this->input->post('tujuan_kompetisi'),
-            'sasaran_kompetisi'                 => $this->input->post('sasaran_kompetisi'),
-            'tanggal_kompetisi'                 => $this->input->post('tanggal_kompetisi'),
-            'tempat_kompetisi'                  => $this->input->post('tempat_kompetisi'),
             'anggaran_biaya'                    => $this->input->post('anggaran_biaya'),
             'nama_tim'                          => $this->input->post('nama_tim'),
             'waktu_upload'                      => date('Y-n-j h:i:s')
@@ -292,14 +291,11 @@ class Proposal extends Private_Controller {
         $data['id_pengajuan_proposal_mahasiswa']    = $proposal->id_pengajuan_proposal_mahasiswa;
         $data['id']                 = $proposal->id;
         $data['penyelenggara']      = $event->penyelenggara;
-        $data['tingkat_kompetisi']  = $event->tingkat_kompetisi;            
+        $data['tingkat_kompetisi']  = $event->tingkat_kompetisi;  
+        $data['tempat_kompetisi']   = $event->tempat_kompetisi;           
         $data['kategori_kompetisi'] = $proposal->kategori_kompetisi;
-        $data['tujuan_kompetisi']   = $proposal->tujuan_kompetisi;
-        $data['tanggal_kompetisi']  = $proposal->tanggal_kompetisi;
-        $data['tempat_kompetisi']   = $proposal->tempat_kompetisi;
         $data['anggaran_biaya']     = $proposal->anggaran_biaya;
         $data['nama_tim']           = $proposal->nama_tim;
-        $data['sasaran_kompetisi']  = $proposal->sasaran_kompetisi;
         $data['pembimbing']         = $proposal->pembimbing;
 
         $data['user']       = $user;

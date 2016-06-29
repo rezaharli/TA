@@ -8,7 +8,7 @@ class Sertifikat extends Private_Controller {
         $this->load->model('user_model');
 
         $this->config_upload['upload_path']     = './assets/upload/sertifikat';
-        $this->config_upload['allowed_types']   = 'rar|zip';
+        $this->config_upload['allowed_types']   = '*';
         $this->config_upload['max_size']        = '100000';
     }
 
@@ -54,8 +54,8 @@ class Sertifikat extends Private_Controller {
         }
 
         $this->load->library('upload', $this->config_upload);
+        var_dump($this->config_upload);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
             if ($this->upload->do_upload($nama_input_file)) {
                 
                 $upload_data = $this->upload->data();

@@ -29,7 +29,6 @@
                               <tr>
                                 <th align="center" style="width: 10px">No</th>
                                 <th align="center">Nama Event</th>
-                                <th align="center" style="width: 100px">Tanggal Kompetisi</th>
                                 <th align="center" style="width: 100px">Tanggal Upload</th>
                                 <th align="center" style="width: 100px">Waktu Pengajuan</th>
                                 <th align="center" >Nama Tim</th>
@@ -43,7 +42,6 @@
                                 <tr>
                                   <td><?php echo $i; ?></td>
                                   <td><?php echo $proposal->nama_event; ?></td>
-                                  <td><?php echo $proposal->tanggal_kompetisi; ?></td>  
                                   <td><?php echo $proposal->tanggal_pengajuan; ?></td>                                  
                                   <td><?php echo $proposal->tanggal_proposal_terakhir; ?></td>
                                   <td><?php echo $proposal->nama_tim; ?></td>

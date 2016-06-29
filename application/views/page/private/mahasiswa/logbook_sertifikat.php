@@ -23,7 +23,7 @@
             <div class="col-xs-12">
                 <div class="box">
                   <div class="box-header">
-                      <a href="<?php echo base_url('sertifikat/add') ?>"<button type="button" class="btn btn-default"><span class="fa fa-plus"></span>&nbsp;Ajukan Beasiswa </button></a>
+                      <a href="<?php echo base_url('sertifikat/add') ?>"<button type="button" class="btn btn-default"><span class="fa fa-plus"></span>&nbsp;Upload Bukti Lomba </button></a>
                   </div>
                   <!-- /.box-header -->
                     <div class="box-body">

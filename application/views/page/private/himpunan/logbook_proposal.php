@@ -41,6 +41,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <th align="center" style="width: 125px">Judul Proposal</th>
                                 <th align="center" style="width: 35px">Tanggal Pengajuan</th>
                                 <th align="center" style="width: 35px">Tanggal Unggah Terakhir</th>
+                                <th align="center" style="width: 35px">Tanggal Acara</th>
+                                <th align="center" style="width: 35px">Tanggal Batas Upload</th>
                                 <th align="center">Status</th>
                                 <th align="center">Penanggung Jawab</th>
                                 <th align="center">Aksi</th>
@@ -48,48 +50,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </thead>
                             <tbody>
                                 <?php $i=1; ?>
-                                <?php foreach ($proposals as $proposal) : ?>
+                                <?php foreach ($logbook as $proposal) : ?>
                                   <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $proposal['pengaju']; ?></td>
-                                    <td><a href="<?php echo base_url('proposal_himpunan/detail_pengajuan?id_pengajuan='.$proposal['id']); ?>"><?php echo $proposal['judul']; ?></a></td>  
-                                    <td><?php echo $proposal['tanggal_pengajuan']; ?></td>
-                                    <td><?php echo $proposal['tanggal_proposal_terakhir']; ?></td>
+                                    <td><?php echo $proposal->pengaju->nama; ?></td>
+                                    <td><a href="<?php echo base_url('proposal_himpunan/detail_pengajuan?id_pengajuan='.$proposal->id_pengajuan); ?>"><?php echo $proposal->judul; ?></a></td>  
+                                    <td><?php echo $proposal->tanggal_pengajuan; ?></td>
+                                    <td><?php echo $proposal->tanggal_proposal_terakhir; ?></td>
+                                    <td><?php echo (isset($proposal->acara_himpunan->tanggal_acara)) ? $proposal->acara_himpunan->tanggal_acara : '-'; ?></td>
+                                    <td><?php echo (isset($proposal->tanggal_batas_upload)) ? $proposal->tanggal_batas_upload : '-'; ?></td>
                                     <td>
-                                        <?php if ($proposal['status_approve'] == 'y') { ?>
+                                        <?php if ($proposal->status_approve == 'y') { ?>
                                           <span class="label label-success">Disetujui</span></td>
-                                        <?php } else if ($proposal['status_approve'] == 'n') { ?>
+                                        <?php } else if ($proposal->status_approve == 'n') { ?>
                                           <span class="label label-danger">Ditolak</span></td>
                                         <?php } else { ?>
                                           <span class="label label-warning">Pending</span></td>
                                         <?php }?>
-                                    <td><?php echo $proposal['penanggungjawab']; ?></td>
+                                    <td><?php echo $proposal->penanggungjawab; ?></td>
                                     <td>
-                                      <?php if ($proposal['status_approve'] == 'n' || $proposal['status_approve'] == null) { ?>
-                                      <a href="<?php echo base_url('proposal_himpunan/tambah_acara?id_pengajuan='.$proposal['id']); ?>">
+                                      <?php if ($proposal->status_approve == 'n' || $proposal->status_approve == null) { ?>
+                                      <a href="<?php echo base_url('proposal_himpunan/tambah_acara?id_pengajuan='.$proposal->id_pengajuan); ?>">
                                         <button class="btn btn-sm btn-info pull-left" disabled><i class="fa fa-plus-circle"></i>&nbsp;Buat Acara</button>
                                       </a>
                                     <?php } else { ?>
-                                      <a href="<?php echo base_url('proposal_himpunan/tambah_acara?id_pengajuan='.$proposal['id']); ?>">
+                                      <a href="<?php echo base_url('proposal_himpunan/tambah_acara?id_pengajuan='.$proposal->id_pengajuan); ?>">
                                         <button class="btn btn-sm btn-info pull-left"><i class="fa fa-plus-circle"></i>&nbsp;Buat Acara</button>
                                       </a>
                                     <?php } ?>
                                       &nbsp;
-                                      <a href="<?php echo base_url('proposal_himpunan/detail_pengajuan?id_pengajuan='.$proposal['id']); ?>">
+                                      <a href="<?php echo base_url('proposal_himpunan/detail_pengajuan?id_pengajuan='.$proposal->id_pengajuan); ?>">
                                         <button class="btn btn-sm btn-info"><i class="fa fa-list"></i>&nbsp;Lihat Detail</button>
                                       </a>
+
+                                    <?php $disabled = 'disabled' ?>
+                                    <?php if (isset($proposal->acara_himpunan->tanggal_acara) && isset($proposal->tanggal_batas_upload)) { ?>
                                     
-                                    <?php if ($proposal['status_approve'] == 'n' || $proposal['status_approve'] == null) { ?>
-                                      &nbsp;
-                                      <a href="<?php echo base_url('proposal_himpunan/upload_lpj?id_pengajuan='.$proposal['id']); ?>">
-                                        <button class="btn btn-sm btn-info" disabled><i class="fa fa-upload"></i>&nbsp;Unggah LPJ</button>
-                                      </a>
-                                    <?php } else { ?>
-                                      &nbsp;
-                                      <a href="<?php echo base_url('proposal_himpunan/upload_lpj?id_pengajuan='.$proposal['id']); ?>">
-                                        <button class="btn btn-sm btn-info"><i class="fa fa-upload"></i>&nbsp;Unggah LPJ</button>
-                                      </a>
+                                      <?php if ($proposal->status_approve == 'y' && $proposal->tanggal_batas_upload >= date('Y-m-d')){ ?>
+                                        <?php $disabled = ''; ?>
+                                      <?php } ?>
                                     <?php } ?>
+
+                                      &nbsp;
+                                      <a href="<?php echo base_url('proposal_himpunan/upload_lpj?id_pengajuan='.$proposal->id_pengajuan); ?>">
+                                        <button class="btn btn-sm btn-info" <?php echo $disabled ?>><i class="fa fa-upload"></i>&nbsp;Unggah LPJ</button>
+                                      </a>
                                     </td>
                                   </tr>
                                 <?php $i++; ?>
